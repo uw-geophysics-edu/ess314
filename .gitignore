@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Jupyter Book build output
+_build/
+website/
+
+# Pixi
+.pixi/
+
+# Virtual environments
+.venv/
+.venv-jb/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+
+# Lock file (uncomment if you want to track it)
+# pixi.lock

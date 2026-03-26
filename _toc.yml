@@ -1,0 +1,106 @@
+format: jb-book
+root: README
+
+parts:
+  - caption: "Module 1 — Introduction to Geophysical Methods"
+    chapters:
+      - file: lectures/01_intro_course
+        title: "Introduction to the Course"
+      - file: lectures/02_what_is_geophysics
+        title: "What is Geophysics?"
+
+  - caption: "Module 2 — Seismic Waves, Refraction, and Reflection"
+    chapters:
+      - file: lectures/03_seismic_waves_basics
+        title: "Seismic Waves — The Basics"
+      - file: lectures/04_wavefronts_rays
+        title: "Wavefronts and Rays"
+      - file: lectures/05_snells_law
+        title: "Snell's Law & Waves at Boundaries"
+
+  - caption: "Module 3 — Subsurface Imaging"
+    chapters:
+      - file: lectures/06_seismic_refraction_I
+        title: "Seismic Refraction I"
+      - file: lectures/07_seismic_refraction_II
+        title: "Seismic Refraction II"
+      - file: lectures/08_intro_reflection
+        title: "Introduction to Seismic Reflection"
+      - file: lectures/09_seismic_reflections_I
+        title: "Seismic Reflections I"
+      - file: lectures/10_seismic_reflections_II
+        title: "Seismic Reflections II"
+      - file: lectures/11_whole_earth_I
+        title: "Whole Earth Structure I"
+      - file: lectures/12_whole_earth_II
+        title: "Whole Earth Structure II"
+      - file: lectures/13_seismic_tomography
+        title: "Seismic Tomography"
+
+  - caption: "Module 4 — Earthquake Phenomenology"
+    chapters:
+      - file: lectures/14_earthquake_phenomena_I
+        title: "Earthquake Phenomena I"
+      - file: lectures/15_earthquake_phenomena_II
+        title: "Earthquake Phenomena II"
+      - file: lectures/16_ground_motions
+        title: "Ground Motions, Intensities, and Building Damage"
+      - file: lectures/17_tsunami
+        title: "Tsunami"
+
+  - caption: "Module 5 — Gravity"
+    chapters:
+      - file: lectures/18_earths_gravity
+        title: "Earth's Gravity"
+      - file: lectures/19_gravity_isostasy
+        title: "Gravity II — Isostasy"
+      - file: lectures/20_gravity_anomalies_I
+        title: "Using Gravity to Detect Anomalies I"
+      - file: lectures/21_gravity_anomalies_II
+        title: "Using Gravity to Detect Anomalies II"
+
+  - caption: "Module 6 — Magnetism"
+    chapters:
+      - file: lectures/22_density_lithosphere
+        title: "Density, Isostasy, and the Lithosphere"
+      - file: lectures/23_earth_magnetism
+        title: "Earth Magnetism & Mineral Magnetism"
+      - file: lectures/24_magnetic_field_tectonics
+        title: "The Magnetic Field, Magnetism, and Tectonic Plates"
+
+  - caption: "Module 7 — Geodynamics and Tectonics: A Synthesis"
+    chapters:
+      - file: lectures/25_heat_geodynamics
+        title: "Heat in the Earth and Geodynamics"
+      - file: lectures/26_divergent_margins
+        title: "Divergent Margins and Mid-Ocean Ridges"
+      - file: lectures/27_convergent_margins
+        title: "Convergent Margins, Subduction, and Seismotectonics"
+      - file: lectures/28_transform_intraplate
+        title: "Transform Faults and Intraplate Processes"
+      - file: lectures/29_synthesis
+        title: "Putting It Together: Geophysics as a Tool"
+
+  - caption: "Labs"
+    chapters:
+      - file: notebooks/Lab1-Intro-Python
+        title: "Lab 1: Introduction to Python"
+      - file: notebooks/Lab2-Python-Ray-Tracing
+        title: "Lab 2: Python II & Seismic Ray Tracing"
+      - file: notebooks/Lab3-Refraction
+        title: "Lab 3: Refraction"
+      - file: notebooks/Lab4-Reflection
+        title: "Lab 4: Reflection"
+      - file: notebooks/Lab5-Earthquake-Location
+        title: "Lab 5: Earthquake Location"
+      - file: notebooks/Lab6-AI-Literacy
+        title: "Lab 6: AI Literacy"
+      - file: notebooks/Lab7-Gravity
+        title: "Lab 7: Gravity"
+      - file: notebooks/Lab8-Magnetics
+        title: "Lab 8: Magnetics"
+
+  - caption: "References"
+    chapters:
+      - file: bibliography
+        title: "Full Bibliography"

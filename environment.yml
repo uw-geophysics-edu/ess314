@@ -1,0 +1,14 @@
+name: ess314
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.11,<3.13
+  - jupyter>=1.0
+  - jupyterlab>=3.0
+  - jupyter-book>=1.0,<2
+  - sphinxcontrib-bibtex>=2.5
+  - ipykernel>=6.0
+  - matplotlib>=3.5
+  - numpy>=1.20
+  - scipy>=1.7
+  - pandas>=1.3

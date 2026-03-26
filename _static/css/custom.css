@@ -1,0 +1,11 @@
+/* ESS 314 Jupyter Book — Custom Styles */
+
+/* Slightly wider content area */
+.bd-content .bd-article-container {
+  max-width: 65em;
+}
+
+/* Colab badge styling */
+a img[alt="Open In Colab"] {
+  margin-bottom: 1rem;
+}
