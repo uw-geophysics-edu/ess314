@@ -36,6 +36,7 @@ bibtex_bibfiles:
 parse:
   myst_enable_extensions:
     - amsmath
+    - colon_fence
     - dollarmath
     - linkify
     - smartquotes
