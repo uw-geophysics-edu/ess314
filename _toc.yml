@@ -1,7 +1,12 @@
 format: jb-book
-root: README
+root: intro
 
 parts:
+  - caption: "Course Information"
+    chapters:
+      - file: syllabus
+        title: "Syllabus"
+
   - caption: "Module 1 — Introduction to Geophysical Methods"
     chapters:
       - file: lectures/01_intro_course
@@ -99,6 +104,51 @@ parts:
         title: "Lab 7: Gravity"
       - file: notebooks/Lab8-Magnetics
         title: "Lab 8: Magnetics"
+
+  - caption: "Career Prospects & Skills"
+    chapters:
+      - file: career/index
+        title: "Overview"
+      - file: career/job_market
+        title: "Job Market & Salaries"
+      - file: career/skills
+        title: "Skills to Build"
+      - file: career/paths
+        title: "Career Paths"
+
+  - caption: "Discussion Sections"
+    chapters:
+      - file: discussions/index
+        title: "Design & Mentoring"
+      - file: discussions/formats
+        title: "Five Formats"
+      - file: discussions/session_01
+        title: "Session 1 — Why Does the Earth Make Noise?"
+      - file: discussions/session_02
+        title: "Session 2 — Reading the Subsurface"
+      - file: discussions/session_03
+        title: "Session 3 — Guest: PhD Student's First Year"
+      - file: discussions/session_04
+        title: "Session 4 — Explaining Geophysics"
+      - file: discussions/session_05
+        title: "Session 5 — Gravity, Ice Sheets, and CO₂"
+      - file: discussions/session_06
+        title: "Session 6 — Guest: Industry Geophysicist"
+      - file: discussions/session_07
+        title: "Session 7 — Inside the Planet"
+      - file: discussions/session_08
+        title: "Session 8 — Guest: Science-Society Boundary"
+      - file: discussions/session_09
+        title: "Session 9 — Inversion & the Climate Problem"
+      - file: discussions/session_10
+        title: "Session 10 — What Have We Learned?"
+
+  - caption: "AI Skills & Skill Threads"
+    chapters:
+      - file: ai_skills/index
+        title: "Five Skill Threads"
+      - file: ai_skills/ai_literacy
+        title: "AI Literacy Guide"
 
   - caption: "References"
     chapters:

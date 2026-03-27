@@ -1,11 +1,69 @@
 /* ESS 314 Jupyter Book — Custom Styles */
 
-/* Slightly wider content area */
+/* ── Design system color tokens ───────────────────────────────────────── */
+:root {
+  --ess-teal:        #0f6e56;
+  --ess-teal-bg:     #e1f5ee;
+  --ess-teal-mid:    #1d9e75;
+  --ess-blue:        #185fa5;
+  --ess-blue-bg:     #e6f1fb;
+  --ess-blue-mid:    #378add;
+  --ess-amber:       #854f0b;
+  --ess-amber-bg:    #faeeda;
+  --ess-amber-mid:   #ef9f27;
+  --ess-coral:       #993c1d;
+  --ess-coral-bg:    #faece7;
+  --ess-coral-mid:   #d85a30;
+  --ess-purple:      #534ab7;
+  --ess-purple-bg:   #eeedfe;
+  --ess-purple-mid:  #7f77dd;
+  --ess-green:       #3b6d11;
+  --ess-green-bg:    #eaf3de;
+  --ess-green-mid:   #639922;
+}
+
+/* ── Slightly wider content area ──────────────────────────────────────── */
 .bd-content .bd-article-container {
   max-width: 65em;
 }
 
-/* Colab badge styling */
+/* ── Colab badge styling ───────────────────────────────────────────────── */
 a img[alt="Open In Colab"] {
   margin-bottom: 1rem;
+}
+
+/* ── Inline pill badges ────────────────────────────────────────────────── */
+/* Usage in MyST: <span class="ess-badge ess-b-teal">Label</span>          */
+.ess-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 9px;
+  border-radius: 20px;
+  margin: 2px;
+  line-height: 1.6;
+  vertical-align: middle;
+}
+.ess-b-teal   { background: var(--ess-teal-bg);   color: var(--ess-teal); }
+.ess-b-blue   { background: var(--ess-blue-bg);   color: var(--ess-blue); }
+.ess-b-amber  { background: var(--ess-amber-bg);  color: var(--ess-amber); }
+.ess-b-coral  { background: var(--ess-coral-bg);  color: var(--ess-coral); }
+.ess-b-purple { background: var(--ess-purple-bg); color: var(--ess-purple); }
+.ess-b-green  { background: var(--ess-green-bg);  color: var(--ess-green); }
+
+/* ── Simple card shell (for prose sections not using sphinx-design) ────── */
+.ess-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  border-radius: 10px;
+  padding: 1.1rem 1.3rem;
+  margin-bottom: 1rem;
+}
+.ess-card-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #888780;
+  margin-bottom: 0.55rem;
 }
