@@ -1,10 +1,16 @@
 # ESS 314 – Geophysics
-### University of Washington, Spring 2026
+## University of Washington, Spring 2026
 
-**Instructor:** Marine Denolle (mdenolle@uw.edu) · **TA & Lab:** Emily Wilbur (ewilbur5@uw.edu)  
+**Instructor:** Marine Denolle (mdenolle@uw.edu) · **TA & Lab:** Emily Wilbur (ewilbur5@uw.edu) and Nicolas Chang (mehffin@uw.edu)  
 **Meets:** Mon–Thu 1:30–2:20 pm · JHN 111
 
 ---
+
+```{image} _static/images/ess314-front3.png
+:width: 100%
+:alt: ESS 314 Geophysics — marine seismic survey, coastline, subsurface structure, monitoring instruments
+```
+
 
 This is the open course companion for ESS 314. It collects lecture notes, lab notebooks, and Python demos in one place so that everything you need — derivations, figures, code, data — is reproducible and freely accessible.
 
