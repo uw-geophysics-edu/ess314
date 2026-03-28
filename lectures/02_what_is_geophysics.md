@@ -241,23 +241,7 @@ No pillar is sufficient in isolation. Theory without observational constraint is
 
 ---
 
-## 8. Research Horizon
-
-:::{admonition} Current Research Highlights (2022–2025)
-:class: seealso
-
-**Neural operators for accelerating geophysical inverse problems:** Traditional full-waveform inversion is computationally expensive because it requires repeated forward simulations to converge on a model. Neural operators — networks trained to approximate the forward operator — enable inverse problem exploration at speeds 100–1000× faster than spectral-element codes. Lehmann et al. (2024, *JGR Solid Earth*, DOI: [10.1029/2023JB027856](https://doi.org/10.1029/2023JB027856)) demonstrate neural operator surrogates for 3D seismic wave propagation. This does not resolve the non-uniqueness of the inverse problem, but it dramatically accelerates the exploration of the solution space — a distinction worth maintaining carefully.
-
-**DAS ambient noise tomography in urban settings:** Fichtner et al. (2022, *JGR Solid Earth*, DOI: [10.1029/2022JB024690](https://doi.org/10.1029/2022JB024690)) demonstrate shallow structure tomography using a DAS array in urban Switzerland, exploiting traffic noise as a passive source. This directly enables the 4D subsurface monitoring of groundwater, fault creep, and volcanic unrest — processes that are geodynamically informative but were previously unresolvable with sparse traditional networks.
-
-**USArray legacy and North American lithospheric structure:** The IRIS/EarthScope USArray rolling grid of 400 broadband seismometers produced a passive dataset enabling seismic tomography at 50-km lateral resolution through the entire North American lithosphere. Analysis continues; Schmandt & Lin's foundational imaging of the Farallon slab remnant and subsequent updates are accessible through the open IRIS data archive at [ds.iris.edu](https://ds.iris.edu).
-
-*Entry points for graduate research:* The open-source SPECFEM3D code ([github.com/geodynamics/specfem3d](https://github.com/geodynamics/specfem3d)) and the IRIS FDSN web services ([service.iris.edu](https://service.iris.edu)) underlie most of modern observational and computational seismology and are accessible to students with Python and basic Linux experience.
-:::
-
----
-
-## 9. Societal Relevance
+## 8. Societal Relevance
 
 :::{admonition} Why It Matters: The Cascadia Inverse Problem
 :class: note

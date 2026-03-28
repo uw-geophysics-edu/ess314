@@ -178,23 +178,8 @@ The trailing digits in the raw result are physically meaningless — they encode
 
 ---
 
-## 8. Research Horizon
 
-:::{admonition} Current Research Highlights (2022–2025)
-:class: seealso
-
-**Machine learning and passive seismic catalog expansion:** Deep learning models for seismic phase picking — EQTransformer (Mousavi et al., *Nature Communications*, 2020, DOI: [10.1038/s41467-020-17591-w](https://doi.org/10.1038/s41467-020-17591-w)) — have expanded earthquake catalogs by factors of 10–100 by detecting events previously below analyst-detection thresholds. Mousavi & Beroza (2022, *Science*, DOI: [10.1126/science.abm4470](https://doi.org/10.1126/science.abm4470)) survey the broader transformation of passive seismological analysis by deep learning, covering event detection, waveform classification, and ground-motion prediction.
-
-**Distributed Acoustic Sensing on dark fiber:** Telecommunications fiber-optic cables function as dense passive seismic arrays when interrogated with laser pulses. Research groups are deploying DAS on dark fiber (unused buried cable) in Seattle and other urban areas, exploiting traffic noise and ocean microseisms as passive sources to image shallow subsurface structure at meter-scale resolution in four dimensions. Lindsey et al. (*Geophysical Research Letters*, 2020, DOI: [10.1029/2020GL088925](https://doi.org/10.1029/2020GL088925)) established foundational results for urban DAS ambient noise tomography.
-
-**Active methods for the energy transition:** Time-lapse seismic monitoring of CO₂ injection sites requires integrating active and passive strategies simultaneously, raising new questions about source repeatability, noise characterization, and time-lapse signal detection. This is an active frontier in both academic research and industrial geophysics.
-
-*Entry points for graduate research:* The SCOPED computational seismology workshop materials ([scoped.codes](https://scoped.codes)) and the IRIS FDSN data archive ([ds.iris.edu](https://ds.iris.edu)) are the primary open resources. PNSN maintains a public catalog and waveform archive for Pacific Northwest events at [pnsn.org](https://pnsn.org).
-:::
-
----
-
-## 9. Societal Relevance
+## 8. Societal Relevance
 
 :::{admonition} Why It Matters: Cascadia and the Pacific Northwest
 :class: note
