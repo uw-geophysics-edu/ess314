@@ -15,6 +15,10 @@ open_sources:
 
 # Lecture 2 — The Inaccessible Earth: Scales, Instruments, and the Logic of Geophysical Inference
 
+:::{seealso}
+📊 **Lecture slides** — [open in new tab](https://uw-geophysics-edu.github.io/ess314/slides/lecture_02_slides.html)
+:::
+
 ## Syllabus Alignment
 
 | | |

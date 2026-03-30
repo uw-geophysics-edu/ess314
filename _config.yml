@@ -48,6 +48,7 @@ sphinx:
   config:
     bibtex_reference_style: author_year
     bibtex_default_style: plain
+    html_extra_path: ["slides"]
     exclude_patterns:
       - ".pixi/**"
       - ".venv/**"
