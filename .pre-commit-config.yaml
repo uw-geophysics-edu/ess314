@@ -1,0 +1,40 @@
+# Pre-commit hooks for ESS 314.
+#
+# Setup (one-time, after `pixi install`):
+#   pixi run install-marp        # installs @marp-team/marp-cli globally via npm
+#   pixi run -e dev -- pre-commit install
+#
+# Run manually:
+#   pre-commit run --all-files
+
+repos:
+  # ── Marp: compile slide decks to HTML on every commit ──────────────────────
+  # Requires `marp` in PATH — run `pixi run install-marp` once.
+  # For each staged *_slides.md the hook:
+  #   1. Compiles it to a sibling .html file (--output-dir slides/)
+  #   2. git-adds the output so source + compiled output land in the same commit
+  # The commit proceeds normally on success; fails loud if marp is missing.
+  - repo: local
+    hooks:
+      - id: marp-compile-slides
+        name: "Compile Marp slide decks → HTML"
+        language: system
+        files: "_slides\\.md$"
+        pass_filenames: true
+        entry: >-
+          bash -c
+          'for f in "$@"; do
+             marp --html --theme slides/ess314.css --output-dir slides/ "$f"
+             && git add "${f%_slides.md}_slides.html" slides/"$(basename "${f%.md}.html")";
+           done' --
+
+  # ── Standard hygiene ───────────────────────────────────────────────────────
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: "\\.(md|ipynb)$"
+      - id: end-of-file-fixer
+        exclude: "\\.(ipynb)$"
+      - id: check-yaml
+      - id: check-merge-conflict

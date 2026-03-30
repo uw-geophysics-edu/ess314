@@ -27,8 +27,22 @@ jobs:
           cache: true
           frozen: true
 
+      - name: Setup Node.js (for Marp)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Marp CLI
+        run: npm install -g @marp-team/marp-cli
+
+      - name: Compile Marp slide decks → HTML
+        run: marp --html --theme slides/ess314.css --output-dir slides/ slides/*_slides.md
+
       - name: Build book
         run: pixi run build-ci
+
+      - name: Copy slides into website/
+        run: mkdir -p website/slides && cp slides/*.html website/slides/
 
       - name: Linkcheck
         continue-on-error: true
