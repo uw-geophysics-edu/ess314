@@ -17,6 +17,7 @@ matplotlib = ">=3.5"
 numpy = ">=1.20"
 scipy = ">=1.7"
 pandas = ">=1.3"
+nodejs = ">=18"
 
 [pypi-dependencies]
 
@@ -28,12 +29,19 @@ dependencies = { black = ">=22.0", pre-commit = "*", codespell = "*" }
 lab = "jupyter lab"
 notebook = "jupyter notebook"
 
+# Marp slide tasks — run `pixi run install-marp` once after `pixi install`
+install-marp = "npm install -g @marp-team/marp-cli"
+slides-html  = "marp --html --theme slides/ess314.css --output-dir slides/ slides/*_slides.md"
+slides-pdf   = "marp --pdf  --theme slides/ess314.css --output-dir slides/ slides/*_slides.md"
+copy-slides  = "mkdir -p website/slides && cp slides/*.html website/slides/ 2>/dev/null || true"
+
 # Book building tasks
 build-book = "jupyter book build ."
-build-ci = "jupyter book build . && rm -rf website && mv _build/html website"
+build-ci   = "jupyter book build . && rm -rf website && mv _build/html website"
+build-all  = { depends_on = ["slides-html", "build-book"] }
 serve-book = "python -m http.server --directory _build/html 8000"
-serve-all = "python -m http.server --directory website/ 3000"
-clean = "rm -rf _build website"
+serve-all  = "python -m http.server --directory website/ 3000"
+clean      = "rm -rf _build website"
 
 # Validation tasks
 spellcheck = "codespell --skip './_build,./website,pixi.lock,*.ipynb,*.js,*.css,*.map,*.svg,*.pdf,*.png,*.jpg' --ignore-words-list='hist,nd,te,ba'"

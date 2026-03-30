@@ -1,0 +1,288 @@
+/* =============================================================
+   ESS 314 Geophysics — Marp Custom Theme (ess314.css)
+   University of Washington · Marine Denolle · Spring 2026
+
+   Usage:
+     marp --html --theme slides/ess314.css slides/week01/lecture_01_slides.md
+
+   Slide front matter:
+     theme: ess314
+
+   WCAG AA colorblind-safe palette:
+     #0072B2  deep blue      (primary accent)
+     #E69F00  amber          (secondary)
+     #56B4E9  sky blue
+     #009E73  teal green
+     #D55E00  vermilion
+     #CC79A7  mauve pink
+     #000000  black
+   ============================================================= */
+
+@import 'default';
+
+/* ── Design tokens ─────────────────────────────────────────── */
+:root {
+  --uw-purple:    #4B2E83;
+  --uw-gold:      #E8D078;
+  --deep-blue:    #0072B2;
+  --amber:        #E69F00;
+  --sky:          #56B4E9;
+  --teal:         #009E73;
+  --vermilion:    #D55E00;
+  --mauve:        #CC79A7;
+  --text-dark:    #1a1a1a;
+  --text-light:   #ffffff;
+  --text-muted:   #555555;
+  --bg-white:     #ffffff;
+  --rule-color:   #0072B2;
+}
+
+/* ── Base slide ────────────────────────────────────────────── */
+section {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 26px;
+  line-height: 1.5;
+  color: var(--text-dark);
+  padding: 48px 68px;
+  background-color: var(--bg-white);
+}
+
+h1 {
+  font-size: 1.55em;
+  color: var(--deep-blue);
+  border-bottom: 2px solid var(--deep-blue);
+  padding-bottom: 6px;
+  margin-bottom: 0.55em;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 1.22em;
+  color: #333;
+  margin-bottom: 0.4em;
+}
+
+h3 {
+  font-size: 1.05em;
+  color: var(--text-muted);
+}
+
+strong { color: var(--deep-blue); }
+
+em { color: var(--vermilion); font-style: italic; }
+
+a { color: var(--deep-blue); }
+
+ul, ol {
+  margin-top: 0.4em;
+  padding-left: 1.4em;
+}
+
+li {
+  margin-bottom: 0.35em;
+}
+
+table {
+  font-size: 0.84em;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  background-color: var(--deep-blue);
+  color: var(--text-light);
+  padding: 6px 10px;
+  text-align: left;
+}
+
+td {
+  padding: 5px 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) td {
+  background-color: #f5f8fc;
+}
+
+blockquote {
+  border-left: 4px solid var(--amber);
+  margin-left: 0;
+  padding-left: 1em;
+  color: #444;
+  font-style: italic;
+}
+
+code {
+  background: #f0f4f8;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 0.88em;
+}
+
+/* ── Figure caption helper ─────────────────────────────────── */
+/* Usage: <span class="caption">Figure N. Caption text.</span> */
+.caption {
+  font-size: 0.62em;
+  color: var(--text-muted);
+  margin-top: 5px;
+  display: block;
+  line-height: 1.3;
+}
+
+/* ── Pagination ────────────────────────────────────────────── */
+section::after {
+  font-size: 0.68em;
+  color: #aaa;
+}
+
+/* ── Title slide ───────────────────────────────────────────── */
+/*  Usage: add to slide front matter -->
+/*    <!-- _class: title-slide -->                              */
+section.title-slide {
+  background-color: var(--uw-purple);
+  color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+section.title-slide h1,
+section.title-slide h2,
+section.title-slide h3,
+section.title-slide p,
+section.title-slide strong {
+  color: var(--text-light);
+  border: none;
+}
+
+section.title-slide h1 {
+  font-size: 1.7em;
+  border-bottom: 2px solid var(--uw-gold);
+  padding-bottom: 8px;
+  margin-bottom: 0.5em;
+}
+
+/* ── Background-image slides with 50 % dark overlay ──────── */
+/*  Usage in slide front matter:
+/*    <!-- _class: bg-overlay -->
+/*    <!-- backgroundImage: url('NASA_OR_USGS_PUBLIC_DOMAIN_URL') -->
+/*    <!-- backgroundSize: cover -->
+/*
+/*  The ::before pseudo-element creates the veil so text is
+/*  readable against any image — no inline <style> needed.     */
+section.bg-overlay {
+  position: relative;
+  color: var(--text-light);
+}
+
+section.bg-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);   /* 50 % dark overlay */
+  z-index: 0;
+}
+
+/* Push all content above the overlay pseudo-element */
+section.bg-overlay > * {
+  position: relative;
+  z-index: 1;
+}
+
+section.bg-overlay h1,
+section.bg-overlay h2,
+section.bg-overlay h3,
+section.bg-overlay p,
+section.bg-overlay li,
+section.bg-overlay blockquote {
+  color: var(--text-light);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.75);
+}
+
+section.bg-overlay h1 {
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Light overlay variant (dark text on bright images)
+   Usage: <!-- _class: bg-overlay-light -->               */
+section.bg-overlay-light::before {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+section.bg-overlay-light h1,
+section.bg-overlay-light h2,
+section.bg-overlay-light h3,
+section.bg-overlay-light p,
+section.bg-overlay-light li {
+  color: var(--text-dark);
+  text-shadow: none;
+}
+
+/* 50 % background-image fade (white veil) — watermark effect  */
+/*  Image appears at half opacity against the white slide bg.   */
+/*  Usage: <!-- _class: bg-fade -->                             */
+/*         <!-- backgroundImage: url('…') -->                   */
+/*         <!-- backgroundSize: cover -->                       */
+section.bg-fade {
+  position: relative;
+  color: var(--text-dark);
+}
+
+section.bg-fade::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.50);  /* 50 % white veil  */
+  z-index: 0;
+}
+
+section.bg-fade > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Two-column layout ────────────────────────────────────── */
+/*  Usage: <div class="columns"><div>…</div><div>…</div></div> */
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em;
+  align-items: start;
+}
+
+.columns-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5em;
+  align-items: start;
+}
+
+/* ── Admonition-style callout boxes ──────────────────────── */
+/*  Usage: <div class="callout-note">…</div>                  */
+.callout-note {
+  background: #eaf3fb;
+  border-left: 5px solid var(--deep-blue);
+  padding: 0.7em 1em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  margin-top: 0.8em;
+}
+
+.callout-key {
+  background: #fff8e6;
+  border-left: 5px solid var(--amber);
+  padding: 0.7em 1em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  margin-top: 0.8em;
+}
+
+.callout-warning {
+  background: #fdf0ee;
+  border-left: 5px solid var(--vermilion);
+  padding: 0.7em 1em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  margin-top: 0.8em;
+}

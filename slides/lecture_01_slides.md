@@ -1,141 +1,164 @@
 ---
 marp: true
-theme: default
+theme: ess314
+html: true
 paginate: true
 math: mathjax
-style: |
-  section {
-    font-size: 28px;
-    padding: 50px 60px;
-  }
-  h1 {
-    font-size: 36px;
-    color: #0072B2;
-    border-bottom: 2px solid #0072B2;
-    padding-bottom: 8px;
-  }
-  h2 {
-    font-size: 30px;
-    color: #333;
-  }
-  .columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2em;
-  }
-  ul { margin-top: 0.5em; }
-  li { margin-bottom: 0.3em; }
-  strong { color: #0072B2; }
-  .footer { font-size: 18px; color: #777; border-top: 1px solid #ddd; margin-top: 1em; padding-top: 0.4em; }
 ---
 
+<!-- ============================================================
+     ESS 314 — Lecture 1
+     What Is Geophysics? Three Motivations, Five Physics Domains,
+     and the Stakeholder Landscape
+     Marine Denolle · University of Washington · March 31, 2026
+     ============================================================ -->
+
+<!-- Slide 1 — Title (UW purple, no background photo) -->
+<!-- _class: title-slide -->
+
 # What Is Geophysics?
-### Three Motivations, Five Physics Domains, and the Stakeholder Landscape
+### Three Motivations · Five Physics Domains · Stakeholder Landscape
 
 **ESS 314 — Geophysics** | Lecture 1 | March 31, 2026
 Marine Denolle · University of Washington
 
 ---
 
+<!-- Slide 2 — Learning Objectives -->
+
 # Learning Objectives
 
 By the end of this lecture:
 
-- **[LO-1.1]** State a precise definition of solid Earth geophysics and explain why indirect observation is the defining constraint
-- **[LO-1.2]** Classify any geophysical study into geodynamics, hazards, or resource management — with process and observable
-- **[LO-4.1]** Identify which physics domain governs a given observable and which Earth property it senses
+- **[LO-1.1]** State a precise definition of solid Earth geophysics and explain why indirect observation is the defining epistemological constraint
+- **[LO-1.2]** Classify any geophysical study into geodynamics, hazards, or resource management — with process and observable named
+- **[LO-4.1]** Identify the physics domain governing a given observable and the Earth property it senses
 - **[LO-6.1]** Identify four stakeholder communities and their distinct requirements from geophysical knowledge
 
 ---
 
-# The Defining Constraint
+<!-- Slide 3 — Opening hook: Earth from ISS as motivation for "why geophysics"
+     Photo: NASA ISS042-E-294596, public domain.
+     Source: https://eol.jsc.nasa.gov/SearchPhotos/photo.pl?mission=ISS042&roll=E&frame=294596
+     50% overlay handled by .bg-overlay class in ess314.css               -->
+<!-- _class: bg-overlay -->
+<!-- backgroundImage: url('https://assets.science.nasa.gov/dynamicimage/assets/science/esd/eo/images/imagerecords/86000/86041/iss042e294596.jpg?w=1280&h=853&fit=clip&crop=faces%2Cfocalpoint') -->
+<!-- backgroundSize: cover -->
 
-**On January 26, 1700** — the entire Cascadia fault ruptured
+# A Planet We Can Only See the Surface Of
 
-- A 1,300 km rupture — no instrumental seismic record existed
-- Date reconstructed from: Japanese tsunami records, drowned coastal forests, Indigenous oral traditions, coastal sediment stratigraphy
-- **Everything known about this event is geophysical inference from indirect evidence**
+Everything we know about what lies beneath
+was inferred — not sampled.
 
-> Earth's interior is permanently inaccessible to direct sampling beyond a few kilometers. Geophysics exists to address this constraint.
-
-**Key point:** The inability to sample directly is not a limitation of current technology — it is a permanent physical constraint on what Earth science can do without geophysics.
+> *Seismic waves, gravity, magnetics, heat flow:*
+> **physics as a telescope pointed inward.**
 
 ---
+
+<!-- Slide 4 — The 1700 Cascadia event -->
+
+# The Defining Constraint
+
+**January 26, 1700 — the entire Cascadia fault ruptured**
+
+- 1,300 km rupture — **no instrumental seismic record existed**
+- Date reconstructed from:
+  - Japanese tsunami records
+  - Drowned coastal forests (tree rings stop 1699)
+  - Coastal sand sheets from tsunami inundation
+  - Indigenous oral traditions of Cascadia peoples
+
+> Everything known about this event is geophysical inference from indirect evidence.
+
+**Key point:** The inability to sample directly is not a technology failure — it is a permanent physical constraint.
+
+---
+
+<!-- Slide 5 — Definition -->
 
 # Definition
 
 $$\boxed{\text{Solid Earth Geophysics} = \text{Quantitative inference of Earth's interior from surface observations}}$$
 
 Physical fields measured at or above the surface:
-- Seismic wave travel times
-- Gravitational acceleration
-- Magnetic field strength
-- Surface deformation (GPS, InSAR)
-- Heat flux
 
-Every observable is **indirect** — the Earth property of interest is always inferred through a physical model.
+| Observable | Field | Earth property sensed |
+|---|---|---|
+| Seismograms | Elastic displacement | Velocity $\alpha$, $\beta$; density $\rho$ |
+| $g$ anomaly | Gravitational acceleration | Density $\rho$ |
+| Magnetic anomaly | **B** field | Remanent magnetization |
+| Heat flux | $q = -k\,dT/dz$ | Thermal conductivity $k$ |
+| GPS / InSAR | Surface displacement | Strain accumulation |
 
-**Key point:** Geophysics is applied physics working backward — from effect to cause, from measurement to structure.
+**Every observable is indirect.** The Earth property is always inferred through a physical model.
 
 ---
 
-# Three Motivating Contexts
+<!-- Slide 6 — Three motivating contexts -->
 
-Every geophysical study belongs to at least one:
+# Three Motivating Contexts
 
 | Context | Physical Process | Key Observable |
 |---------|-----------------|----------------|
 | **Geodynamics** | Mantle convection, subduction, glacial rebound | Seismic velocity, gravity, heat flow |
 | **Natural Hazards** | Fault rupture, wave propagation, site amplification | Seismograms, GPS, InSAR |
-| **Resource Management** | Stratigraphy, fluid-bearing reservoirs, ore bodies | Seismic reflection, resistivity |
+| **Resource Management** | Stratigraphy, fluid reservoirs, ore bodies | Seismic reflection, resistivity |
 
 The same methods frequently serve multiple contexts simultaneously.
 
-**Key point:** Knowing which motivation drives a study tells what precision is required and what constitutes a satisfactory answer.
+**Key point:** The motivation determines the required precision and what counts as a satisfactory answer.
 
 ---
+
+<!-- Slide 7 — Geodynamics (figure slide) -->
 
 # Geodynamics: How the Planet Works
 
-- Juan de Fuca Plate subducts at ~3 cm/yr — measured by GPS, not by drilling
-- Subducting slab geometry — imaged by seismic tomography, not by sampling
-- Mantle convection drives plate tectonics — inferred from seismic velocity, gravity, and heat flow
+![alt text: Schematic diagram showing three panels. Left panel: Earth cross-section with two convection cells in the mantle and a subducting plate. Center panel: map view of a fault trace with concentric shaking-intensity ellipses and a star at the epicenter. Right panel: seismic reflection section with wavy sedimentary horizons and a highlighted reservoir trap at depth.](../../assets/figures/fig_three_motivations.png)
+<span class="caption">Figure 1.1 — Three motivating contexts. Python-generated · <code>assets/scripts/fig_three_motivations.py</code></span>
 
-**No sample has ever been retrieved from the mantle under equilibrium conditions.**
-
-![FIGURE: seismic tomography of Juan de Fuca slab](../../assets/figures/fig_three_motivations.png)
-
-**Key point:** Every layer boundary in the Earth model was found by listening to earthquakes — not by drilling.
+- Juan de Fuca Plate subducts at ~3 cm/yr — **measured by GPS, not drilling**
+- Slab geometry at depth — **imaged by seismic tomography, not sampling**
 
 ---
 
-# Natural Hazards: Physics in Service of Public Safety
+<!-- Slide 8 — Natural Hazards -->
 
-- **ShakeAlert** (Alaska to California): real-time P-wave detection → shaking estimate → warning before S-wave arrives
-- Lead time: seconds to tens of seconds — enough to slow trains, open fire station doors, trigger shutoffs
-- Built on: wave propagation physics (Weeks 2–5), site response models, network design
+# Natural Hazards: Physics for Public Safety
 
-Uncertainty matters:
-- Underestimating shaking → inadequate building design → casualties
-- Overestimating → wasted resources, public distrust
+- **ShakeAlert** (Alaska → California): real-time P-wave detection → shaking estimate → warning before S-wave arrives
+- Lead time: seconds to tens of seconds
+  - Slow high-speed trains · open fire station doors · trigger industrial shutoffs
 
-**Key point:** The wave physics in this course is the direct scientific foundation for operational public safety systems.
+Uncertainty matters directly:
+
+> Underestimate shaking → inadequate building design → casualties
+> Overestimate shaking → wasted resources, public distrust
+
+**Key point:** The wave propagation physics in Weeks 2–5 is the direct scientific foundation for this operational system.
 
 ---
+
+<!-- Slide 9 — Resource Management -->
 
 # Resource Management: Knowing What Is Underground
 
 - Before drilling: **seismic reflection surveys** image stratigraphy kilometers below the seafloor
-- Marine airguns → elastic pulses → reflections off rock interfaces → subsurface image
-- Same methods now serve: geothermal, critical minerals, CO₂ storage monitoring
+  - Marine airguns → elastic pulses → reflections off rock interfaces → subsurface image
+- Same methods now serve the clean-energy transition:
+  - Geothermal resource assessment
+  - Critical minerals for batteries
+  - CO₂ storage monitoring
 
-Global exploration geophysics: tens of billions of dollars annually
+Global exploration geophysics: **tens of billions of dollars annually**
 
-**Key point:** The same physical methods serve petroleum, geothermal, groundwater, and carbon storage — the motivation changes, the physics does not.
+**Key point:** The motivation changes (petroleum → climate); the physics does not.
 
 ---
 
-# The Five Physics Domains
+<!-- Slide 10 — Five physics domains -->
+
+# Five Physics Domains
 
 | Domain | Governing Equation | Earth Property | Observable |
 |--------|-------------------|----------------|------------|
@@ -145,11 +168,13 @@ Global exploration geophysics: tens of billions of dollars annually
 | Electromagnetism | $\nabla\times\mathbf{B} = \mu_0\mathbf{J}$ | $\sigma_e$, magnetization | EM anomaly |
 | Thermodynamics | $\rho c_p \partial_t T = \nabla\cdot(k\nabla T)$ | $T$, $k$ | Heat flux $q$ |
 
-These equations will be derived or applied in detail during each module.
+These equations will be derived in detail during each module.
 
-**Key point:** Every observable is connected to an Earth property through a physical operator. This structure is the forward problem.
+**Key point:** Every observable connects to an Earth property through a physical operator. This is the forward problem.
 
 ---
+
+<!-- Slide 11 — Passive vs Active (two-column) -->
 
 # Passive vs. Active Surveys
 
@@ -158,87 +183,99 @@ These equations will be derived or applied in detail during each module.
 
 **Passive** — measure natural signals
 - No source cost; continuous; global
-- Earthquakes, geomagnetic field, gravity, ambient noise
+- Earthquakes, gravity, ambient noise, GPS
 - Coverage limited by natural source distribution
-- *Examples:* earthquake seismology, GPS, gravity
+- *Examples:* earthquake seismology, gravity, GPS
 
 </div>
 <div>
 
 **Active** — generate controlled signals
-- Full control over source parameters → higher resolution
-- Expensive; limited spatial coverage
+- Full source control → higher resolution
+- Expensive; requires permitting
 - Explosions, vibroseis, airguns, GPR
 - *Examples:* seismic reflection, resistivity
 
 </div>
 </div>
 
-The 2021 CASIE21 experiment combined both: active airguns + passive ocean-bottom seismometers.
+**CASIE21 (2021):** Combined active airguns + passive ocean-bottom seismometers on Cascadia margin — a paradigmatic integrated survey.
 
-**Key point:** Most rigorous campaigns integrate both strategies — active surveys image structure; passive networks monitor behavior over time.
+**Key point:** Active surveys image structure; passive networks monitor behavior. Rigorous campaigns integrate both.
 
 ---
+
+<!-- Slide 12 — Stakeholders -->
 
 # Who Uses Geophysics?
 
-- **Research universities** — physical models, open datasets, trained scientists
-- **Government agencies** — USGS (hazard maps), NOAA (tsunami warning), CTBTO (nuclear test monitoring)
-- **Engineering firms** — site characterization, Vs30 for building codes, dam safety
-- **Energy / mining** — petroleum, geothermal, critical minerals, CO₂ storage
-- **Environmental agencies** — groundwater mapping, contaminant detection, GPR
-- **Defense** — nuclear test monitoring, underground facility characterization
+- 🎓 **Research universities** — physical models, open datasets, trained scientists
+- 🏛️ **Government agencies** — USGS (hazard maps), NOAA (tsunami warning), CTBTO (nuclear monitoring)
+- 🏗️ **Engineering firms** — site characterization, Vs30, dam safety, tunnel routing
+- ⛽ **Energy / mining** — petroleum, geothermal, critical minerals, CO₂ storage
+- 🌿 **Environmental agencies** — groundwater, contaminant mapping, GPR
+- 🛡️ **Defense** — nuclear test monitoring, underground facility characterization
 
-**Key point:** Geophysics graduates work across all these sectors. The physical reasoning, signal processing, and Python skills in this course are directly transferable.
+**Key point:** Geophysics graduates work across all these sectors. Physical reasoning, signal processing, and Python are directly transferable.
 
 ---
+
+<!-- Slide 13 — Worked example -->
 
 # Worked Example: Precision Matters
 
 Magnetic lineation survey, Juan de Fuca Ridge:
+
 - Reversal boundary at **21 km** from ridge axis
 - Brunhes–Matuyama reversal age: **0.78 Ma**
 
 $$v = \frac{d}{t} = \frac{21 \times 10^5 \text{ cm}}{0.78 \times 10^6 \text{ yr}} = 2.692307... \text{ cm/yr}$$
 
-But $d = 21$ km has **2 significant figures** → $v \approx \mathbf{2.7}$ cm/yr
+$d = 21$ km has **2 significant figures** → $v \approx \mathbf{2.7 \text{ cm/yr}}$
 
-The trailing digits are physically meaningless. **Misrepresenting precision propagates through all downstream analysis.**
-
-**Key point:** An answer can only be as precise as the least precise input. This applies to every geophysical inference.
+The trailing digits encode no physical information. **Overconfident precision propagates into all downstream analysis.**
 
 ---
+
+<!-- Slide 14 — Concept check -->
 
 # Concept Check
 
-1. The magnetic lineation method exploits a naturally occurring signal. What category of survey is it, and what is the natural source?
-
-2. If greater precision on the spreading rate were needed, which input — distance or age — would be more productive to refine, and on what grounds?
-
-3. The calculation assumes the reversal boundary is uniformly located 21 km from the ridge axis. What geological processes could violate this assumption?
-
 *Discuss in pairs — 3 minutes*
 
+1. The magnetic lineation method exploits a naturally occurring signal. What category of survey is it, and what is the natural source it exploits?
+
+2. If greater precision on the spreading rate were needed, which input — distance or age — would be more productive to refine, and on what physical or practical grounds?
+
+3. The calculation assumes the reversal boundary is uniformly 21 km from the ridge axis. What geological processes could violate this assumption?
+
 ---
 
-# Summary: Lecture 1 Key Takeaways
+<!-- Slide 15 — Summary -->
 
-- Solid Earth geophysics infers interior structure from surface observations — indirect measurement is unavoidable
-- Three motivating contexts: **geodynamics**, **natural hazards**, **resource management**
-- Five physics domains connect observables to Earth properties: mechanics, waves, gravity, EM, heat
+# Summary: Lecture 1
+
+- Solid Earth geophysics **infers interior structure from surface observations** — indirect measurement is unavoidable
+- Three motivating contexts: **geodynamics · natural hazards · resource management**
+- Five physics domains connect observables to Earth properties: mechanics · waves · gravity · EM · heat
 - **Passive methods**: continuous, global, source-limited resolution
 - **Active methods**: high-resolution snapshots, controlled source, high cost
-- Many stakeholder communities rely on geophysical knowledge — with different precision requirements
-- Significant figures are the minimum expression of measurement uncertainty
+- Significant figures = minimum expression of measurement uncertainty
 
 ---
 
-# Further Reading
+<!-- Slide 16 — Further reading -->
 
+# Further Reading & Lab 1
+
+**Reading:**
 - Lowrie & Fichtner (2020) §1.1–1.3 — **free via UW Libraries**
-- MIT OCW 12.201 Essentials of Geophysics: [ocw.mit.edu/courses/12-201](https://ocw.mit.edu/courses/12-201-essentials-of-geophysics-fall-2004)
+- MIT OCW 12.201: [ocw.mit.edu/courses/12-201](https://ocw.mit.edu/courses/12-201-essentials-of-geophysics-fall-2004)
 - Mousavi & Beroza (2022) Deep-learning seismology, *Science*: [doi.org/10.1126/science.abm4470](https://doi.org/10.1126/science.abm4470)
 - PNSN real-time seismicity: [pnsn.org](https://pnsn.org)
-- USGS ShakeAlert: [usgs.gov/programs/earthquake-hazards/shakealert](https://www.usgs.gov/programs/earthquake-hazards/shakealert)
 
-**Lab 1 (Friday):** Install ObsPy · Fetch a PNSN seismogram · Identify P and S arrivals by eye
+**Lab 1 (Friday):**
+1. Install ObsPy
+2. Fetch a PNSN seismogram via IRIS FDSN client
+3. Identify P and S arrivals by eye
+4. Compute source distance from $t_S - t_P = \Delta(1/\beta - 1/\alpha)$

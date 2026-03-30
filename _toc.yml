@@ -10,9 +10,9 @@ parts:
   - caption: "Module 1 — Introduction to Geophysical Methods"
     chapters:
       - file: lectures/01_intro_course
-        title: "Introduction to the Course"
-      - file: lectures/02_what_is_geophysics
         title: "What is Geophysics?"
+      - file: lectures/02_what_is_geophysics
+        title: ""
 
   - caption: "Module 2 — Seismic Waves, Refraction, and Reflection"
     chapters:
