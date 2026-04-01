@@ -38,6 +38,8 @@ parse:
     - amsmath
     - colon_fence
     - dollarmath
+    - html_admonition
+    - html_image
     - linkify
     - smartquotes
     - substitution
