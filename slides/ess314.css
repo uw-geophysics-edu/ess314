@@ -52,7 +52,7 @@ h1 {
   color: var(--deep-blue);
   border-bottom: 2px solid var(--deep-blue);
   padding-bottom: 6px;
-  margin-bottom: 0.55em;
+  margin-bottom: 0.35em;
   margin-top: 0;
 }
 
@@ -73,13 +73,26 @@ em { color: var(--vermilion); font-style: italic; }
 
 a { color: var(--deep-blue); }
 
+/* ── Images ─────────────────────────────────────────────────── */
+/*  max-height prevents figures from overflowing the 720 px slide */
+img {
+  max-width: 100%;
+  max-height: 420px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0.3em auto 0;
+  border-radius: 4px;
+}
+
 ul, ol {
-  margin-top: 0.4em;
+  margin-top: 0.25em;
   padding-left: 1.4em;
 }
 
 li {
-  margin-bottom: 0.35em;
+  margin-bottom: 0.2em;
 }
 
 table {

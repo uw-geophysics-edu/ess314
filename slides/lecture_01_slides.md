@@ -1,6 +1,7 @@
 ---
 marp: true
 theme: ess314
+size: 16:9
 html: true
 paginate: true
 math: mathjax

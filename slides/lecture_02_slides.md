@@ -1,33 +1,13 @@
 ---
 marp: true
-theme: default
+theme: ess314
+size: 16:9
+html: true
 paginate: true
 math: mathjax
-style: |
-  section {
-    font-size: 28px;
-    padding: 50px 60px;
-  }
-  h1 {
-    font-size: 36px;
-    color: #0072B2;
-    border-bottom: 2px solid #0072B2;
-    padding-bottom: 8px;
-  }
-  h2 {
-    font-size: 30px;
-    color: #333;
-  }
-  .columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2em;
-  }
-  ul { margin-top: 0.5em; }
-  li { margin-bottom: 0.3em; }
-  strong { color: #0072B2; }
-  table { font-size: 24px; }
 ---
+
+<!-- _class: title-slide -->
 
 # The Inaccessible Earth
 ### Scales, Instruments, and the Logic of Geophysical Inference
