@@ -114,7 +114,7 @@ The same methods frequently serve multiple contexts simultaneously.
 
 # Geodynamics: How the Planet Works
 
-![alt text: Schematic diagram showing three panels. Left panel: Earth cross-section with two convection cells in the mantle and a subducting plate. Center panel: map view of a fault trace with concentric shaking-intensity ellipses and a star at the epicenter. Right panel: seismic reflection section with wavy sedimentary horizons and a highlighted reservoir trap at depth.](../../assets/figures/fig_three_motivations.png)
+![alt text: Schematic diagram showing three panels. Left panel: Earth cross-section with two convection cells in the mantle and a subducting plate. Center panel: map view of a fault trace with concentric shaking-intensity ellipses and a star at the epicenter. Right panel: seismic reflection section with wavy sedimentary horizons and a highlighted reservoir trap at depth.](../assets/figures/fig_three_motivations.png)
 <span class="caption">Figure 1.1 — Three motivating contexts. Python-generated · <code>assets/scripts/fig_three_motivations.py</code></span>
 
 - Juan de Fuca Plate subducts at ~3 cm/yr — **measured by GPS, not drilling**

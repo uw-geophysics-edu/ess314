@@ -180,7 +180,7 @@ section.bg-overlay::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.25);   /* 50 % dark overlay */
+  background: rgba(0, 0, 0, 0.55);   /* 55% dark overlay — WCAG AA contrast */
   z-index: 0;
 }
 
@@ -197,7 +197,7 @@ section.bg-overlay p,
 section.bg-overlay li,
 section.bg-overlay blockquote {
   color: var(--text-light);
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.75);
+  text-shadow: 1px 2px 6px rgba(0, 0, 0, 0.95), 0 0 12px rgba(0, 0, 0, 0.8);
 }
 
 section.bg-overlay h1 {

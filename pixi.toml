@@ -31,8 +31,8 @@ notebook = "jupyter notebook"
 
 # Marp slide tasks — run `pixi run install-marp` once after `pixi install`
 install-marp = "npm install -g @marp-team/marp-cli"
-slides-html  = "marp --html --theme slides/ess314.css --output-dir slides/ slides/*_slides.md"
-slides-pdf   = "marp --pdf  --theme slides/ess314.css --output-dir slides/ slides/*_slides.md"
+slides-html  = "marp --html --allow-local-files --theme slides/ess314.css --output-dir slides/ slides/*_slides.md"
+slides-pdf   = "marp --pdf  --allow-local-files --theme slides/ess314.css --output-dir slides/ slides/*_slides.md"
 copy-slides  = "mkdir -p website/slides && cp slides/*.html website/slides/ 2>/dev/null || true"
 copy-slides-local = "mkdir -p _build/html/slides && cp slides/*.html _build/html/slides/ 2>/dev/null || true"
 

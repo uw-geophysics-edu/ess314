@@ -15,6 +15,8 @@ All slide decks are compiled from [Marp](https://marp.app/) Markdown and served 
 |---|---------|------|-----|
 | 01 | What Is Geophysics? | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_01_slides.html" target="_blank">▶ View</a> | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_01_slides.pdf" download>⬇ PDF</a> |
 | 02 | Scales, Instruments, and Geophysical Inference | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_02_slides.html" target="_blank">▶ View</a> | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_02_slides.pdf" download>⬇ PDF</a> |
+| 03 | Seismic Waves: Stress, Strain, and Elasticity | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_03_slides.html" target="_blank">▶ View</a> | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_03_slides.pdf" download>⬇ PDF</a> |
+| 04 | Wavefronts, Rays, and Huygens Construction | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_04_slides.html" target="_blank">▶ View</a> | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_04_slides.pdf" download>⬇ PDF</a> |
 
 ---
 

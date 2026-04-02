@@ -86,7 +86,7 @@ $$R_\oplus = \frac{C_\oplus}{2\pi} \approx 6{,}366\text{ km} \quad (\text{modern
 
 # Scale Diagram: Scale Determines Method
 
-![width:900px](../../assets/figures/fig_space_time_scales.png)
+![width:900px](../assets/figures/fig_space_time_scales.png)
 
 **Key point:** No single instrument spans 15 orders of magnitude in time and 10 in space. The scale of the process dictates the appropriate method.
 

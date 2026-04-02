@@ -66,17 +66,9 @@ style: |
 
 ---
 
+<!-- _class: bg-overlay -->
 <!-- backgroundImage: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Cascadia_subduction_zone.svg/1200px-Cascadia_subduction_zone.svg.png') -->
 <!-- Source: USGS / Wikimedia Commons — Public Domain -->
-
-<style scoped>
-section {
-  background: rgba(0,0,0,0.55);
-  color: white;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
-}
-h1, h2 { color: white; }
-</style>
 
 # Why Does the Ground Shake?
 
@@ -99,7 +91,7 @@ Seismic strains are ~10⁻⁷ — far inside the Hookean regime.
 Fault zones, magma chambers, and the deep Earth are exceptions.
 </div>
 
-![alt text: stress-strain curve with blue linear Hookean region, amber nonlinear zone, orange plastic zone, and dashed green unloading path showing permanent strain after the elastic limit](../../assets/figures/fig_stress_strain_curve.png)
+![alt text: stress-strain curve with blue linear Hookean region, amber nonlinear zone, orange plastic zone, and dashed green unloading path showing permanent strain after the elastic limit](../assets/figures/fig_stress_strain_curve.png)
 <span class="caption">Figure 3.1. Seismic waves operate in the blue (linear elastic) region only. Python-generated — assets/scripts/fig_stress_strain_curve.py</span>
 
 ---
@@ -130,7 +122,7 @@ $$\boldsymbol{\sigma} = \begin{pmatrix} \sigma_{xx} & \sigma_{xy} & \sigma_{xz} 
 - **Off-diagonal** = shear stresses
 - **Symmetric** ($\sigma_{ij} = \sigma_{ji}$) → 6 independent components
 
-![alt text: two 3D diagrams showing force components on a surface element decomposing into one normal and two shear forces, and a unit cube with blue normal stress arrows and vermilion shear stress arrows on each visible face](../../assets/figures/fig_stress_tensor.png)
+![alt text: two 3D diagrams showing force components on a surface element decomposing into one normal and two shear forces, and a unit cube with blue normal stress arrows and vermilion shear stress arrows on each visible face](../assets/figures/fig_stress_tensor.png)
 <span class="caption">Figure 3.2. Normal stresses (blue) and shear stresses (vermilion) on a unit cube. Python-generated — assets/scripts/fig_stress_tensor.py</span>
 
 ---
@@ -153,14 +145,14 @@ $$\theta = \varepsilon_{xx} + \varepsilon_{yy} + \varepsilon_{zz} = \nabla\cdot\
 
 # Three Modes of Strain
 
-![alt text: three-panel figure showing panel a with a cylinder compressed axially with labels h and delta-h and longitudinal strain formula, panel b with a cube compressed uniformly by pressure arrows from all sides with volumetric strain formula, panel c with a rectangle sheared into a parallelogram by a horizontal force with shear angle psi and shear strain formula](../../assets/figures/fig_strain_types.png)
+![alt text: three-panel figure showing panel a with a cylinder compressed axially with labels h and delta-h and longitudinal strain formula, panel b with a cube compressed uniformly by pressure arrows from all sides with volumetric strain formula, panel c with a rectangle sheared into a parallelogram by a horizontal force with shear angle psi and shear strain formula](../assets/figures/fig_strain_types.png)
 <span class="caption">Figure 3.3. (a) Longitudinal ε_xx = Δh/h. (b) Volumetric θ = ΔV/V. (c) Shear γ = tan ψ. P-waves involve (a)+(b); S-waves involve (c). Python-generated — assets/scripts/fig_strain_types.py</span>
 
 ---
 
 # Four Elastic Moduli
 
-![alt text: four-panel figure showing Young's modulus E with a cylinder compressed axially, shear modulus mu with a block sheared into a parallelogram, bulk modulus K with a cube compressed uniformly, and Poisson ratio nu with a cylinder compressed axially that bulges laterally, each panel labeled with defining formula in a green equation box](../../assets/figures/fig_elastic_moduli.png)
+![alt text: four-panel figure showing Young's modulus E with a cylinder compressed axially, shear modulus mu with a block sheared into a parallelogram, bulk modulus K with a cube compressed uniformly, and Poisson ratio nu with a cylinder compressed axially that bulges laterally, each panel labeled with defining formula in a green equation box](../assets/figures/fig_elastic_moduli.png)
 <span class="caption">Figure 3.4. E (axial stiffness), μ (shear stiffness), K (bulk stiffness), ν (lateral/axial ratio). Python-generated — assets/scripts/fig_elastic_moduli.py</span>
 
 ---
@@ -205,7 +197,7 @@ The key step: apply Newton's $F = ma$ to an infinitesimal element
 
 $$m = \rho\,dx\,A_x \qquad F_x = A_x\,\sigma_{xx}$$
 
-![alt text: two-panel figure. Left panel shows an element between x and x-plus-dx with face area A_x and displacement arrows u and u-plus-du. Right panel shows the same element with a vermilion force arrow F_x entering from the left face and F_x-plus-dF_x leaving the right face, with equation boxes showing net force equals partial of sigma over x times dx, Newton's law, and the final equation of motion](../../assets/figures/fig_force_balance.png)
+![alt text: two-panel figure. Left panel shows an element between x and x-plus-dx with face area A_x and displacement arrows u and u-plus-du. Right panel shows the same element with a vermilion force arrow F_x entering from the left face and F_x-plus-dF_x leaving the right face, with equation boxes showing net force equals partial of sigma over x times dx, Newton's law, and the final equation of motion](../assets/figures/fig_force_balance.png)
 <span class="caption">Figure 3.5. Net force = stress gradient × volume. Divide by A_x dx → equation of motion. Python-generated — assets/scripts/fig_force_balance.py</span>
 
 ---
@@ -264,7 +256,7 @@ Characteristic of **upper-crustal granite** ✓
 
 # Seismic Velocities: Typical Values
 
-![alt text: horizontal bar chart with material names on the vertical axis and P-wave velocity in meters per second on the horizontal axis from 0 to 8000. Dark blue bars for crystalline rocks span 2000 to 6500 m/s, sky blue bars for unconsolidated sediments span 60 to 2000 m/s, green bars for fluids cluster near 1200 to 1540 m/s, amber bars for engineering materials like steel and aluminum are between 5800 and 6400 m/s. A vertical dotted reference line marks 1480 m/s for water.](../../assets/figures/fig_seismic_velocities.png)
+![alt text: horizontal bar chart with material names on the vertical axis and P-wave velocity in meters per second on the horizontal axis from 0 to 8000. Dark blue bars for crystalline rocks span 2000 to 6500 m/s, sky blue bars for unconsolidated sediments span 60 to 2000 m/s, green bars for fluids cluster near 1200 to 1540 m/s, amber bars for engineering materials like steel and aluminum are between 5800 and 6400 m/s. A vertical dotted reference line marks 1480 m/s for water.](../assets/figures/fig_seismic_velocities.png)
 <span class="caption">Figure 3.7. V_P spans nearly two orders of magnitude across Earth materials. Dry sand is ~100× slower than granite. Python-generated — assets/scripts/fig_seismic_velocities.py</span>
 
 ---

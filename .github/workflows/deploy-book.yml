@@ -36,13 +36,21 @@ jobs:
         run: npm install -g @marp-team/marp-cli
 
       - name: Compile Marp slide decks → HTML
-        run: marp --html --theme slides/ess314.css --output-dir slides/ slides/*_slides.md
+        run: marp --html --allow-local-files --theme slides/ess314.css --output-dir slides/ slides/*_slides.md
+
+      - name: Compile Marp slide decks → PDF
+        run: marp --pdf  --allow-local-files --theme slides/ess314.css --output-dir slides/ slides/*_slides.md
+        continue-on-error: true   # PDF requires Chrome; skip gracefully if unavailable
 
       - name: Build book
         run: pixi run build-ci
 
-      - name: Copy slides into website/
-        run: mkdir -p website/slides && cp slides/*.html website/slides/
+      - name: Copy slides and figures into website/
+        run: |
+          mkdir -p website/slides website/assets
+          cp slides/*.html website/slides/
+          cp slides/*.pdf  website/slides/ 2>/dev/null || true
+          cp -r assets/figures website/assets/
 
       - name: Linkcheck
         continue-on-error: true

@@ -101,7 +101,7 @@ We don't add them by hand — they emerge from the vector nature of elasticity.
 
 # P-waves and S-waves: Particle Motion
 
-![alt text: two-panel figure. Top panel shows P-wave with alternating dark blue compression zones and sky blue rarefaction zones of closely and widely spaced particles respectively, with orange arrows showing particle motion parallel to the green propagation arrow. Bottom panel shows S-wave with gray-blue particles displaced transversely above and below an equilibrium dashed line, with orange arrows perpendicular to the propagation direction and a callout noting S-waves require mu not equal to zero and cannot travel in fluids.](../../assets/figures/fig_pwave_swave_motion.png)
+![alt text: two-panel figure. Top panel shows P-wave with alternating dark blue compression zones and sky blue rarefaction zones of closely and widely spaced particles respectively, with orange arrows showing particle motion parallel to the green propagation arrow. Bottom panel shows S-wave with gray-blue particles displaced transversely above and below an equilibrium dashed line, with orange arrows perpendicular to the propagation direction and a callout noting S-waves require mu not equal to zero and cannot travel in fluids.](../assets/figures/fig_pwave_swave_motion.png)
 <span class="caption">Figure 4.1. P-wave: longitudinal motion (top). S-wave: transverse motion (bottom). Blue/sky encodes compression state; arrow direction encodes displacement. Python-generated — assets/scripts/fig_pwave_swave_motion.py</span>
 
 ---
@@ -162,14 +162,14 @@ Both are **dispersive**: phase velocity depends on frequency
 
 # Rayleigh and Love Waves
 
-![alt text: three-panel figure. Left panel shows Rayleigh wave retrograde elliptical particle orbits at multiple depths, with ellipses shrinking from large at the surface to tiny at depth, indicating exponential decay. Center panel shows amplitude versus depth curve decaying exponentially with a dashed reference line at 0.4 wavelengths depth and label V_R approximately 0.92 V_S. Right panel shows a cross-section with a slow surface layer over a fast half-space, with dashed orange zigzag rays bouncing by total internal reflection between the free surface and the interface, and dot symbols on rays showing horizontal transverse (SH) particle motion.](../../assets/figures/fig_surface_waves.png)
+![alt text: three-panel figure. Left panel shows Rayleigh wave retrograde elliptical particle orbits at multiple depths, with ellipses shrinking from large at the surface to tiny at depth, indicating exponential decay. Center panel shows amplitude versus depth curve decaying exponentially with a dashed reference line at 0.4 wavelengths depth and label V_R approximately 0.92 V_S. Right panel shows a cross-section with a slow surface layer over a fast half-space, with dashed orange zigzag rays bouncing by total internal reflection between the free surface and the interface, and dot symbols on rays showing horizontal transverse (SH) particle motion.](../assets/figures/fig_surface_waves.png)
 <span class="caption">Figure 4.2. Rayleigh retrograde ellipses (left), amplitude decay with depth (center), Love wave SH trapping (right). Python-generated — assets/scripts/fig_surface_waves.py</span>
 
 ---
 
 # Point Source Radiation
 
-![alt text: 3D perspective with a horizontal surface plane and a curved lower hemisphere. From a central source point P, concentric orange-red hemispherical shells expand downward labeled body wave wavefront, and concentric blue circles expand outward on the surface labeled surface wave. Green arrows labeled rays radiate from the source perpendicular to the wavefronts in all directions.](../../assets/figures/fig_point_source_wavefronts.png)
+![alt text: 3D perspective with a horizontal surface plane and a curved lower hemisphere. From a central source point P, concentric orange-red hemispherical shells expand downward labeled body wave wavefront, and concentric blue circles expand outward on the surface labeled surface wave. Green arrows labeled rays radiate from the source perpendicular to the wavefronts in all directions.](../assets/figures/fig_point_source_wavefronts.png)
 <span class="caption">Figure 4.3. Body waves: spherical wavefronts in the interior. Surface waves: circular wavefronts on the surface. Rays always perpendicular to wavefronts. Python-generated — assets/scripts/fig_point_source_wavefronts.py</span>
 
 ---
@@ -191,7 +191,7 @@ This is not just geometry — it is the Green's function representation of the w
 
 # Huygens → Snell's Law: Geometry
 
-![alt text: three-panel figure. Left panel shows Huygens principle with an initial horizontal wavefront at t-zero, secondary circular wavelets on each point, and a new envelope wavefront at t-zero plus delta-t above with propagation arrows. Middle panel shows Snell's law geometry with incident ray from A to B at angle theta-1 from the normal in medium 1 (blue) and refracted ray from B at larger angle theta-2 in medium 2 (green), with segments a-1-t and a-2-t labeled on the geometric triangles. Right panel shows the general Snell's law with incident P-wave, reflected P-wave at same angle, refracted P-wave at larger angle, and converted S-wave at smaller angle, all sharing the same ray parameter p.](../../assets/figures/fig_snell_law.png)
+![alt text: three-panel figure. Left panel shows Huygens principle with an initial horizontal wavefront at t-zero, secondary circular wavelets on each point, and a new envelope wavefront at t-zero plus delta-t above with propagation arrows. Middle panel shows Snell's law geometry with incident ray from A to B at angle theta-1 from the normal in medium 1 (blue) and refracted ray from B at larger angle theta-2 in medium 2 (green), with segments a-1-t and a-2-t labeled on the geometric triangles. Right panel shows the general Snell's law with incident P-wave, reflected P-wave at same angle, refracted P-wave at larger angle, and converted S-wave at smaller angle, all sharing the same ray parameter p.](../assets/figures/fig_snell_law.png)
 <span class="caption">Figure 4.4. (a) Huygens principle. (b) Snell's law geometric derivation. (c) General Snell's law for all wave types. Python-generated — assets/scripts/fig_snell_law.py</span>
 
 ---
