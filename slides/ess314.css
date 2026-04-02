@@ -260,7 +260,8 @@ section.bg-fade > * {
 
 /* ── Admonition-style callout boxes ──────────────────────── */
 /*  Usage: <div class="callout-note">…</div>                  */
-.callout-note {
+/*  Aliases: .callout (= callout-note), .warning (= callout-warning), .key-eq (= callout-key) */
+.callout, .callout-note {
   background: #eaf3fb;
   border-left: 5px solid var(--deep-blue);
   padding: 0.7em 1em;
@@ -269,7 +270,7 @@ section.bg-fade > * {
   margin-top: 0.8em;
 }
 
-.callout-key {
+.key-eq, .callout-key {
   background: #fff8e6;
   border-left: 5px solid var(--amber);
   padding: 0.7em 1em;
@@ -278,7 +279,7 @@ section.bg-fade > * {
   margin-top: 0.8em;
 }
 
-.callout-warning {
+.warning, .callout-warning {
   background: #fdf0ee;
   border-left: 5px solid var(--vermilion);
   padding: 0.7em 1em;

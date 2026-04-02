@@ -1,49 +1,9 @@
 ---
 marp: true
-theme: uncover
+theme: ess314
 html: true
 paginate: true
-backgroundColor: '#ffffff'
-style: |
-  section {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    font-size: 26px;
-    color: #1a1a1a;
-  }
-  section.title-slide {
-    background-color: #003366;
-    color: white;
-  }
-  section.title-slide h1 { color: white; font-size: 1.5em; }
-  section.title-slide h3 { color: #a8c8f0; }
-  section.title-slide h4 { color: #cde; font-weight: normal; }
-  h1 { font-size: 1.4em; color: #003366; }
-  h2 { font-size: 1.15em; color: #0072B2; }
-  img { border-radius: 4px; max-width: 100%; }
-  .caption { font-size: 0.60em; color: #666; margin-top: 4px; font-style: italic; }
-  .key-eq {
-    background: #d4edda;
-    border-left: 5px solid #28a745;
-    padding: 10px 16px;
-    border-radius: 4px;
-    font-size: 0.92em;
-    margin: 8px 0;
-  }
-  .callout {
-    background: #eaf4fb;
-    border-left: 5px solid #0072B2;
-    padding: 10px 16px;
-    border-radius: 4px;
-    font-size: 0.88em;
-    margin: 8px 0;
-  }
-  .warning {
-    background: #fff3cd;
-    border-left: 5px solid #E69F00;
-    padding: 10px 16px;
-    border-radius: 4px;
-    font-size: 0.88em;
-  }
+math: mathjax
 ---
 
 <!-- _class: title-slide -->

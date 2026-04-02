@@ -16,7 +16,7 @@ open_sources:
 # Lecture 1 — What Is Geophysics? 
 
 :::{seealso}
-📊 **Lecture slides** — [open in new tab](../slides/lecture_01_slides.html)
+📊 **Lecture slides** — <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_01_slides.html" target="_blank">open in new tab ↗</a>
 :::
 
 ## Syllabus Alignment
