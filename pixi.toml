@@ -39,7 +39,7 @@ copy-slides-local = "mkdir -p _build/html/slides && cp slides/*.html _build/html
 # Book building tasks
 build-book = "jupyter book build ."
 build-ci   = "jupyter book build . && rm -rf website && mv _build/html website"
-build-all  = { depends_on = ["slides-html", "build-book", "copy-slides-local"] }
+build-all  = { depends-on = ["slides-html", "build-book", "copy-slides-local"] }
 serve-book = "python -m http.server --directory _build/html 8000"
 serve-all  = "python -m http.server --directory website/ 3000"
 clean      = "rm -rf _build website"
