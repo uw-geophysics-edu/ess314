@@ -17,6 +17,10 @@ open_sources:
 
 # Stress, Strain, and the Equation of Motion
 
+:::{seealso}
+📊 **Lecture slides** — [open in new tab](../slides/lecture_03_slides.html)
+:::
+
 ## Syllabus Alignment
 
 | | |
@@ -79,7 +83,7 @@ This linear elastic (Hookean) regime applies when strains are small — roughly 
 Seismic wave propagation relies on two linked assumptions: (1) the rock is *elastic* — it returns to its original shape after deformation — and (2) the relationship between stress and strain is *linear*. These are collectively called Hookean elasticity. Seismic strains ($\sim 10^{-7}$) are tiny enough that this is almost always valid.
 :::
 
-:::{figure} ../../assets/figures/fig_stress_strain_curve.png
+:::{figure} ../assets/figures/fig_stress_strain_curve.png
 :name: fig-stress-strain-lec3
 :alt: Stress-strain curve showing four regions: a blue linear elastic zone labeled Hooke's law where stress is proportional to strain, an amber nonlinear elastic zone, an orange plastic deformation zone, and a dashed green unloading path showing permanent strain. Vertical dashed lines mark the linearity limit and elastic limit.
 :width: 72%
@@ -143,7 +147,7 @@ $$ (eq:stress-symmetry)
 
 Symmetry reduces the 9 independent components to 6.
 
-:::{figure} ../../assets/figures/fig_stress_tensor.png
+:::{figure} ../assets/figures/fig_stress_tensor.png
 :name: fig-stress-tensor-lec3
 :alt: Two 3D diagrams. Left panel shows a surface element with one normal force and two shear forces labeled with component notation. Right panel shows a unit cube with six distinct stress components as arrows on the three visible faces, colored blue for normal stresses and vermilion for shear stresses.
 :width: 88%
@@ -186,7 +190,7 @@ $$
 \theta = \varepsilon_{xx} + \varepsilon_{yy} + \varepsilon_{zz} = \nabla \cdot \mathbf{u}
 $$ (eq:dilatation)
 
-:::{figure} ../../assets/figures/fig_strain_types.png
+:::{figure} ../assets/figures/fig_strain_types.png
 :name: fig-strain-types-lec3
 :alt: Three-panel figure showing longitudinal strain as a cylinder compressed axially with dimension labels, volumetric strain as a cube compressed uniformly with four pressure arrows, and shear strain as a rectangle distorted into a parallelogram with an angle psi labeled at the corner.
 :width: 90%
@@ -198,7 +202,7 @@ $$ (eq:dilatation)
 
 Elastic moduli quantify how strongly a material resists each mode of deformation. For an isotropic solid, four independent moduli are in common use; any two of them fully specify the elastic behavior.
 
-:::{figure} ../../assets/figures/fig_elastic_moduli.png
+:::{figure} ../assets/figures/fig_elastic_moduli.png
 :name: fig-elastic-moduli
 :alt: Four-panel figure. Panel 1 shows Young's modulus with a tall blue rectangle compressed vertically to a shorter rectangle by a downward force, with the equation E equals sigma over epsilon. Panel 2 shows shear modulus with a rectangle sheared into a parallelogram by a horizontal force, with angle theta and equation mu equals tau over gamma. Panel 3 shows bulk modulus with a cube compressed from all sides by confining pressure P arrows, with equation K equals negative P divided by delta-V over V. Panel 4 shows Poisson ratio with a cylinder compressed axially that bulges laterally, with equation nu equals negative lateral strain divided by axial strain.
 :width: 95%
@@ -274,7 +278,7 @@ Even if there is no strain in $x$ ($\varepsilon_{xx} = 0$), compression in $y$ a
 
 Now combine the stress tensor with Newton's second law to find how stress gradients drive particle acceleration. Consider an infinitesimal element between positions $x$ and $x + dx$, with cross-sectional area $A_x$ and density $\rho$.
 
-:::{figure} ../../assets/figures/fig_force_balance.png
+:::{figure} ../assets/figures/fig_force_balance.png
 :name: fig-force-balance
 :alt: Two-panel figure. Left panel shows a thin elastic element between x and x plus dx with face area labeled A_x and two displacement arrows labeled u at x and u plus du at x plus dx. Right panel shows the same element with a vermilion force arrow F_x entering from the left face and a larger F_x plus dF_x arrow leaving the right face, with equation boxes showing the net force, Newton's second law, and the final equation of motion rho times second partial of u over t-squared equals partial of sigma-xx over x.
 :width: 88%

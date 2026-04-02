@@ -6,7 +6,7 @@ parts:
     chapters:
       - file: syllabus
         title: "Syllabus"
-      - file: slides/index
+      - file: lecture_slides
         title: "Lecture Slides"
 
   - caption: "Module 1 — Introduction to Geophysical Methods"

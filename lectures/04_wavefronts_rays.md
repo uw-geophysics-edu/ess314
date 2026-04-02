@@ -15,6 +15,10 @@ open_sources:
 
 # Seismic Wave Types and Ray Propagation
 
+:::{seealso}
+📊 **Lecture slides** — [open in new tab](../slides/lecture_04_slides.html)
+:::
+
 ## Syllabus Alignment
 
 | | |
@@ -95,7 +99,7 @@ S-waves are solutions to the shear wave equation. Particle motion is **perpendic
 
 Because $\mu = 0$ in any fluid, the S-wave speed $V_S = \sqrt{\mu/\rho} = 0$, meaning **S-waves cannot propagate through any fluid** — water, magma, or the liquid outer core. This is not a mathematical coincidence; it reflects the physical fact that a fluid has no elastic restoring force to oppose transverse deformation: the molecules flow and rearrange rather than springing back.
 
-:::{figure} ../../assets/figures/fig_pwave_swave_motion.png
+:::{figure} ../assets/figures/fig_pwave_swave_motion.png
 :name: fig-pwave-swave-lec4
 :alt: Two-panel figure. Top panel shows P-wave particle motion as alternating clusters of close-spaced particles (compression, dark blue) and widely-spaced particles (rarefaction, sky blue) with orange arrows showing longitudinal displacement parallel to the propagation direction. Bottom panel shows S-wave motion as particles displaced transversely above and below the equilibrium line, tracing a sinusoidal path, with orange arrows showing perpendicular displacement and a callout box noting that S-waves cannot propagate in fluids because mu equals zero.
 :width: 92%
@@ -123,7 +127,7 @@ Love waves require a velocity gradient: a slower surface layer over a faster hal
 
 Both wave types are **dispersive**: their phase velocity depends on frequency (longer periods sample deeper, faster material). This frequency-dependent velocity is the basis for **surface wave tomography** — by measuring dispersion, one can infer $V_S(z)$.
 
-:::{figure} ../../assets/figures/fig_surface_waves.png
+:::{figure} ../assets/figures/fig_surface_waves.png
 :name: fig-surface-waves-lec4
 :alt: Three-panel figure. Left panel shows Rayleigh wave retrograde elliptical particle trajectories at multiple depths, with ellipses shrinking from large near the surface to small at depth. Center panel shows an amplitude-versus-depth curve decaying exponentially with a dashed line marking 0.4 wavelength and a label V_R approximately 0.92 V_S. Right panel shows a cross-section with a light blue slow surface layer over a green fast half-space with orange dashed zigzag rays illustrating SH wave trapping by total internal reflection, and dot symbols showing transverse particle motion.
 :width: 92%
@@ -157,7 +161,7 @@ Both wave types are **dispersive**: their phase velocity depends on frequency (l
 
 Wave speeds span nearly two orders of magnitude across Earth materials:
 
-:::{figure} ../../assets/figures/fig_seismic_velocities.png
+:::{figure} ../assets/figures/fig_seismic_velocities.png
 :name: fig-seismic-velocities-lec4
 :alt: Horizontal bar chart with material names on the vertical axis and P-wave velocity in meters per second on the horizontal axis from 0 to 8000 m/s. Bars are colored by category: dark blue for crystalline and sedimentary rocks (Granite, Basalt, Limestone, Sandstone, Salt rock, Shale) spanning roughly 2000 to 6500 m/s; sky-blue for unconsolidated sediments (Dry sand, Wet sand, Clay) with shorter bars from 60 to 2000 m/s; green for fluids (Seawater, Freshwater, Oil) near 1200 to 1540 m/s; and amber for engineering materials (Steel, Aluminum, Concrete, Ice).
 :width: 82%
@@ -180,7 +184,7 @@ This principle is not just a geometric construction — it is a consequence of t
 2. Why wavefronts bend (refract) when the wave speed changes
 3. Why energy spreads (geometrical spreading) as waves propagate away from a source
 
-:::{figure} ../../assets/figures/fig_snell_law.png
+:::{figure} ../assets/figures/fig_snell_law.png
 :name: fig-snell-law
 :alt: Three-panel figure. Left panel shows Huygens' principle with a horizontal initial wavefront at time t-zero, secondary circular wavelets centered on each point source, and an envelope wavefront at t-zero plus delta-t above, with propagation arrows between the two wavefronts. Middle panel shows the geometric derivation of Snell's law with a medium 1 (blue shading) above an interface and medium 2 (green shading) below, an incident ray A to B with angle theta-1 from the normal, a refracted ray from B with larger angle theta-2, and a geometric construction labeling segments a-1-t and a-2-t on the two triangles. Right panel shows the general Snell's law with an incident P-wave, a reflected P-wave at the same angle, a refracted P-wave at larger angle in medium 2, and a converted refracted S-wave at smaller angle, all labeled with the generalized Snell's law equation.
 :width: 95%
