@@ -10,6 +10,10 @@ __pycache__/
 _build/
 website/
 
+# Marp compiled outputs (non-deterministic theme hash; CI regenerates from source)
+slides/*.html
+slides/*.pdf
+
 # Pixi
 .pixi/
 
