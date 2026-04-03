@@ -185,6 +185,24 @@ To restart in JupyterLab: click the **Kernel** menu at the top, or right-click i
 
 ---
 
+## Option C: Run notebooks in VS Code
+
+If you already use [Visual Studio Code](https://code.visualstudio.com), you can open and run the lab notebooks directly inside the editor.
+
+:::{note}
+VS Code does **not** include Jupyter support by default. The first time you open a `.ipynb` file, VS Code will display a prompt asking you to install the **Jupyter** extension — just click **Install** and follow the prompts. You will also be prompted to select a kernel; choose **ESS 314 (Python 3)** (registered in Step 2.3 above).
+:::
+
+1. Make sure you have completed Steps 1 and 2 above (clone + `pixi install` + `pixi run install-kernel`).
+2. Open VS Code, then open the `ess314` folder: **File → Open Folder…**
+3. Open any notebook in `notebooks/`. VS Code will prompt you to install the **Jupyter** extension if it is not already present — click **Install**.
+4. In the top-right corner of the notebook, click **Select Kernel** and choose **ESS 314 (Python 3)**.
+5. Run cells with **Shift+Enter** (run current cell and advance) or **Ctrl/Cmd+Enter** (run in place).
+
+Kernel restart works the same way as in JupyterLab: use the **⟳ Restart** button in the toolbar, or open the Command Palette (**Ctrl/Cmd+Shift+P**) and search for *Jupyter: Restart Kernel*.
+
+---
+
 ## Troubleshooting
 
 | Symptom | Likely cause | Fix |
@@ -195,6 +213,8 @@ To restart in JupyterLab: click the **Kernel** menu at the top, or right-click i
 | Kernel selector shows no ESS 314 kernel | `install-kernel` not run | Run `pixi run install-kernel` once, then restart JupyterLab |
 | JupyterLab opens but kernel fails to start | Kernel not linked to environment | Run `pixi run install-kernel` (Pixi) or `python -m ipykernel install --user --name ess314` (conda) |
 | Cell output looks wrong after editing earlier cells | Stale kernel state | **Kernel → Restart Kernel and Run All Cells** |
+| VS Code says "No kernel found" | `install-kernel` not run | Run `pixi run install-kernel`, then reload VS Code |
+| VS Code does not open `.ipynb` files properly | Jupyter extension not installed | Click **Install** when VS Code prompts, or search for "Jupyter" in the Extensions panel |
 | `git pull` gives "merge conflict" | You edited a tracked file | Copy your changes to a separate file, run `git checkout -- <filename>`, then pull |
 
 If you are stuck, post a screenshot of the error on the course Slack or bring your laptop to office hours.

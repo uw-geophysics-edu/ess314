@@ -8,11 +8,11 @@ platforms = ["osx-64", "osx-arm64", "linux-64", "win-64"]
 
 [dependencies]
 python = ">=3.11,<3.13"
-jupyter = ">=1.0"
-jupyterlab = ">=3.0"
+jupyter = ">=1.0"         # installs the full Jupyter stack
+jupyterlab = ">=3.0"      # browser-based notebook UI
+ipykernel = ">=6.0"       # required to register the ESS 314 kernel (pixi run install-kernel)
 jupyter-book = ">=1.0,<2"
 sphinxcontrib-bibtex = ">=2.5"
-ipykernel = ">=6.0"
 matplotlib = ">=3.5"
 numpy = ">=1.20"
 scipy = ">=1.7"
