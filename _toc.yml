@@ -2,12 +2,12 @@ format: jb-book
 root: intro
 
 parts:
-  - caption: "Course Information"
+  - caption: "Course Logistics"
     chapters:
       - file: syllabus
         title: "Syllabus"
-      - file: setup
-        title: "Setup — Clone & Install"
+      - file: technology
+        title: "Technology"
       - file: lecture_slides
         title: "Lecture Slides"
 

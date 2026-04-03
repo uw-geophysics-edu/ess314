@@ -28,6 +28,7 @@ dependencies = { black = ">=22.0", pre-commit = "*", codespell = "*" }
 # Student tasks
 lab = "jupyter lab"
 notebook = "jupyter notebook"
+install-kernel = "python -m ipykernel install --user --name ess314 --display-name 'ESS 314 (Python 3)'"
 
 # Marp slide tasks — run `pixi run install-marp` once after `pixi install`
 install-marp = "npm install -g @marp-team/marp-cli"

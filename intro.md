@@ -26,7 +26,7 @@ A fourth thread runs through the whole course: **AI literacy**. Geophysics alrea
 
 :::{admonition} Running the notebooks
 :class: tip
-Every lab notebook has a **Open in Colab** badge — click it to run in your browser with no installation needed. To run notebooks locally, see {doc}`setup` for step-by-step instructions on cloning the repository and installing the Python environment with Pixi or conda.
+Every lab notebook has a **Open in Colab** badge — click it to run in your browser with no installation needed. To run notebooks locally, see {doc}`technology` for step-by-step instructions on cloning the repository and installing the Python environment with Pixi or conda.
 :::
 
 ---

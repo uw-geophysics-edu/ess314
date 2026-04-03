@@ -1,4 +1,4 @@
-# Setting Up Your Computing Environment
+# Technology
 
 This page walks you through everything you need to run the lab notebooks on your own computer.
 If you prefer not to install anything, you can run every notebook in **Google Colab** using the badge at the top of each lab — no setup required.
@@ -83,20 +83,30 @@ We support two environment managers: **Pixi** (preferred — faster, handles eve
 
 #### Option B-1: Pixi (preferred)
 
-[Pixi](https://prefix.dev/docs/pixi/overview) is a fast, cross-platform package manager that reads the `pixi.toml` file already in the repository.
+[Pixi](https://pixi.prefix.dev/latest/) is a fast, cross-platform package manager that reads the `pixi.toml` file already in the repository. Full installation docs: [pixi.prefix.dev/latest/installation](https://pixi.prefix.dev/latest/installation/).
 
-1. **Install Pixi** — open a terminal and run:
+1. **Install Pixi.**
 
+   **macOS / Linux** — open a terminal and run:
    ```bash
    curl -fsSL https://pixi.sh/install.sh | sh
    ```
-
-   On Windows, open PowerShell and run:
-   ```powershell
-   iwr -useb https://pixi.sh/install.ps1 | iex
+   If your system does not have `curl`, use `wget` instead:
+   ```bash
+   wget -qO- https://pixi.sh/install.sh | sh
+   ```
+   On **macOS** you can also use Homebrew:
+   ```bash
+   brew install pixi
    ```
 
-   Close and reopen your terminal after installation so the `pixi` command is on your PATH.
+   **Windows** — open PowerShell and run:
+   ```powershell
+   winget install prefix-dev.pixi
+   ```
+   Or download the `.msi` installer from the [Pixi GitHub releases page](https://github.com/prefix-dev/pixi/releases/latest).
+
+   **After installation, close and reopen your terminal** so that the `pixi` command is on your PATH.
 
 2. **Install all dependencies** — from inside the `ess314` folder:
 
@@ -106,13 +116,21 @@ We support two environment managers: **Pixi** (preferred — faster, handles eve
 
    This reads `pixi.toml` and installs all required packages into a local `.pixi/` folder inside the repository. It does **not** affect your system Python.
 
-3. **Launch JupyterLab:**
+3. **Register the Jupyter kernel** (one-time, required so JupyterLab can find the environment):
+
+   ```bash
+   pixi run install-kernel
+   ```
+
+   This registers a kernel named **ESS 314 (Python 3)** that will appear in JupyterLab's kernel selector.
+
+4. **Launch JupyterLab:**
 
    ```bash
    pixi run lab
    ```
 
-   Your browser will open JupyterLab. Navigate to `notebooks/` and open any lab file.
+   Your browser will open JupyterLab. Navigate to `notebooks/`, open a lab file, and select the **ESS 314 (Python 3)** kernel when prompted.
 
 #### Option B-2: conda / miniconda
 
@@ -148,14 +166,35 @@ Once JupyterLab is open, navigate to `notebooks/` and open `Lab1-Intro-Python.ip
 
 ---
 
+### Step 4 — Restarting the kernel
+
+A **kernel** is the Python process that runs your notebook cells. You will need to restart it in several situations:
+
+| When | What to do |
+|------|------------|
+| A cell seems stuck and never finishes | **Kernel → Interrupt Kernel**, then re-run if needed |
+| Variables are in an unexpected state after deleting/reordering cells | **Kernel → Restart Kernel…** |
+| You install a new package and need it to be importable | **Kernel → Restart Kernel…** |
+| Before submitting: verify the notebook runs top-to-bottom cleanly | **Kernel → Restart Kernel and Run All Cells…** |
+
+:::{important}
+Always do a **Restart Kernel and Run All Cells** before submitting a lab. This catches bugs where later cells depend on variables set in cells that were later deleted or reordered.
+:::
+
+To restart in JupyterLab: click the **Kernel** menu at the top, or right-click in the notebook and choose from the kernel options. You can also click the ⟳ (restart) button in the toolbar.
+
+---
+
 ## Troubleshooting
 
 | Symptom | Likely cause | Fix |
 |---------|-------------|-----|
 | `git: command not found` | Git not installed | Follow Step 1 above |
 | `pixi: command not found` after install | Terminal not restarted | Close and reopen terminal |
-| `ModuleNotFoundError: No module named 'numpy'` | Wrong environment active | Run `pixi run lab` or `conda activate ess314` |
-| JupyterLab opens but kernel fails to start | Kernel not linked to environment | In conda: run `python -m ipykernel install --user --name ess314` |
+| `ModuleNotFoundError: No module named 'numpy'` | Wrong environment active | Run `pixi run lab` (Pixi) or `conda activate ess314` then `jupyter lab` (conda) |
+| Kernel selector shows no ESS 314 kernel | `install-kernel` not run | Run `pixi run install-kernel` once, then restart JupyterLab |
+| JupyterLab opens but kernel fails to start | Kernel not linked to environment | Run `pixi run install-kernel` (Pixi) or `python -m ipykernel install --user --name ess314` (conda) |
+| Cell output looks wrong after editing earlier cells | Stale kernel state | **Kernel → Restart Kernel and Run All Cells** |
 | `git pull` gives "merge conflict" | You edited a tracked file | Copy your changes to a separate file, run `git checkout -- <filename>`, then pull |
 
 If you are stuck, post a screenshot of the error on the course Slack or bring your laptop to office hours.
