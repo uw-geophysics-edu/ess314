@@ -24,6 +24,11 @@ The course covers the solid Earth, from seismic waves and earthquake phenomenolo
 
 A fourth thread runs through the whole course: **AI literacy**. Geophysics already uses machine learning for earthquake detection, phase picking, and tomographic imaging. We treat AI as a scientific tool that requires the same critical scrutiny as any other — you will practice using it, evaluating it, and knowing when not to trust it.
 
+:::{admonition} Running the notebooks
+:class: tip
+Every lab notebook has a **Open in Colab** badge — click it to run in your browser with no installation needed. To run notebooks locally, see {doc}`setup` for step-by-step instructions on cloning the repository and installing the Python environment with Pixi or conda.
+:::
+
 ---
 
 ## How This Book Is Organized

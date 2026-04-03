@@ -6,6 +6,8 @@ parts:
     chapters:
       - file: syllabus
         title: "Syllabus"
+      - file: setup
+        title: "Setup — Clone & Install"
       - file: lecture_slides
         title: "Lecture Slides"
 
