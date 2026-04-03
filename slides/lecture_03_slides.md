@@ -82,25 +82,10 @@ $$\boldsymbol{\sigma} = \begin{pmatrix} \sigma_{xx} & \sigma_{xy} & \sigma_{xz} 
 - **Diagonal** = normal stresses (compression / tension)
 - **Off-diagonal** = shear stresses
 - **Symmetric** ($\sigma_{ij} = \sigma_{ji}$) → 6 independent components
+- **Force = Stress × Area:** $F_x = \sigma_{xx}\,A_x$ — stress is force per unit area on a surface
 
 ![alt text: two 3D diagrams showing force components on a surface element decomposing into one normal and two shear forces, and a unit cube with blue normal stress arrows and vermilion shear stress arrows on each visible face](../assets/figures/fig_stress_tensor.png)
 <span class="caption">Figure 3.2. Normal stresses (blue) and shear stresses (vermilion) on a unit cube. Python-generated — assets/scripts/fig_stress_tensor.py</span>
-
----
-
-# The Strain Tensor
-
-Strain = symmetric part of the displacement gradient:
-
-$$\varepsilon_{ij} = \frac{1}{2}\left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}\right)$$
-
-- Diagonal: **extension / compression** along each axis
-- Off-diagonal: **angular distortion**
-- Factor of ½ excludes rigid-body rotation
-
-**Dilatation** (volume change):
-
-$$\theta = \varepsilon_{xx} + \varepsilon_{yy} + \varepsilon_{zz} = \nabla\cdot\mathbf{u}$$
 
 ---
 
@@ -108,6 +93,24 @@ $$\theta = \varepsilon_{xx} + \varepsilon_{yy} + \varepsilon_{zz} = \nabla\cdot\
 
 ![alt text: three-panel figure showing panel a with a cylinder compressed axially with labels h and delta-h and longitudinal strain formula, panel b with a cube compressed uniformly by pressure arrows from all sides with volumetric strain formula, panel c with a rectangle sheared into a parallelogram by a horizontal force with shear angle psi and shear strain formula](../assets/figures/fig_strain_types.png)
 <span class="caption">Figure 3.3. (a) Longitudinal ε_xx = Δh/h. (b) Volumetric θ = ΔV/V. (c) Shear γ = tan ψ. P-waves involve (a)+(b); S-waves involve (c). Python-generated — assets/scripts/fig_strain_types.py</span>
+
+---
+
+# The Strain Tensor
+
+$x$ = coordinate (fixed, meters) · $u(x)$ = displacement (how far that material point moved)
+
+Strain = symmetric part of the displacement gradient:
+
+$$\varepsilon_{ij} = \frac{1}{2}\left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}\right)$$
+
+- Diagonal ($i=j$): **extension / compression** — modes (a) longitudinal and (b) volumetric above
+- Off-diagonal ($i\neq j$): **angular distortion** — mode (c) shear above
+- Factor of ½ excludes rigid-body rotation
+
+**Dilatation** (volume change):
+
+$$\theta = \varepsilon_{xx} + \varepsilon_{yy} + \varepsilon_{zz} = \nabla\cdot\mathbf{u}$$
 
 ---
 
@@ -154,9 +157,13 @@ Two parameters ($\lambda$, $\mu$) because isotropy collapses 21 stiffness compon
 
 # Force Balance on a Continuum Element
 
-The key step: apply Newton's $F = ma$ to an infinitesimal element
+<div class="callout">
+$x$ = position (m, fixed) · $u$ = particle displacement (m) · $a = \partial^2u/\partial t^2$ = acceleration (m/s²)
+</div>
 
-$$m = \rho\,dx\,A_x \qquad F_x = A_x\,\sigma_{xx}$$
+Apply **Force = Stress × Area** → $F_x = \sigma_{xx}\,A_x$, then Newton's $F = ma$:
+
+$$m = \rho\,dx\,A_x \qquad dF_x = A_x\,\frac{\partial\sigma_{xx}}{\partial x}\,dx$$
 
 ![alt text: two-panel figure. Left panel shows an element between x and x-plus-dx with face area A_x and displacement arrows u and u-plus-du. Right panel shows the same element with a vermilion force arrow F_x entering from the left face and F_x-plus-dF_x leaving the right face, with equation boxes showing net force equals partial of sigma over x times dx, Newton's law, and the final equation of motion](../assets/figures/fig_force_balance.png)
 <span class="caption">Figure 3.5. Net force = stress gradient × volume. Divide by A_x dx → equation of motion. Python-generated — assets/scripts/fig_force_balance.py</span>

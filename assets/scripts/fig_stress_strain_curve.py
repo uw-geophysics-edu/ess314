@@ -64,9 +64,8 @@ def make_unload(eps, sig, eps_L, eps_E, sig_E):
     # Straight line from (eps_E, sig_E) down to x-axis with original slope
     eps_perm = eps_E - sig_E / 40.0
     e_unload = np.linspace(eps_E, eps_perm, 40)
-    s_unload = sig_E - 40.0 * (e_unload - eps_E) * (-1)
-    # slope = -E so sig decreases
-    s_unload = sig_E + 40.0 * (eps_E - e_unload)
+    # Unloads with original elastic slope: sig_E → 0 as strain returns to eps_perm
+    s_unload = sig_E - 40.0 * (eps_E - e_unload)
     return e_unload, s_unload, eps_perm
 
 
