@@ -77,7 +77,7 @@ a { color: var(--deep-blue); }
 /*  max-height prevents figures from overflowing the 720 px slide */
 img {
   max-width: 100%;
-  max-height: 420px;
+  max-height: 480px;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -299,4 +299,16 @@ section.bg-fade > * {
   border-radius: 4px;
   font-size: 0.9em;
   margin-top: 0.8em;
+}
+
+/* ── Figure-dominant slides ─────────────────────────────── */
+/*  Usage: <!-- _class: fig-full -->                         */
+/*  Removes extra padding and lets image breathe to 540 px.  */
+section.fig-full {
+  font-size: 22px;
+  padding: 36px 60px;
+}
+
+section.fig-full img {
+  max-height: 540px;
 }

@@ -41,7 +41,12 @@ The wave speed — and the shaking intensity — depend on the **elastic propert
 
 ---
 
+<!-- _class: fig-full -->
+
 # Elastic Deformation: The Key Assumption
+
+<div class="columns">
+<div>
 
 **Elastic** = material returns to its original shape after stress is removed
 
@@ -52,8 +57,14 @@ Seismic strains are ~10⁻⁷ — far inside the Hookean regime.
 Fault zones, magma chambers, and the deep Earth are exceptions.
 </div>
 
+</div>
+<div>
+
 ![alt text: stress-strain curve with blue linear Hookean region, amber nonlinear zone, orange plastic zone, and dashed green unloading path showing permanent strain after the elastic limit](../assets/figures/fig_stress_strain_curve.png)
 <span class="caption">Figure 3.1. Seismic waves operate in the blue (linear elastic) region only. Python-generated — assets/scripts/fig_stress_strain_curve.py</span>
+
+</div>
+</div>
 
 ---
 
@@ -75,7 +86,12 @@ Fluids: μ = 0 → no resistance to shear → S-waves CANNOT travel in fluids
 
 ---
 
+<!-- _class: fig-full -->
+
 # The Stress Tensor
+
+<div class="columns">
+<div>
 
 $$\boldsymbol{\sigma} = \begin{pmatrix} \sigma_{xx} & \sigma_{xy} & \sigma_{xz} \\ \sigma_{yx} & \sigma_{yy} & \sigma_{yz} \\ \sigma_{zx} & \sigma_{zy} & \sigma_{zz} \end{pmatrix}$$
 
@@ -84,10 +100,18 @@ $$\boldsymbol{\sigma} = \begin{pmatrix} \sigma_{xx} & \sigma_{xy} & \sigma_{xz} 
 - **Symmetric** ($\sigma_{ij} = \sigma_{ji}$) → 6 independent components
 - **Force = Stress × Area:** $F_x = \sigma_{xx}\,A_x$ — stress is force per unit area on a surface
 
+</div>
+<div>
+
 ![alt text: two 3D diagrams showing force components on a surface element decomposing into one normal and two shear forces, and a unit cube with blue normal stress arrows and vermilion shear stress arrows on each visible face](../assets/figures/fig_stress_tensor.png)
 <span class="caption">Figure 3.2. Normal stresses (blue) and shear stresses (vermilion) on a unit cube. Python-generated — assets/scripts/fig_stress_tensor.py</span>
 
+</div>
+</div>
+
 ---
+
+<!-- _class: fig-full -->
 
 # Three Modes of Strain
 
@@ -113,6 +137,8 @@ $$\varepsilon_{ij} = \frac{1}{2}\left(\frac{\partial u_i}{\partial x_j} + \frac{
 $$\theta = \varepsilon_{xx} + \varepsilon_{yy} + \varepsilon_{zz} = \nabla\cdot\mathbf{u}$$
 
 ---
+
+<!-- _class: fig-full -->
 
 # Four Elastic Moduli
 
@@ -155,15 +181,11 @@ Two parameters ($\lambda$, $\mu$) because isotropy collapses 21 stiffness compon
 
 ---
 
+<!-- _class: fig-full -->
+
 # Force Balance on a Continuum Element
 
-<div class="callout">
-$x$ = position (m, fixed) · $u$ = particle displacement (m) · $a = \partial^2u/\partial t^2$ = acceleration (m/s²)
-</div>
-
-Apply **Force = Stress × Area** → $F_x = \sigma_{xx}\,A_x$, then Newton's $F = ma$:
-
-$$m = \rho\,dx\,A_x \qquad dF_x = A_x\,\frac{\partial\sigma_{xx}}{\partial x}\,dx$$
+Apply **Force = Stress × Area** → Newton's $F = ma$ on an infinitesimal element of density $\rho$.
 
 ![alt text: two-panel figure. Left panel shows an element between x and x-plus-dx with face area A_x and displacement arrows u and u-plus-du. Right panel shows the same element with a vermilion force arrow F_x entering from the left face and F_x-plus-dF_x leaving the right face, with equation boxes showing net force equals partial of sigma over x times dx, Newton's law, and the final equation of motion](../assets/figures/fig_force_balance.png)
 <span class="caption">Figure 3.5. Net force = stress gradient × volume. Divide by A_x dx → equation of motion. Python-generated — assets/scripts/fig_force_balance.py</span>
@@ -221,6 +243,8 @@ $$\frac{V_P}{V_S} = \sqrt{\frac{80}{25}} = \sqrt{3.2} \approx 1.79 \quad\Leftrig
 Characteristic of **upper-crustal granite** ✓
 
 ---
+
+<!-- _class: fig-full -->
 
 # Seismic Velocities: Typical Values
 

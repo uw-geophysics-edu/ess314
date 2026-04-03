@@ -110,5 +110,5 @@ fig.text(0.5, -0.02,
     ha='center', fontsize=7.5, style='italic', color='#555')
 
 plt.tight_layout()
-plt.savefig('assets/figures/fig_seismic_velocities.png', dpi=150, bbox_inches='tight')
+plt.savefig('assets/figures/fig_seismic_velocities.png', dpi=70, bbox_inches='tight')
 print('Saved: assets/figures/fig_seismic_velocities.png')
