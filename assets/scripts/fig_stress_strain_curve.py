@@ -108,18 +108,18 @@ ax.text((eps_E + eps_F)/2, y_bracket + 0.2, 'plastic\ndeformation',
 
 # ── Point labels ──
 ax.annotate('linearity\nlimit', xy=(eps_L, sig_L),
-            xytext=(eps_L - 0.005, sig_L + 3.5),
+            xytext=(eps_L - 0.007, 1.20),
             fontsize=8.5, color=C_NONLIN, ha='center',
             arrowprops=dict(arrowstyle='->', color=C_NONLIN, lw=1.0))
 ax.annotate('elastic\nlimit', xy=(eps_E, sig_E),
-            xytext=(eps_E + 0.008, sig_E + 2),
+            xytext=(eps_E + 0.015, 1.25),
             fontsize=8.5, color=C_PLASTIC, ha='left',
             arrowprops=dict(arrowstyle='->', color=C_PLASTIC, lw=1.0))
 
 # Failure annotation
 sig_peak_idx = np.argmax(sig[80:]) + 80
 ax.annotate('failure', xy=(eps[sig_peak_idx], sig[sig_peak_idx]),
-            xytext=(eps[sig_peak_idx] + 0.008, sig[sig_peak_idx] + 1.5),
+            xytext=(eps[sig_peak_idx] - 0.015, 1.28),
             fontsize=8.5, color=C_PLASTIC, ha='left',
             arrowprops=dict(arrowstyle='->', color=C_PLASTIC, lw=1.0))
 
@@ -127,7 +127,7 @@ ax.annotate('failure', xy=(eps[sig_peak_idx], sig[sig_peak_idx]),
 x0, x1 = 0.002, 0.015
 ax.plot([x0, x1], [40*x0, 40*x1], color='white', lw=4, zorder=3)
 ax.annotate('Hooke\'s law\n(linear)', xy=(0.010, 40*0.010),
-            xytext=(0.001, 14),
+            xytext=(0.001, 1.30),
             fontsize=8.5, color=C_ELASTIC,
             arrowprops=dict(arrowstyle='->', color=C_ELASTIC, lw=1.0))
 
