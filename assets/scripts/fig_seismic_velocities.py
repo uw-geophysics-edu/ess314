@@ -1,114 +1,116 @@
 """
 fig_seismic_velocities.py
-=========================
-Horizontal bar chart of representative P-wave velocities (Vp) for
-Earth materials and common engineering materials.
 
-Data compiled from:
-  Lowrie, W. & Fichtner, A. (2020). Fundamentals of Geophysics, 3rd ed.,
-  Table 3.1. Cambridge University Press. DOI: 10.1017/9781108685917
-  Also: Telford et al. (1990). Applied Geophysics, 2nd ed., Cambridge.
+Scientific content: Horizontal bar chart of representative P-wave velocities
+for common Earth and engineering materials. Data compiled from standard
+references (Lowrie & Fichtner 2020 Table 3.1; Sheriff & Geldart 1995 Ch. 5).
 
-Output : assets/figures/fig_seismic_velocities.png
-License: CC-BY 4.0
+Replaces: Legacy slide 15 from 314_2023_4_seismic_waves.pdf (velocity table).
+
+Output: assets/figures/fig_seismic_velocities.png
+License: CC-BY 4.0 (this script)
 """
-
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
+import matplotlib as mpl
 
-# ── Data ──────────────────────────────────────────────────────────────────────
-materials = {
-    # Earth materials — rocks
-    'Granite':           (4800, 6400),
-    'Basalt':            (5500, 6500),
-    'Limestone':         (3500, 6000),
-    'Sandstone':         (2000, 4500),
-    'Salt rock':         (4200, 5500),
-    'Shale':             (2100, 4500),
-    # Earth materials — unconsolidated
-    'Dry sand':          (200,  1000),
-    'Wet sand':          (1500, 2000),
-    'Clay (Vs)':         (60,   150),
-    # Fluids
-    'Seawater':          (1470, 1540),
-    'Freshwater':        (1450, 1510),
-    'Oil':               (1200, 1350),
-    # Engineering materials
-    'Steel':             (5800, 6100),
-    'Aluminum':          (6100, 6400),
-    'Concrete':          (3000, 4500),
-    'Ice':               (3000, 4200),
-}
+# ── Global rcParams ─────────────────────────────────────────────────
+mpl.rcParams.update({
+    "font.size": 13,
+    "axes.titlesize": 15,
+    "axes.labelsize": 13,
+    "xtick.labelsize": 12,
+    "ytick.labelsize": 12,
+    "legend.fontsize": 11,
+    "figure.dpi": 150,
+    "savefig.dpi": 300,
+})
 
-# ── Category colors (colorblind-safe) ────────────────────────────────────────
-cat_colors = {
-    'Granite':    '#0072B2',
-    'Basalt':     '#0072B2',
-    'Limestone':  '#0072B2',
-    'Sandstone':  '#0072B2',
-    'Salt rock':  '#0072B2',
-    'Shale':      '#0072B2',
-    'Dry sand':   '#56B4E9',
-    'Wet sand':   '#56B4E9',
-    'Clay (Vs)':  '#56B4E9',
-    'Seawater':   '#009E73',
-    'Freshwater': '#009E73',
-    'Oil':        '#009E73',
-    'Steel':      '#E69F00',
-    'Aluminum':   '#E69F00',
-    'Concrete':   '#E69F00',
-    'Ice':        '#E69F00',
-}
+BLUE   = "#0072B2"
+ORANGE = "#E69F00"
+SKY    = "#56B4E9"
+GREEN  = "#009E73"
+VERM   = "#D55E00"
+BLACK  = "#000000"
 
-labels = list(materials.keys())[::-1]
-lows   = [materials[m][0] for m in labels]
-highs  = [materials[m][1] for m in labels]
-colors = [cat_colors[m] for m in labels]
 
-fig, ax = plt.subplots(figsize=(9, 7))
+def main():
+    # Data: (material, V_P_min, V_P_max, category)
+    data = [
+        # Crystalline / sedimentary rocks
+        ("Basalt",        5400, 6400, "rock"),
+        ("Granite",       4800, 5800, "rock"),
+        ("Limestone",     4000, 7000, "rock"),
+        ("Salt rock",     4200, 5000, "rock"),
+        ("Sandstone",     2000, 5500, "rock"),
+        ("Shale",         2000, 4500, "rock"),
+        # Unconsolidated
+        ("Wet sand",       200, 1800, "sediment"),
+        ("Dry sand",       120,  270, "sediment"),
+        ("Clay ($V_S$)",    60,  150, "sediment"),
+        # Fluids
+        ("Seawater",      1530, 1530, "fluid"),
+        ("Freshwater",    1480, 1480, "fluid"),
+        # Engineering / other
+        ("Steel",         5900, 5900, "other"),
+        ("Aluminum",      6400, 6400, "other"),
+        ("Ice",           3000, 4000, "other"),
+    ]
 
-y = np.arange(len(labels))
-bar_h = 0.65
+    materials = [d[0] for d in data]
+    vmin = [d[1] for d in data]
+    vmax = [d[2] for d in data]
+    cats = [d[3] for d in data]
 
-for i, (lo, hi, lbl, col) in enumerate(zip(lows, highs, labels, colors)):
-    # Range bar
-    ax.barh(y[i], hi - lo, left=lo, height=bar_h, color=col, alpha=0.75,
-            edgecolor='black', lw=0.6, zorder=3)
-    # Midpoint marker
-    mid = (lo + hi) / 2
-    ax.plot(mid, y[i], 'o', color='white', ms=5, zorder=5, mec=col, mew=1.2)
-    # Value label at right end
-    ax.text(hi + 60, y[i], f'{lo}–{hi}', va='center', fontsize=7.5, color='#333')
+    cat_colors = {
+        "rock":     BLUE,
+        "sediment": SKY,
+        "fluid":    GREEN,
+        "other":    ORANGE,
+    }
+    cat_labels = {
+        "rock":     "Crystalline & sedimentary rocks",
+        "sediment": "Unconsolidated sediments",
+        "fluid":    "Fluids",
+        "other":    "Engineering materials",
+    }
 
-ax.set_yticks(y)
-ax.set_yticklabels(labels, fontsize=9.5)
-ax.set_xlabel(r'$V_P$ (m/s)', fontsize=12)
-ax.set_title('Representative P-wave Velocities\nfor Earth and Engineering Materials',
-             fontsize=12, fontweight='bold')
-ax.set_xlim(0, 8000)
-ax.spines[['top', 'right']].set_visible(False)
-ax.axvline(1500, color='#aaa', lw=1.0, ls=':', zorder=1)
-ax.text(1520, -0.7, 'Vwater\n~1480 m/s', fontsize=7.5, color='#777', style='italic')
+    fig, ax = plt.subplots(figsize=(10, 7))
 
-# Dividing lines between categories
-ax.axhline(5.5, color='#ddd', lw=1.2, zorder=0)    # rocks / unconsolidated
-ax.axhline(8.5, color='#ddd', lw=1.2, zorder=0)    # unconsolidated / fluids
-ax.axhline(11.5, color='#ddd', lw=1.2, zorder=0)   # fluids / engineering
+    y_pos = np.arange(len(materials))
+    bar_heights = [mx - mn for mn, mx in zip(vmin, vmax)]
+    colors = [cat_colors[c] for c in cats]
 
-# Legend
-rock_p   = mpatches.Patch(color='#0072B2', alpha=0.75, label='Crystalline / sedimentary rock')
-uncon_p  = mpatches.Patch(color='#56B4E9', alpha=0.75, label='Unconsolidated sediment / soil')
-fluid_p  = mpatches.Patch(color='#009E73', alpha=0.75, label='Fluid')
-eng_p    = mpatches.Patch(color='#E69F00', alpha=0.75, label='Engineering material')
-ax.legend(handles=[rock_p, uncon_p, fluid_p, eng_p],
-          loc='lower right', fontsize=8.5, framealpha=0.95)
+    # Draw bars (horizontal)
+    bars = ax.barh(y_pos, bar_heights, left=vmin, height=0.6,
+                   color=colors, edgecolor="white", linewidth=0.5)
 
-fig.text(0.5, -0.02,
-    'Bars show typical ranges; filled circle marks approximate midpoint. '
-    'Color and y-position both encode material category.',
-    ha='center', fontsize=7.5, style='italic', color='#555')
+    # For single-value entries (range = 0), draw a marker instead
+    for i, (mn, mx) in enumerate(zip(vmin, vmax)):
+        if mx - mn < 50:
+            ax.plot(mn, y_pos[i], "D", color=colors[i], markersize=8, zorder=5)
 
-plt.tight_layout()
-plt.savefig('assets/figures/fig_seismic_velocities.png', dpi=70, bbox_inches='tight')
-print('Saved: assets/figures/fig_seismic_velocities.png')
+    ax.set_yticks(y_pos)
+    ax.set_yticklabels(materials)
+    ax.invert_yaxis()
+    ax.set_xlabel("$V_P$ (m/s)", fontsize=13)
+    ax.set_title("Representative P-wave Velocities", fontsize=14, fontweight="bold")
+    ax.set_xlim(0, 8000)
+
+    # Legend
+    from matplotlib.patches import Patch
+    legend_elements = [Patch(facecolor=cat_colors[c], label=cat_labels[c])
+                       for c in ["rock", "sediment", "fluid", "other"]]
+    ax.legend(handles=legend_elements, loc="lower right", fontsize=11,
+              framealpha=0.9)
+
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+
+    plt.savefig("assets/figures/fig_seismic_velocities.png")
+    plt.close()
+    print("Saved: assets/figures/fig_seismic_velocities.png")
+
+
+if __name__ == "__main__":
+    main()

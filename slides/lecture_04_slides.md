@@ -1,301 +1,341 @@
 ---
 marp: true
 theme: ess314
-size: 16:9
-html: true
 paginate: true
-math: mathjax
+math: katex
 ---
 
-<!-- _class: title-slide -->
+<!-- _class: title -->
 
-# Seismic Wave Types and Ray Propagation
+# Seismic Wave Types
 
 ### ESS 314 Geophysics · University of Washington
-#### Week 1, Lecture 4 · April 9, 2026
+
+#### Week 1, Lecture 4 · April 2, 2026
+
 #### Marine Denolle
 
 ---
 
 # By the end of this lecture…
 
-- **[LO-4.1]** *Distinguish* P, S, Rayleigh, Love by particle motion, polarization, and speed
-- **[LO-4.2]** *Explain* why S-waves cannot travel in fluids — physics, not just formula
-- **[LO-4.3]** *Apply* Huygens' principle to describe wavefront evolution at a contrast
-- **[LO-4.4]** *Derive* Snell's law from wavefront geometry; predict refracted ray angles
-- **[LO-4.5]** *Calculate* the critical angle and head-wave arrival geometry
+- **[LO-4.1]** *Distinguish* P, S, Rayleigh, and Love waves by particle motion and speed
+- **[LO-4.2]** *Explain* physically why S-waves cannot propagate in fluids
+- **[LO-4.3]** *Decompose* S-wave polarization into SV and SH components
+- **[LO-4.4]** *Calculate* $V_P/V_S$ and interpret it as a fluid-saturation diagnostic
+- **[LO-4.5]** *Compare* seismic velocities across Earth materials
 
 ---
 
-# What Does a Seismogram Record?
+# One earthquake, three kinds of shaking
 
-A Cascadia earthquake signal at a Seattle station arrives in three distinct bursts:
+A seismometer records:
+1. A sharp **vertical jolt** — arrives first
+2. A stronger **horizontal shake** — arrives seconds later
+3. A long **rolling oscillation** — persists for minutes
 
-| Arrival | Wave type | Travel time | Character |
-|---------|-----------|-------------|-----------|
-| First | P-wave | ~90 s | Sharp, vertical motion |
-| Second | S-wave | ~140 s | Larger, transverse |
-| Third | Surface waves | ~300 s | Long, rolling |
+These are **not** different earthquakes.
 
-**Why different wave types? Why different speeds?**
+They are different **solutions** to the same wave equation from Lecture 3.
 
-→ The Helmholtz decomposition of the 3D wave equation produces two independent families
-
----
-
-# Helmholtz Decomposition
-
-Any displacement field can be split:
-
-$$\mathbf{u} = \underbrace{\nabla\phi}_\text{irrotational} + \underbrace{\nabla\times\boldsymbol{\psi}}_\text{divergence-free}$$
-
-Each part satisfies its own wave equation:
-
-$$\frac{\partial^2\phi}{\partial t^2} = V_P^2\nabla^2\phi \qquad \frac{\partial^2\boldsymbol{\psi}}{\partial t^2} = V_S^2\nabla^2\boldsymbol{\psi}$$
-
-<div class="callout">
-The wave equation from Lecture 3 automatically contains TWO wave types.
-We don't add them by hand — they emerge from the vector nature of elasticity.
-</div>
+*Today: what are these wave types, and what does each reveal about the Earth?*
 
 ---
 
-# P-waves and S-waves: Particle Motion
+# Recall: the vector equation of motion
 
-![alt text: two-panel figure. Top panel shows P-wave with alternating dark blue compression zones and sky blue rarefaction zones of closely and widely spaced particles respectively, with orange arrows showing particle motion parallel to the green propagation arrow. Bottom panel shows S-wave with gray-blue particles displaced transversely above and below an equilibrium dashed line, with orange arrows perpendicular to the propagation direction and a callout noting S-waves require mu not equal to zero and cannot travel in fluids.](../assets/figures/fig_pwave_swave_motion.png)
-<span class="caption">Figure 4.1. P-wave: longitudinal motion (top). S-wave: transverse motion (bottom). Blue/sky encodes compression state; arrow direction encodes displacement. Python-generated — assets/scripts/fig_pwave_swave_motion.py</span>
+From Lecture 3 — Newton's second law + Hooke's law in a continuum:
 
----
+$$\rho\,\frac{\partial^2\mathbf{u}}{\partial t^2} = (\lambda+2\mu)\,\nabla(\nabla\cdot\mathbf{u}) - \mu\,\nabla\times(\nabla\times\mathbf{u})$$
 
-# Why No S-waves in Fluids?
+This single equation contains **all** seismic wave behavior.
 
-From Lecture 3: $V_S = \sqrt{\mu/\rho}$
-
-In any fluid: **$\mu = 0$** (no resistance to shear)
-
-→ $V_S = 0$ — S-waves don't propagate
-
-**Physical reason (not just the formula):**
-
-An S-wave requires the medium to spring back from shear distortion. In a fluid, molecules flow and rearrange instead of storing elastic shear energy.
-
-<div class="warning">
-S-wave shadow zone → liquid outer core: no S-waves through Earth's core
-Water table: S-waves reflect at water-saturated layer (V_S drops sharply)
-Magma chamber: S-wave attenuation → bright reflector in imaging
-</div>
+The key: it can be **separated** into two independent wave equations.
 
 ---
 
-# S-wave Polarizations
+# Helmholtz decomposition
 
-**SV** — particle motion in the *vertical* plane containing the ray
+Any displacement field splits into two parts:
 
-**SH** — particle motion *horizontal*, perpendicular to the ray
+$$\mathbf{u} = \underbrace{\nabla\phi}_{\text{curl-free (P)}} + \underbrace{\nabla\times\boldsymbol{\psi}}_{\text{div-free (S)}}$$
 
-Both travel at $V_S$ but interact differently with boundaries:
-- **SV** converts to P at interfaces (mode conversion)
-- **SH** does not convert to P → Love waves form from SH trapping
+Substituting into the equation of motion yields:
 
-<div class="callout">
-In earthquake seismology: vertical-component seismometers emphasize P + SV; 
-horizontal seismometers emphasize SH + Love waves
-</div>
+| | Equation | Speed |
+|---|---|---|
+| **Dilatational** (P) | $\partial^2\phi/\partial t^2 = V_P^2\,\nabla^2\phi$ | $V_P = \sqrt{(\lambda+2\mu)/\rho}$ |
+| **Rotational** (S) | $\partial^2\boldsymbol{\psi}/\partial t^2 = V_S^2\,\nabla^2\boldsymbol{\psi}$ | $V_S = \sqrt{\mu/\rho}$ |
 
----
-
-# Surface Waves: Trapped at the Free Surface
-
-Boundary condition at Earth's surface: zero traction
-
-→ New solutions that decay exponentially with depth and travel along the surface
-
-| Type | Motion | Speed | Requires |
-|------|--------|-------|---------|
-| Rayleigh | Retrograde ellipse (P + SV) | $\approx 0.92\,V_S$ | Any half-space |
-| Love | Transverse (SH only) | $V_{S1} < V_L < V_{S2}$ | Velocity layering |
-
-Both are **dispersive**: phase velocity depends on frequency
-
-→ Longer periods sample deeper → **surface wave tomography**
+Two **independent** wave families in a homogeneous medium.
 
 ---
 
-# Rayleigh and Love Waves
+# Why two wave speeds?
 
-![alt text: three-panel figure. Left panel shows Rayleigh wave retrograde elliptical particle orbits at multiple depths, with ellipses shrinking from large at the surface to tiny at depth, indicating exponential decay. Center panel shows amplitude versus depth curve decaying exponentially with a dashed reference line at 0.4 wavelengths depth and label V_R approximately 0.92 V_S. Right panel shows a cross-section with a slow surface layer over a fast half-space, with dashed orange zigzag rays bouncing by total internal reflection between the free surface and the interface, and dot symbols on rays showing horizontal transverse (SH) particle motion.](../assets/figures/fig_surface_waves.png)
-<span class="caption">Figure 4.2. Rayleigh retrograde ellipses (left), amplitude decay with depth (center), Love wave SH trapping (right). Python-generated — assets/scripts/fig_surface_waves.py</span>
+**P-waves** compress + dilate → engage **both** bulk and shear resistance
 
----
+$$V_P = \sqrt{\frac{\lambda + 2\mu}{\rho}} = \sqrt{\frac{K + \tfrac{4}{3}\mu}{\rho}}$$
 
-# Point Source Radiation
+**S-waves** distort shape only → engage shear resistance **alone**
 
-![alt text: 3D perspective with a horizontal surface plane and a curved lower hemisphere. From a central source point P, concentric orange-red hemispherical shells expand downward labeled body wave wavefront, and concentric blue circles expand outward on the surface labeled surface wave. Green arrows labeled rays radiate from the source perpendicular to the wavefronts in all directions.](../assets/figures/fig_point_source_wavefronts.png)
-<span class="caption">Figure 4.3. Body waves: spherical wavefronts in the interior. Surface waves: circular wavefronts on the surface. Rays always perpendicular to wavefronts. Python-generated — assets/scripts/fig_point_source_wavefronts.py</span>
+$$V_S = \sqrt{\frac{\mu}{\rho}}$$
 
----
-
-# Huygens' Principle
-
-> Every point on a wavefront is a new **point source** of secondary spherical wavelets
-> 
-> The new wavefront = envelope (tangent surface) of all secondary wavelets
-
-This is not just geometry — it is the Green's function representation of the wave equation.
-
-**It explains:**
-- Why plane waves stay plane in a homogeneous medium
-- Why wavefronts *bend* (refract) at a velocity contrast
-- Why seismic energy *spreads* (geometrical spreading)
+Since $\lambda + 2\mu > \mu$ always: **P-waves are always faster than S-waves**
 
 ---
 
-# Huygens → Snell's Law: Geometry
+# P-waves: Compressional / Longitudinal
 
-![alt text: three-panel figure. Left panel shows Huygens principle with an initial horizontal wavefront at t-zero, secondary circular wavelets on each point, and a new envelope wavefront at t-zero plus delta-t above with propagation arrows. Middle panel shows Snell's law geometry with incident ray from A to B at angle theta-1 from the normal in medium 1 (blue) and refracted ray from B at larger angle theta-2 in medium 2 (green), with segments a-1-t and a-2-t labeled on the geometric triangles. Right panel shows the general Snell's law with incident P-wave, reflected P-wave at same angle, refracted P-wave at larger angle, and converted S-wave at smaller angle, all sharing the same ray parameter p.](../assets/figures/fig_snell_law.png)
-<span class="caption">Figure 4.4. (a) Huygens principle. (b) Snell's law geometric derivation. (c) General Snell's law for all wave types. Python-generated — assets/scripts/fig_snell_law.py</span>
+Particle motion is **parallel** to propagation direction
 
----
+The medium alternately **compresses** (C) and **rarefies** (R)
 
-# Deriving Snell's Law
+Conceptually like sound waves — but in rock
 
-In time $\Delta t$, wavefront segment in medium 1 travels $V_1 \Delta t$; in medium 2, $V_2 \Delta t$.
+**P-waves travel through solids, liquids, and gases**
 
-Comparing the two right triangles sharing hypotenuse $AB$:
-
-$$\sin\theta_1 = \frac{V_1\,\Delta t}{AB}, \qquad \sin\theta_2 = \frac{V_2\,\Delta t}{AB}$$
-
-<div class="key-eq">
-
-$$\frac{\sin\theta_1}{V_1} = \frac{\sin\theta_2}{V_2} = p \quad\text{(ray parameter)}$$
-
-- Ray bends **toward** normal when entering a **slower** medium
-- Ray bends **away** when entering a **faster** medium
-- $p$ [s/m] is constant along the entire ray path
-
-</div>
+![alt text: Two-panel figure. Top panel (P-wave, emphasized here): alternating clusters of close-spaced dark blue dots labeled C for compression zones and widely-spaced sky-blue dots labeled R for rarefaction zones, with orange horizontal arrows showing longitudinal displacement parallel to the green propagation arrow. Bottom panel (S-wave): vermilion particles displaced transversely above and below equilibrium in a sinusoidal pattern, with orange vertical arrows perpendicular to the propagation direction. A callout box states S-waves cannot propagate in fluids because the shear modulus mu equals zero.](../assets/figures/fig_pwave_swave_motion.png)
 
 ---
 
-# Snell's Law: General Form
+# S-waves: Shear / Transverse
 
-At any interface, one incident wave produces four outgoing waves:
+Particle motion is **perpendicular** to propagation direction
 
-$$\frac{\sin\theta_i}{V_{P1}} = \frac{\sin\theta_{P\text{refl}}}{V_{P1}} = \frac{\sin\theta_{P\text{refr}}}{V_{P2}} = \frac{\sin\theta_{S\text{refr}}}{V_{S2}} = p$$
+No volume change — only **shape distortion**
 
-**Key rule:** use the velocity of the *wave type* in the *medium it travels in*
+**S-waves CANNOT travel through fluids** ($\mu = 0$)
 
-- Incident P at 30°, $V_{P1} = 3$ km/s, $V_{P2} = 5$ km/s:
-  $\theta_{P2} = \arcsin(5/3 \times \sin 30°) = \arcsin(0.833) = 56.4°$
-
-- Converted S ($V_{S2} = 3$ km/s):
-  $\theta_{S2} = \arcsin(3/3 \times \sin 30°) = \arcsin(0.5) = 30°$
+![alt text: Two-panel figure. Top panel (P-wave): alternating close-spaced dark blue compression zones and widely-spaced sky-blue rarefaction zones, with orange horizontal arrows showing longitudinal displacement parallel to the propagation direction. Bottom panel (S-wave, emphasized here): vermilion particles displaced transversely above and below equilibrium in a sinusoidal pattern, with orange vertical arrows perpendicular to the propagation direction. A callout box states S-waves cannot propagate in fluids because the shear modulus mu equals zero.](../assets/figures/fig_pwave_swave_motion.png)
 
 ---
 
-# Fermat's Principle
+# Why can't S-waves travel through water?
 
-> A seismic ray takes the path of **stationary travel time** between two points
+**Physical argument — not just math:**
 
-$$T = \int_\Gamma \frac{ds}{V(x,z)}$$
+In a solid: atoms are bonded in a lattice. Transverse displacement creates an **elastic restoring force** that pulls particles back → wave propagates.
 
-Setting $\delta T = 0$ → **ray equation** → reduces to Snell's law at each interface
+In a fluid: molecules are free to rearrange. Transverse displacement causes molecules to **flow sideways** → no restoring force develops → no wave propagates.
 
-For a single layer (velocity $V_1$, thickness $H$, over half-space $V_2$):
+$$\mu_{\text{fluid}} = 0 \implies V_S = \sqrt{\mu/\rho} = 0$$
 
-| Arrival | Travel time $T(x)$ |
-|---------|-------------------|
-| Direct | $x / V_1$ |
-| Reflected | $\sqrt{x^2 + 4H^2}\,/\,V_1$ (hyperbola) |
-| Refracted (head) | $x/V_2 + 2H\cos\theta_c/V_1$ (linear) |
+This is why the **outer core** blocks S-waves (Lectures 17–18).
 
 ---
 
-# Critical Refraction and Head Waves
+# S-wave polarization: SV and SH
 
-When $V_2 > V_1$, there exists an angle at which $\theta_2 = 90°$:
+S-wave motion is perpendicular to the ray — but "perpendicular" has **two** independent directions:
 
-<div class="key-eq">
+- **SV** — in the vertical plane containing the ray
+- **SH** — horizontal, perpendicular to the ray plane
 
-$$\sin\theta_c = \frac{V_1}{V_2} \qquad\Rightarrow\qquad \theta_c = \arcsin\!\left(\frac{V_1}{V_2}\right)$$
-
-The refracted wave travels **along the interface** at $V_2$, radiating energy back at angle $\theta_c$ → **head wave**
-
-Head wave $T(x) = \dfrac{x}{V_2} + \underbrace{\dfrac{2H\cos\theta_c}{V_1}}_{\text{intercept time}}$
-
-</div>
-
-Slope of $T$–$x$ line = $1/V_2$ → read off $V_2$ directly
+![alt text: 3D diagram showing ray direction labeled P in blue, SV as a vermilion double-headed arrow in the vertical plane, and SH as an amber double-headed arrow perpendicular to both, forming an orthogonal triad with a light blue shaded vertical plane](../assets/figures/fig_sv_sh_polarization.png)
 
 ---
 
-# Reading a Travel-Time Plot
+# Why does SV vs. SH matter?
 
-**Two-layer model:** $V_1 = 2000$ m/s, $V_2 = 5000$ m/s, $H = 100$ m
+The free surface and horizontal layering **break the symmetry** between vertical and horizontal transverse motions
 
-- Direct wave: slope $= 1/V_1 = 0.5$ ms/m
-- Head wave: slope $= 1/V_2 = 0.2$ ms/m
-- Crossover distance: $x_\text{cross} = 2H\sqrt{(V_2+V_1)/(V_2-V_1)} \approx 224$ m
-- Intercept time: $t_i = 2H\cos\theta_c/V_1$; from $t_i$ and slopes → recover $H$
+| Polarization | At free surface | Generates |
+|---|---|---|
+| **SV** | Vertical + horizontal motion | **Rayleigh waves** (with P) |
+| **SH** | Horizontal motion only | **Love waves** (if slow layer present) |
 
-<div class="callout">
-The entire method depends on reading slopes on a T–x plot.
-Lab 2 will have you do exactly this in Python.
-</div>
+This decomposition becomes critical at boundaries (Lecture 7).
 
 ---
 
-# Worked Example: S–P Method
+# The $V_P/V_S$ ratio
 
-Seismogram: $t_P = 42.0$ s, $t_S = 74.8$ s; $V_P = 6.2$ km/s, $V_P/V_S = \sqrt{3}$
+$$\frac{V_P}{V_S} = \sqrt{\frac{\lambda + 2\mu}{\mu}} = \sqrt{\frac{2(1-\nu)}{1-2\nu}}$$
 
-$$V_S = 6.2/\sqrt{3} = 3.58 \text{ km/s}$$
+Depends **only** on Poisson's ratio $\nu$, not on density.
 
-$$\Delta t = 74.8 - 42.0 = 32.8 \text{ s}$$
+| Condition | $\nu$ | $V_P/V_S$ |
+|---|---|---|
+| Minimum (stable solid) | 0 | $\sqrt{2} \approx 1.41$ |
+| **Poisson solid** (typical rock) | **0.25** | $\sqrt{3} \approx \mathbf{1.73}$ |
+| Fluid limit ($\mu \to 0$) | 0.5 | $\to \infty$ |
 
-$$d = \frac{\Delta t}{1/V_S - 1/V_P} = \frac{32.8}{0.279 - 0.161} = \frac{32.8}{0.118} \approx 278 \text{ km}$$
-
-**Single-station distance estimate from wave-type timing difference**
+**Anomalously high $V_P/V_S$ → fluid saturation, partial melt, or high pore pressure.**
 
 ---
 
-# AI Literacy: Machine-Learning Phase Picking
+# $V_P/V_S$ as a fluid diagnostic
 
-PhaseNet, EQTransformer: deep learning models that auto-pick P and S arrivals
+**Example: Duwamish Valley, south Seattle** (shallow borehole)
 
-They exploit the *same physics*:
-- P arrives first (vertical motion)
-- S arrives ~73% later with transverse motion
-- Waveform envelope shape differs between P and S
+$$V_P = 1750 \text{ m/s}, \quad V_S = 220 \text{ m/s}$$
 
-**Epistemics prompt:**
-> *"A phase picker labels an arrival as P with 97% confidence, but it appears only on horizontal components. Is this consistent with P-wave physics? What could explain it?"*
+$$\frac{V_P}{V_S} = \frac{1750}{220} = 7.95 \implies \nu = 0.492$$
 
-Evaluate: Does the AI flag the tension? Suggest alternative explanations (steep incidence, mode conversion, instrument issue)?
+Almost the incompressible fluid limit (0.5).
+
+**Interpretation:** Water-saturated Holocene alluvium — $V_P$ dominated by pore fluid, $V_S$ controlled by weak grain contacts.
+
+This is why Pioneer Square shakes harder than Capitol Hill.
+
+---
+
+# Seismic velocities of Earth materials
+
+![alt text: horizontal bar chart of P-wave velocities grouped by category — dark blue bars for crystalline rocks from 2000 to 6500 m/s, sky blue for unconsolidated sediments from 60 to 1800 m/s, green diamonds for fluids near 1500 m/s, and amber for engineering materials](../assets/figures/fig_seismic_velocities.png)
+
+Nearly **two orders of magnitude** from soft clay ($V_S \sim 60$ m/s) to basalt ($V_P \sim 6000$ m/s).
+
+---
+
+# What controls seismic velocity?
+
+**Stiffness increases velocity** — crystalline rocks (high $\mu$, $K$) are fast; unconsolidated sediments are slow
+
+**Density: indirect effect** — denser rocks are also stiffer; stiffness increase dominates
+
+**Fluid saturation:** Filling pores with water increases $K$ but NOT $\mu$
+→ $V_P$ increases, $V_S$ unchanged → $V_P/V_S$ increases
+
+**Pressure** (depth) → closes cracks, stiffens contacts → $V$ increases
+**Temperature** → weakens contacts, approaches melt → $V$ decreases
+
+---
+
+# Surface waves: Rayleigh
+
+Arise from P + SV interaction with the **free surface** (zero traction boundary)
+
+**Particle motion:** retrograde ellipses — backward at crest, forward in trough
+
+**Amplitude:** decays as $\sim e^{-kz}$, negligible below $\sim 0.4\lambda$
+
+**Speed:** $V_R \approx 0.92\,V_S$ (for $\nu = 0.25$)
+
+![alt text: Rayleigh wave showing retrograde elliptical particle trajectories that shrink with depth, with an amplitude decay curve and a label V_R approximately 0.92 V_S](../assets/figures/fig_surface_waves.png)
+
+---
+
+# Surface waves: Love
+
+**Require** a slow surface layer over a faster half-space
+
+SH waves trapped by **total internal reflection** at layer base → constructive interference → Love wave
+
+**Particle motion:** purely horizontal (SH)
+
+**Phase velocity:** $V_{S1} < V_{\text{Love}} < V_{S2}$
+
+No vertical component — only horizontal shaking.
+
+---
+
+# Surface wave dispersion
+
+Both Rayleigh and Love waves are **dispersive** in a layered Earth:
+
+- **Long periods** → penetrate deeper → sample faster material → travel faster
+- **Short periods** → confined to slow near-surface → travel slower
+
+Measuring **phase velocity vs. period** = the **dispersion curve**
+
+The dispersion curve directly reveals $V_S(z)$ — **surface wave tomography**.
+
+This is one of the most powerful tools for imaging the crust and upper mantle.
+
+---
+
+# Wave type summary
+
+| Wave | Particle motion | Speed | In fluids? | Diagnostic use |
+|---|---|---|---|---|
+| **P** | ∥ propagation | $\sqrt{(\lambda+2\mu)/\rho}$ | ✅ Yes | Fastest; sensitive to $K$ and $\mu$ |
+| **S** | ⊥ propagation | $\sqrt{\mu/\rho}$ | ❌ No | Shear rigidity; site characterization |
+| **Rayleigh** | Retrograde ellipse | $\approx 0.92\,V_S$ | Surface only | Dispersive; dominant distant shaking |
+| **Love** | Horizontal (SH) | $V_{S1} < c < V_{S2}$ | Needs layering | Dispersive; pure horizontal shaking |
+
+---
+
+# The S–P time method
+
+**Problem:** How far away is an earthquake?
+
+$$\Delta t_{S-P} = t_S - t_P, \qquad d = \Delta t \cdot \frac{V_P \cdot V_S}{V_P - V_S}$$
+
+**Example:** Poulsbo M4.3 at PNSN station SEW:
+
+$\Delta t = 4.6$ s, $V_P = 6.3$ km/s, $V_S = 3.64$ km/s
+
+$$d = 4.6 \times \frac{6.3 \times 3.64}{6.3 - 3.64} = 4.6 \times 8.62 \approx 39.7 \text{ km}$$
+
+Consistent with the straight-line distance Poulsbo → UW campus.
+
+---
+
+# ShakeAlert: P-waves save lives
+
+The USGS ShakeAlert system detects **fast-arriving P-waves** to issue alerts before the **more damaging S-waves** arrive.
+
+For a **Cascadia M9**:
+- P-wave reaches coast: ~15 s after rupture
+- Strong S-wave shaking reaches Seattle: 60–90 s later
+
+That **60–90 s warning window** = time to stop trains, pause surgeries, move away from windows.
+
+The physics: **$V_P > V_S$** — always.
+
+---
+
+# $V_{S30}$ and building codes
+
+**$V_{S30}$** = average shear velocity in the top 30 m of soil
+
+| Site Class | $V_{S30}$ (m/s) | Description |
+|---|---|---|
+| A | > 1500 | Hard rock |
+| B | 760–1500 | Rock |
+| C | 360–760 | Dense soil / soft rock |
+| D | 180–360 | Stiff soil |
+| **E** | **< 180** | **Soft soil** |
+
+Design earthquake force for Class E is **3–5× larger** than Class B.
+
+In Seattle: Capitol Hill (till, ~500 m/s) vs. Pioneer Square (fill, ~180 m/s).
+
+---
+
+# AI as a tool: ML phase picking
+
+Deep-learning models (PhaseNet, EQTransformer) now pick P and S arrivals at near-human accuracy
+
+**Why it works:** the models learn the same physics from this lecture:
+- P: impulsive, dominant on vertical component, higher frequency
+- S: emergent, dominant on horizontal, lower frequency
+
+**Where it fails:** unusual waveforms outside the training distribution → confident but wrong picks
+
+**Your check:** Does the picked S–P time give a physically plausible $V_P/V_S$? (Should be 1.4–2.5 for crust.)
 
 ---
 
 # Concept Check
 
-1. A Love wave at period 10 s has phase speed 3.2 km/s; at 30 s, 3.8 km/s. What does this tell you about how $V_S$ changes with depth? Estimate the depth sampled by each period.
+1. A basalt sample has $V_P = 5900$ m/s and $V_S = 3200$ m/s. Calculate $V_P/V_S$ and Poisson's ratio. Is this consistent with dry crystalline rock?
 
-2. S-waves from distant earthquakes are absent at the antipodal station. Using *only* the physics of this lecture, explain what this tells us about the outer core.
+2. Explain in **two sentences** — without formulas — *why* S-waves cannot travel through water. Reference a specific physical process at the molecular scale.
 
-3. $V_1 = 2000$ m/s, $V_2 = 3500$ m/s, $H = 150$ m. Find: critical angle, crossover distance, and which arrival (direct or head wave) comes first at $x = 400$ m.
+3. An AI assistant claims "P-waves are faster because compression is faster than shearing." Critique this statement. What does the ratio $\sqrt{(\lambda+2\mu)/\mu}$ actually tell us?
 
 ---
 
-# Summary
+# Next time
 
-| Wave | Motion | Speed | Medium |
-|------|--------|-------|--------|
-| P | Longitudinal (∥ prop.) | $\sqrt{(\lambda+2\mu)/\rho}$ | Solid + fluid |
-| S | Transverse (⊥ prop.) | $\sqrt{\mu/\rho}$ | Solid only |
-| Rayleigh | Retrograde ellipse | $\approx 0.92\,V_S$ | Any half-space |
-| Love | Transverse (SH) | $V_{S1}<V_L<V_{S2}$ | Layered only |
+**Lecture 6: Wavefronts, Rays, and Snell's Law**
 
-**Snell's law:** $\sin\theta_1/V_1 = \sin\theta_2/V_2 = p$ (constant)
+Now that we know what wave types exist — how do we predict the **paths** they take through structured media?
 
-**Critical angle:** $\sin\theta_c = V_1/V_2$ → head waves → refraction surveys
+*Huygens' principle · ray-wavefront duality · Snell's law · Fermat's principle*
 
-**Next lecture:** Reflection seismology and the NMO correction
+**Lab 1 (Friday):** Introduction to Python — computing $V_P$, $V_S$ for different rock types
+

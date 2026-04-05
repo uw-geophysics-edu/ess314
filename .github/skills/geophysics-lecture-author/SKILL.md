@@ -716,6 +716,107 @@ Tie AI literacy to LO-7 explicitly: students should see AI as part of scientific
 
 ---
 
+## New Lecture Delivery Checklist
+
+**Run this checklist every time new slides are uploaded or a new lecture `.md` is created.**
+Work from the repo root (`/Users/marinedenolle/GitHub/ess314`).
+
+### Step 1 — Regenerate figures
+
+For every `assets/scripts/fig_*.py` referenced by the lecture, run:
+```bash
+pixi run python assets/scripts/fig_XXXX.py
+```
+Verify each script prints `Saved: assets/figures/fig_XXXX.png`.
+
+If a new figure script was added, run all scripts linked to the lecture.
+
+### Step 2 — Verify figure files exist and render
+
+```bash
+ls -lh assets/figures/fig_XXXX.png   # check file exists and is non-zero size
+```
+
+Open each PNG visually (or use `view_image` tool) to confirm:
+- Colorblind-safe palette (no red/green-only encoding)
+- Labels and axis text are readable at 300 DPI
+- No white-border clipping or excessive whitespace
+
+### Step 3 — Check slide deck theme and figure paths
+
+Open `slides/lecture_NN_slides.md` and verify:
+- YAML front matter: `theme: ess314` (not `default`, `uncover`, or other)
+- All figure image paths are relative: `../assets/figures/fig_XXXX.png`
+- The `--allow-local-files` flag is present in the pixi task (enables base64 embedding)
+- No stale `_v2` or draft copies of the same slide deck exist in `slides/`
+
+### Step 4 — Rebuild HTML slides
+
+```bash
+pixi run slides-html
+```
+
+Expected output: `slides/lecture_NN_slides.html` listed under `[INFO] Converting N markdowns...`.
+
+Verify the output HTML is non-zero and newer than the `.md` source:
+```bash
+ls -lh slides/lecture_NN_slides.html
+```
+
+### Step 5 — Verify lecture notes link to slides
+
+Open `lectures/NN_XXXX.md` and confirm the `:::{seealso}` block is present and points to the correct GitHub Pages URL:
+```markdown
+:::{seealso}
+📊 **Lecture slides** — <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_NN_slides.html" target="_blank">open in new tab ↗</a>
+:::
+```
+The URL pattern is: `https://uw-geophysics-edu.github.io/ess314/slides/lecture_NN_slides.html`
+
+### Step 6 — Verify `_toc.yml` entry
+
+```bash
+grep -n "NN_" /Users/marinedenolle/GitHub/ess314/_toc.yml
+```
+
+If the lecture is not listed, add it under the correct module caption in `_toc.yml`:
+```yaml
+- file: lectures/NN_lecture_topic
+  title: "Lecture Title"
+```
+
+Preserve lecture ordering within the module.
+
+### Step 7 — ADA compliance review
+
+**Slides (`slides/lecture_NN_slides.md`):**
+- [ ] Every `![...]()` image tag has a descriptive `alt text:` prefix (not just "Figure X")
+- [ ] When the same multi-panel figure appears on multiple slides, each `alt text` describes the **full figure** and identifies which panel is the focus of that slide
+- [ ] No information encoded by color alone — shapes, labels, or patterns also distinguish data series
+- [ ] All text on slides has sufficient contrast against the background (WCAG AA: ≥4.5:1 for body text)
+
+**Lecture notes (`lectures/NN_XXXX.md`):**
+- [ ] Every `:::{figure}` block has `:alt:` attribute with a complete scientific description
+- [ ] Figure captions are visible in the rendered HTML (not hidden behind CSS)
+- [ ] All equations are LaTeX-rendered (not image-only) for screen reader compatibility
+
+**Python figure scripts (`assets/scripts/fig_XXXX.py`):**
+- [ ] WCAG AA colorblind-safe palette: uses deep-blue `#0072B2`, vermilion `#D55E00`, amber/gold `#E69F00`, sky-blue `#56B4E9`, teal-green `#009E73`
+- [ ] `rcParams['savefig.dpi'] = 300` for crisp rendering in the book and slides
+- [ ] No legend that relies solely on hue to distinguish categories (add shape or line style)
+
+### Step 8 — Commit and deploy
+
+```bash
+git add lectures/NN_XXXX.md slides/lecture_NN_slides.md slides/lecture_NN_slides.html assets/figures/fig_*.png _toc.yml
+git commit -m "lec NN: add seismic wave types notes, slides, and figures"
+git push
+```
+
+GitHub Actions will rebuild and deploy the JupyterBook with the new HTML slides served as static assets.
+
+---
+
 ## Slide Render Pipeline
 
 Marp `.md` files must be compiled to HTML before they can be served from JupyterBook or GitHub Pages. This section defines the canonical build process for the course repo.

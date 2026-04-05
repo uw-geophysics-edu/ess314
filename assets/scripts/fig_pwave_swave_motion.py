@@ -1,152 +1,137 @@
 """
 fig_pwave_swave_motion.py
-=========================
-Two-panel figure showing particle motion for P-waves and S-waves,
-illustrating compression/rarefaction zones and transverse oscillation.
 
-Reproduces the scientific content of:
-  Lowrie, W. & Fichtner, A. (2020). Fundamentals of Geophysics, 3rd ed.
-  Cambridge University Press. DOI: 10.1017/9781108685917
-  Also consistent with: MIT OCW 12.201 §4.5 (CC BY NC SA)
+Scientific content: P-wave (longitudinal) and S-wave (transverse) particle
+motions, showing compression/rarefaction for P and transverse displacement
+for S. Replaces legacy slide 7–8 from 314_2023_4_seismic_waves.pdf which
+used images of unknown provenance (grid animations, Bell Labs photo).
 
-Output : assets/figures/fig_pwave_swave_motion.png
-License: CC-BY 4.0
+Output: assets/figures/fig_pwave_swave_motion.png
+License: CC-BY 4.0 (this script)
 """
-
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-from matplotlib.patches import FancyArrowPatch
+import matplotlib as mpl
 
-# ── Palette ───────────────────────────────────────────────────────────────────
-C_COMPRESS = '#0072B2'   # blue    – compression zone
-C_RAREFY   = '#56B4E9'   # sky     – rarefaction zone
-C_NEUTRAL  = '#BBBBBB'   # gray    – neutral / unperturbed
-C_ARROW    = '#D55E00'   # vermilion – particle displacement arrows
-C_PROP     = '#009E73'   # green   – propagation direction
+# ── Global rcParams (MANDATORY at top of every script) ──────────────
+mpl.rcParams.update({
+    "font.size": 13,
+    "axes.titlesize": 15,
+    "axes.labelsize": 13,
+    "xtick.labelsize": 12,
+    "ytick.labelsize": 12,
+    "legend.fontsize": 11,
+    "figure.dpi": 150,
+    "savefig.dpi": 300,
+})
 
-fig, axes = plt.subplots(2, 1, figsize=(11, 7))
-fig.subplots_adjust(hspace=0.55)
+# Colorblind-safe palette — WCAG AA compliant
+BLUE    = "#0072B2"
+ORANGE  = "#E69F00"
+SKY     = "#56B4E9"
+GREEN   = "#009E73"
+VERM    = "#D55E00"
+PINK    = "#CC79A7"
+BLACK   = "#000000"
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Panel 1 — P-wave (compressional, longitudinal)
-# ─────────────────────────────────────────────────────────────────────────────
-ax = axes[0]
-ax.set_xlim(0, 12)
-ax.set_ylim(-1.0, 1.8)
-ax.axis('off')
-ax.set_title('P-wave (Primary / Compressional): particle motion ∥ propagation direction',
-             fontsize=10.5, fontweight='bold', pad=4)
+def main():
+    fig, axes = plt.subplots(2, 1, figsize=(12, 7), gridspec_kw={"hspace": 0.35})
 
-# Draw a sinusoidal pressure wave as alternating colored bands
-n_particles = 28
-x_base = np.linspace(0.3, 11.7, n_particles)
-wavelength = 4.0
-k = 2 * np.pi / wavelength
-A_p = 0.38   # amplitude of particle displacement
+    # ── P-wave panel ────────────────────────────────────────────────
+    ax = axes[0]
+    ax.set_title("P-wave (Compressional / Longitudinal)", fontsize=14, fontweight="bold")
 
-# Color each particle zone by local compression state
-for i, xb in enumerate(x_base):
-    disp = A_p * np.sin(k * xb)
-    # Color by local strain ∂u/∂x ≈ displacement gradient
-    grad = A_p * k * np.cos(k * xb)
-    if grad < -0.2:
-        col = C_COMPRESS
-    elif grad > 0.2:
-        col = C_RAREFY
-    else:
-        col = C_NEUTRAL
+    n_particles = 60
+    x_eq = np.linspace(0, 10, n_particles)
+    y_eq = 0.0
 
-    # Draw particle as circle
-    circle = plt.Circle((xb + disp, 0), 0.18, color=col, zorder=3,
-                         ec='black', lw=0.5)
-    ax.add_patch(circle)
-    # Displacement arrow
-    if abs(disp) > 0.04:
-        ax.annotate('', xy=(xb + disp, 0), xytext=(xb, 0),
-                    arrowprops=dict(arrowstyle='->', color=C_ARROW,
-                                    lw=1.2, mutation_scale=10))
+    # Sinusoidal displacement in x (longitudinal)
+    wavelength = 3.0
+    amp = 0.12
+    k = 2 * np.pi / wavelength
+    displacement = amp * np.sin(k * x_eq)
+    x_displaced = x_eq + displacement
 
-# Zone labels
-for xlabel, lbl, col in [(1.4, 'Compression\n(C)', C_COMPRESS),
-                           (3.4, 'Rarefaction\n(R)', C_RAREFY),
-                           (5.4, 'C', C_COMPRESS),
-                           (7.4, 'R', C_RAREFY),
-                           (9.4, 'C', C_COMPRESS)]:
-    ax.text(xlabel, -0.65, lbl, ha='center', fontsize=8.5,
-            color=col, fontweight='bold')
+    # Color by compression vs rarefaction
+    # Compression: particles closer together (negative gradient of displacement)
+    grad = np.gradient(displacement, x_eq)
+    colors = [BLUE if g < -0.02 else (SKY if g > 0.02 else "#888888") for g in grad]
 
-# Propagation direction arrow
-ax.annotate('', xy=(11.5, 1.4), xytext=(0.5, 1.4),
-            arrowprops=dict(arrowstyle='->', color=C_PROP, lw=2.0))
-ax.text(6.0, 1.6, 'Propagation direction →', ha='center', fontsize=9.5,
-        color=C_PROP, fontweight='bold')
+    ax.scatter(x_displaced, np.zeros_like(x_displaced), c=colors, s=50, zorder=3, edgecolors="none")
 
-# Legend
-comp_p = mpatches.Patch(color=C_COMPRESS, label='Compression')
-rare_p = mpatches.Patch(color=C_RAREFY,   label='Rarefaction')
-neut_p = mpatches.Patch(color=C_NEUTRAL,  label='Neutral')
-ax.legend(handles=[comp_p, rare_p, neut_p], loc='lower right', fontsize=8.5,
-          framealpha=0.9)
-ax.text(0.2, 0.35, 'Particle\ndisplacement\n∥ propagation', fontsize=8, color=C_ARROW)
+    # Arrows showing particle displacement direction
+    arrow_idx = np.arange(5, n_particles, 8)
+    for i in arrow_idx:
+        dx = displacement[i]
+        ax.annotate("", xy=(x_eq[i] + dx * 3, 0.15),
+                     xytext=(x_eq[i], 0.15),
+                     arrowprops=dict(arrowstyle="->", color=ORANGE, lw=1.8))
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Panel 2 — S-wave (shear, transverse)
-# ─────────────────────────────────────────────────────────────────────────────
-ax = axes[1]
-ax.set_xlim(0, 12)
-ax.set_ylim(-1.5, 2.0)
-ax.axis('off')
-ax.set_title('S-wave (Secondary / Shear): particle motion ⊥ propagation direction\n'
-             '(SV = vertical shear shown here; SH = horizontal shear, into page)',
-             fontsize=10.5, fontweight='bold', pad=4)
+    # Labels
+    # Find compression and rarefaction zones
+    comp_x = x_eq[np.argmin(grad)]
+    rare_x = x_eq[np.argmax(grad)]
+    ax.text(comp_x, -0.25, "C", ha="center", fontsize=12, fontweight="bold", color=BLUE)
+    ax.text(rare_x, -0.25, "R", ha="center", fontsize=12, fontweight="bold", color=SKY)
 
-x_base = np.linspace(0.3, 11.7, 26)
-A_s = 0.70   # transverse amplitude
+    # Propagation arrow
+    ax.annotate("Propagation direction",
+                xy=(9.5, 0.45), xytext=(6.0, 0.45),
+                fontsize=11,
+                arrowprops=dict(arrowstyle="-|>", color=BLACK, lw=1.5),
+                va="center")
 
-for xb in x_base:
-    disp_y = A_s * np.sin(k * xb)
-    circle = plt.Circle((xb, disp_y), 0.18, color=C_NEUTRAL, zorder=3,
-                         ec='black', lw=0.5)
-    ax.add_patch(circle)
-    # Vertical displacement arrow
-    if abs(disp_y) > 0.07:
-        ax.annotate('', xy=(xb, disp_y), xytext=(xb, 0),
-                    arrowprops=dict(arrowstyle='->', color=C_ARROW,
-                                    lw=1.2, mutation_scale=10))
+    ax.set_xlim(-0.5, 11)
+    ax.set_ylim(-0.5, 0.7)
+    ax.set_aspect("equal")
+    ax.axis("off")
 
-# Equilibrium line
-ax.axhline(0, color='black', lw=0.8, ls='--', alpha=0.5)
+    # ── S-wave panel ────────────────────────────────────────────────
+    ax = axes[1]
+    ax.set_title("S-wave (Shear / Transverse)", fontsize=14, fontweight="bold")
 
-# Sinusoidal envelope
-x_env = np.linspace(0.3, 11.7, 200)
-ax.plot(x_env, A_s * np.sin(k * x_env), color=C_NEUTRAL, lw=1.0, ls=':', alpha=0.6)
+    x_eq_s = np.linspace(0, 10, n_particles)
+    amp_s = 0.35
+    wavelength_s = 3.0
+    k_s = 2 * np.pi / wavelength_s
+    y_displaced = amp_s * np.sin(k_s * x_eq_s)
 
-# Propagation direction
-ax.annotate('', xy=(11.5, 1.65), xytext=(0.5, 1.65),
-            arrowprops=dict(arrowstyle='->', color=C_PROP, lw=2.0))
-ax.text(6.0, 1.85, 'Propagation direction →', ha='center', fontsize=9.5,
-        color=C_PROP, fontweight='bold')
+    # Equilibrium line
+    ax.axhline(0, color="#CCCCCC", lw=1, ls="--", zorder=1)
 
-# Amplitude label
-ax.annotate('', xy=(0.3, A_s), xytext=(0.3, 0),
-            arrowprops=dict(arrowstyle='<->', color=C_ARROW, lw=1.5))
-ax.text(0.0, A_s/2, '$A$', ha='right', va='center', fontsize=11, color=C_ARROW)
+    # Particles
+    ax.scatter(x_eq_s, y_displaced, c=VERM, s=50, zorder=3, edgecolors="none")
 
-ax.text(0.2, -0.35, 'Particle\ndisplacement\n⊥ propagation', fontsize=8, color=C_ARROW)
+    # Transverse displacement arrows
+    arrow_idx_s = np.arange(3, n_particles, 6)
+    for i in arrow_idx_s:
+        dy = y_displaced[i]
+        if abs(dy) > 0.05:
+            ax.annotate("", xy=(x_eq_s[i], dy),
+                         xytext=(x_eq_s[i], 0),
+                         arrowprops=dict(arrowstyle="->", color=ORANGE, lw=1.5))
 
-# Key difference callout
-ax.text(5.5, -1.25,
-    'Key: S-waves require shear rigidity (μ ≠ 0)\n'
-    '→ S-waves CANNOT propagate in fluids (μ = 0)',
-    ha='center', fontsize=9, style='italic',
-    bbox=dict(fc='#FFF3CD', ec='#E69F00', alpha=0.95, boxstyle='round,pad=0.4'))
+    # Propagation arrow
+    ax.annotate("Propagation direction",
+                xy=(9.5, 0.65), xytext=(6.0, 0.65),
+                fontsize=11,
+                arrowprops=dict(arrowstyle="-|>", color=BLACK, lw=1.5),
+                va="center")
 
-fig.suptitle('Seismic Body Wave Particle Motion', fontsize=13, fontweight='bold', y=1.01)
-fig.text(0.5, -0.02,
-    'Colors encode compression state in P-wave (blue=compression, sky=rarefaction, gray=neutral). '
-    'Arrow orientation encodes displacement direction independently of color.',
-    ha='center', fontsize=7.5, style='italic', color='#555')
+    # Callout box
+    bbox_props = dict(boxstyle="round,pad=0.4", fc="#FFF3E0", ec=VERM, lw=1.5)
+    ax.text(0.5, -0.55, "S-waves cannot propagate in fluids ($\\mu = 0$)",
+            fontsize=11, ha="left", va="center", bbox=bbox_props)
 
-plt.savefig('assets/figures/fig_pwave_swave_motion.png', dpi=150, bbox_inches='tight')
-print('Saved: assets/figures/fig_pwave_swave_motion.png')
+    ax.set_xlim(-0.5, 11)
+    ax.set_ylim(-0.85, 0.85)
+    ax.set_aspect("equal")
+    ax.axis("off")
+
+    plt.savefig("assets/figures/fig_pwave_swave_motion.png")
+    plt.close()
+    print("Saved: assets/figures/fig_pwave_swave_motion.png")
+
+
+if __name__ == "__main__":
+    main()
