@@ -77,37 +77,33 @@ For `has_visual_content: true` slides, always view the image — it is the conte
 
 ---
 
-## Phase 1: Slide Audit (Output Before Writing)
+## Phase 1: Slide Audit (Agent-Internal — Never Rendered in Output)
 
-Produce this structured audit first. Present it to the instructor for confirmation.
+> **IMPORTANT:** The slide audit, copyright inventory, and pedagogical gap analysis are
+> **internal working notes for the agent only**. They MUST NOT appear in the final
+> `lectures/*.md` or `slides/*_slides.md` deliverables. Produce this audit mentally
+> (or in a scratchpad) to guide writing; do NOT write it into the lecture markdown.
 
-```markdown
-## Slide Audit: [Lecture Title]
-**File:** filename.pdf | **Slides:** N | **Date:** [course date]
+Work through these questions before writing:
 
-### Content Inventory
-| # | Type | Summary | Figure Source | Copyright | Action |
-|---|------|---------|---------------|-----------|--------|
-| 1 | Title | ... | ... | ⚠️/❌/✅ | [PYTHON-REGEN/AI-GEN/OPEN] |
+**Content Inventory (internal checklist — do not paste into lecture file)**
+- For each slide: what is the visual content? Is the source copyrightable?
+- For each figure: assign `[PYTHON-REGEN]`, `[AI-GEN]`, `[OPEN-CC]`, or `[OPEN-PD]`
 
-### Pedagogical Gap Analysis
-| Criterion | Status | Gap to Fill |
-|-----------|--------|-------------|
-| LOs stated in deck | ❌/⚠️/✅ | |
-| Geoscientific motivation | ❌/⚠️/✅ | |
-| Mathematical framework complete | ❌/⚠️/✅ | |
-| Forward problem addressed | ❌/⚠️/✅ | |
-| Inverse problem addressed | ❌/⚠️/✅ | |
-| Research horizon present | ❌ (always missing) | Add §8 |
-| Societal relevance hook | ❌ (always missing) | Add §9 |
-| Course LO alignment | ❌/⚠️/✅ | |
+**Pedagogical Gaps to Fill (internal — drives which sections to write)**
+- Missing LO statements → add structured Learning Objectives
+- Missing geoscientific motivation → add §1
+- Missing math derivation → add §3
+- Missing forward/inverse problem → add §4/§5
+- Research horizon always missing → add §8
+- Societal relevance always missing → add §9
 
-### Copyright Inventory
-[List every figure with external source. Tag: [PYTHON-REGEN] | [AI-GEN] | [OPEN-CC] | [OPEN-PD]]
+**Copyright Inventory (internal — drives figure regeneration)**
+- List every figure with external source; note action required
+- Never reproduce copyrighted figures; always regenerate with Python or AI
 
-### Open-Access Sources to Search
-[List 3-5 specific topics to search for supplementary open-access material]
-```
+**Open-Access Sources to Search (internal)**
+- [3-5 topics to search before writing Phase 3]
 
 ---
 
@@ -180,7 +176,11 @@ open_sources:
 
 # [Lecture Title]
 
-## Syllabus Alignment
+:::{seealso}
+📊 **Lecture slides** — <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_NN_slides.html" target="_blank">open in new tab ↗</a>
+:::
+
+:::{{dropdown}} Syllabus Alignment
 
 | | |
 |---|---|
@@ -189,9 +189,11 @@ open_sources:
 | **Lowrie & Fichtner chapter** | Ch. N, §N.N–N.N |
 | **Lab connection** | Lab N: [title] |
 
+:::
+
 ---
 
-## Learning Objectives
+:::{{dropdown}} Learning Objectives
 
 By the end of this lecture, students will be able to:
 - **[LO-W.1]** [Bloom verb — Analysis or higher] [concept] [in context]
@@ -201,13 +203,17 @@ By the end of this lecture, students will be able to:
 *Bloom's level guide: define/identify (Knowledge) → explain/describe (Comprehension) →
 calculate/apply (Application) → derive/analyze/compare (Analysis) → design/predict (Synthesis)*
 
+:::
+
 ---
 
-## Prerequisites
+:::{{dropdown}} Prerequisites
 
 Students should be comfortable with:
 - [Concept — link to specific prior lecture, e.g., "Stress-strain relations (Lecture 3)"]
 - [Math tool, e.g., "Partial derivatives and the chain rule (Calculus II)"]
+
+:::
 
 ---
 
@@ -444,7 +450,7 @@ The Marp slide deck is a **required companion deliverable** for every lecture. I
 ```markdown
 ---
 marp: true
-theme: uncover
+theme: ess314
 html: true
 paginate: true
 backgroundColor: '#ffffff'
@@ -694,10 +700,12 @@ Tie AI literacy to LO-7 explicitly: students should see AI as part of scientific
 ```
 [ ] Slides fully read before writing
 [ ] Open-access source research completed (≥4 sources found and recorded)
-[ ] Slide audit produced and includes copyright inventory
+[ ] Slide audit completed INTERNALLY (copyright + pedagogical gaps identified; NOT written into lecture file)
 [ ] Syllabus LOs and LO-OUTs mapped (≥2 each)
 [ ] Learning objectives stated (3–5, ≥1 at Analysis level or above per Bloom's)
 [ ] All 9 sections present (including §8 Research Horizon, §9 Societal Relevance)
+[ ] Preamble sections (Syllabus Alignment, Learning Objectives, Prerequisites) wrapped in :::{dropdown} — collapsed by default
+[ ] NO Slide Audit Summary / Copyright Inventory / Pedagogical Gap Analysis sections in output file
 [ ] Notation table present, all variables defined before use
 [ ] All equations LaTeXed, labeled, with unit check
 [ ] Forward problem and inverse problem both addressed
@@ -713,6 +721,24 @@ Tie AI literacy to LO-7 explicitly: students should see AI as part of scientific
 [ ] Slide deck: background image slides use 50% rgba overlay
 [ ] Slide deck: ≤25 slides, ≤5 bullets/slide, alt text on every image
 ```
+
+---
+
+## Transforming Existing Lecture Stubs
+
+If a lecture file exists but still uses the **old flat-heading preamble** (plain `## Syllabus Alignment`,
+`## Learning Objectives`, `## Prerequisites` headings), you can batch-transform it using:
+
+```bash
+pixi run python assets/scripts/_transform_lectures.py
+```
+
+This script:
+- Removes any `## Slide Audit Summary`, `## Copyright Inventory`, and `## Pedagogical Gap Analysis` blocks
+- Wraps Syllabus Alignment, Learning Objectives, and Prerequisites in `:::{{dropdown}}` directives
+- Preserves all other content and `---` separators
+
+Run it again any time new stub lectures are added. It is idempotent — already-transformed files are left unchanged.
 
 ---
 
@@ -745,7 +771,7 @@ Open each PNG visually (or use `view_image` tool) to confirm:
 ### Step 3 — Check slide deck theme and figure paths
 
 Open `slides/lecture_NN_slides.md` and verify:
-- YAML front matter: `theme: ess314` (not `default`, `uncover`, or other)
+- YAML front matter: `theme: ess314` (**not** `default`, `uncover`, or other — reject any slide deck using `uncover`)
 - All figure image paths are relative: `../assets/figures/fig_XXXX.png`
 - The `--allow-local-files` flag is present in the pixi task (enables base64 embedding)
 - No stale `_v2` or draft copies of the same slide deck exist in `slides/`
