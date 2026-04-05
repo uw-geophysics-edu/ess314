@@ -159,7 +159,7 @@ def make_figure():
              ha="center", va="top", fontsize=16, fontweight="bold")
 
     os.makedirs("assets/figures", exist_ok=True)
-    fig.savefig("assets/figures/fig_three_motivations.png", dpi=150,
+    fig.savefig("assets/figures/fig_three_motivations.png", dpi=300,
                 bbox_inches="tight", facecolor="white")
     print("Saved: assets/figures/fig_three_motivations.png")
     plt.close(fig)

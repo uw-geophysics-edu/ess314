@@ -6,7 +6,8 @@ motions, showing compression/rarefaction for P and transverse displacement
 for S. Replaces legacy slide 7–8 from 314_2023_4_seismic_waves.pdf which
 used images of unknown provenance (grid animations, Bell Labs photo).
 
-Output: assets/figures/fig_pwave_swave_motion.png
+Output: assets/figures/fig_pwave_motion.png
+        assets/figures/fig_swave_motion.png
 License: CC-BY 4.0 (this script)
 """
 import numpy as np
@@ -34,16 +35,13 @@ VERM    = "#D55E00"
 PINK    = "#CC79A7"
 BLACK   = "#000000"
 
-def main():
-    fig, axes = plt.subplots(2, 1, figsize=(12, 7), gridspec_kw={"hspace": 0.35})
-
-    # ── P-wave panel ────────────────────────────────────────────────
-    ax = axes[0]
+def make_pwave_fig():
+    """P-wave (compressional / longitudinal) particle motion."""
+    fig, ax = plt.subplots(1, 1, figsize=(12, 3.5))
     ax.set_title("P-wave (Compressional / Longitudinal)", fontsize=14, fontweight="bold")
 
     n_particles = 60
     x_eq = np.linspace(0, 10, n_particles)
-    y_eq = 0.0
 
     # Sinusoidal displacement in x (longitudinal)
     wavelength = 3.0
@@ -53,7 +51,6 @@ def main():
     x_displaced = x_eq + displacement
 
     # Color by compression vs rarefaction
-    # Compression: particles closer together (negative gradient of displacement)
     grad = np.gradient(displacement, x_eq)
     colors = [BLUE if g < -0.02 else (SKY if g > 0.02 else "#888888") for g in grad]
 
@@ -67,8 +64,7 @@ def main():
                      xytext=(x_eq[i], 0.15),
                      arrowprops=dict(arrowstyle="->", color=ORANGE, lw=1.8))
 
-    # Labels
-    # Find compression and rarefaction zones
+    # Labels for compression and rarefaction zones
     comp_x = x_eq[np.argmin(grad)]
     rare_x = x_eq[np.argmax(grad)]
     ax.text(comp_x, -0.25, "C", ha="center", fontsize=12, fontweight="bold", color=BLUE)
@@ -86,10 +82,18 @@ def main():
     ax.set_aspect("equal")
     ax.axis("off")
 
-    # ── S-wave panel ────────────────────────────────────────────────
-    ax = axes[1]
+    plt.tight_layout()
+    plt.savefig("assets/figures/fig_pwave_motion.png")
+    plt.close()
+    print("Saved: assets/figures/fig_pwave_motion.png")
+
+
+def make_swave_fig():
+    """S-wave (shear / transverse) particle motion."""
+    fig, ax = plt.subplots(1, 1, figsize=(12, 3.5))
     ax.set_title("S-wave (Shear / Transverse)", fontsize=14, fontweight="bold")
 
+    n_particles = 60
     x_eq_s = np.linspace(0, 10, n_particles)
     amp_s = 0.35
     wavelength_s = 3.0
@@ -128,9 +132,15 @@ def main():
     ax.set_aspect("equal")
     ax.axis("off")
 
-    plt.savefig("assets/figures/fig_pwave_swave_motion.png")
+    plt.tight_layout()
+    plt.savefig("assets/figures/fig_swave_motion.png")
     plt.close()
-    print("Saved: assets/figures/fig_pwave_swave_motion.png")
+    print("Saved: assets/figures/fig_swave_motion.png")
+
+
+def main():
+    make_pwave_fig()
+    make_swave_fig()
 
 
 if __name__ == "__main__":

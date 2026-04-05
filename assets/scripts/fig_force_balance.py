@@ -222,7 +222,7 @@ fig.text(0.5, -0.03,
     'Symbols and arrows both encode information (WCAG AA dual-coding).',
     ha='center', fontsize=10, style='italic', color='#555')
 
-plt.savefig('assets/figures/fig_force_balance.png', dpi=70, bbox_inches='tight')
+plt.savefig('assets/figures/fig_force_balance.png', dpi=300, bbox_inches='tight')
 print('Saved: assets/figures/fig_force_balance.png')
 
 if __name__ == '__main__':

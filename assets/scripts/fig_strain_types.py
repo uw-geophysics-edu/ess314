@@ -181,5 +181,5 @@ fig.text(0.5, -0.04,
     'Shape encodes deformation mode independent of color.',
     ha='center', fontsize=7.5, style='italic', color='#555')
 
-plt.savefig('assets/figures/fig_strain_types.png', dpi=90, bbox_inches='tight')
+plt.savefig('assets/figures/fig_strain_types.png', dpi=300, bbox_inches='tight')
 print('Saved: assets/figures/fig_strain_types.png')

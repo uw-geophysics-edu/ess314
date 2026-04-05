@@ -112,5 +112,5 @@ ax.legend(handles=[body_patch, surface_patch, ray_patch],
           loc='upper left', fontsize=8.5, framealpha=0.9)
 
 plt.tight_layout()
-plt.savefig('assets/figures/fig_point_source_wavefronts.png', dpi=150, bbox_inches='tight')
+plt.savefig('assets/figures/fig_point_source_wavefronts.png', dpi=300, bbox_inches='tight')
 print('Saved: assets/figures/fig_point_source_wavefronts.png')

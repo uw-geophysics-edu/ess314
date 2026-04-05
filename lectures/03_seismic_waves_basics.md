@@ -351,6 +351,114 @@ $$ (eq:vs)
 
 Since $\lambda \geq 0$ for any stable elastic material, $\lambda + 2\mu > \mu$, and therefore $V_P > V_S$ — always. The P-wave always arrives before the S-wave.
 
+### 3.6 Extending to Three Dimensions: The Vector Equation of Motion
+
+The 1D derivation above is sufficient to introduce wave speeds, but it only captures motion along a single axis. A real earthquake radiates energy in all directions, and the displacement field $\mathbf{u}(\mathbf{x},t)$ is a full 3D vector field. To describe it, we repeat the force-balance argument on all six faces of an infinitesimal 3D element.
+
+**Step 1 — Generalize the force balance to 3D.**
+In 3D, the stress on each pair of faces contributes to the net force. The net force per unit volume in direction $i$ from all stress gradients is:
+
+$$
+f_i = \frac{\partial \sigma_{i1}}{\partial x_1} + \frac{\partial \sigma_{i2}}{\partial x_2} + \frac{\partial \sigma_{i3}}{\partial x_3} = \frac{\partial \sigma_{ij}}{\partial x_j}
+$$ (eq:cauchy-force)
+
+where the repeated index $j$ is summed (Einstein summation convention). Combining with Newton's second law gives the **Cauchy equation of motion**:
+
+$$
+\rho\,\frac{\partial^2 u_i}{\partial t^2} = \frac{\partial \sigma_{ij}}{\partial x_j}
+$$ (eq:cauchy)
+
+*Units check:* $[\rho]\,[u/t^2] = (\text{kg/m}^3)(\text{m/s}^2) = \text{kg/(m}^2\text{s}^2) = \text{Pa/m}$. Right side: $[\sigma_{ij}/x_j] = \text{Pa/m}$ ✓
+
+**Step 2 — Substitute Hooke's law.** Insert $\sigma_{ij} = \lambda\,\delta_{ij}\,\theta + 2\mu\,\varepsilon_{ij}$ from {eq}`eq:hookes-law` into {eq}`eq:cauchy`. For a homogeneous medium ($\lambda$, $\mu$ spatially constant):
+
+$$
+\frac{\partial \sigma_{ij}}{\partial x_j}
+= \lambda\,\delta_{ij}\,\frac{\partial \theta}{\partial x_j}
+  + 2\mu\,\frac{\partial \varepsilon_{ij}}{\partial x_j}
+= \lambda\,\frac{\partial \theta}{\partial x_i}
+  + 2\mu\,\frac{\partial \varepsilon_{ij}}{\partial x_j}
+$$ (eq:hooke-sub)
+
+The $\delta_{ij}$ collapses the sum to a single term: $\delta_{ij}\partial\theta/\partial x_j = \partial\theta/\partial x_i$. Now expand the strain divergence using {eq}`eq:strain-tensor`:
+
+$$
+\frac{\partial \varepsilon_{ij}}{\partial x_j}
+= \frac{1}{2}\frac{\partial}{\partial x_j}\!\left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}\right)
+= \frac{1}{2}\frac{\partial^2 u_i}{\partial x_j^2}
++ \frac{1}{2}\frac{\partial}{\partial x_i}\!\underbrace{\left(\frac{\partial u_j}{\partial x_j}\right)}_{=\,\theta}
+= \frac{1}{2}\nabla^2 u_i + \frac{1}{2}\frac{\partial \theta}{\partial x_i}
+$$ (eq:strain-div)
+
+**Step 3 — Assemble the Navier equation.** Substituting {eq}`eq:strain-div` into {eq}`eq:hooke-sub` and writing in vector form:
+
+$$
+\rho\,\frac{\partial^2\mathbf{u}}{\partial t^2}
+= (\lambda + \mu)\,\nabla(\nabla\cdot\mathbf{u}) + \mu\,\nabla^2\mathbf{u}
+$$ (eq:navier)
+
+This is the **Navier–Cauchy equation** of linear elasticity. It governs the displacement field in any homogeneous, isotropic, linearly elastic solid.
+
+**Step 4 — Apply a vector identity.** The vector Laplacian satisfies the identity:
+
+$$
+\nabla^2\mathbf{u} = \nabla(\nabla\cdot\mathbf{u}) - \nabla\times(\nabla\times\mathbf{u})
+$$ (eq:vec-laplacian)
+
+Substituting {eq}`eq:vec-laplacian` into {eq}`eq:navier`:
+
+$$
+\rho\,\frac{\partial^2\mathbf{u}}{\partial t^2}
+= (\lambda+\mu)\,\nabla(\nabla\cdot\mathbf{u})
+  + \mu\bigl[\nabla(\nabla\cdot\mathbf{u}) - \nabla\times(\nabla\times\mathbf{u})\bigr]
+$$
+
+Collecting the $\nabla(\nabla\cdot\mathbf{u})$ terms yields the canonical form:
+
+$$
+\rho\,\frac{\partial^2\mathbf{u}}{\partial t^2}
+= (\lambda+2\mu)\,\nabla(\nabla\cdot\mathbf{u}) - \mu\,\nabla\times(\nabla\times\mathbf{u})
+$$ (eq:vector-eom-lec3)
+
+:::{admonition} Key Equation: 3D Vector Equation of Motion
+:class: important
+$$
+\rho\,\frac{\partial^2\mathbf{u}}{\partial t^2}
+= (\lambda+2\mu)\,\nabla(\nabla\cdot\mathbf{u}) - \mu\,\nabla\times(\nabla\times\mathbf{u})
+$$
+
+**Physical interpretation of the two terms:**
+
+| Term | Operator | What it measures | Elastic resistance | Wave type |
+|------|----------|------------------|--------------------|-----------|
+| $(\lambda+2\mu)\,\nabla(\nabla\cdot\mathbf{u})$ | $\nabla(\nabla\cdot)$ | Gradient of dilatation $\theta = \nabla\cdot\mathbf{u}$ — where volume is changing | $\lambda+2\mu = K + \tfrac{4}{3}\mu$ (bulk + shear) | **P-wave** |
+| $-\mu\,\nabla\times(\nabla\times\mathbf{u})$ | $\nabla\times(\nabla\times)$ | Curl of rotation — where the medium is spinning | $\mu$ (shear only) | **S-wave** |
+
+The equation encodes the same physics as the two 1D equations in §3.5, but in a single vector statement that is direction-independent and valid for waves traveling in any direction through any isotropic solid.
+:::
+
+**Consistency check: recovery of the 1D results.** Let $\mathbf{u} = u(x,t)\,\hat{\mathbf{x}}$ — displacement only in $x$, varying only with $x$. Then:
+
+$$
+\nabla\cdot\mathbf{u} = \frac{\partial u}{\partial x}, \qquad
+\nabla\times\mathbf{u} = \mathbf{0}.
+$$
+
+Equation {eq}`eq:vector-eom-lec3` becomes:
+
+$$
+\rho\,\frac{\partial^2 u}{\partial t^2} = (\lambda+2\mu)\,\frac{\partial^2 u}{\partial x^2}
+$$
+
+— exactly the P-wave equation {eq}`eq:wave-eqn-p` from §3.5. ✓
+
+For a transverse displacement $\mathbf{u} = u(x,t)\,\hat{\mathbf{z}}$, we have $\nabla\cdot\mathbf{u} = 0$ and $\nabla\times(\nabla\times\mathbf{u}) = -(\partial^2 u/\partial x^2)\,\hat{\mathbf{z}}$, recovering the S-wave equation {eq}`eq:vs`. ✓
+
+:::{admonition} Look Ahead — Lecture 4
+:class: tip
+Equation {eq}`eq:vector-eom-lec3` has a remarkable property: in a **homogeneous** medium, its right-hand side separates into two non-interacting terms. In Lecture 4, we will formalize this using the **Helmholtz decomposition**, writing $\mathbf{u} = \nabla\phi + \nabla\times\boldsymbol{\psi}$. Substituting shows that $\phi$ satisfies a scalar wave equation at speed $V_P$ and $\boldsymbol{\psi}$ satisfies a vector wave equation at speed $V_S$ — independently. The same elastic wave equation spawns two distinct wave families, each carrying different information about the subsurface.
+:::
+
 ---
 
 ## 4. The Forward Problem
@@ -439,7 +547,7 @@ This $\nu \approx 0.49$ is close to the incompressible fluid limit of 0.5. The i
 ## 7. Course Connections
 
 - **Prior lectures:** This lecture applies the force-per-unit-area definition of stress from Lecture 2, extends it to a 3D tensor, and introduces strain as the kinematic complement. Lecture 3 is the bridge from statics (Lecture 2) to dynamics (Lectures 4–6).
-- **Next lecture (Lecture 4):** Seismic wave types — P, S, Rayleigh, Love — and the ray-based framework for predicting their propagation. We will use $V_P$ and $V_S$ from this lecture as the wave speeds.
+- **Next lecture (Lecture 4):** Seismic wave types — P, S, Rayleigh, Love — and the Helmholtz decomposition that separates the vector equation of motion {eq}`eq:vector-eom-lec3` into two independent wave families. The $\nabla(\nabla\cdot\mathbf{u})$ term derived in §3.6 will be identified as the P-wave driver; the $\nabla\times(\nabla\times\mathbf{u})$ term as the S-wave driver. We will use $V_P$ and $V_S$ from this lecture as the two wave speeds throughout.
 - **Lecture 5:** Reflection and refraction seismology — the travel-time equations all descend from the wave equation derived here.
 - **Lab 2:** Students will write Python code to compute $V_P$, $V_S$, and $V_P/V_S$ as functions of depth for a layered crustal model, then plot the results and interpret them.
 - **Cross-topic:** The elastic moduli derived here reappear in every geophysical method. In gravity, density $\rho$ is the primary observable. In magnetics, rock composition (which determines both magnetic properties and moduli) provides joint constraints. The $V_P/V_S$ ratio is arguably the single most useful diagnostic in applied seismology.

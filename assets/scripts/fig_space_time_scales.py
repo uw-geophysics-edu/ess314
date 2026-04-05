@@ -113,7 +113,7 @@ def make_figure():
 
     fig.tight_layout()
     os.makedirs("assets/figures", exist_ok=True)
-    fig.savefig("assets/figures/fig_space_time_scales.png", dpi=150,
+    fig.savefig("assets/figures/fig_space_time_scales.png", dpi=300,
                 bbox_inches="tight", facecolor="white")
     print("Saved: assets/figures/fig_space_time_scales.png")
     plt.close(fig)

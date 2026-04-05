@@ -220,7 +220,7 @@ fig.text(0.5, 0.01,
     'Shape encodes deformation mode independently of color (WCAG AA).',
     ha='center', fontsize=9.5, style='italic', color='#555')
 
-plt.savefig('assets/figures/fig_elastic_moduli.png', dpi=90, bbox_inches='tight')
+plt.savefig('assets/figures/fig_elastic_moduli.png', dpi=300, bbox_inches='tight')
 print('Saved: assets/figures/fig_elastic_moduli.png')
 
 if __name__ == '__main__':

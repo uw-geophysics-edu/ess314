@@ -66,7 +66,7 @@ $$R_\oplus = \frac{C_\oplus}{2\pi} \approx 6{,}366\text{ km} \quad (\text{modern
 
 # Scale Diagram: Scale Determines Method
 
-![width:900px](../assets/figures/fig_space_time_scales.png)
+![alt text: Log-log scatter plot of spatial scale in kilometers (x-axis, 10^-3 to 10^4) versus temporal scale in seconds (y-axis, 10^-2 to 10^17). Sixteen labeled geophysical processes are plotted as colored symbols: blue triangles for Geodynamics (mantle convection, subduction dynamics, seismic tomography, volcanic evolution, glacial rebound), orange circles for Natural Hazards (seismic P-wave, local earthquake M2–3, aftershock sequence, earthquake cycle Cascadia), green squares for Resources and Engineering (active seismic survey, DAS urban imaging, reflection survey, gravity survey, groundwater depletion), and a pink diamond for slow-slip event. A right-side axis labels approximate timescales from 1 millisecond to 100 million years. The overall pattern shows a positive correlation: larger spatial processes have longer time scales, spanning 15 orders of magnitude in time and 10 in space. w:900px](../assets/figures/fig_space_time_scales.png)
 
 **Key point:** No single instrument spans 15 orders of magnitude in time and 10 in space. The scale of the process dictates the appropriate method.
 

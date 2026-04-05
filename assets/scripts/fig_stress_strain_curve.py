@@ -145,7 +145,7 @@ fig.text(0.5, -0.03,
     ha='center', fontsize=7.5, style='italic', color='#555')
 
 plt.tight_layout()
-plt.savefig('assets/figures/fig_stress_strain_curve.png', dpi=90, bbox_inches='tight')
+plt.savefig('assets/figures/fig_stress_strain_curve.png', dpi=300, bbox_inches='tight')
 print('Saved: assets/figures/fig_stress_strain_curve.png')
 
 if __name__ == '__main__':

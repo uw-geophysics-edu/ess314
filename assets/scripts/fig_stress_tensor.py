@@ -145,5 +145,5 @@ fig.text(0.5, -0.07,
     ha='center', fontsize=7.5, style='italic', color='#555')
 
 plt.tight_layout()
-plt.savefig('assets/figures/fig_stress_tensor.png', dpi=90, bbox_inches='tight')
+plt.savefig('assets/figures/fig_stress_tensor.png', dpi=300, bbox_inches='tight')
 print('Saved: assets/figures/fig_stress_tensor.png')

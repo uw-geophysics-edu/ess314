@@ -87,8 +87,10 @@ By the end of this lecture, students will be able to:
 ## Prerequisites
 
 Students should be comfortable with:
-- The 1D wave equation and the expressions $V_P = \sqrt{(\lambda+2\mu)/\rho}$, $V_S = \sqrt{\mu/\rho}$ (Lecture 3)
-- The elastic moduli $\lambda$, $\mu$, $K$, $E$, $\nu$ and their physical meaning (Lecture 3)
+- The 3D vector equation of motion $\rho\,\partial^2\mathbf{u}/\partial t^2 = (\lambda+2\mu)\,\nabla(\nabla\cdot\mathbf{u}) - \mu\,\nabla\times(\nabla\times\mathbf{u})$ and its derivation from the Cauchy equation and Hooke's law (Lecture 3, §3.6)
+- The 1D wave equation and the expressions $V_P = \sqrt{(\lambda+2\mu)/\rho}$, $V_S = \sqrt{\mu/\rho}$ (Lecture 3, §3.5)
+- The physical meaning of the two terms: $\nabla(\nabla\cdot\mathbf{u})$ as a gradient of dilatation (volumetric change) and $\nabla\times(\nabla\times\mathbf{u})$ as a measure of rotation (shear distortion) (Lecture 3, §3.6)
+- The elastic moduli $\lambda$, $\mu$, $K$, $E$, $\nu$ and their physical meaning (Lecture 3, §3.3)
 - The concept of a wavefield as a propagating pattern of stress and strain, not a flow of material (Lecture 3)
 
 ---
@@ -189,12 +191,20 @@ $$
 V_S = \sqrt{\frac{\mu}{\rho}}
 $$ (eq:vs)
 
-:::{figure} ../assets/figures/fig_pwave_swave_motion.png
-:name: fig-pwave-swave-lec4
-:alt: Two-panel figure. Top panel shows P-wave particle motion as alternating clusters of close-spaced dots labeled C for compression and widely-spaced dots labeled R for rarefaction, with horizontal arrows showing displacement parallel to the propagation direction (left to right). Bottom panel shows S-wave motion as particles displaced vertically above and below a horizontal equilibrium line in a sinusoidal pattern, with vertical arrows showing displacement perpendicular to the propagation direction. A callout box notes that S-waves cannot propagate in fluids because the shear modulus mu equals zero.
+:::{figure} ../assets/figures/fig_pwave_motion.png
+:name: fig-pwave-lec4
+:alt: P-wave particle motion diagram. Particles are shown as colored dots along a horizontal line. Clusters of close-spaced blue dots represent compression zones labeled C; clusters of wide-spaced sky-blue dots represent rarefaction zones labeled R. Orange horizontal arrows above the particle row show that displacement is parallel to the propagation direction (left to right), which is indicated by a labeled arrow at the top right.
 :width: 92%
 
-**Figure 4.1.** Particle motion for P-waves (top: longitudinal compression and rarefaction) and S-waves (bottom: transverse displacement). The propagation direction is horizontal in both panels. [Python-generated. Script: `assets/scripts/fig_pwave_swave_motion.py`]
+**Figure 4.1.** P-wave (compressional / longitudinal) particle motion. Compression zones (C, blue) and rarefaction zones (R, sky blue) alternate along the propagation direction; particle displacement (orange arrows) is parallel to propagation. [Python-generated. Script: `assets/scripts/fig_pwave_swave_motion.py`]
+:::
+
+:::{figure} ../assets/figures/fig_swave_motion.png
+:name: fig-swave-lec4
+:alt: S-wave particle motion diagram. Vermilion particles trace a sinusoidal path above and below a dashed horizontal equilibrium line. Orange vertical arrows show that particle displacement is perpendicular to the propagation direction (left to right, indicated by a labeled arrow at top right). A callout box notes that S-waves cannot propagate in fluids because the shear modulus mu equals zero.
+:width: 92%
+
+**Figure 4.2.** S-wave (shear / transverse) particle motion. Particles oscillate perpendicular to the propagation direction (orange arrows), with no volume change. S-waves require a nonzero shear modulus and therefore do not propagate in fluids. [Python-generated. Script: `assets/scripts/fig_pwave_swave_motion.py`]
 :::
 
 ### 3.3 S-Wave Polarization: SV and SH
@@ -210,7 +220,7 @@ The S-wave displacement is confined to the plane perpendicular to the ray direct
 :alt: Three-dimensional diagram showing a ray propagating downward and to the right. The propagation direction is labeled P with a blue arrow. A vertical plane containing the ray is shaded light blue. The SV polarization is shown as a vermilion double-headed arrow within this vertical plane, perpendicular to the ray. The SH polarization is shown as an amber double-headed arrow perpendicular to both the ray and SV, pointing horizontally out of the vertical plane. The three directions P, SV, SH form an orthogonal triad.
 :width: 70%
 
-**Figure 4.2.** Decomposition of S-wave polarization into SV (in the vertical plane containing the ray) and SH (horizontal, out of the ray plane). Together with the P-wave direction, these define an orthogonal coordinate system aligned with the ray. [Python-generated. Script: `assets/scripts/fig_sv_sh_polarization.py`]
+**Figure 4.3.** Decomposition of S-wave polarization into SV (in the vertical plane containing the ray) and SH (horizontal, out of the ray plane). Together with the P-wave direction, these define an orthogonal coordinate system aligned with the ray. [Python-generated. Script: `assets/scripts/fig_sv_sh_polarization.py`]
 :::
 
 The SV–SH decomposition is not merely a mathematical convenience. It reflects a physical asymmetry: the free surface and horizontal layering break the symmetry between vertical and horizontal transverse motions. An SV wave arriving at the surface generates both vertical and horizontal ground motion; an SH wave generates only horizontal motion. This distinction directly determines which surface wave types are excited.

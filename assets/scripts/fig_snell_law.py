@@ -262,7 +262,7 @@ fig.text(0.5, -0.01,
     'Line style also distinguishes ray types (solid vs dashed).',
     ha='center', fontsize=9.0, style='italic', color='#555')
 
-plt.savefig('assets/figures/fig_snell_law.png', dpi=150, bbox_inches='tight')
+plt.savefig('assets/figures/fig_snell_law.png', dpi=300, bbox_inches='tight')
 print('Saved: assets/figures/fig_snell_law.png')
 
 if __name__ == '__main__':

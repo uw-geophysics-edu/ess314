@@ -127,7 +127,7 @@ def make_figure():
     )
 
     os.makedirs("assets/figures", exist_ok=True)
-    fig.savefig("assets/figures/fig_inaccessible_earth.png", dpi=150,
+    fig.savefig("assets/figures/fig_inaccessible_earth.png", dpi=300,
                 bbox_inches="tight", facecolor="white")
     print("Saved: assets/figures/fig_inaccessible_earth.png")
     plt.close(fig)
