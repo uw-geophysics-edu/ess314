@@ -95,7 +95,8 @@ Conceptually like sound waves — but in rock
 
 **P-waves travel through solids, liquids, and gases**
 
-![alt text: Two-panel figure. Top panel (P-wave, emphasized here): alternating clusters of close-spaced dark blue dots labeled C for compression zones and widely-spaced sky-blue dots labeled R for rarefaction zones, with orange horizontal arrows showing longitudinal displacement parallel to the green propagation arrow. Bottom panel (S-wave): vermilion particles displaced transversely above and below equilibrium in a sinusoidal pattern, with orange vertical arrows perpendicular to the propagation direction. A callout box states S-waves cannot propagate in fluids because the shear modulus mu equals zero.](../assets/figures/fig_pwave_swave_motion.png)
+![alt text: P-wave particle motion diagram. Alternating clusters of close-spaced dark blue dots labeled C for compression zones and widely-spaced sky-blue dots labeled R for rarefaction zones. Orange horizontal arrows show longitudinal displacement parallel to the green propagation arrow at bottom.](../assets/figures/fig_pwave_motion.png)
+<span class="caption">Figure: P-wave compressional particle motion. Python-generated — `assets/scripts/fig_pwave_swave_motion.py`</span>
 
 ---
 
@@ -107,7 +108,8 @@ No volume change — only **shape distortion**
 
 **S-waves CANNOT travel through fluids** ($\mu = 0$)
 
-![alt text: Two-panel figure. Top panel (P-wave): alternating close-spaced dark blue compression zones and widely-spaced sky-blue rarefaction zones, with orange horizontal arrows showing longitudinal displacement parallel to the propagation direction. Bottom panel (S-wave, emphasized here): vermilion particles displaced transversely above and below equilibrium in a sinusoidal pattern, with orange vertical arrows perpendicular to the propagation direction. A callout box states S-waves cannot propagate in fluids because the shear modulus mu equals zero.](../assets/figures/fig_pwave_swave_motion.png)
+![alt text: S-wave particle motion diagram. Vermilion particles displaced transversely above and below the equilibrium line in a sinusoidal pattern. Orange vertical arrows show displacement perpendicular to the green propagation arrow. A callout box states S-waves cannot propagate in fluids because the shear modulus mu equals zero.](../assets/figures/fig_swave_motion.png)
+<span class="caption">Figure: S-wave shear particle motion. Python-generated — `assets/scripts/fig_pwave_swave_motion.py`</span>
 
 ---
 
