@@ -24,8 +24,8 @@ parts:
         title: "Seismic Waves — The Basics"
       - file: lectures/04_seismic_wave_types
         title: "Seismic Wave Types"
-      - file: lectures/04_wavefronts_rays
-        title: "Wavefronts and Rays"
+      - file: lectures/05_wavefronts_rays
+        title: "Wavefronts, Rays, and Snell's Law"
       - file: lectures/05_snells_law
         title: "Snell's Law & Waves at Boundaries"
 
