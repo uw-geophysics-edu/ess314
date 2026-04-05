@@ -19,7 +19,7 @@ open_sources:
 📊 **Lecture slides** — <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_04_slides.html" target="_blank">open in new tab ↗</a>
 :::
 
-## Syllabus Alignment
+:::{dropdown} Syllabus Alignment
 
 | | |
 |---|---|
@@ -29,9 +29,11 @@ open_sources:
 | **Next lecture** | Lecture 5 — Reflection Seismology |
 | **Lab connection** | Lab 2: Seismic Ray Tracing |
 
+:::
+
 ---
 
-## Learning Objectives
+:::{dropdown} Learning Objectives
 
 By the end of this lecture, students will be able to:
 
@@ -41,14 +43,18 @@ By the end of this lecture, students will be able to:
 - **[LO-4.4]** *Derive* Snell's law from wavefront geometry and apply it to predict refracted and reflected ray angles at a planar interface.
 - **[LO-4.5]** *Calculate* the critical angle for total internal reflection and predict the geometry of head-wave arrivals.
 
+:::
+
 ---
 
-## Prerequisites
+:::{dropdown} Prerequisites
 
 Students should be comfortable with:
 - The 1D wave equation and wave speeds $V_P = \sqrt{(\lambda+2\mu)/\rho}$, $V_S = \sqrt{\mu/\rho}$ (Lecture 3)
 - Elastic moduli: $\mu = 0$ for fluids (Lecture 3)
 - Basic trigonometry: Snell's law involves $\sin\theta$ and right-triangle geometry
+
+:::
 
 ---
 

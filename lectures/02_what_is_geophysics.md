@@ -19,7 +19,7 @@ open_sources:
 📊 **Lecture slides** — <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_02_slides.html" target="_blank">open in new tab ↗</a>
 :::
 
-## Syllabus Alignment
+:::{dropdown} Syllabus Alignment
 
 | | |
 |---|---|
@@ -29,9 +29,11 @@ open_sources:
 | **Lab connection** | Lab 1 (Friday): download and plot a PNSN seismogram; identify P and S arrivals; compute source distance from the S–P time difference |
 | **Next lecture** | Lecture 4 (Thursday): Seismic waves — fundamentals |
 
+:::
+
 ---
 
-## Learning Objectives
+:::{dropdown} Learning Objectives
 
 By the end of this lecture, students will be able to:
 
@@ -40,9 +42,13 @@ By the end of this lecture, students will be able to:
 - **[LO-4.2]** Describe what each of the five major geophysical instruments records physically, and identify at least one limitation or ambiguity intrinsic to each measurement type.
 - **[LO-3.1]** Formulate the forward problem for two different geophysical methods by specifying model parameters, observables, and the physical operator connecting them, and explain why the corresponding inverse problem is non-unique.
 
-## Prerequisites
+:::
+
+:::{dropdown} Prerequisites
 
 Lecture 1 (motivations, physics domains, passive vs. active surveys). Basic algebra and dimensional analysis.
+
+:::
 
 ---
 

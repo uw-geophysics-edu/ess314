@@ -20,46 +20,7 @@ open_sources:
 📊 **Lecture slides** — <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_04_slides.html" target="_blank">open in new tab ↗</a>
 :::
 
-## Slide Audit Summary
-
-**Source decks:** `314_2023_4_seismic_waves.pdf` (slides 1–15), `314_2023_5_seismic_waves_II.pdf` (slides 1–3)
-**Relevant slides for Lecture 4 scope:** Elastic moduli review (slides 2–3), wave equation result (slides 4–6), P-wave and S-wave descriptions (slides 7–9), polarization (slide 9), surface waves (slides 10–14), velocity table (slide 15).
-**Slides deferred to Lectures 6–7:** Huygens (slide 16), wavefronts (slide 17), refraction (slides 18–20), reflection (slides 21–22), mode conversion (slides 23–24), Fermat (slides 25–26), critical refraction (slide 27).
-
-### Copyright Inventory
-
-| Slide | Content | Source | Copyright | Action |
-|-------|---------|--------|-----------|--------|
-| 1 | Title (water droplet photo) | Stock photo, unknown | ❌ | Omit |
-| 2 | Elastic moduli diagram | Agile Scientific blog | ❌ | Already replaced in Lecture 3 |
-| 3 | Elastic moduli conversion table | Agile Scientific blog | ❌ | Already replaced in Lecture 3 |
-| 4 | 1D wave equation derivation (Fig. 3.11) | Lowrie & Fichtner, Cambridge | ❌ | Already in Lecture 3 |
-| 7 | P-wave grid animation + Bell Labs photo | Unknown provenance | ❌ | [PYTHON-REGEN] |
-| 8 | S-wave grid animation + earthquake damage | Unknown provenance | ❌ | [PYTHON-REGEN] + omit damage photo |
-| 9 | P/SV/SH polarization diagram | Original? | ⚠️ | [PYTHON-REGEN] |
-| 10 | Surface waves + P-wave at surface (Fig from textbook) | Likely textbook | ❌ | [PYTHON-REGEN] |
-| 11 | S-wave wavefront + SV/SH (Fig 2.8g) | W.W. Norton, *Introduction to Applied Geophysics* | ❌ | [PYTHON-REGEN] |
-| 12 | Rayleigh wave animation | Unknown provenance | ❌ | [PYTHON-REGEN] |
-| 13 | Rayleigh wave diagram (textbook figure) | Likely Lowrie or Sheriff & Geldart | ❌ | [PYTHON-REGEN] |
-| 14 | Love wave diagrams (textbook figures) | Likely Lowrie | ❌ | [PYTHON-REGEN] |
-| 15 | Velocity table | Common values, instructor-generated | ✅ | Retain data, [PYTHON-REGEN] bar chart |
-
-### Pedagogical Gap Analysis
-
-| Criterion | Status | Gap to Fill |
-|-----------|--------|-------------|
-| LOs stated in deck | ❌ | Add structured LOs |
-| Geoscientific motivation | ❌ | Add §1 (Cascadia seismogram narrative) |
-| Helmholtz decomposition | ❌ | Add §2 (physical, not full derivation) |
-| $V_P/V_S$ as diagnostic | ⚠️ (slide 15 has values but no interpretation) | Add §3.3 with fluid-diagnostic example |
-| Forward problem | ❌ | Add §4 |
-| Inverse problem | ❌ | Add §5 |
-| Research horizon | ❌ | Add §8 (DAS, ambient noise tomography) |
-| Societal relevance | ❌ | Add §9 (ShakeAlert, Seattle basin amplification) |
-
----
-
-## Syllabus Alignment
+:::{dropdown} Syllabus Alignment
 
 | | |
 |---|---|
@@ -70,9 +31,11 @@ open_sources:
 | **Next lecture** | Lecture 6 — Wavefronts, Rays, and Snell's Law |
 | **Lab connection** | Lab 1 (Apr 3): Introduction to Python — students compute $V_P$, $V_S$ for different rock types |
 
+:::
+
 ---
 
-## Learning Objectives
+:::{dropdown} Learning Objectives
 
 By the end of this lecture, students will be able to:
 
@@ -82,9 +45,11 @@ By the end of this lecture, students will be able to:
 - **[LO-4.4]** *Calculate* the $V_P/V_S$ ratio from elastic moduli and interpret anomalous ratios as indicators of fluid saturation, partial melt, or lithological change.
 - **[LO-4.5]** *Compare* seismic velocities across Earth materials spanning two orders of magnitude (soft sediment to crystalline rock) and explain the physical controls on velocity.
 
+:::
+
 ---
 
-## Prerequisites
+:::{dropdown} Prerequisites
 
 Students should be comfortable with:
 - The 3D vector equation of motion $\rho\,\partial^2\mathbf{u}/\partial t^2 = (\lambda+2\mu)\,\nabla(\nabla\cdot\mathbf{u}) - \mu\,\nabla\times(\nabla\times\mathbf{u})$ and its derivation from the Cauchy equation and Hooke's law (Lecture 3, §3.6)
@@ -92,6 +57,8 @@ Students should be comfortable with:
 - The physical meaning of the two terms: $\nabla(\nabla\cdot\mathbf{u})$ as a gradient of dilatation (volumetric change) and $\nabla\times(\nabla\times\mathbf{u})$ as a measure of rotation (shear distortion) (Lecture 3, §3.6)
 - The elastic moduli $\lambda$, $\mu$, $K$, $E$, $\nu$ and their physical meaning (Lecture 3, §3.3)
 - The concept of a wavefield as a propagating pattern of stress and strain, not a flow of material (Lecture 3)
+
+:::
 
 ---
 

@@ -19,7 +19,7 @@ open_sources:
 📊 **Lecture slides** — <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_01_slides.html" target="_blank">open in new tab ↗</a>
 :::
 
-## Syllabus Alignment
+:::{dropdown} Syllabus Alignment
 
 | | |
 |---|---|
@@ -29,9 +29,11 @@ open_sources:
 | **Lab connection** | Lab 1: Introduction to Python and ObsPy — fetching a real seismogram from PNSN |
 | **Next lecture** | Lecture 2: Scales, instruments, and the logic of geophysical inference |
 
+:::
+
 ---
 
-## Learning Objectives
+:::{dropdown} Learning Objectives
 
 By the end of this lecture, students will be able to:
 
@@ -40,9 +42,13 @@ By the end of this lecture, students will be able to:
 - **[LO-4.1]** Identify the branch of physics governing a given geophysical observable and name the Earth property that observable senses.
 - **[LO-6.1]** Identify four distinct stakeholder communities that rely on geophysical knowledge and characterize what each requires from the discipline.
 
-## Prerequisites
+:::
+
+:::{dropdown} Prerequisites
 
 No technical prerequisites. Familiarity with basic SI units and with the qualitative concept of a physical wave from introductory physics is assumed.
+
+:::
 
 ---
 

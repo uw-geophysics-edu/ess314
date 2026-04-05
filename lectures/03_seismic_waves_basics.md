@@ -21,7 +21,7 @@ open_sources:
 📊 **Lecture slides** — <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_03_slides.html" target="_blank">open in new tab ↗</a>
 :::
 
-## Syllabus Alignment
+:::{dropdown} Syllabus Alignment
 
 | | |
 |---|---|
@@ -31,9 +31,11 @@ open_sources:
 | **Next lecture** | Lecture 4 — Seismic Wave Types and Ray Propagation |
 | **Lab connection** | Lab 2: Python II and Seismic Ray Tracing |
 
+:::
+
 ---
 
-## Learning Objectives
+:::{dropdown} Learning Objectives
 
 By the end of this lecture, students will be able to:
 
@@ -43,15 +45,19 @@ By the end of this lecture, students will be able to:
 - **[LO-3.4]** *Derive* the 1D equation of motion from Newton's second law applied to a continuum element, and identify $V_P = \sqrt{(\lambda+2\mu)/\rho}$ and $V_S = \sqrt{\mu/\rho}$ as wave speeds.
 - **[LO-3.5]** *Evaluate* the assumptions embedded in the linear elastic model — small strain, isotropy, homogeneity — and identify where they break down.
 
+:::
+
 ---
 
-## Prerequisites
+:::{dropdown} Prerequisites
 
 Students should be comfortable with:
 - Stress as force per unit area and strain as fractional deformation (Lecture 2)
 - Vectors and 3D Cartesian coordinates (MATH 126)
 - Newton's second law: $F = ma$ (PHYS 122/115)
 - Partial derivatives and the chain rule (MATH 124/125)
+
+:::
 
 ---
 
