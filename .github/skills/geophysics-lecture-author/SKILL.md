@@ -651,6 +651,67 @@ Key open-access resources to mine for research horizon content:
 
 ---
 
+## Student Personalization Protocol
+
+> **Private data file:** `.student_profiles.md` (repo root, gitignored — never committed).
+> Before writing or revising a slide deck, read this file to load current student interest themes.
+
+### When to personalize
+
+Apply personalization to **Marp slides only** — lecture notes (`.md`) are public and should remain
+generic. Target these slide locations:
+
+- **Slide 1 (Title slide):** No change needed.
+- **Slide 2 (Learning objectives):** No change needed.
+- **§1 Geoscientific Question / Opening hook slide:** Preferred location. Drop in a one-liner
+  connection to a student interest cluster.
+- **§9 Societal Relevance slide:** Add a parenthetical example drawn from a student interest.
+- **Concept Check (final slide):** Optionally frame one question in a context drawn from the class
+  (e.g., soccer analogy for wave energy, Cascade volcanoes for a student who hikes there).
+
+### How to personalize — rules
+
+1. **Aggregate only — never individual.** Draw from the thematic clusters in `.student_profiles.md`
+   (e.g., "several of you are interested in planetary science"), never from a single row.
+2. **One touch per slide.** A single sentence or sub-bullet. Never restructure a slide for it.
+3. **Opt-in tone.** Use phrases like "For those of you interested in…", "One connection to
+   planetary science…", "If you've hiked in the Cascades, you've seen…". Never assume everyone
+   shares the interest.
+4. **Topic-appropriate only.** Only add a connection if it is scientifically accurate and
+   meaningfully extends the slide's core concept. Skip if forced.
+5. **No personal anecdotes in public slides.** The Nisqually earthquake story (Student 16) can be
+   *invited* verbally by the instructor — do not print it on the slide. Instead, note it in a
+   `<!-- Instructor note: ... -->` HTML comment at the bottom of the relevant slide.
+
+### Personalization hooks by module (pre-computed from `.student_profiles.md`)
+
+| Module | Hook | Connection |
+|--------|------|-----------|
+| 2 — Seismic Waves | Planetary seismology | Students interested in space / other planets |
+| 3 — Subsurface Imaging | Cascadia subduction zone | Hikers/PNW students; plate tectonics interest |
+| 3 — Whole Earth | Mars/Moon seismology (InSight) | Astronomy + space students |
+| 4 — Earthquake Phenomena | Nisqually 2001 (invite verbally) | 1 student has first-hand experience |
+| 4 — Ground Motions | Cascade volcano hazard | Several students from/hiking in Cascades |
+| 5 — Gravity | Isostasy + ice sheets / glaciology | Student interested in glaciology |
+| 5 — Gravity Anomalies | Ocean floor gravity / ocean physics | Student interested in ocean physics |
+| 6 — Magnetism | Precambrian banded iron formations | Student who collects them |
+| 6 — Magnetic Field & Tectonics | Planetary magnetic fields | Space/astronomy students |
+| 7 — Heat & Geodynamics | Heat flow at mid-ocean ridges | Ocean physics interest |
+| 7 — Convergent Margins | Cascadia subduction + Seattle basin | PNW students; earthquake modeling student |
+| 7 — Synthesis | Geophysics applied to other planets | Planetary science students |
+
+### Slide deck comment template
+
+When a verbal instructor prompt is more appropriate than printed text, add at the bottom of the
+relevant slide:
+
+```markdown
+<!-- Instructor note: [specific prompt, e.g., "Ask Student who experienced Nisqually if they'd like
+to briefly describe the experience — they indicated willingness in the intake survey."] -->
+```
+
+---
+
 ## Societal Relevance Protocol
 
 The §9 Societal Relevance section must be concrete, not vague. Rules:

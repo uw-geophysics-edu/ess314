@@ -29,5 +29,8 @@ Thumbs.db
 .idea/
 .vscode/
 
+# Private student data (never push)
+.student_profiles.md
+
 # Lock file (uncomment if you want to track it)
 # pixi.lock

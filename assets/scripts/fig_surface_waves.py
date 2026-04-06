@@ -36,12 +36,11 @@ fig.subplots_adjust(wspace=0.42)
 # ═══════════════════════════════════════════════════════════════════════════
 ax = axes[0]
 ax.set_xlim(-0.2, 12.2)
-ax.set_ylim(-5, 0.8)
+ax.set_ylim(5, -0.8)   # bottom=5 (deep), top=-0.8 (above surface) → surface at top
 ax.axhline(0, color=C_SURFACE, lw=2.0)
 ax.set_title('(a) Rayleigh wave:\nRetrograde elliptical motion', fontsize=10, fontweight='bold')
 ax.set_xlabel('Horizontal distance (arbitrary units)', fontsize=9)
 ax.set_ylabel('Depth (arbitrary units)', fontsize=9)
-ax.invert_yaxis()
 
 # Propagation direction
 ax.annotate('', xy=(11.8, -0.55), xytext=(0.2, -0.55),
@@ -62,7 +61,7 @@ for i, (d, xc) in enumerate(zip(depths, x_centers)):
     # Retrograde: phase angle offset so the motion is counter-clockwise when viewed normally
     theta = np.linspace(0, 2*np.pi, 80)
     ex = xc + amp_x * np.sin(theta)      # horizontal: forward on the way up
-    ez = -d - amp_z * np.cos(theta)      # vertical: retrograde
+    ez = d + amp_z * np.cos(theta)        # vertical: retrograde (centered at +d)
     ax.plot(ex, ez, color=C_RAYLEIGH, lw=1.5, alpha=0.75)
     # Direction arrow on ellipse
     idx = 15
@@ -70,9 +69,9 @@ for i, (d, xc) in enumerate(zip(depths, x_centers)):
                 arrowprops=dict(arrowstyle='->', color=C_RAYLEIGH, lw=1.0,
                                 mutation_scale=10))
     # Depth tick
-    ax.text(-0.15, -d, f'z={d:.1f}', va='center', ha='right', fontsize=7, color='#555')
+    ax.text(-0.15, d, f'z={d:.1f}', va='center', ha='right', fontsize=7, color='#555')
 
-ax.text(0.5, -4.5, 'Amplitude → 0\nat depth ~0.4λ', fontsize=8.5,
+ax.text(0.5, 4.3, 'Amplitude → 0\nat depth ~0.4λ', fontsize=8.5,
         style='italic', color=C_DECAY)
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -89,9 +88,8 @@ ax.text(0.1, 0.4*lam - 0.2, r'$z \approx 0.4\lambda$', fontsize=9,
 ax.set_xlabel('Normalized amplitude', fontsize=9)
 ax.set_ylabel('Depth (wavelengths)', fontsize=9)
 ax.set_title('(b) Rayleigh wave\namplitude vs depth', fontsize=10, fontweight='bold')
-ax.invert_yaxis()
 ax.set_xlim(-0.05, 1.15)
-ax.set_ylim(5.2, -0.2)
+ax.set_ylim(5.2, -0.2)   # bottom=5.2 (deep), top=-0.2 (above surface) → surface at top
 ax.spines[['top', 'right']].set_visible(False)
 
 # Vr label
@@ -103,27 +101,26 @@ ax.text(0.55, 0.4, r'$V_R \approx 0.92\, V_S$', fontsize=9.5,
 # ═══════════════════════════════════════════════════════════════════════════
 ax = axes[2]
 ax.set_xlim(-0.2, 10.2)
-ax.set_ylim(-5, 1.0)
+ax.set_ylim(5, -1.0)   # bottom=5 (deep), top=-1.0 (above surface) → surface at top
 ax.set_title('(c) Love wave: SH-wave trapped\nin slow surface layer', fontsize=10, fontweight='bold')
 ax.set_xlabel('Horizontal distance (arbitrary units)', fontsize=9)
 ax.set_ylabel('Depth (arbitrary units)', fontsize=9)
-ax.invert_yaxis()
 
 # Layer boundary
 layer_depth = 2.5
 ax.axhline(0, color=C_SURFACE, lw=2.0)
-ax.axhline(-layer_depth, color=C_LOVE, lw=2.0, ls='-')
+ax.axhline(layer_depth, color=C_LOVE, lw=2.0, ls='-')
 
 # Layer fills
-ax.axhspan(-0.001, -layer_depth, alpha=0.12, color=C_LAYER, label=f'Slow layer (β₁)')
-ax.axhspan(-layer_depth, -5.2, alpha=0.12, color=C_HALFSP, label='Fast half-space (β₂ > β₁)')
+ax.axhspan(0, layer_depth, alpha=0.12, color=C_LAYER, label=f'Slow layer (β₁)')
+ax.axhspan(layer_depth, 5.2, alpha=0.12, color=C_HALFSP, label='Fast half-space (β₂ > β₁)')
 
-ax.text(8.0, -0.8, 'β₁ (slow)', fontsize=9, color=C_LAYER, fontweight='bold')
-ax.text(8.0, -3.5, 'β₂ > β₁\n(fast)', fontsize=9, color=C_HALFSP, fontweight='bold')
+ax.text(8.0, 0.8, 'β₁ (slow)', fontsize=9, color=C_LAYER, fontweight='bold')
+ax.text(8.0, 3.5, 'β₂ > β₁\n(fast)', fontsize=9, color=C_HALFSP, fontweight='bold')
 
 # SH rays bouncing inside layer by total internal reflection
 x_seg = [0.5, 2.5, 4.5, 6.5, 8.5]
-z_seg = [0.0, -layer_depth, 0.0, -layer_depth, 0.0]
+z_seg = [0.0, layer_depth, 0.0, layer_depth, 0.0]
 ax.plot(x_seg, z_seg, color=C_LOVE, lw=1.8, ls='--', zorder=5)
 # Arrows along rays
 for i in range(len(x_seg)-1):
@@ -137,11 +134,11 @@ for i in range(len(x_seg)-1):
                                 mutation_scale=12))
 
 # SH particle motion markers (into page = dot, out of page = cross)
-for xm, zm in zip([1.5, 3.5, 5.5, 7.5], [-0.8, -1.8, -0.8, -1.8]):
+for xm, zm in zip([1.5, 3.5, 5.5, 7.5], [0.8, 1.8, 0.8, 1.8]):
     ax.plot(xm, zm, 'o', ms=8, color=C_LOVE, zorder=6)   # into page
     ax.text(xm+0.15, zm, '⊙', fontsize=10, color=C_LOVE, va='center')
 
-ax.text(0.3, -2.0, 'Total internal\nreflection at\nboundary',
+ax.text(0.3, 2.0, 'Total internal\nreflection at\nboundary',
         fontsize=8, color=C_LOVE, style='italic')
 
 # Propagation direction
