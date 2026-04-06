@@ -408,6 +408,34 @@ License: CC-BY 4.0 (this script)
 # #F0E442 (yellow), #D55E00 (vermilion), #CC79A7 (pink), #000000 (black)
 ```
 
+#### Depth-Axis Convention (MANDATORY for any figure with a depth/vertical axis)
+
+Any axis representing **depth below the Earth's surface** MUST follow geophysical convention:
+- **Surface (z = 0) at the TOP** of the plot
+- **Greater depth at the BOTTOM**
+
+**Correct pattern — use positive depth values with inverted ylim:**
+```python
+ax.set_ylim(max_depth, -margin)   # e.g., ax.set_ylim(5, -0.5)
+# DO NOT call ax.invert_yaxis() — it will double-invert if ylim is already set correctly
+```
+
+**Wrong patterns to avoid:**
+```python
+# WRONG: negative depth values + invert_yaxis() → surface ends up at bottom
+ax.set_ylim(-max_depth, 0)
+ax.invert_yaxis()   # ← this inverts the already-wrong axis, putting surface at bottom
+
+# WRONG: positive values but no inversion → default matplotlib has y increasing upward
+ax.set_ylim(0, max_depth)   # surface at bottom, deep at top
+```
+
+**Audit rule:** When reviewing or creating any `assets/scripts/fig_*.py`, check every axis that
+represents depth. If negative coordinates + `invert_yaxis()` are used (the common bug), convert
+to positive depth values with `set_ylim(max_depth, -margin)` and remove `invert_yaxis()`.
+
+---
+
 Cite in figure directive:
 ```markdown
 :::{figure} ../../assets/figures/fig_DESCRIPTION.png

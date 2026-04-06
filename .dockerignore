@@ -1,0 +1,48 @@
+# ── Docker build context exclusions for ESS 314 ─────────────────────────────
+# Only notebooks/ and assets/figures/ are copied into the image (see Dockerfile).
+# Everything else is excluded to keep the build context small and fast.
+
+# Build outputs
+_build/
+website/
+
+# Compiled slides (not needed inside the container)
+slides/*.html
+slides/*.pdf
+
+# Pixi / conda environment (resolved at local dev time, not in Docker)
+.pixi/
+pixi.lock
+
+# Node (Marp is a dev/CI concern, not a student lab dependency)
+node_modules/
+
+# Git history
+.git/
+.github/
+
+# Private student data (never ship into image)
+.student_profiles.md
+
+# Python bytecode
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+
+# OS artifacts
+.DS_Store
+**/.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
+*.swo
+
+# Lecture source (not needed inside the container)
+lectures/
+discussions/
+career/
+ai_skills/
+_static/
+assets/scripts/

@@ -1,0 +1,28 @@
+# ── ESS 314 Geophysics — docker-compose.yml ──────────────────────────────────
+#
+# Usage:
+#   docker compose up
+#   Open http://localhost:8888 → enter token: ess314
+#
+# Student work saved to ./student-work/ (created automatically on first run).
+# Notebooks embedded in the image at /home/jovyan/work/notebooks/ are read-only;
+# students should copy notebooks into /home/jovyan/work/my-work/ to edit them.
+#
+# ⚠️  JUPYTER_TOKEN=ess314 is for classroom convenience only.
+#     Change it (or set JUPYTER_TOKEN to a strong random value) for any
+#     deployment on a shared or Internet-accessible host.
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+  jupyterlab:
+    image: ghcr.io/marinedenolle/ess314:latest
+    # Uncomment to build locally instead of pulling:
+    # build: .
+    ports:
+      - "8888:8888"
+    environment:
+      JUPYTER_TOKEN: "ess314"
+    volumes:
+      # Persists student edits on the host machine
+      - ./student-work:/home/jovyan/work/my-work
+    restart: unless-stopped

@@ -1,6 +1,8 @@
 # ESS 314: Introduction to Geophysics
 
 [![Deploy Jupyter Book](https://github.com/uw-geophysics-edu/ess314/actions/workflows/deploy-book.yml/badge.svg)](https://github.com/uw-geophysics-edu/ess314/actions/workflows/deploy-book.yml)
+[![Docker Image](https://github.com/marinedenolle/ess314/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/marinedenolle/ess314/actions/workflows/docker-publish.yml)
+[![Docker Pulls](https://ghcr-badge.egpl.dev/marinedenolle/ess314/latest_tag?trim=major&label=ghcr.io)](https://github.com/marinedenolle/ess314/pkgs/container/ess314)
 
 Computational labs and lecture notes for ESS 314 Introduction to Geophysics at the University of Washington by Marine Denolle.
 
@@ -9,12 +11,17 @@ Computational labs and lecture notes for ESS 314 Introduction to Geophysics at t
 ## Quick Start
 
 ```bash
-# Option 1: Pixi (preferred)
+# Option 1: Docker (no install required — recommended for UW IT managed machines)
+docker compose up
+# Open http://localhost:8888  →  token: ess314
+# Save your work in the my-work/ folder inside JupyterLab (persisted to ./student-work/ on your machine)
+
+# Option 2: Pixi (preferred for development)
 pixi install
 pixi run install-marp   # one-time: installs @marp-team/marp-cli globally
 pixi run lab
 
-# Option 2: Conda
+# Option 3: Conda
 conda env create -f environment.yml
 conda activate ess314
 npm install -g @marp-team/marp-cli   # one-time
@@ -22,6 +29,48 @@ jupyter lab
 ```
 
 Each notebook includes a **Colab badge** — click it to run in Google Colab with no local setup.
+
+## Run with Docker
+
+The course ships a pre-built JupyterLab image containing all 8 lab notebooks and course figures.
+
+### Pull and run (UW IT / managed machines)
+
+```bash
+# Pull the latest image
+docker pull ghcr.io/marinedenolle/ess314:latest
+
+# Run — token printed to stdout, open the URL it shows
+docker run -p 8888:8888 ghcr.io/marinedenolle/ess314:latest
+```
+
+### Run with persistent student work (recommended)
+
+```bash
+docker compose up
+```
+
+Open [http://localhost:8888](http://localhost:8888) and enter token **`ess314`**.
+
+Copy the lab notebooks from `notebooks/` into the `my-work/` folder before editing — this folder
+is mounted to `./student-work/` on your machine so your work survives container restarts.
+
+> **⚠️ Saving work:** Files edited directly in `notebooks/` inside the container are lost when it
+> stops. Always work in `my-work/`.
+
+### Image details
+
+| Item | Value |
+|------|-------|
+| Registry | `ghcr.io/marinedenolle/ess314:latest` |
+| Base image | `quay.io/jupyter/scipy-notebook:python-3.11` |
+| Included | `notebooks/` (Labs 1–8), `assets/figures/` |
+| Port | 8888 |
+| Rebuilt | Automatically on every push to `main` via GitHub Actions |
+
+> **Note for UW IT:** The image is public on GitHub Container Registry. No authentication is
+> needed to pull it. To make the image public after the first CI push, go to
+> `github.com/marinedenolle/ess314/packages` → Package settings → Change visibility to Public.
 
 > **Pre-commit hooks** (enforced on commit): set them up once with
 > `pixi run -e dev -- pre-commit install`
