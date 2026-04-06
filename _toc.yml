@@ -16,35 +16,35 @@ parts:
       - file: lectures/01_intro_course
         title: "What is Geophysics?"
       - file: lectures/02_what_is_geophysics
-        title: ""
+        title: "Geophysical Methods"
 
   - caption: "Module 2 — Seismic Waves, Refraction, and Reflection"
     chapters:
       - file: lectures/03_seismic_waves_basics
-        title: "Seismic Waves — The Basics"
+        title: "Seismic Wave Basics"
       - file: lectures/04_seismic_wave_types
         title: "Seismic Wave Types"
       - file: lectures/05_wavefronts_rays
-        title: "Wavefronts, Rays, and Snell's Law"
+        title: "Wavefronts & Ray Theory"
       - file: lectures/05_snells_law
-        title: "Snell's Law & Waves at Boundaries"
+        title: "Snell's Law"
 
   - caption: "Module 3 — Subsurface Imaging"
     chapters:
       - file: lectures/06_seismic_refraction_I
-        title: "Seismic Refraction I"
+        title: "Refraction I"
       - file: lectures/07_seismic_refraction_II
-        title: "Seismic Refraction II"
+        title: "Refraction II"
       - file: lectures/08_intro_reflection
-        title: "Introduction to Seismic Reflection"
+        title: "Intro to Reflection"
       - file: lectures/09_seismic_reflections_I
-        title: "Seismic Reflections I"
+        title: "Reflections I"
       - file: lectures/10_seismic_reflections_II
-        title: "Seismic Reflections II"
+        title: "Reflections II"
       - file: lectures/11_whole_earth_I
-        title: "Whole Earth Structure I"
+        title: "Whole Earth I"
       - file: lectures/12_whole_earth_II
-        title: "Whole Earth Structure II"
+        title: "Whole Earth II"
       - file: lectures/13_seismic_tomography
         title: "Seismic Tomography"
 
@@ -55,7 +55,7 @@ parts:
       - file: lectures/15_earthquake_phenomena_II
         title: "Earthquake Phenomena II"
       - file: lectures/16_ground_motions
-        title: "Ground Motions, Intensities, and Building Damage"
+        title: "Ground Motions"
       - file: lectures/17_tsunami
         title: "Tsunami"
 
@@ -64,33 +64,33 @@ parts:
       - file: lectures/18_earths_gravity
         title: "Earth's Gravity"
       - file: lectures/19_gravity_isostasy
-        title: "Gravity II — Isostasy"
+        title: "Isostasy"
       - file: lectures/20_gravity_anomalies_I
-        title: "Using Gravity to Detect Anomalies I"
+        title: "Gravity Anomalies I"
       - file: lectures/21_gravity_anomalies_II
-        title: "Using Gravity to Detect Anomalies II"
+        title: "Gravity Anomalies II"
 
   - caption: "Module 6 — Magnetism"
     chapters:
       - file: lectures/22_density_lithosphere
-        title: "Density, Isostasy, and the Lithosphere"
+        title: "Density & Lithosphere"
       - file: lectures/23_earth_magnetism
-        title: "Earth Magnetism & Mineral Magnetism"
+        title: "Earth Magnetism"
       - file: lectures/24_magnetic_field_tectonics
-        title: "The Magnetic Field, Magnetism, and Tectonic Plates"
+        title: "Magnetism & Tectonics"
 
   - caption: "Module 7 — Geodynamics and Tectonics: A Synthesis"
     chapters:
       - file: lectures/25_heat_geodynamics
-        title: "Heat in the Earth and Geodynamics"
+        title: "Heat & Geodynamics"
       - file: lectures/26_divergent_margins
-        title: "Divergent Margins and Mid-Ocean Ridges"
+        title: "Divergent Margins"
       - file: lectures/27_convergent_margins
-        title: "Convergent Margins, Subduction, and Seismotectonics"
+        title: "Convergent Margins"
       - file: lectures/28_transform_intraplate
-        title: "Transform Faults and Intraplate Processes"
+        title: "Transform & Intraplate"
       - file: lectures/29_synthesis
-        title: "Putting It Together: Geophysics as a Tool"
+        title: "Synthesis"
 
   - caption: "Labs"
     chapters:
