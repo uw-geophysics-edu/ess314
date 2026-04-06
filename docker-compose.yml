@@ -15,7 +15,7 @@
 
 services:
   jupyterlab:
-    image: ghcr.io/marinedenolle/ess314:latest
+    image: ghcr.io/uw-geophysics-edu/ess314:latest
     # Uncomment to build locally instead of pulling:
     # build: .
     ports:

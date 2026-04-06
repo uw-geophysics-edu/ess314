@@ -1,8 +1,8 @@
 # ESS 314: Introduction to Geophysics
 
 [![Deploy Jupyter Book](https://github.com/uw-geophysics-edu/ess314/actions/workflows/deploy-book.yml/badge.svg)](https://github.com/uw-geophysics-edu/ess314/actions/workflows/deploy-book.yml)
-[![Docker Image](https://github.com/marinedenolle/ess314/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/marinedenolle/ess314/actions/workflows/docker-publish.yml)
-[![Docker Pulls](https://ghcr-badge.egpl.dev/marinedenolle/ess314/latest_tag?trim=major&label=ghcr.io)](https://github.com/marinedenolle/ess314/pkgs/container/ess314)
+[![Docker Image](https://github.com/uw-geophysics-edu/ess314/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/uw-geophysics-edu/ess314/actions/workflows/docker-publish.yml)
+[![Docker Pulls](https://ghcr-badge.egpl.dev/uw-geophysics-edu/ess314/latest_tag?trim=major&label=ghcr.io)](https://github.com/uw-geophysics-edu/ess314/pkgs/container/ess314)
 
 Computational labs and lecture notes for ESS 314 Introduction to Geophysics at the University of Washington by Marine Denolle.
 
@@ -38,10 +38,10 @@ The course ships a pre-built JupyterLab image containing all 8 lab notebooks and
 
 ```bash
 # Pull the latest image
-docker pull ghcr.io/marinedenolle/ess314:latest
+docker pull ghcr.io/uw-geophysics-edu/ess314:latest
 
 # Run — token printed to stdout, open the URL it shows
-docker run -p 8888:8888 ghcr.io/marinedenolle/ess314:latest
+docker run -p 8888:8888 ghcr.io/uw-geophysics-edu/ess314:latest
 ```
 
 ### Run with persistent student work (recommended)
@@ -62,7 +62,7 @@ is mounted to `./student-work/` on your machine so your work survives container 
 
 | Item | Value |
 |------|-------|
-| Registry | `ghcr.io/marinedenolle/ess314:latest` |
+| Registry | `ghcr.io/uw-geophysics-edu/ess314:latest` |
 | Base image | `quay.io/jupyter/scipy-notebook:python-3.11` |
 | Included | `notebooks/` (Labs 1–8), `assets/figures/` |
 | Port | 8888 |
@@ -70,7 +70,7 @@ is mounted to `./student-work/` on your machine so your work survives container 
 
 > **Note for UW IT:** The image is public on GitHub Container Registry. No authentication is
 > needed to pull it. To make the image public after the first CI push, go to
-> `github.com/marinedenolle/ess314/packages` → Package settings → Change visibility to Public.
+> `github.com/uw-geophysics-edu/ess314/packages` → Package settings → Change visibility to Public.
 
 > **Pre-commit hooks** (enforced on commit): set them up once with
 > `pixi run -e dev -- pre-commit install`

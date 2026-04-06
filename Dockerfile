@@ -15,7 +15,7 @@
 #   docker compose up          # see docker-compose.yml
 #
 # Published image:
-#   ghcr.io/marinedenolle/ess314:latest
+#   ghcr.io/uw-geophysics-edu/ess314:latest
 # ────────────────────────────────────────────────────────────────────────────
 
 FROM quay.io/jupyter/scipy-notebook:python-3.11
@@ -23,7 +23,7 @@ FROM quay.io/jupyter/scipy-notebook:python-3.11
 LABEL org.opencontainers.image.title="ESS 314 Geophysics — Student Labs"
 LABEL org.opencontainers.image.description="JupyterLab environment for ESS 314 at UW. Contains all 8 lab notebooks and course figures."
 LABEL org.opencontainers.image.authors="Marine Denolle <marinedenolle@uw.edu>"
-LABEL org.opencontainers.image.source="https://github.com/marinedenolle/ess314"
+LABEL org.opencontainers.image.source="https://github.com/uw-geophysics-edu/ess314"
 LABEL org.opencontainers.image.licenses="MIT"
 
 # ── Copy course content ──────────────────────────────────────────────────────
