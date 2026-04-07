@@ -25,9 +25,7 @@ parts:
       - file: lectures/04_seismic_wave_types
         title: "Seismic Wave Types"
       - file: lectures/05_wavefronts_rays
-        title: "Wavefronts & Ray Theory"
-      - file: lectures/05_snells_law
-        title: "Snell's Law"
+        title: "Wavefronts, Rays, and Snell's Law"
 
   - caption: "Module 3 — Subsurface Imaging"
     chapters:

@@ -1,32 +1,10 @@
 ---
 marp: true
 theme: ess314
+size: 16:9
+html: true
 paginate: true
 math: katex
-style: |
-  .callout {
-    background: #eaf4fb;
-    border-left: 5px solid #0072B2;
-    padding: 10px 16px;
-    border-radius: 4px;
-    font-size: 0.88em;
-    margin: 8px 0;
-  }
-  .key-eq {
-    background: #d4edda;
-    border-left: 5px solid #009E73;
-    padding: 10px 16px;
-    border-radius: 4px;
-    font-size: 0.92em;
-    margin: 8px 0;
-  }
-  .warning {
-    background: #fff3cd;
-    border-left: 5px solid #E69F00;
-    padding: 10px 16px;
-    border-radius: 4px;
-    font-size: 0.88em;
-  }
 ---
 
 <!-- _class: title -->

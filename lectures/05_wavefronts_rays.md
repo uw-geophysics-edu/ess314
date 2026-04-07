@@ -2,7 +2,7 @@
 title: "Wavefronts, Rays, and Snell's Law"
 week: 2
 lecture: 5
-date: "2026-04-06"
+date: "2026-04-14"
 topic: "Wave propagation in heterogeneous media, the wavefront-ray duality, Huygens' principle, the geometric and variational derivations of Snell's law, the ray parameter, and Fermat's principle of least time"
 course_lo: ["LO-1", "LO-2", "LO-3"]
 learning_outcomes: ["LO-OUT-A", "LO-OUT-B", "LO-OUT-C"]

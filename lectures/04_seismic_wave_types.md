@@ -2,7 +2,7 @@
 title: "Seismic Wave Types"
 week: 1
 lecture: 4
-date: "2026-04-02"
+date: "2026-04-09"
 topic: "Body waves (P, S) and surface waves (Rayleigh, Love): particle motion geometry, polarization, wave speeds, the V_P/V_S ratio as a geological diagnostic, and seismic velocities of Earth materials"
 course_lo: ["LO-1", "LO-2", "LO-4"]
 learning_outcomes: ["LO-OUT-B", "LO-OUT-C", "LO-OUT-H"]

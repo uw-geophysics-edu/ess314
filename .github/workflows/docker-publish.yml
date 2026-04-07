@@ -40,6 +40,9 @@ jobs:
             type=sha,prefix=sha-
             type=ref,event=branch
 
+      - name: Set up QEMU (for cross-platform builds)
+        uses: docker/setup-qemu-action@v3
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -47,9 +50,9 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          # Cache layers between runs to speed up repeated builds
           cache-from: type=gha
           cache-to: type=gha,mode=max

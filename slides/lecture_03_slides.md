@@ -4,7 +4,7 @@ theme: ess314
 size: 16:9
 html: true
 paginate: true
-math: mathjax
+math: katex
 ---
 
 <!-- _class: title-slide -->
