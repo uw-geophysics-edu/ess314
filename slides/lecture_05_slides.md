@@ -192,7 +192,7 @@ Snell's law — from calculus, not geometry.
 | **Huygens** | Wavefront geometry at interface | Physical intuition — "see" the bending |
 | **Fermat** | Minimize travel time via $dT/dx = 0$ | Generalizes to curves, gradients, 3D |
 
-Both yield $p = \sin\theta/V = $ constant.
+Both yield $p = \sin\theta/V = \text{constant}$.
 
 The ray parameter $p$ is the **fundamental invariant** of ray theory.
 

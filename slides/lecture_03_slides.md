@@ -81,7 +81,9 @@ Fault zones, magma chambers, and the deep Earth are exceptions.
 - → S-waves
 
 <div class="warning">
-Fluids: μ = 0 → no resistance to shear → S-waves CANNOT travel in fluids
+
+Fluids: $\mu = 0$ → no resistance to shear → S-waves CANNOT travel in fluids
+
 </div>
 
 ---
@@ -224,8 +226,10 @@ Since $\lambda \geq 0$: $\lambda + 2\mu > \mu$ → **$V_P > V_S$ always**
 *Units:* $\sqrt{\text{Pa}/(\text{kg/m}^3)} = \sqrt{(\text{kg/m·s}^2)/(\text{kg/m}^3)} = \text{m/s}$ ✓
 
 <div class="callout">
+
 Stiffer rock → faster waves. Denser rock → slower waves.
 Their ratio sets the speed — not either quantity alone.
+
 </div>
 
 ---
@@ -265,8 +269,10 @@ As $\nu \to 0.5$ (fluid saturation): $V_P/V_S \to \infty$
 - → water-saturated sediment
 
 <div class="callout">
-High V_P/V_S = fluid. Low V_P/V_S = dry rock or gas sand.
+
+High $V_P/V_S$ = fluid. Low $V_P/V_S$ = dry rock or gas sand.
 This is the single most useful seismic diagnostic in exploration and hazard.
+
 </div>
 
 ---

@@ -71,7 +71,9 @@ $$\frac{\partial^2\phi}{\partial t^2} = V_P^2\,\nabla^2\phi
 \frac{\partial^2\boldsymbol{\psi}}{\partial t^2} = V_S^2\,\nabla^2\boldsymbol{\psi}$$
 
 <div class="callout">
-The wave equation <em>must</em> produce exactly two body-wave families — elastic deformation has exactly two independent modes: <strong>volume change</strong> (P) and <strong>shape change</strong> (S).
+
+The wave equation *must* produce exactly two body-wave families — elastic deformation has exactly two independent modes: **volume change** (P) and **shape change** (S).
+
 </div>
 
 ---
@@ -87,7 +89,9 @@ Exists in **solids and fluids** — fastest seismic arrival
 $$V_P = \sqrt{\frac{\lambda + 2\mu}{\rho}} = \sqrt{\frac{K + \tfrac{4}{3}\mu}{\rho}}$$
 
 <div class="callout">
-Think: a slinky pushed end-to-end. The compression pulse travels forward while individual coils oscillate back-and-forth <em>along</em> the slinky's axis.
+
+Think: a slinky pushed end-to-end. The compression pulse travels forward while individual coils oscillate back-and-forth *along* the slinky's axis.
+
 </div>
 
 ---
@@ -141,12 +145,12 @@ The physical argument:
 3. No shear restoring force → no transverse oscillation propagates
 
 <div class="warning">
+
 Consequences in this course:
-<ul>
-  <li>S-wave <strong>shadow zone</strong> → liquid outer core (Lectures 17–18)</li>
-  <li>For those interested in ocean physics: ocean basins are <strong>transparent to P-waves</strong> (hydroacoustic <em>T</em>-phases) but <strong>opaque to S</strong></li>
-  <li>High $V_P/V_S$ in saturated sediments → direct fluid detection</li>
-</ul>
+- S-wave **shadow zone** → liquid outer core (Lectures 17–18)
+- For those interested in ocean physics: ocean basins are **transparent to P-waves** (hydroacoustic *T*-phases) but **opaque to S**
+- High $V_P/V_S$ in saturated sediments → direct fluid detection
+
 </div>
 
 ---
@@ -182,8 +186,11 @@ Love waves require a **slow layer over a faster half-space** ($V_{S2} > V_{S1}$)
 3. Result: a trapped guided wave with purely horizontal SH particle motion
 
 <div class="callout">
-A homogeneous half-space has Rayleigh but <em>not</em> Love waves — observing Love waves requires a layered Earth.<br><br>
+
+A homogeneous half-space has Rayleigh but *not* Love waves — observing Love waves requires a layered Earth.
+
 For those interested in planetary science: NASA's InSight used surface wave dispersion from marsquakes to map the Martian crustal layering.
+
 </div>
 
 ---
@@ -207,9 +214,11 @@ $$\frac{V_P}{V_S} = \sqrt{\frac{\lambda+2\mu}{\mu}} = \sqrt{\frac{2(1-\nu)}{1-2\
 | Perfect fluid | 0.50 | $\infty$ |
 
 <div class="callout">
-<strong>High</strong> $V_P/V_S$ → fluid saturation, magma, high pore pressure<br>
-<strong>Low</strong> $V_P/V_S$ → gas sand, dry fractured rock<br>
-<em>Seattle example:</em> Duwamish Valley $V_P/V_S = 7.95$ (water-saturated alluvium) — why Pioneer Square shakes harder than Capitol Hill.
+
+**High** $V_P/V_S$ → fluid saturation, magma, high pore pressure
+**Low** $V_P/V_S$ → gas sand, dry fractured rock
+*Seattle example:* Duwamish Valley $V_P/V_S = 7.95$ (water-saturated alluvium) — why Pioneer Square shakes harder than Capitol Hill.
+
 </div>
 
 ---
@@ -220,9 +229,7 @@ P and S travel the same distance $d$ at speeds $V_P > V_S$:
 
 <div class="key-eq">
 
-$$\Delta t_{SP} = t_S - t_P = d\!\left(\frac{1}{V_S} - \frac{1}{V_P}\right)
-\qquad\Rightarrow\qquad
-d = \frac{\Delta t_{SP}}{\dfrac{1}{V_S} - \dfrac{1}{V_P}}$$
+$$\Delta t_{SP} = t_S - t_P = d\!\left(\frac{1}{V_S} - \frac{1}{V_P}\right) \qquad\Rightarrow\qquad d = \frac{\Delta t_{SP}}{\dfrac{1}{V_S} - \dfrac{1}{V_P}}$$
 
 </div>
 
@@ -252,8 +259,10 @@ Seattle → Portland ≈ 280 km — consistent with a Cascades or Willamette Val
 | **Horizontal N–S, E–W** | S-wave (transverse); Love wave (horizontal SH); Rayleigh wave (horizontal ellipse component) |
 
 <div class="callout">
-A Love wave has <em>no vertical component</em> — a vertical-only seismometer misses it entirely.<br>
+
+A Love wave has *no vertical component* — a vertical-only seismometer misses it entirely.
 This is why three-component instruments are essential for full wave-type identification.
+
 </div>
 
 ---
@@ -307,7 +316,9 @@ Deep learning models (PhaseNet, EQTransformer) pick P and S arrivals because of 
 - Does it give overconfident velocities without acknowledging regional variability? ← flag this
 
 <div class="warning">
+
 AI passes the formula test easily. The harder test is physical reasoning — not algebra.
+
 </div>
 
 ---
