@@ -3,6 +3,7 @@ marp: true
 theme: ess314
 paginate: true
 math: katex
+html: true
 ---
 
 <!-- _class: title -->
@@ -134,9 +135,9 @@ Between these two offsets the head wave exists but arrives **after** the direct 
 
 # How the T(x) diagram is built
 
-![Two-panel final frame of the refraction wavefield animation. Top panel: T-x travel-time diagram with 18 geophone picks. Blue circles at near offsets follow the steep direct-wave branch. Head-wave picks at far offsets are coloured by a plasma colormap: purple for the smallest head-wave offsets, grading to yellow at the largest. The colour encodes the interface lag time — how long the wavefront spent traveling along the V_2 interface before generating the upgoing ray. The same plasma colorscale applies to both panels. Bottom panel: two-layer cross-section with all 18 cumulative ray paths visible. Near-offset direct-wave rays are thin blue lines at the surface. Each head-wave ray path has a blue downgoing segment to the interface, a horizontal interface segment coloured by plasma lag time, and an orange upgoing segment returning to the surface. Earlier rays are faded to gray; the most recent ray is drawn at full weight.](../assets/figures/fig_refraction_wavefield_frame_final.png)
+<img src="../assets/figures/fig_refraction_wavefield_animation.gif" alt="Animated refraction wavefield: geophone picks appear one by one on the T-x diagram as ray paths accumulate in the subsurface cross-section. Near-offset picks follow the direct-wave branch; far-offset picks follow the head-wave branch. Plasma color encodes interface lag time." width="90%">
 
-The **plasma color** = interface lag time. Same scale in both panels. *(Full GIF: `assets/figures/fig_refraction_wavefield_animation.gif`)*
+The **plasma color** = interface lag time. Same scale in both panels.
 
 ---
 

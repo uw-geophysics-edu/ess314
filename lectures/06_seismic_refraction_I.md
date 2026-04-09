@@ -233,12 +233,12 @@ For $x < x_\text{crit}$, head-wave arrivals are geometrically impossible — the
 
 A concrete way to understand the T(x) diagram is to watch it being constructed geophone by geophone as the wavefield propagates. At each receiver the first-arriving energy is recorded, and together these picks define the two linear branches.
 
-:::{figure} ../assets/figures/fig_refraction_wavefield_frame_final.png
+:::{figure} ../assets/figures/fig_refraction_wavefield_animation.gif
 :name: fig-refraction-animation-lec6
-:alt: Final frame of refraction wavefield animation. Top panel shows the T-x diagram with 18 geophone picks: near-offset picks in blue follow the direct-wave branch, far-offset picks in orange follow the head-wave branch. Bottom panel shows the subsurface cross-section with the ray path to the most distant geophone highlighted.
+:alt: Animated refraction wavefield: geophone picks appear one by one on the T-x diagram as ray paths accumulate in the subsurface cross-section. Near-offset picks follow the direct-wave branch; far-offset picks follow the head-wave branch. Plasma color encodes interface lag time.
 :width: 90%
 
-**Figure 6.4.** Final frame of the refraction wavefield animation — all 18 geophone picks have been recorded. The animated GIF (assets/figures/fig_refraction_wavefield_animation.gif) shows the frame-by-frame buildup, one geophone at a time. [Python-generated. Script: assets/scripts/fig_refraction_wavefield_animation.py]
+**Figure 6.4.** Animated construction of the T(x) diagram — geophone picks appear one by one as ray paths accumulate. Near-offset picks (blue) follow the direct-wave branch; far-offset picks (plasma colors) follow the head-wave branch. The plasma color encodes the interface lag time. [Python-generated. Script: `assets/scripts/fig_refraction_wavefield_animation.py`]
 :::
 
 ### 3.7 The Crossover Distance
