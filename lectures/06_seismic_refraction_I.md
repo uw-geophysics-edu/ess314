@@ -346,25 +346,25 @@ A 13-geophone survey uses a sledgehammer source with receivers at 5–38 m spaci
 
 The "knee" in the first-arrival trend — the point where the steep direct-wave branch transitions to the shallower head-wave branch — occurs at the crossover distance \text{cross}$. In this model:
 
-9
+$
 x_\text{cross} = 2 \times 5.0\sqrt{\frac{1500 + 350}{1500 - 350}} = 10\sqrt{\frac{1850}{1150}} \approx 12.7 \text{ m}
-9
+$
 
 The intercept time read from the far-offset line extrapolated to  = 0$:
 
-9
+$
 t_i = \frac{2 \times 5.0 \times \cos\theta_c}{350}, \quad \theta_c = \arcsin(350/1500) = 13.5°
-9
+$
 
-9
+$
 t_i = \frac{10 \times 0.972}{350} = 0.0278 \text{ s} = 27.8 \text{ ms}
-9
+$
 
 The depth to the water table:
 
-9
+$
 H = \frac{t_i V_1 V_2}{2\sqrt{V_2^2 - V_1^2}} = \frac{0.0278 \times 350 \times 1500}{2\sqrt{1500^2 - 350^2}} = \frac{14595}{2 \times 1459} = 5.0 \text{ m}
-9
+$
 
 The inversion recovers the true layer depth exactly, as expected for noise-free synthetic data. Real field data introduces scatter in the picks (due to near-surface heterogeneity, instrument noise, and imperfect source coupling), so $ is estimated by least-squares line fitting rather than graphical reading.
 
