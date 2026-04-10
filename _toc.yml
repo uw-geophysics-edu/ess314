@@ -92,21 +92,21 @@ parts:
 
   - caption: "Labs"
     chapters:
-      - file: notebooks/Lab1-Intro-Python
+      - file: notebooks/Lab1/Lab1-Intro-Python
         title: "Lab 1: Introduction to Python"
-      - file: notebooks/Lab2-Python-Ray-Tracing
-        title: "Lab 2: Python II & Seismic Ray Tracing"
-      - file: notebooks/Lab3-Refraction
-        title: "Lab 3: Refraction"
-      - file: notebooks/Lab4-Reflection
-        title: "Lab 4: Reflection"
-      - file: notebooks/Lab5-Earthquake-Location
-        title: "Lab 5: Earthquake Location"
-      - file: notebooks/Lab6-AI-Literacy
-        title: "Lab 6: AI Literacy"
-      - file: notebooks/Lab7-Gravity
-        title: "Lab 7: Gravity"
-      - file: notebooks/Lab8-Magnetics
+      # - file: notebooks/Lab2-Python-Ray-Tracing
+        # title: "Lab 2: Python II & Seismic Ray Tracing"
+      # - file: notebooks/Lab3-Refraction
+        # title: "Lab 3: Refraction"
+      # - file: notebooks/Lab4-Reflection
+        # title: "Lab 4: Reflection"
+      # - file: notebooks/Lab5-Earthquake-Location
+        # title: "Lab 5: Earthquake Location"
+      # - file: notebooks/Lab6-AI-Literacy
+        # title: "Lab 6: AI Literacy"
+      # - file: notebooks/Lab7-Gravity
+        # title: "Lab 7: Gravity"
+      # - file: notebooks/Lab8-Magnetics
         title: "Lab 8: Magnetics"
 
   - caption: "Career Prospects & Skills"
