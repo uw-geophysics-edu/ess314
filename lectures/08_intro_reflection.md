@@ -12,7 +12,7 @@ open_sources:
   - "Yilmaz 2001 Seismic Data Analysis Ch. 1–2 (open excerpt via SEG)"
 ---
 
-# Introduction to Seismic Reflection: Flat-Layer Travel Time, NMO, and CMP Stacking
+# Seismic Reflections I: Flat-Layer Travel Time, NMO, and CMP Stacking
 
 :::{seealso}
 📊 **Lecture slides** — <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_08_slides.html" target="_blank">open in new tab ↗</a>

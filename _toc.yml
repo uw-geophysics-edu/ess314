@@ -34,9 +34,9 @@ parts:
       - file: lectures/07_seismic_refraction_II
         title: "Refraction II"
       - file: lectures/08_intro_reflection
-        title: "Intro to Reflection"
-      - file: lectures/09_seismic_reflections_I
         title: "Reflections I"
+      - file: lectures/09_seismic_reflections_I
+        title: "Reflections II"
       - file: lectures/10_seismic_reflections_II
         title: "Reflections II"
       - file: lectures/11_whole_earth_I

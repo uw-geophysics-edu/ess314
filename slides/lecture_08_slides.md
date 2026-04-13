@@ -17,7 +17,7 @@ style: |
 
 <!-- _class: title -->
 
-# Introduction to Seismic Reflection
+# Seismic Reflections I
 ## Flat-Layer Travel Time, NMO, and CMP Stacking
 
 ### ESS 314 Geophysics · University of Washington
@@ -40,20 +40,20 @@ style: |
 
 # Motivation: Why Reflection Surveys?
 
-<div class="pnw">Refraction surveys: image only shallow layers; limited by the critical angle and source-receiver distance. Reflection surveys: image at any depth — sedimentary cover to the Moho.</div>
+![h:370px alt text: Two-panel figure. Panel A shows a cross-section with a source star, four triangle receivers, a flat reflector at depth, and two-way ray paths. Panel B shows the corresponding travel-time hyperbola with t0 label and asymptote](../assets/figures/fig_reflection_geometry.png)
 
-Key advantage: **redundancy**. Many source-receiver pairs share the same midpoint → CMP stacking boosts SNR.
-
-- Cascadia subduction: OBS and multichannel reflection profiles resolve the accretionary wedge geometry, décollement depth, fluid pathways
-- Seattle fault zone: reflection lines image fault geometry at shallow depth, informing M7+ hazard models
+<div class="pnw" style="font-size:0.82em">Unlike refraction, reflection surveys image at <strong>any depth</strong> — shallow sediment to Moho. Each colour = one source–receiver pair; all sample the same reflector.</div>
 
 ---
 
 # Acoustic Impedance and Reflection Coefficient
 
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2em;align-items:center">
+<div>
+
 **Acoustic impedance:** $Z = \rho\, V_P$
 
-At normal incidence, boundary conditions (continuity of pressure and particle velocity) give:
+At normal incidence:
 
 <div class="keq">
 
@@ -63,55 +63,58 @@ $$R = \frac{Z_2 - Z_1}{Z_2 + Z_1} \qquad T = \frac{2Z_2}{Z_1 + Z_2}$$
 
 **Energy fractions:** $\mathcal{R} = R^2$, $\mathcal{T} = 1 - R^2$
 
-Typical crustal interface: $|R| = 0.01$–$0.15$. **Only 1–2% of energy is reflected** at most sedimentary contacts → stacking is essential.
+<div class="warn" style="font-size:0.82em">Typical $|R| = 0.01$–$0.15$ → only 1–2% reflected at most interfaces. <strong>Stacking is essential.</strong></div>
+
+</div>
+<div>
+
+![h:420px alt text: Four-panel impedance-to-synthetic figure showing layer impedance stack, reflectivity spike series, Ricker wavelet, and synthetic seismogram](../assets/figures/fig_impedance_synthetic.png)
+
+</div>
+</div>
 
 ---
 
-# The Convolutional Model
+# From Impedance to Seismogram: The Convolutional Model
 
-The seismogram is a convolution of the **source wavelet** $w(t)$ with the **reflectivity** $r(t)$:
+![h:390px alt text: Four-panel figure: (A) coloured impedance depth profile with layer labels; (B) reflectivity spikes with signed R values; (C) 30 Hz Ricker source wavelet; (D) synthetic seismogram as wiggle trace with blue/red fill](../assets/figures/fig_impedance_synthetic.png)
 
-$$d(t) = w(t) * r(t) = \sum_i R_i\, w(t - t_{0,i}), \qquad t_{0,i} = \frac{2z_i}{V_i}$$
-
-- High $|R|$ interface → strong reflector on section
-- **Polarity** of $R$ encodes velocity/density jump direction:
-  - $Z_2 > Z_1$ → $R > 0$ (peak)
-  - $Z_2 < Z_1$ → $R < 0$ (trough)
+<div class="keq" style="font-size:0.85em">$d(t) = w(t) * r(t)$ &nbsp;→&nbsp; each reflector prints a copy of the wavelet, scaled by $R$ and shifted to its TWTT. Blue = positive $R$ (impedance increase); red = negative $R$.</div>
 
 ---
 
 # Acquisition: CMP Gather
 
-**Shot gather**: all receivers from one source. **CMP gather**: all source–receiver pairs with same midpoint $x_m$.
+![h:375px alt text: Two-panel figure. Panel A shows a cross-section with five source-receiver pairs of different offsets all reflecting from the same point on a flat reflector. Panel B shows the resulting CMP gather of wiggle traces and the reflection hyperbola.](../assets/figures/fig_cmp_gather.png)
 
-For a **flat horizontal** reflector, every trace in the CMP gather reflects from the **same subsurface point** — directly below $x_m$.
-
-<div class="keq">
-
-Fold: $N_\mathrm{fold} = \dfrac{\text{spread length}}{2 \times \text{shot spacing}}$
-
-</div>
-
-- 96-trace survey, shot spacing 25 m, spread 2400 m → fold = 48
-- Modern marine: fold = 120–240 → SNR improvement 11–15×
+<div class="pnw" style="font-size:0.82em">Every coloured pair shares the same <strong>midpoint</strong> (CMP) → same reflection point on a flat reflector. Fold = spread / (2 × shot spacing). Modern marine: 120–240-fold → SNR ×11–15.</div>
 
 ---
 
 # The Reflection Hyperbola
 
-**Image-point method:** reflect source through reflector at depth $h$. Total path length = straight line from image to receiver.
+<div style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:1.2em;align-items:start">
+<div>
 
-$$t(x) = \frac{1}{V_1}\sqrt{x^2 + 4h^2}$$
+![h:380px alt text: Two-panel figure. Left: acquisition geometry with source, four receivers and two-way ray paths to a flat reflector. Right: travel-time hyperbola with t0 horizontal dashed line and orange asymptote.](../assets/figures/fig_reflection_geometry.png)
+
+</div>
+<div>
+
+**Image-point construction:** reflect source through reflector.
 
 <div class="keq">
 
-$$t^2(x) = t_0^2 + \frac{x^2}{V_1^2}, \qquad t_0 = \frac{2h}{V_1}$$
+$$t^2(x) = t_0^2 + \frac{x^2}{V_1^2}$$
+
+$$t_0 = \dfrac{2h}{V_1}$$
 
 </div>
 
-- **Slope** of $t^2$–$x^2$ line = $1/V_1^2$; **intercept** = $t_0^2 = 4h^2/V_1^2$
-- Deeper reflectors → flatter hyperbola (larger $t_0$, same $V_1$)
-- Faster velocity → steeper hyperbola asymptote
+$t^2$–$x^2$ is a **straight line** → slope gives $V_1^2$, intercept gives $h$
+
+</div>
+</div>
 
 ---
 

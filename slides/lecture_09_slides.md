@@ -38,17 +38,11 @@ style: |
 
 ---
 
-# Why the Flat-Layer Model Fails
+# Why the Flat-Layer Model Fails: Cascadia
 
-<div class="pnw">Cascadia's accretionary wedge: dipping reflectors 5–25°, active thrust faults, intense ground roll on land surveys, multiples above shallow reflectors.</div>
+![h:380px alt text: Accretionary wedge schematic cross-section showing dipping thrust packages with labelled decorations for three non-idealities: orange label for dipping reflectors, red dashed ray path for a surface multiple, and green triangles with fan arrows for a fault-tip diffraction.](../assets/figures/fig_accretionary_wedge.png)
 
-Three key failures of the flat-layer assumption:
-
-- **Dip**: CMP gather no longer samples a single point → smeared image
-- **Multiples**: have same NMO velocity as primaries → not removed by stacking
-- **Diffractions**: fault tips appear as broad hyperbolae → false structure
-
-Each requires a **distinct correction strategy**.
+<div class="pnw" style="font-size:0.83em">Each non-ideality requires a distinct correction: DMO for ①, SRME for ②, migration for ③.</div>
 
 ---
 
