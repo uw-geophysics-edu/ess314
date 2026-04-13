@@ -17,7 +17,7 @@ style: |
 
 <!-- _class: title -->
 
-# Seismic Reflections I
+# Seismic Reflections II
 ## Dipping Layers, Non-Idealities, and Modern Methods
 
 ### ESS 314 Geophysics · University of Washington
@@ -150,9 +150,7 @@ Key properties vs primary reflections:
 
 **f–k filter:** reject all $|k| > f / V_\mathrm{cutoff}$, preserving $V > V_\mathrm{cutoff}$
 
-$$\mathrm{SNR}_\mathrm{stack} = \sqrt{N_\mathrm{fold}} \times \mathrm{SNR}_\mathrm{single}$$
-
-A 48-fold survey improves SNR by a factor of $\approx 7$.
+<div class="keq">Velocity cone: $|k| \leq f / V_\mathrm{cutoff}$ in $f$–$k$ space defines the slope threshold separating slow noise from faster reflections.</div>
 
 ---
 

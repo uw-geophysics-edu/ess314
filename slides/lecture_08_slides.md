@@ -40,38 +40,50 @@ style: |
 
 # Motivation: Why Reflection Surveys?
 
-![h:370px alt text: Two-panel figure. Panel A shows a cross-section with a source star, four triangle receivers, a flat reflector at depth, and two-way ray paths. Panel B shows the corresponding travel-time hyperbola with t0 label and asymptote](../assets/figures/fig_reflection_geometry.png)
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.4em">
+<div>
 
-<div class="pnw" style="font-size:0.82em">Unlike refraction, reflection surveys image at <strong>any depth</strong> — shallow sediment to Moho. Each colour = one source–receiver pair; all sample the same reflector.</div>
+**What refraction cannot do:**
+- Image below the critical-angle limit
+- Resolve thin beds or velocity inversions
+- Map steeply dipping structure
+
+</div>
+<div>
+
+**What reflection delivers:**
+- Two-way travel time → depth at **any** velocity
+- Lateral continuity of stratigraphic horizons
+- Cascadia décollement, Seattle fault, CO₂ storage targets
+
+</div>
+</div>
+
+<div class="pnw" style="margin-top:0.6em">Key idea: many source–receiver pairs share the same reflection point → <strong>CMP redundancy</strong> stacks coherent signal while incoherent noise cancels. Geometry shown next slide.</div>
 
 ---
 
 # Acoustic Impedance and Reflection Coefficient
 
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2em;align-items:center">
-<div>
-
 **Acoustic impedance:** $Z = \rho\, V_P$
 
-At normal incidence:
+At normal incidence (boundary conditions: continuity of pressure + particle velocity):
 
 <div class="keq">
 
 $$R = \frac{Z_2 - Z_1}{Z_2 + Z_1} \qquad T = \frac{2Z_2}{Z_1 + Z_2}$$
 
-</div>
-
 **Energy fractions:** $\mathcal{R} = R^2$, $\mathcal{T} = 1 - R^2$
 
-<div class="warn" style="font-size:0.82em">Typical $|R| = 0.01$–$0.15$ → only 1–2% reflected at most interfaces. <strong>Stacking is essential.</strong></div>
-
 </div>
-<div>
 
-![h:420px alt text: Four-panel impedance-to-synthetic figure showing layer impedance stack, reflectivity spike series, Ricker wavelet, and synthetic seismogram](../assets/figures/fig_impedance_synthetic.png)
+| Interface | $Z_1$ (MPa·s/m) | $Z_2$ | $R$ |
+|---|---|---|---|
+| Sediment → limestone | 3.5 | 6.0 | +0.26 |
+| Sand → shale | 4.8 | 4.2 | −0.07 |
+| Crust → mantle (Moho) | 13 | 20 | +0.21 |
 
-</div>
-</div>
+<div class="warn" style="font-size:0.82em">Most sedimentary contacts: $|R| = 0.01$–$0.15$ → only 1–2% of energy reflected. <strong>CMP stacking is essential to extract the signal.</strong></div>
 
 ---
 
