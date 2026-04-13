@@ -347,4 +347,3 @@ $V_P > V_S > V_R$ always. S-waves require $\mu \neq 0$ (shear restoring force).
 **Next class:** Lab 1 — Introduction to Python — computing $V_P$, $V_S$ for different rock types
 
 **Lecture 6 (Apr 6):** Wavefronts, Rays, and Snell's Law
-

@@ -19,14 +19,9 @@ repos:
       - id: marp-compile-slides
         name: "Compile Marp slide decks → HTML"
         language: system
-        files: "_slides\\.md$"
+        files: "^slides/.*_slides\\.md$"
         pass_filenames: true
-        entry: >-
-          bash -c
-          'for f in "$@"; do
-             marp --html --theme slides/ess314.css --output-dir slides/ "$f"
-             && git add "${f%_slides.md}_slides.html" slides/"$(basename "${f%.md}.html")";
-           done' --
+        entry: bash -c 'for f in "$@"; do marp --html --theme slides/ess314.css --output-dir slides/ "$f"; done' --
 
   # ── Standard hygiene ───────────────────────────────────────────────────────
   - repo: https://github.com/pre-commit/pre-commit-hooks

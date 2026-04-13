@@ -107,7 +107,7 @@ parts:
       # - file: notebooks/Lab7-Gravity
         # title: "Lab 7: Gravity"
       # - file: notebooks/Lab8-Magnetics
-        title: "Lab 8: Magnetics"
+        # title: "Lab 8: Magnetics"
 
   - caption: "Career Prospects & Skills"
     chapters:

@@ -295,4 +295,3 @@ When a P-wave hits a boundary, it doesn't just refract — it **reflects**, and 
 *Reflection · mode conversion · impedance · critical refraction · head waves*
 
 **Discussion (Wed):** Radar eyes on ice — applying today's physics to GPR
-
