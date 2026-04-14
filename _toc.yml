@@ -92,10 +92,10 @@ parts:
 
   - caption: "Labs"
     chapters:
-      - file: notebooks/Lab1/Lab1-Intro-Python
+      - file: notebooks/Lab1/Lab1-FirstnameLastname
         title: "Lab 1: Introduction to Python"
-      # - file: notebooks/Lab2-Python-Ray-Tracing
-        # title: "Lab 2: Python II & Seismic Ray Tracing"
+      - file: notebooks/Lab2-FirstnameLastname
+        title: "Lab 2: More Python & Earthquakes"
       # - file: notebooks/Lab3-Refraction
         # title: "Lab 3: Refraction"
       # - file: notebooks/Lab4-Reflection
