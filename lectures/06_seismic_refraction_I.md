@@ -40,8 +40,6 @@ open_sources:
 ::::{dropdown} Learning Objectives
 :color: primary
 :icon: target
-:open:
-
 By the end of this lecture, students will be able to:
 
 - **[LO-6.1]** *Sketch* a seismic refraction survey geometry (source, geophone array, direct wave, head wave ray paths) and identify the roles of each component.

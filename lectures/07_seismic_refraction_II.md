@@ -24,7 +24,6 @@ open_sources:
 :::::{dropdown} Learning Objectives
 :color: primary
 :icon: target
-:open:
 
 By the end of this lecture, students will be able to:
 

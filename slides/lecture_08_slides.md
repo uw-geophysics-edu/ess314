@@ -134,7 +134,11 @@ $t^2$–$x^2$ is a **straight line** → slope gives $V_1^2$, intercept gives $h
 
 **Normal moveout** is the delay at offset $x$ relative to $t_0$:
 
+<div class="keq">
+
 $$\Delta t_\mathrm{NMO}(x) = \sqrt{t_0^2 + \frac{x^2}{V_\mathrm{NMO}^2}} - t_0 \approx \frac{x^2}{2\,V_\mathrm{NMO}^2\, t_0}$$
+
+</div>
 
 NMO correction **shifts each trace up** by $\Delta t_\mathrm{NMO}(x)$, flattening the hyperbola to $t_0$.
 
@@ -172,7 +176,7 @@ $$V_n = \sqrt{\dfrac{V_\mathrm{rms,n}^2\,t_{0,n} - V_\mathrm{rms,n-1}^2\,t_{0,n-
 
 </div>
 
-**Key assumptions:** flat, horizontal, isotropic layers. Dipping layers require the DMO correction (Lecture 9).
+**Key assumptions:** flat, horizontal, isotropic layers — violations are addressed in Lecture 9.
 
 **Precision matters:** a small error in$V_\mathrm{rms}$ propagates strongly to $V_n$ for thin layers (when $t_{0,n} - t_{0,n-1}$ is small).
 
@@ -182,7 +186,11 @@ $$V_n = \sqrt{\dfrac{V_\mathrm{rms,n}^2\,t_{0,n} - V_\mathrm{rms,n-1}^2\,t_{0,n-
 
 **Semblance** $S(V,\tau)$: coherence of the NMO-corrected CMP gather at trial velocity $V$ and time $\tau$.
 
+<div class="keq">
+
 $$S(V, \tau) = \frac{\left[\sum_j d_j(\tau + \Delta t_j)\right]^2}{N\,\sum_j \left[d_j(\tau + \Delta t_j)\right]^2} \in [0, 1]$$
+
+</div>
 
 Reading the semblance panel:
 - **Pick maxima** tracing a velocity function $V(t_0)$ from shallow to deep
@@ -195,7 +203,11 @@ Reading the semblance panel:
 
 After NMO correction and mute:
 
+<div class="keq">
+
 $$s(t) = \frac{1}{N_\mathrm{fold}} \sum_{j=1}^{N_\mathrm{fold}} d_j^\mathrm{NMO}(t)$$
+
+</div>
 
 <div class="pnw">
 
@@ -246,228 +258,3 @@ Traditional velocity picking: manual, time-consuming, subjective for millions of
 4. A 48-fold stack has $\mathrm{SNR}_\mathrm{single} = 0.5$. What is $\mathrm{SNR}_\mathrm{stack}$? Is the reflector visible?
 
 
-<!-- _class: title -->
-
-# Seismic Reflection I
-## Dipping Layers, Non-Idealities, and Modern Methods
-
-### ESS 314 Geophysics · University of Washington
-
-#### Week 3, Lecture 8 · April 15, 2026
-
-#### Marine Denolle
-
----
-
-# By the end of this lecture…
-
-<div class="lo"><strong>[LO-8.1]</strong> <em>Derive</em> the dipping-layer travel-time equation; compute up-dip and down-dip apparent velocities; recover true velocity and dip</div>
-<div class="lo"><strong>[LO-8.2]</strong> <em>Identify</em> multiple types; predict long-path multiple TWTT and NMO velocity; explain why stacking cannot remove it</div>
-<div class="lo"><strong>[LO-8.3]</strong> <em>State</em> the diffraction equation; describe what migration accomplishes</div>
-<div class="lo"><strong>[LO-8.4]</strong> <em>Apply</em> Shuey approximation $R(\theta) \approx R(0)+G\sin^2\theta$; classify AVO Classes I–IV</div>
-<div class="lo"><strong>[LO-8.5]</strong> <em>Evaluate</em> DL denoising claims; identify two failure modes</div>
-
----
-
-# Why the Flat-Layer Model Fails
-
-<div class="pnw">Cascadia's accretionary wedge: dipping reflectors 5–25°, active thrust faults, intense ground roll on land surveys, multiples above shallow reflectors.</div>
-
-Three key failures of the flat-layer assumption:
-
-- **Dip**: CMP gather no longer samples a single point → smeared image
-- **Multiples**: have same NMO velocity as primaries → not removed by stacking
-- **Diffractions**: fault tips appear as broad hyperbolae → false structure
-
-Each requires a **distinct correction strategy**.
-
----
-
-# Dipping Layer: Geometry
-
-For perpendicular depth $h$, dip $\delta$, velocity $V_1$:
-
-$$t_d(x) = \frac{1}{V_1}\sqrt{x^2 + 4hx\sin\delta + 4h^2} \quad \text{(down-dip)}$$
-
-$$t_u(x) = \frac{1}{V_1}\sqrt{x^2 - 4hx\sin\delta + 4h^2} \quad \text{(up-dip)}$$
-
-Both have $t(0) = t_0 = 2h/V_1$ — **same zero-offset time**.
-
-<div class="keq">Key: a <strong>linear term</strong> $\pm\,(2t_0\sin\delta/V_1)\cdot x$ appears in $t^2$ — the mathematical signature of dip</div>
-
----
-
-# Dipping Layer: Asymmetric Curves
-
-![h:400px alt text: Three-panel figure showing (A) dipping reflector geometry with source and up-dip/down-dip receivers; (B) t(x) curves where down-dip (orange) arrives later and up-dip (blue) earlier than flat (grey dashed); (C) t-squared x-squared plot with curved non-linear trends for dipping cases](../assets/figures/fig_dipping_layer_geometry.png)
-
-*Down-dip: MORE moveout (slower apparent $V$). Up-dip: LESS moveout (faster apparent $V$). All share the same $t_0$.*
-
----
-
-# CMP Reflection-Point Smear
-
-![h:410px alt text: Two-panel figure; left shows flat reflector with all CMP gather reflection points coinciding at one location; right shows dipping reflector with reflection points scattered up-dip as offset increases](../assets/figures/fig_cmp_dipping_scatter.png)
-
-*For dipping reflectors, stacking without **DMO correction** blurs the subsurface image. DMO repositions reflection points before NMO stacking.*
-
----
-
-# NMO Velocity and Dip Recovery
-
-Taylor expansion of $t_d(x)$ at small $x$ gives:
-
-<div class="keq">
-
-$$V_\mathrm{NMO,dip} = \frac{V_1}{\cos\delta} \quad (> V_1 \text{ for any } \delta > 0)$$
-
-</div>
-
-Recover $V_1$ and $\delta$ from two-survey apparent velocities $V_d$, $V_u$:
-
-$$V_1 = \frac{2V_d V_u}{V_d + V_u} \qquad \sin\delta = \frac{V_u - V_d}{V_u + V_d}$$
-
----
-
-# Multiple Reflections
-
-![h:400px alt text: Three-panel figure showing (A) ray paths for primary P, long-path multiple M, peg-leg PL, interbed IB; (B) synthetic CMP gather with four hyperbolic events; (C) t-squared x-squared plot where primary and long-path multiple have the same slope annotated as same V_rms](../assets/figures/fig_multiple_types.png)
-
----
-
-# The Multiple Suppression Problem
-
-Long-path surface multiple TWTT:
-
-$$t_\mathrm{mult}^2(x) = (2t_0)^2 + \frac{x^2}{V_\mathrm{rms}^2}$$
-
-<div class="warn">
-
-**Same NMO velocity as the primary** → NMO correction flattens BOTH simultaneously. **Stacking cannot suppress the multiple.**
-
-</div>
-
-Suppression methods:
-- **SRME** (surface-related multiple elimination): autocorrelation-based prediction and subtraction
-- **DL in $\tau$-$p$ domain**: CNN trained to separate primaries from multiples by slope
-
----
-
-# Diffractions: Huygens Principle
-
-Any sharp edge (fault tip, channel boundary, unconformity) acts as a **secondary point source** of spherical waves.
-
-<div class="keq">
-
-$$t_\mathrm{diff}(x) = \frac{2}{V_1}\sqrt{(x-x_s)^2 + z_s^2}$$
-
-</div>
-
-Key properties vs primary reflections:
-- **Uniform amplitude** across all offsets (isotropic emission)
-- Energy from a **single point**, not a planar interface
-- Migration collapses it to the point $(x_s, z_s)$
-
----
-
-# Diffractions in the Seismic Section
-
-![h:400px alt text: Three-panel figure showing (A) depth model with flat reflector at 600 m and fault-tip scatterer at 1000 m; (B) travel-time curves showing flat primary and broader diffraction hyperbola; (C) synthetic seismic section with both events visible](../assets/figures/fig_diffraction_hyperbola.png)
-
-*Bowtie patterns (synclines) and diffraction tails (fault tips) are unmigrated artefacts. Migration (Lecture 10) collapses them.*
-
----
-
-# Shot Gather Noise and f–k Filtering
-
-**Coherent noise in raw shot gathers:**
-- Ground roll: $V \approx 300$ m/s, $f \approx 5$–20 Hz — **high amplitude**
-- Direct wave: $V \approx V_1$, linear, easily muted
-- Air blast: $V \approx 340$ m/s
-
-**f–k filter:** reject all $|k| > f / V_\mathrm{cutoff}$, preserving $V > V_\mathrm{cutoff}$
-
-$$\mathrm{SNR}_\mathrm{stack} = \sqrt{N_\mathrm{fold}} \times \mathrm{SNR}_\mathrm{single}$$
-
-A 48-fold survey improves SNR by a factor of $\approx 7$.
-
----
-
-# f–k Ground Roll Suppression
-
-![h:400px alt text: Three-panel figure showing (A) raw shot gather with annotations for ground roll, direct wave and reflection; (B) f-k spectrum with velocity fan lines at 300, 600, 2000 m/s; (C) filtered gather with ground roll removed](../assets/figures/fig_ground_roll_fk.png)
-
-*Ground roll occupies the slow fan (high $|k|$ per Hz). Rejecting it preserves reflections ($V > 600$ m/s).*
-
----
-
-# AVO: Zoeppritz + Shuey
-
-At oblique incidence $\theta_i$, energy partitions into reflected P, S, transmitted P, S (Zoeppritz equations). Shuey (1985) linearisation:
-
-<div class="keq">
-
-$$R(\theta_i) \approx \underbrace{R(0)}_{\text{intercept}} + \underbrace{G}_{\text{gradient}} \sin^2\theta_i$$
-
-</div>
-
-- $R(0) = (Z_2 - Z_1)/(Z_2 + Z_1)$ — normal-incidence reflectivity
-- $G$ = AVO gradient, sensitive to $\Delta(V_P/V_S)$ — **fluid content**
-- Gas substitution lowers $V_P$, leaves $V_S$ unchanged → large $|G|$
-
----
-
-# AVO Classes I–IV
-
-![h:400px alt text: Two-panel figure showing (A) R(theta) vs theta curves for Classes I through IV and IIp with different slopes and (B) R(0)-G crossplot with background trend, scatter clusters for each class, and quadrant annotations](../assets/figures/fig_avo_classes.png)
-
-*Gas sands (Class III): **negative $R(0)$ and $G$** — amplitude brightens with offset. The $R(0)$–$G$ crossplot separates gas from brine-saturated sands.*
-
----
-
-# DL Denoising: U-Net Architecture
-
-![h:390px alt text: Three-panel figure showing (A) U-Net schematic with encoder green blocks bottleneck orange decoder blue and red skip connections; (B) noisy synthetic CMP gather; (C) denoised gather with improved SNR](../assets/figures/fig_dl_denoising_concept.png)
-
-*Skip connections preserve fine spatial detail. Supervised training requires paired noisy/clean data — unavailable for field data; self-supervised methods train on the noisy data alone.*
-
----
-
-# DL Failure Modes — Critical Evaluation
-
-<div class="warn">
-
-1. **Domain shift**: network trained on synthetic gathers fails on field data where noise is non-stationary and geologically correlated
-2. **Physics inconsistency**: denoised output may violate AVO, polarity, or reciprocity — creating spurious bright spots
-3. **Interpretability gap**: cannot determine whether amplitude anomaly is a true DHI or a network artifact
-
-</div>
-
-*False bright spots from DL denoising have been documented in published case studies.*
-
----
-
-# Worked Example: Dipping Layer
-
-$h = 800$ m, $V_1 = 2000$ m/s, $\delta = 10°$
-
-| Quantity | Formula | Result |
-|---|---|---|
-| $t_0$ | $2h/V_1$ | **0.80 s** |
-| $V_\mathrm{NMO}$ | $V_1/\cos\delta$ | **2031 m/s** |
-| $t_d(2400\,\text{m})$ | Exact dip eq. | **1.553 s** |
-| $t_u(2400\,\text{m})$ | Exact dip eq. | **1.322 s** |
-
-Check: $\sin\delta = (2421-1704)/(2421+1704) = 0.174 \approx \sin10°$ ✓
-
----
-
-# Concept Check
-
-1. A flat-layer NMO correction is applied to a dipping reflector ($\delta = 12°$). Is the corrected gather over- or under-corrected? Quantify the velocity error.
-
-2. A long-path multiple arrives at $t_0 = 1.4$ s with $V_\mathrm{rms} = 2400$ m/s. What is the parent primary TWTT? Compute the reflector depth.
-
-3. What distinguishes a diffraction hyperbola from a primary reflection? Name two geological features in the Cascadia wedge that commonly produce diffractions.
-
-4. A sand–shale interface has $R(0) = -0.08$ and $G = -0.10$. What AVO class is this? Is the sand likely gas- or brine-saturated?
