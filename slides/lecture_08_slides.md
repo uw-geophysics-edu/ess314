@@ -38,34 +38,89 @@ style: |
 
 ---
 
-# Motivation: Why Reflection Surveys?
+# Before the Equations — Look at This
+
+<figure>
+<img src="../assets/figures/ledeczi2024_fig2.png" alt="Five annotated sparker multi-channel seismic reflection panels (a–e) from the Cascadia accretionary wedge, offshore Washington, showing typical stratigraphic and deformational patterns: (a) inactive fold with flat postdeformational strata; (b) active fault-propagation fold with surface offset; (c) active fold with seafloor signature; (d) onlapping seismic facies at a sequence boundary; (e) stratal thinning and tilting onto an anticline indicating recent tectonic activity. Horizontal axis = distance along the survey line; vertical axis = two-way travel time (s), deeper downward." style="width:100%;max-height:380px;object-fit:contain">
+<figcaption style="font-size:0.62em;color:#555;margin-top:0.3em">
+Fig. 2 from Ledeczi et al. (2024), <em>Seismica</em> 2(4), <a href="https://doi.org/10.26443/seismica.v2i4.1158">doi:10.26443/seismica.v2i4.1158</a> · Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · Reproduced unmodified
+</figcaption>
+</figure>
+
+<div class="pnw" style="font-size:0.82em;margin-top:0.4em">
+<strong>Discussion prompts:</strong> What is the horizontal axis? The vertical axis? Why do some layers appear bright and others dark? Why does the pattern change laterally?
+</div>
+
+---
+
+# Reading a Seismic Section
 
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.4em">
 <div>
 
-**What refraction cannot do:**
-- Image below the critical-angle limit
-- Resolve thin beds or velocity inversions
-- Map steeply dipping structure
+**Orientation**
+- **Horizontal axis:** distance along the survey line (km)
+- **Vertical axis:** two-way travel time (TWTT) in seconds — time increases **downward**; shallower reflectors plot at top
+- Each column of pixels = one **seismic trace** recorded at one location
 
 </div>
 <div>
 
-**What reflection delivers:**
-- Two-way travel time → depth at **any** velocity
-- Lateral continuity of stratigraphic horizons
-- Cascadia décollement, Seattle fault, CO₂ storage targets
+**Amplitude and polarity**
+- **Bright reflector** → large impedance contrast between layers
+- **Dark zone** → gradational boundary, low contrast, or gradual velocity change
+- **Polarity** (light vs. dark wiggle) → sign of $R = (Z_2 - Z_1)/(Z_2 + Z_1)$:
+  - positive $R$ if impedance increases with depth
+  - negative $R$ if impedance decreases
 
 </div>
 </div>
 
-<div class="pnw" style="margin-top:0.6em">Key idea: many source–receiver pairs share the same reflection point → <strong>CMP redundancy</strong> stacks coherent signal while incoherent noise cancels. Geometry shown next slide.</div>
+<div class="warn" style="margin-top:0.5em;font-size:0.82em">Note: TWTT is <em>not</em> depth — converting it to depth requires knowing the P-wave velocity field (exactly what this lecture develops).</div>
 
 ---
 
-# Acoustic Impedance and Reflection Coefficient
+# From a Single Point to the Cross-Section
 
-**Acoustic impedance:** $Z = \rho\, V_P$
+<div style="display:grid;grid-template-columns:1.15fr 0.85fr;gap:1.3em;align-items:start">
+<div>
+
+**Step 1 — Single interface, normal incidence:**
+A downgoing pulse hits a boundary → fraction $R$ of the energy reflects upward → arrives at the surface at two-way time $t_0 = 2h/V$.
+One reflection = one amplitude value at one $(x, t_0)$ pixel.
+
+**Step 2 — One vertical trace:**
+Stack all reflections from all interfaces at location $x$ → a time-series (one column of the image).
+
+**Step 3 — Sweep across the survey line:**
+Repeat for every source–receiver pair → mosaic all traces side by side → the **2D seismic section**.
+
+</div>
+<div>
+
+<div class="keq" style="font-size:0.88em">
+
+**What controls brightness?**
+
+$$R = \frac{Z_2 - Z_1}{Z_2 + Z_1}$$
+
+High-contrast boundary (e.g., sand–shale, water–rock) → bright.
+Small contrast (clay–clay) → dark.
+
+</div>
+
+<div class="pnw" style="font-size:0.82em;margin-top:0.7em">
+In the Cascadia image: the seafloor is the brightest reflector. Deeper, the décollement and sediment packages appear as bands of varying amplitude — each controlled by $R$ at that boundary.
+</div>
+
+</div>
+</div>
+
+---
+
+# What Makes a Bright Reflector? Acoustic Impedance
+
+The brightness in the Cascadia image is controlled by **acoustic impedance** $Z = \rho\, V_P$ — the resistance of a medium to wave propagation.
 
 At normal incidence (boundary conditions: continuity of pressure + particle velocity):
 
