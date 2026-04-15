@@ -150,11 +150,27 @@ $$R = \frac{Z_2 - Z_1}{Z_2 + Z_1} \qquad T = \frac{2Z_2}{Z_1 + Z_2}$$
 
 ---
 
-# Acquisition: CMP Gather
+# Why Stack? The Signal-to-Noise Problem
 
-![h:375px alt text: Two-panel figure. Panel A shows a cross-section with five source-receiver pairs of different offsets all reflecting from the same point on a flat reflector. Panel B shows the resulting CMP gather of wiggle traces and the reflection hyperbola.](../assets/figures/fig_cmp_gather.png)
+Most sedimentary reflectors have $|R| = 0.01$–$0.15$: only **1–2% of seismic energy** reflects at any one boundary — the rest propagates deeper or scatters as noise.
 
-<div class="pnw" style="font-size:0.82em">Every coloured pair shares the same <strong>midpoint</strong> (CMP) → same reflection point on a flat reflector. Fold = spread / (2 × shot spacing). Modern marine: 120–240-fold → SNR ×11–15.</div>
+<div class="warn" style="margin-bottom:0.5em">A single source–receiver trace is almost never enough to detect a reflector above ambient noise.</div>
+
+<div class="pnw">
+
+**Solution:** record the same reflection from $N_\mathrm{fold}$ different source–receiver offsets. Signal adds **coherently** ($\propto N$); noise adds **incoherently** ($\propto \sqrt{N}$):
+
+$$\mathrm{SNR}_\mathrm{stack} = \sqrt{N_\mathrm{fold}} \times \mathrm{SNR}_\mathrm{single}$$
+
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.8em;margin-top:0.5em;text-align:center;font-size:0.9em">
+<div class="keq">48-fold → <strong>7×</strong></div>
+<div class="keq">96-fold → <strong>10×</strong></div>
+<div class="keq">240-fold → <strong>15×</strong></div>
+</div>
+
+<div class="warn" style="margin-top:0.5em;font-size:0.82em">"Aligning" traces from different offsets to the same reflection time requires understanding the geometry of offset travel time — the <strong>reflection hyperbola</strong>.</div>
 
 ---
 
@@ -195,13 +211,21 @@ $$\Delta t_\mathrm{NMO}(x) = \sqrt{t_0^2 + \frac{x^2}{V_\mathrm{NMO}^2}} - t_0 \
 
 </div>
 
-NMO correction **shifts each trace up** by $\Delta t_\mathrm{NMO}(x)$, flattening the hyperbola to $t_0$.
+NMO correction **shifts each trace up** by $\Delta t_\mathrm{NMO}(x)$, flattening the hyperbola to $t_0$ — this is the alignment step that makes stacking work.
 
 <div class="warn">
 
 **NMO stretch** at large offsets distorts the wavelet. Traces beyond the mute zone ($x/h \gtrsim 1$–$1.5$) are discarded before stacking.
 
 </div>
+
+---
+
+# Acquisition: CMP Gather
+
+![h:375px alt text: Two-panel figure. Panel A shows a cross-section with five source-receiver pairs of different offsets all reflecting from the same point on a flat reflector. Panel B shows the resulting CMP gather of wiggle traces and the reflection hyperbola.](../assets/figures/fig_cmp_gather.png)
+
+<div class="pnw" style="font-size:0.82em">Every coloured pair shares the same <strong>common midpoint</strong> (CMP) → same reflection point on a flat reflector. NMO-correcting and summing these traces produces one stacked trace. Fold = spread / (2 × shot spacing). Modern marine: 120–240-fold.</div>
 
 ---
 
@@ -254,9 +278,9 @@ Reading the semblance panel:
 
 ---
 
-# CMP Stacking and SNR Gain
+# CMP Stack: The Full Pipeline
 
-After NMO correction and mute:
+After semblance velocity picking, NMO correction, and mute:
 
 <div class="keq">
 
@@ -264,14 +288,7 @@ $$s(t) = \frac{1}{N_\mathrm{fold}} \sum_{j=1}^{N_\mathrm{fold}} d_j^\mathrm{NMO}
 
 </div>
 
-<div class="pnw">
-
-**SNR improvement:**
-$$\mathrm{SNR}_\mathrm{stack} = \sqrt{N_\mathrm{fold}} \times \mathrm{SNR}_\mathrm{single}$$
-
-48-fold → 7× better SNR · 96-fold → 10× · 240-fold → 15×
-
-</div>
+Each CMP produces one stacked trace. Assembled side by side → the **2D stacked section** (the cross-section we opened the lecture with).
 
 Post-stack: deconvolution → **migration** (Lecture 10) → interpretation
 
