@@ -54,11 +54,19 @@ Students should be comfortable with acoustic impedance ($Z = \rho V$), Snell's l
 
 ## 1. The Geoscientific Question
 
-Seismic reflection surveys image the Earth by recording the echoes of controlled sources from subsurface interfaces. In contrast to refraction methods, which require the refracted wave to return along the surface and can only constrain velocity in the shallowest layers, **reflection surveys image structure at any depth** — from the shallow sedimentary column to the Moho and beyond.
+```{figure} ../assets/figures/ledeczi2024_fig2.png
+:name: fig-l8-cascadia
+:alt: Five annotated sparker multi-channel seismic reflection panels (a–e) from the Cascadia accretionary wedge, offshore Washington, showing typical stratigraphic and deformational patterns.
+:width: 100%
 
-The fundamental challenge is extracting signal from noise: reflected P-waves are typically 1–3 orders of magnitude weaker than the direct first arrival, and the same receiver array simultaneously records surface waves, head waves, and scattered energy. The **Common Midpoint (CMP) method** solves this by summing many redundant traces that share the same reflection point, boosting signal while averaging down incoherent noise.
+Fig. 2 from {cite:t}`Ledeczi2024`, *Seismica* 2(4). Licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Reproduced unmodified. Panels show (a) inactive fold with postdeformational strata, (b) active fault-propagation fold, (c) active fold with seafloor signature, (d) onlapping seismic facies, (e) stratal thinning indicating recent tectonic activity.
+```
 
-The Cascadia subduction system provides the motivating application. High-resolution multichannel reflection profiles offshore Washington reveal the geometry of the accretionary wedge, the dipping décollement, and fluid-migration pathways — all resolved from reflection traveltimes using the methods developed in this lecture.
+Begin by looking at {numref}`fig-l8-cascadia`: a real seismic reflection section from the Cascadia accretionary wedge offshore Washington. The horizontal axis is distance along the survey line; the vertical axis is **two-way travel time (TWTT)** — not depth. Bright bands mark interfaces with large impedance contrast; dark zones correspond to gradational or low-contrast boundaries. The lateral variation in reflector character reveals folds, faults, and basin-fill history.
+
+This image is the *product* of seismic reflection processing. This lecture develops the physics and methodology that build it, starting from a single reflected pulse and working up to the full stacked cross-section.
+
+In contrast to refraction methods, which require the refracted wave to return along the surface and can only constrain velocity in the shallowest layers, **reflection surveys image structure at any depth** — from the shallow sedimentary column to the Moho and beyond.
 
 ---
 
@@ -107,23 +115,28 @@ where $t_{0,i} = 2 z_i / V_i$ is the two-way travel time to reflector $i$. This 
 
 ---
 
-## 3. Acquisition Geometry and the CMP Method
+## 3. The Signal-to-Noise Problem
 
-### 3.1 Shot Gather and CMP Gather
+The fundamental challenge of reflection seismology is that reflections are *weak*. Typical sedimentary interfaces have $|R| = 0.01$–$0.15$, meaning only 1–2% of seismic energy reflects at any one boundary. Reflected P-waves are 1–3 orders of magnitude weaker than the direct first arrival, and the same receiver array simultaneously records surface waves, head waves, and scattered energy.
 
-A **shot gather** collects all receiver traces from a single source. Sources and receivers are arranged in a 2D line (or 3D grid), typically spaced $\Delta x = 12.5$–$25$ m. The **source–receiver offset** $x$ ranges from near-trace ($x \approx \Delta x$) to far-trace ($x \approx N\Delta x$).
+A single source–receiver trace is almost never enough to detect a reflector above ambient noise.
 
-A **CMP gather** collects all source–receiver pairs whose midpoint is at the same surface location $x_m$. If the subsurface is flat and horizontally homogeneous, every trace in a CMP gather reflects from the same subsurface point — directly below $x_m$ at depth $z = h$. This is the crucial geometric property that makes NMO stacking coherent.
+### 3.1 Stacking as the Solution
 
-The **CMP fold** $N_\mathrm{fold}$ is the number of traces in each gather. For a land line with source spacing $\Delta s$, receiver spacing $\Delta r$, and spread length $L = N\Delta r$:
+Record the same reflection from $N_\mathrm{fold}$ different source–receiver offsets. Because the reflection signal is coherent across traces (it arrives at a predictable time governed by geometry) while noise is incoherent:
 
-$$N_\mathrm{fold} = \frac{L}{2\,\Delta s}$$
+- Signal adds proportionally to $N_\mathrm{fold}$
+- Noise adds proportionally to $\sqrt{N_\mathrm{fold}}$
 
-Modern marine surveys achieve fold of 60–240; dense land surveys may reach 300+.
+After normalising:
 
-### 3.2 Why Redundant Traces Matter
+$$\mathrm{SNR}_\mathrm{stack} = \sqrt{N_\mathrm{fold}} \times \mathrm{SNR}_\mathrm{single}$$
 
-Each trace in a CMP gather has a different source-receiver offset, so it samples the reflector at a slightly different reflection angle. If reflections are the same on all traces (after accounting for travel time), they are coherent signal; ambient and instrumental noise is incoherent and averages to zero when traces are summed.
+For a 96-fold survey: $\sqrt{96} \approx 10\times$ SNR improvement. This is the primary motivation for the **Common Midpoint (CMP) method**.
+
+### 3.2 The Alignment Problem
+
+"Stacking" only works if the reflection signal on each trace is aligned to the same arrival time. But traces at different offsets record the reflector at different travel times — the arrival traces out a **hyperbola** in the offset–time plane. We must first understand this hyperbola (§4), correct for it (§5), and only then can we meaningfully stack (§9).
 
 ---
 
@@ -184,11 +197,7 @@ For small-to-moderate offsets ($x \ll V_\mathrm{NMO} t_0$, i.e. $x < h$), the Ta
 
 ### 5.2 Applying NMO
 
-The NMO correction shifts each trace in the CMP gather upward by $\Delta t_\mathrm{NMO}(x)$. After a **correct** NMO correction (using the true velocity $V_1$), all traces in the gather show the reflection at the same time $t_0$. The gather is then said to be **flattened**. Summing (stacking) the flattened traces:
-
-- Coherent reflection energy adds constructively ($\propto N_\mathrm{fold}$)
-- Incoherent noise averages down ($\propto \sqrt{N_\mathrm{fold}}$)
-- Net SNR improvement: $\sqrt{N_\mathrm{fold}}$ (as in Lecture 9, Eq. {eq}`eq-l9-snr-fold`)
+The NMO correction shifts each trace in the CMP gather upward by $\Delta t_\mathrm{NMO}(x)$. After a **correct** NMO correction (using the true velocity $V_1$), all traces in the gather show the reflection at the same time $t_0$. The gather is then said to be **flattened** — which is exactly the alignment step that makes the stacking argument from §3 work.
 
 ### 5.3 NMO Stretch
 
@@ -196,7 +205,27 @@ At large offsets, the NMO correction is asymptotically large; the corrected wave
 
 ---
 
-## 6. RMS Velocity and the Dix Equation
+## 6. Acquisition Geometry and the CMP Gather
+
+With the hyperbola and NMO framework in hand, we can now understand *how the data are collected* to make stacking possible.
+
+### 6.1 Shot Gather and CMP Gather
+
+A **shot gather** collects all receiver traces from a single source. Sources and receivers are arranged in a 2D line (or 3D grid), typically spaced $\Delta x = 12.5$–$25$ m. The **source–receiver offset** $x$ ranges from near-trace ($x \approx \Delta x$) to far-trace ($x \approx N\Delta x$).
+
+A **CMP gather** collects all source–receiver pairs whose midpoint is at the same surface location $x_m$. If the subsurface is flat and horizontally homogeneous, every trace in a CMP gather reflects from the same subsurface point — directly below $x_m$ at depth $z = h$. This is the crucial geometric property that makes NMO stacking coherent.
+
+### 6.2 CMP Fold
+
+The **CMP fold** $N_\mathrm{fold}$ is the number of traces in each gather. For a land line with source spacing $\Delta s$, receiver spacing $\Delta r$, and spread length $L = N\Delta r$:
+
+$$N_\mathrm{fold} = \frac{L}{2\,\Delta s}$$
+
+Modern marine surveys achieve fold of 60–240; dense land surveys may reach 300+.
+
+---
+
+## 7. RMS Velocity and the Dix Equation
 
 For a stack of $N$ flat horizontal layers with interval velocities $V_i$ and one-way thicknesses $h_i$, the NMO velocity for the $n$-th reflector is the **root-mean-square (RMS) velocity**:
 
@@ -207,7 +236,7 @@ V_\mathrm{rms,n}^2 = \frac{\sum_{i=1}^{n} V_i^2\, \Delta t_i}{\sum_{i=1}^{n} \De
 
 where $\Delta t_i = 2h_i/V_i$ is the two-way travel time within layer $i$.
 
-### 6.1 The Dix Equation
+### 7.1 The Dix Equation
 
 Given the stacking velocities $V_\mathrm{rms,n}$ and $V_\mathrm{rms,n-1}$ for two adjacent reflectors at zero-offset TWTTs $t_{0,n}$ and $t_{0,n-1}$, the **interval velocity** of layer $n$ is:
 
@@ -226,9 +255,9 @@ The Dix equation is exact only for flat, horizontal, isotropic layers. It is an 
 
 ---
 
-## 7. Velocity Analysis: Semblance Panel
+## 8. Velocity Analysis: Semblance Panel
 
-### 7.1 The Semblance Function
+### 8.1 The Semblance Function
 
 The **semblance** measures the coherence of the NMO-corrected CMP gather as a function of trial velocity $V$ and zero-offset time $\tau$:
 
@@ -241,7 +270,7 @@ where $d_j(t)$ is trace $j$, $N$ is the fold, and $\Delta t_j(V)$ is the NMO del
 
 $S \in [0, 1]$: $S = 1$ when all traces are perfectly coherent (ideal signal); $S = 0$ for incoherent noise.
 
-### 7.2 Reading a Semblance Panel
+### 8.2 Reading a Semblance Panel
 
 The semblance is computed over a grid of $(V, \tau)$ values and displayed as a colour image — the **velocity spectrum** or **semblance panel**. Picks are made at **local maxima** of $S$ corresponding to flat-layer reflectors:
 
@@ -257,9 +286,11 @@ Velocity picks are made by following the **highest semblance** from shallow to d
 
 ---
 
-## 8. CMP Stacking
+## 9. CMP Stacking: Closing the Loop
 
-### 8.1 The Stacking Operator
+We introduced the SNR motivation for stacking in §3, derived the hyperbola in §4, and learned to correct it in §5. Now we assemble the full pipeline.
+
+### 9.1 The Stacking Operator
 
 After NMO correction and muting, the stacked trace $s(t)$ at CMP location $x_m$ is:
 
@@ -270,7 +301,7 @@ s(t) = \frac{1}{N_\mathrm{fold}} \sum_{j=1}^{N_\mathrm{fold}} d_j^\mathrm{NMO}(t
 
 where $d_j^\mathrm{NMO}(t) = d_j(t + \Delta t_j)$ is the NMO-corrected trace.
 
-### 8.2 SNR After Stacking
+### 9.2 SNR After Stacking (Recap)
 
 Signal amplitudes add coherently while Gaussian random noise adds incoherently:
 
@@ -279,9 +310,9 @@ Signal amplitudes add coherently while Gaussian random noise adds incoherently:
 
 $$\mathrm{SNR}_\mathrm{stack} = \sqrt{N_\mathrm{fold}} \times \mathrm{SNR}_\mathrm{single}$$
 
-For a 96-fold survey: SNR improvement of $\sqrt{96} \approx 10\times$. This is the primary motivation for the CMP method.
+For a 96-fold survey: $\sqrt{96} \approx 10\times$ SNR improvement. Each CMP produces one stacked trace; assembled side by side, the full set of stacked traces creates the **2D stacked section** — the cross-section we opened this lecture with ({numref}`fig-l8-cascadia`).
 
-### 8.3 After Stacking: Post-Stack Processing
+### 9.3 After Stacking: Post-Stack Processing
 
 The stacked section is a **zero-offset approximation** to the subsurface. It is typically followed by:
 1. **Deconvolution**: compress the wavelet to improve vertical resolution
@@ -290,7 +321,7 @@ The stacked section is a **zero-offset approximation** to the subsurface. It is 
 
 ---
 
-## 9. Worked Example: Two-Layer NMO Analysis
+## 10. Worked Example: Two-Layer NMO Analysis
 
 **Setup:** Layer 1, $V_1 = 1800$ m/s, thickness $h_1 = 900$ m. Layer 2, $V_2 = 2600$ m/s, thickness $h_2 = 700$ m.
 
@@ -322,30 +353,30 @@ $$V_2 = \sqrt{\frac{2048^2 \times 1.538 - 1800^2 \times 1.000}{0.538}} = 2600 \t
 
 ---
 
-## 10. SOTA: Automated Velocity Analysis with Deep Learning
+## 11. SOTA: Automated Velocity Analysis with Deep Learning
 
-### 10.1 Traditional Velocity Picking
+### 11.1 Traditional Velocity Picking
 
 Traditional velocity analysis requires a geophysicist to manually pick semblance maxima for every CMP location — a time-consuming, subjective task in large 3D surveys with millions of CMPs.
 
-### 10.2 CNN-Based Semblance Pickers
+### 11.2 CNN-Based Semblance Pickers
 
 Convolutional neural networks (CNNs) trained on labelled examples from well-constrained areas learn to identify semblance maxima automatically. The network input is the semblance image; the output is a velocity-time curve. Published comparisons show CNN pickers match expert picks within 1–2% RMS velocity in production surveys.
 
-### 10.3 Uncertainty Quantification
+### 11.3 Uncertainty Quantification
 
 Modern DL velocity analysis uses **Bayesian neural networks** or **Monte Carlo Dropout** to output a probability distribution $p(V_\mathrm{NMO} \mid t_0)$ rather than a single pick. The uncertainty is largest at:
 - High TWTTs (low semblance due to attenuation)
 - Depths with multiple overlapping hyperbolas (complex geology)
 - Locations far from well control
 
-### 10.4 Open Questions
+### 11.4 Open Questions
 
 The DL picker is trained on a specific survey's noise characteristics and reflectivity. Performance drops when applied to a new basin (domain shift). Physics-constrained networks embed the Dix equation as a hard constraint, ensuring that inverted interval velocities produce the observed RMS velocities.
 
 ---
 
-## 11. Course Connections
+## 12. Course Connections
 
 The flat-layer reflection hyperbola (§4) is the direct counterpart to the refraction travel-time line (Lectures 6–7): both can be plotted on $t^2$–$x^2$ axes to linearize the moveout, but refraction uses the linear slope beyond the crossover distance while reflection uses the parabolic portion at intermediate offsets.
 
@@ -355,7 +386,7 @@ The Dix equation (§6) provides the **interval velocity** structure needed to co
 
 ---
 
-## 12. Societal Relevance
+## 13. Societal Relevance
 
 :::{admonition} Why It Matters Beyond the Classroom
 :class: note
