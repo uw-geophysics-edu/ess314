@@ -304,6 +304,14 @@ $$ (eq:snell-generalized)
 
 Since $V_S < V_P$ in any given medium, the converted S-wave always propagates at a **steeper angle** (closer to the normal) than the corresponding P-wave. The same logic applies to an incident SV-wave — it generates reflected and transmitted P and SV.
 
+:::{figure} ../assets/figures/fig_psv_mode_conversion.png
+:name: fig-psv-mode-conversion
+:alt: Diagram of P-SV mode conversion at a planar interface. An incident P-wave arrives from the upper left at angle theta_P1 from the normal. At the interface, four outgoing rays emerge — reflected P and reflected SV going to the upper right in medium 1, and transmitted P and transmitted SV going to the lower right in medium 2. The reflected SV is steeper than the reflected P because V_S1 is less than V_P1. The transmitted P is wider than the transmitted SV. All four angles are governed by a single ray parameter p, shown in the generalized Snell's law equation at the bottom. Small double arrows on each ray indicate particle motion direction — along the ray for P-waves, perpendicular to the ray for SV-waves.
+:width: 85%
+
+**Figure 5.6.** P–SV mode conversion at a planar interface. A single incident P-wave generates four outgoing waves. All angles are related by the generalized Snell's law with a single ray parameter $p$. The S-waves are always steeper (closer to the normal) than the P-waves because $V_S < V_P$. Small arrows indicate particle-motion direction: longitudinal (along ray) for P, transverse (perpendicular) for SV. [Python-generated. Script: `assets/scripts/fig_psv_mode_conversion.py`]
+:::
+
 :::{admonition} SH Waves Do Not Convert
 :class: note
 SH motion (horizontal, parallel to the interface) is decoupled from P–SV motion in isotropic media. An incident SH wave generates only reflected and transmitted SH — no P or SV conversion. Conversely, an incident P or SV wave generates no SH.

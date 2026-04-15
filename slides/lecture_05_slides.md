@@ -219,18 +219,7 @@ Only when $Z_1 = Z_2$ does the reflected wave vanish entirely.
 
 # Mode Conversion: One P-Wave In, Four Waves Out
 
-An incident P-wave at oblique incidence generates **four** outgoing waves:
-
-| Wave | Medium | Angle |
-|---|---|---|
-| Reflected P | 1 | $\theta_{P1}$ |
-| Reflected SV | 1 | $\theta_{S1}$ |
-| Transmitted P | 2 | $\theta_{P2}$ |
-| Transmitted SV | 2 | $\theta_{S2}$ |
-
-**Generalized Snell's law** — one ray parameter $p$ governs all four:
-
-$$p = \frac{\sin\theta_{P1}}{V_{P1}} = \frac{\sin\theta_{S1}}{V_{S1}} = \frac{\sin\theta_{P2}}{V_{P2}} = \frac{\sin\theta_{S2}}{V_{S2}}$$
+![alt text: Diagram of P-SV mode conversion at a planar interface. An incident P-wave generates four outgoing waves — reflected P, reflected SV, transmitted P, and transmitted SV — all governed by a single ray parameter p](../assets/figures/fig_psv_mode_conversion.png)
 
 Since $V_S < V_P$: the converted S-wave is always **steeper** than the P-wave.
 
