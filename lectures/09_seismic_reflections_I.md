@@ -1,5 +1,5 @@
 ---
-title: "Seismic Reflections II: Dipping Layers, Non-Idealities, and Modern Methods"
+title: "Seismic Reflections II: Beyond the Flat-Layer Model"
 week: 3
 lecture: 9
 date: "2026-04-22"
@@ -13,7 +13,7 @@ open_sources:
   - "Rutherford & Williams 1989 Geophysics doi:10.1190/1.1442696 (open)"
 ---
 
-# Seismic Reflections II: Dipping Layers, Non-Idealities, and Modern Methods
+# Seismic Reflections II: Beyond the Flat-Layer Model
 
 :::{seealso}
 📊 **Lecture slides** — <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_09_slides.html" target="_blank">open in new tab ↗</a>
@@ -55,23 +55,35 @@ Students should be comfortable with Snell's law (Lecture 5), acoustic impedance,
 
 ---
 
-## 1. The Geoscientific Question
+## 1. From Ideal to Real: Five Assumptions That Fail
 
-The flat-layer model rests on three assumptions: reflectors are horizontal, each layer has constant velocity, and the recorded wavefield contains only primary reflections. None of these assumptions holds in a real geologic setting. The Cascadia accretionary wedge contains fold-and-thrust structures with reflectors dipping at 5–25°; the décollement itself is a planar dipping surface. Multiple reflections dominate seismic gathers above shallow reflectors in the outer wedge. Fault-tip diffractions obscure the geometry of thrust faults. Ground-roll noise from surface waves overwhelms the primary reflections on land surveys.
+In Lecture 8, the CMP stacking pipeline — sort, NMO correct, stack — produced a sharp zero-offset section from multi-offset data. That pipeline rested on five simplifying assumptions:
 
-Relaxing each assumption in turn yields three questions. First: how does a dipping reflector alter the NMO correction, and can true velocity and dip be recovered separately? Second: how are multiple reflections identified and suppressed so they do not produce false structural images? Third: how are diffractions and noise handled, and what does the latest machine-learning toolchain contribute?
+1. **Reflectors are horizontal** — the NMO hyperbola has no linear term in $x$
+2. **Only primary reflections** reach the receiver — every event in the gather is a single-bounce wave
+3. **Reflecting interfaces are continuous** — reflections come from planar surfaces, not isolated point scatterers
+4. **The recorded wavefield is noise-free** — no ground roll, no air blast, no source-generated surface waves
+5. **Only travel times matter** — amplitudes are constant with offset
+
+None of these holds in a real survey. In the Cascadia accretionary wedge, fold-and-thrust structures produce reflectors dipping at 5–25°. Shallow water-bottom multiples dominate marine gathers. Fault-tip diffractions obscure thrust geometry. Ground roll overwhelms land data. And amplitude varies with incidence angle — carrying information about fluid content that travel times alone cannot provide.
+
+This lecture relaxes each assumption in turn. For every complication, we follow the same progression:
+
+> **Why it matters → What breaks → The math → How to fix it**
 
 ---
 
-## 2. Governing Physics: Dipping Reflectors
+## 2. Complication 1: Dipping Reflectors
 
-### 2.1 The Geometry of Dip
+> **Assumption that fails:** *Reflectors are horizontal.* In the Cascadia accretionary wedge, fold-and-thrust structures produce reflectors dipping at 5–25°, invalidating the symmetric NMO hyperbola from Lecture 8.
+
+### 2.1 Why It Matters: The Geometry of Dip
 
 A reflector dipping at angle $\delta$ from horizontal presents a different reflection geometry in the up-dip and down-dip directions from a common surface source. For **down-dip shooting** (receiver in the down-dip direction), each successive receiver is above a progressively deeper part of the reflector, and the two-way path increases faster than for a flat reflector at the same perpendicular depth $h$. For **up-dip shooting**, the receiver looks toward the shallower part of the reflector, shortening the two-way path.
 
 The result is an asymmetric travel-time curve: the same source–receiver configuration produces different arrival times depending on the survey direction.
 
-### 2.2 CMP Reflection-Point Smear
+### 2.2 What Breaks: CMP Reflection-Point Smear
 
 For a flat reflector, every trace in a CMP gather reflects from the same subsurface point — directly below the surface midpoint. For a **dipping reflector**, the reflection point migrates up-dip as offset increases (Fig. {numref}`fig-cmp-smear-l9`). A CMP gather over a dipping layer therefore samples a laterally smeared zone, not a single point. Standard NMO stacking produces a spatially blurred image in the presence of dip.
 
@@ -84,11 +96,7 @@ For a flat reflector, every trace in a CMP gather reflects from the same subsurf
 [Python-generated: `assets/scripts/fig_cmp_dipping_scatter.py`]
 ```
 
----
-
-## 3. Mathematical Framework: Dipping-Layer Travel Time
-
-### 3.1 Exact Travel-Time Equation
+### 2.3 Exact Travel-Time Equation
 
 Using the image-point method, the exact two-way travel-time for a source at the origin and receiver at offset $x$, with a reflector whose perpendicular distance from the source is $h$ and dip angle $\delta$, is
 
@@ -104,7 +112,7 @@ t_u(x) = \frac{1}{V_1}\sqrt{x^2 - 4h x\sin\delta + 4h^2} \quad \text{(up-dip)}
 
 Both curves share the same zero-offset intercept $t_0 = 2h/V_1$.
 
-### 3.2 The Linear Term and Asymmetry
+### 2.4 The Linear Term and Asymmetry
 
 Squaring and expanding:
 
@@ -129,7 +137,7 @@ The $t^2$–$x^2$ relationship is therefore **non-linear** for dipping reflector
 [Python-generated: `assets/scripts/fig_dipping_layer_geometry.py`]
 ```
 
-### 3.3 NMO Velocity for Dipping Layers
+### 2.5 What Breaks: NMO Velocity for Dipping Layers
 
 Taylor-expanding $t_d(x)$ around $x = 0$, the quadratic coefficient gives:
 
@@ -140,7 +148,7 @@ V_\mathrm{NMO,dip} = \frac{V_1}{\cos\delta}
 
 This is **larger** than $V_1$; fitting a flat-layer NMO model to data over a dipping reflector overestimates the subsurface velocity.
 
-### 3.4 Recovering True Velocity and Dip
+### 2.6 The Fix: Recovering True Velocity and Dip
 
 From two surveys — one down-dip and one up-dip — the true velocity and dip angle can be recovered:
 
@@ -151,13 +159,17 @@ V_1 = \frac{2\,V_d\,V_u}{V_d + V_u}, \qquad \sin\delta = \frac{V_u - V_d}{V_u + 
 
 In practice, **dip-moveout (DMO) correction** is applied after NMO correction to reposition the reflection points to a common location before stacking.
 
+*With dip accounted for, the next complication is unwanted energy from waves that bounce more than once.*
+
 ---
 
-## 4. Multiple Reflections
+## 3. Complication 2: Multiple Reflections
+
+> **Assumption that fails:** *Only primary reflections reach the receiver.* In reality, seismic energy bounces multiple times between the free surface and subsurface reflectors, generating coherent events that mimic primaries.
 
 A **multiple** is a seismic event that has undergone more than one reflection before reaching the receiver. Multiples are coherent and appear as hyperbolic events in the CMP gather; they are a primary source of false structure in seismic sections.
 
-### 4.1 Types of Multiples
+### 3.1 Types of Multiples
 
 ```{figure} ../assets/figures/fig_multiple_types.png
 :name: fig-multiples-l9
@@ -177,15 +189,19 @@ t_\mathrm{mult}^2(x) = (2\,t_0)^2 + \frac{x^2}{V_\mathrm{rms}^2}
 
 This has the **same NMO velocity** as the primary but double the zero-offset TWTT. Because NMO correction simultaneously flattens both, stacking will not suppress the multiple.
 
-### 4.2 Multiple Suppression
+### 3.2 The Fix: Multiple Suppression
 
 Modern workflows use **surface-related multiple elimination (SRME)**: the observed wavefield is autocorrelated with itself to predict the multiple waveforms, which are then adaptively subtracted. Deep-learning approaches train encoder-decoder networks to separate primaries from multiples in the $\tau$-$p$ domain.
 
+*With multiples suppressed, we turn to energy scattered by point-like discontinuities rather than planar interfaces.*
+
 ---
 
-## 5. Diffractions
+## 4. Complication 3: Diffractions
 
-### 5.1 Huygens Principle and Point Scatterers
+> **Assumption that fails:** *Reflecting interfaces are continuous surfaces.* At sharp discontinuities — fault tips, unconformity edges, channel boundaries — the wavefront scatters in all directions.
+
+### 4.1 Huygens Principle and Point Scatterers
 
 Every point on a wavefront acts as a secondary source of spherical wavelets (Huygens's principle). At a sharp subsurface discontinuity — a fault tip, an unconformity edge, a channel boundary — the incident wave excites new secondary spherical waves. These **diffractions** carry energy in all directions equally.
 
@@ -207,24 +223,28 @@ This is a hyperbola with vertex at $(x_s,\, 2z_s/V_1)$.
 [Python-generated: `assets/scripts/fig_diffraction_hyperbola.py`]
 ```
 
-### 5.2 Structural Interpretations and Migration
+### 4.2 The Fix: Migration
 
 An **unmigrated** seismic section displays the hyperbolic diffraction rather than the point; fault terminations appear as fan-shaped energy patches. A syncline bounded by two dipping reflectors produces a "bowtie" pattern. **Seismic migration** — the topic of Lecture 10 — collapses diffractions and repositions dipping events to their true subsurface locations.
 
+*Diffractions will be collapsed by migration (Lecture 10). Meanwhile, another class of unwanted energy — coherent noise from surface waves — must be removed before stacking.*
+
 ---
 
-## 6. Survey Noise and Signal Enhancement
+## 5. Complication 4: Coherent Noise and Signal Enhancement
 
-### 6.1 Coherent Noise Types
+> **Assumption that fails:** *The recorded wavefield contains only reflected body waves.* A raw shot gather is dominated by surface waves (ground roll), direct arrivals, and other coherent noise that masks the reflections we seek.
 
-A raw shot gather contains several coherent noise types alongside desireD reflections:
+### 5.1 Coherent Noise Types
+
+A raw shot gather contains several coherent noise types alongside desired reflections:
 
 - **Direct wave** ($V \approx V_1$): linear first arrival, easily muted
 - **Ground roll** (Rayleigh wave; $V \approx 200$–500 m/s): high amplitude, low frequency (5–20 Hz), dispersive; dominates land gathers at short and medium offsets
 - **Air blast** ($V \approx 340$ m/s): muted by velocity filter
 - **Head wave** ($V > V_1$): muted before NMO correction
 
-### 6.2 f–k Velocity Filtering
+### 5.2 The Fix: f–k Velocity Filtering
 
 In the frequency-wavenumber ($f$–$k$) domain, events with apparent velocity $V_\mathrm{app}$ map to the line $k = f/V_\mathrm{app}$. Ground roll occupies the high-$|k|$ fan region. A **velocity filter** rejects all $|k| > f/V_\mathrm{cutoff}$:
 
@@ -242,7 +262,7 @@ In the frequency-wavenumber ($f$–$k$) domain, events with apparent velocity $V
 [Python-generated: `assets/scripts/fig_ground_roll_fk.py`]
 ```
 
-### 6.3 Stacking Fold and SNR
+### 5.3 Stacking Fold and SNR
 
 After NMO correction and noise filtering, the stacked trace SNR improves as:
 
@@ -253,11 +273,15 @@ After NMO correction and noise filtering, the stacked trace SNR improves as:
 
 A 48-fold survey improves SNR by a factor of $\approx 7$. Modern dense 3D surveys achieve fold $> 200$.
 
+*With noise suppressed and travel times corrected, we can finally examine what the amplitudes themselves reveal about subsurface rock and fluid properties.*
+
 ---
 
-## 7. AVO and the Zoeppritz Equations
+## 6. Complication 5: Amplitude Versus Offset
 
-### 7.1 Oblique-Incidence Reflectivity
+> **Assumption that fails:** *Only travel times carry useful information.* In fact, how the reflection amplitude changes with incidence angle reveals the fluid content of subsurface rocks — information invisible to NMO velocity analysis alone.
+
+### 6.1 Oblique-Incidence Reflectivity
 
 For a plane P-wave incident at angle $\theta_i$ on a planar interface, the reflected and transmitted amplitudes are governed by the **Zoeppritz equations**. For moderate angles ($\theta_i < 30°$), the Shuey (1985) two-term approximation gives:
 
@@ -268,7 +292,7 @@ R(\theta_i) \approx R(0) + G\,\sin^2\theta_i
 
 where $R(0) = (Z_2 - Z_1)/(Z_2 + Z_1)$ is the normal-incidence reflection coefficient (intercept) and $G$ is the **AVO gradient**, sensitive to the contrast in $V_P/V_S$ ratio across the interface. Gas substitution strongly lowers $V_P$ while leaving $V_S$ nearly unchanged, producing a large distinctive change in $G$.
 
-### 7.2 AVO Classes
+### 6.2 AVO Classes
 
 ```{figure} ../assets/figures/fig_avo_classes.png
 :name: fig-avo-l9
@@ -284,13 +308,13 @@ where $R(0) = (Z_2 - Z_1)/(Z_2 + Z_1)$ is the normal-incidence reflection coeffi
 - **Class III** ($R(0) < 0$, $G < 0$): Soft gas sand; amplitude increases with offset — the classical **bright spot** direct hydrocarbon indicator (DHI).
 - **Class IV** ($R(0) < 0$, $G > 0$): Amplitude decreases with offset despite a negative intercept; overpressured or very shallow gas sands.
 
-### 7.3 The AVO Crossplot and Fluid Discrimination
+### 6.3 The AVO Crossplot and Fluid Discrimination
 
 Plotting $R(0)$ against $G$ for all reflection events in a 3D survey produces the **AVO crossplot**. Background wet sands and shales cluster along a "fluid line" ($G \approx -R(0)$). Gas-saturated sands deviate toward more negative $G$ values (Classes II, III). The deviation from the background trend is the primary diagnostic for fluid content beyond what impedance alone resolves.
 
 ---
 
-## 8. Worked Example: Dipping-Layer Survey
+## 7. Worked Example: Dipping-Layer Survey
 
 **Given:** A 2D survey over a thrust-fault reflector. Perpendicular depth $h = 800$ m, $V_1 = 2000$ m/s, $\delta = 10°$.
 
@@ -315,9 +339,9 @@ Plotting $R(0)$ against $G$ for all reflection events in a 3D survey produces th
 
 ---
 
-## 9. SOTA: Deep Learning in Reflection Seismic Processing
+## 8. SOTA: Deep Learning in Reflection Seismic Processing
 
-### 9.1 Supervised Denoising with U-Nets
+### 8.1 Supervised Denoising with U-Nets
 
 The dominant deep-learning architecture for seismic denoising is the **U-Net** — a fully convolutional encoder-decoder network trained to map a noisy seismic gather to a denoised output:
 
@@ -334,13 +358,13 @@ Skip connections between the encoder and decoder layers preserve fine spatial de
 [Python-generated: `assets/scripts/fig_dl_denoising_concept.py`]
 ```
 
-### 9.2 Self-Supervised and Foundation Models
+### 8.2 Self-Supervised and Foundation Models
 
 A limitation of supervised U-Nets is the need for paired clean/noisy training data, which is unavailable for real field datasets. **Self-supervised** methods train entirely on the observed noisy data by exploiting the statistical property that noise is spatially uncorrelated while signal is coherent.
 
 **Seismic foundation models** (e.g. SeisFoundation, SegFM) are large pretrained vision transformers fine-tuned on seismic images that can perform multiple tasks — denoising, horizon picking, facies classification — from a single model backbone.
 
-### 9.3 Open Challenges
+### 8.3 Open Challenges
 
 - **Domain shift:** networks trained on synthetic gathers frequently fail on field data because real noise is non-stationary and geologically correlated.
 - **Physics inconsistency:** a denoised gather may violate reciprocity, polarity conventions, or AVO relationships physically present in the original data.
@@ -348,17 +372,17 @@ A limitation of supervised U-Nets is the need for paired clean/noisy training da
 
 ---
 
-## 10. Course Connections
+## 9. Course Connections
 
-The dipping-layer travel-time equation (§3) is the direct extension of the flat-layer hyperbola ($\delta \to 0$ recovers the standard reflection hyperbola). The additional linear term motivates DMO correction, which is a special case of the migration operator discussed in Lecture 10.
+The dipping-layer travel-time equation (§2) is the direct extension of the flat-layer hyperbola ($\delta \to 0$ recovers the standard reflection hyperbola). The additional linear term motivates DMO correction, which is a special case of the migration operator discussed in Lecture 10.
 
-Diffraction hyperbolae (§5) are the building block of Kirchhoff migration (Lecture 10, §3): migration collapses diffractions by summing amplitudes along the diffraction curve.
+Diffraction hyperbolae (§4) are the building block of Kirchhoff migration (Lecture 10, §3): migration collapses diffractions by summing amplitudes along the diffraction curve.
 
 The AVO gradient $G$ involves $V_P/V_S$, which connects to density constraints available from the gravity module (Lectures 18–22): density is related to both impedance ($Z = \rho V_P$) and AVO ($G$ depends on $\Delta\rho/\rho$).
 
 ---
 
-## 11. Research Horizon
+## 10. Research Horizon
 
 :::{admonition} Current Research Highlights (2022–2025)
 :class: seealso
@@ -374,7 +398,7 @@ The AVO gradient $G$ involves $V_P/V_S$, which connects to density constraints a
 
 ---
 
-## 12. Societal Relevance
+## 11. Societal Relevance
 
 :::{admonition} Why It Matters Beyond the Classroom
 :class: note

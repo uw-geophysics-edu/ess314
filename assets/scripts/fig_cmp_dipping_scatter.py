@@ -123,9 +123,9 @@ for ax, is_dip, title in [
         # Dipping reflector
         h_v = h / np.cos(delta)
         x_ref_line = np.array([-1600, 2000])
-        z_ref_line = h_v - x_ref_line * np.tan(delta)
+        z_ref_line = h_v + x_ref_line * np.tan(delta)
         ax.plot(x_ref_line, z_ref_line, color=BLUE, lw=2.5,
-                label=f"Reflector ($\\delta={int(np.degrees(delta))}°$)")
+                label=f"Reflector ($\\delta={np.degrees(delta):.0f}°$)")
 
     cmap_offsets = plt.cm.plasma(np.linspace(0.1, 0.85, len(offsets)))
 

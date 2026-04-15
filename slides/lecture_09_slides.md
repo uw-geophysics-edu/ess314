@@ -18,7 +18,7 @@ style: |
 <!-- _class: title -->
 
 # Seismic Reflections II
-## Dipping Layers, Non-Idealities, and Modern Methods
+## Beyond the Flat-Layer Model
 
 ### ESS 314 Geophysics · University of Washington
 
@@ -46,7 +46,23 @@ style: |
 
 ---
 
-# Dipping Layer: Geometry
+# Five Assumptions That Fail
+
+In Lecture 8, the CMP stacking pipeline assumed:
+
+1. **Reflectors are horizontal** — no linear term in $t^2(x)$
+2. **Only primary reflections** — every event is a single bounce
+3. **Continuous interfaces** — no point scatterers
+4. **Noise-free wavefield** — no ground roll or surface waves
+5. **Only travel times matter** — amplitude constant with offset
+
+This lecture relaxes each assumption in turn:
+
+<div class="keq"><strong>Why it matters → What breaks → The math → How to fix it</strong></div>
+
+---
+
+# ① Dipping Reflectors: Geometry
 
 For perpendicular depth $h$, dip $\delta$, velocity $V_1$:
 
@@ -60,7 +76,7 @@ Both have $t(0) = t_0 = 2h/V_1$ — **same zero-offset time**.
 
 ---
 
-# Dipping Layer: Asymmetric Curves
+# ① Dipping Layer: Asymmetric Curves
 
 ![h:400px alt text: Three-panel figure showing (A) dipping reflector geometry with source and up-dip/down-dip receivers; (B) t(x) curves where down-dip (orange) arrives later and up-dip (blue) earlier than flat (grey dashed); (C) t-squared x-squared plot with curved non-linear trends for dipping cases](../assets/figures/fig_dipping_layer_geometry.png)
 
@@ -68,7 +84,7 @@ Both have $t(0) = t_0 = 2h/V_1$ — **same zero-offset time**.
 
 ---
 
-# CMP Reflection-Point Smear
+# ① CMP Reflection-Point Smear
 
 ![h:410px alt text: Two-panel figure; left shows flat reflector with all CMP gather reflection points coinciding at one location; right shows dipping reflector with reflection points scattered up-dip as offset increases](../assets/figures/fig_cmp_dipping_scatter.png)
 
@@ -76,7 +92,7 @@ Both have $t(0) = t_0 = 2h/V_1$ — **same zero-offset time**.
 
 ---
 
-# NMO Velocity and Dip Recovery
+# ① NMO Velocity and Dip Recovery
 
 Taylor expansion of $t_d(x)$ at small $x$ gives:
 
@@ -92,13 +108,13 @@ $$V_1 = \frac{2V_d V_u}{V_d + V_u} \qquad \sin\delta = \frac{V_u - V_d}{V_u + V_
 
 ---
 
-# Multiple Reflections
+# ② Multiple Reflections
 
 ![h:400px alt text: Three-panel figure showing (A) ray paths for primary P, long-path multiple M, peg-leg PL, interbed IB; (B) synthetic CMP gather with four hyperbolic events; (C) t-squared x-squared plot where primary and long-path multiple have the same slope annotated as same V_rms](../assets/figures/fig_multiple_types.png)
 
 ---
 
-# The Multiple Suppression Problem
+# ② The Multiple Suppression Problem
 
 Long-path surface multiple TWTT:
 
@@ -116,7 +132,7 @@ Suppression methods:
 
 ---
 
-# Diffractions: Huygens Principle
+# ③ Diffractions: Huygens Principle
 
 Any sharp edge (fault tip, channel boundary, unconformity) acts as a **secondary point source** of spherical waves.
 
@@ -133,7 +149,7 @@ Key properties vs primary reflections:
 
 ---
 
-# Diffractions in the Seismic Section
+# ③ Diffractions in the Seismic Section
 
 ![h:400px alt text: Three-panel figure showing (A) depth model with flat reflector at 600 m and fault-tip scatterer at 1000 m; (B) travel-time curves showing flat primary and broader diffraction hyperbola; (C) synthetic seismic section with both events visible](../assets/figures/fig_diffraction_hyperbola.png)
 
@@ -141,7 +157,7 @@ Key properties vs primary reflections:
 
 ---
 
-# Shot Gather Noise and f–k Filtering
+# ④ Shot Gather Noise and f–k Filtering
 
 **Coherent noise in raw shot gathers:**
 - Ground roll: $V \approx 300$ m/s, $f \approx 5$–20 Hz — **high amplitude**
@@ -154,7 +170,7 @@ Key properties vs primary reflections:
 
 ---
 
-# f–k Ground Roll Suppression
+# ④ f–k Ground Roll Suppression
 
 ![h:400px alt text: Three-panel figure showing (A) raw shot gather with annotations for ground roll, direct wave and reflection; (B) f-k spectrum with velocity fan lines at 300, 600, 2000 m/s; (C) filtered gather with ground roll removed](../assets/figures/fig_ground_roll_fk.png)
 
@@ -162,7 +178,7 @@ Key properties vs primary reflections:
 
 ---
 
-# AVO: Zoeppritz + Shuey
+# ⑤ AVO: Zoeppritz + Shuey
 
 At oblique incidence $\theta_i$, energy partitions into reflected P, S, transmitted P, S (Zoeppritz equations). Shuey (1985) linearisation:
 
@@ -178,7 +194,7 @@ $$R(\theta_i) \approx \underbrace{R(0)}_{\text{intercept}} + \underbrace{G}_{\te
 
 ---
 
-# AVO Classes I–IV
+# ⑤ AVO Classes I–IV
 
 ![h:400px alt text: Two-panel figure showing (A) R(theta) vs theta curves for Classes I through IV and IIp with different slopes and (B) R(0)-G crossplot with background trend, scatter clusters for each class, and quadrant annotations](../assets/figures/fig_avo_classes.png)
 
