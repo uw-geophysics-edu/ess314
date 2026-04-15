@@ -44,6 +44,9 @@ By the end of this lecture, students will be able to:
 - **[LO-5.3]** *Derive* Snell's law from wavefront geometry using Huygens' construction, identifying the role of equal travel times across the interface.
 - **[LO-5.4]** *Define* the ray parameter $p = \sin\theta/V$ and explain why it is conserved along a ray path through any number of layers.
 - **[LO-5.5]** *Derive* Snell's law from Fermat's principle of stationary travel time, showing the variational calculation that minimizes $T(x)$.
+- **[LO-5.6]** *Explain* that waves both reflect and refract at every interface, and that the law of reflection ($\theta_r = \theta_i$) follows from Snell's law.
+- **[LO-5.7]** *Describe* P–SV mode conversion at interfaces and state the generalized Snell's law relating all four outgoing wave angles via a single ray parameter.
+- **[LO-5.8]** *Define* acoustic impedance $Z = \rho V$ and compute normal-incidence reflection ($R$) and transmission ($T$) coefficients from impedance contrast.
 :::
 ---
 
@@ -269,6 +272,88 @@ The geometry produces a characteristic pattern: steeper rays (smaller $p$) penet
 **Figure 5.5.** Ray paths in a medium with velocity increasing linearly with depth. Steeper rays (smaller $p$) penetrate deeper and emerge at greater epicentral distances. Each ray turns at the depth where $V(z) = 1/p$. [Python-generated. Script: `assets/scripts/fig_ray_bending_gradient.py`]
 :::
 
+### 3.7 Reflection at an Interface
+
+So far we have focused on the refracted (transmitted) ray. But at every velocity contrast, a wave also **reflects**. The reflected ray remains in medium 1, and its angle obeys Snell's law with the same velocity on both sides:
+
+$$
+\frac{\sin\theta_i}{V_1} = \frac{\sin\theta_r}{V_1} \quad\Longrightarrow\quad \theta_r = \theta_i
+$$ (eq:law-of-reflection)
+
+The **angle of reflection equals the angle of incidence** — both measured from the interface normal. This is the law of reflection, and it is simply Snell's law applied within a single medium.
+
+:::{admonition} Key Concept
+:class: important
+At any velocity contrast, a seismic wave simultaneously reflects *and* refracts. The relative amplitudes depend on the impedance contrast (§3.9). Only when the media on both sides are identical does the reflected wave vanish entirely.
+:::
+
+### 3.8 Mode Conversion: P–SV Coupling at Interfaces
+
+When a P-wave strikes an interface at oblique incidence, the boundary conditions — continuity of displacement and traction across the interface — require the generation of **both P- and S-waves** on each side. A single incident P-wave produces up to four outgoing waves:
+
+1. **Reflected P** — angle $\theta_{P1}^r$ in medium 1
+2. **Reflected SV** — angle $\theta_{S1}^r$ in medium 1
+3. **Transmitted P** — angle $\theta_{P2}^t$ in medium 2
+4. **Transmitted SV** — angle $\theta_{S2}^t$ in medium 2
+
+All four angles are governed by the **generalized Snell's law** — a single ray parameter $p$ for the entire wavefield at the interface:
+
+$$
+p = \frac{\sin\theta_{P1}}{V_{P1}} = \frac{\sin\theta_{S1}}{V_{S1}} = \frac{\sin\theta_{P2}}{V_{P2}} = \frac{\sin\theta_{S2}}{V_{S2}}
+$$ (eq:snell-generalized)
+
+Since $V_S < V_P$ in any given medium, the converted S-wave always propagates at a **steeper angle** (closer to the normal) than the corresponding P-wave. The same logic applies to an incident SV-wave — it generates reflected and transmitted P and SV.
+
+:::{admonition} SH Waves Do Not Convert
+:class: note
+SH motion (horizontal, parallel to the interface) is decoupled from P–SV motion in isotropic media. An incident SH wave generates only reflected and transmitted SH — no P or SV conversion. Conversely, an incident P or SV wave generates no SH.
+:::
+
+### 3.9 Amplitude at an Interface: Reflection and Transmission Coefficients
+
+Snell's law (and its generalized form) dictate the *angles* of reflected and transmitted waves. The **amplitudes** are determined by the boundary conditions: continuity of displacement and stress across the interface. The key material property controlling how much energy reflects is the **acoustic impedance**:
+
+$$
+Z = \rho\, V
+$$ (eq:impedance)
+
+where $\rho$ is density and $V$ is wave speed. Units: $\mathrm{kg/(m^2 \cdot s)}$, also called *rayls*.
+
+**Normal-incidence coefficients.** For a wave arriving perpendicular to the interface ($\theta = 0$), the displacement amplitude ratios simplify to:
+
+$$
+R = \frac{Z_2 - Z_1}{Z_2 + Z_1}, \qquad T = \frac{2\,Z_1}{Z_2 + Z_1}
+$$ (eq:RT-normal)
+
+where $Z_1 = \rho_1 V_1$ is the impedance of the incident medium and $Z_2 = \rho_2 V_2$ of the transmitted medium.
+
+**Key properties of $R$ and $T$:**
+- $R \in [-1,\, +1]$: positive when $Z_2 > Z_1$ (wave enters stiffer/denser material); negative when $Z_2 < Z_1$ (**polarity reversal**)
+- $T \in [0,\, 2]$: always positive — the transmitted wave keeps the incident polarity
+- When $Z_1 = Z_2$: $R = 0$, $T = 1$ — no reflection, even if $\rho$ and $V$ change individually (so long as $\rho V$ stays the same)
+- **Energy conservation**: $R^2 + \dfrac{Z_1}{Z_2}\,T^2 = 1$
+
+:::{admonition} Intuition
+:class: tip
+Think of impedance as the medium's "resistance" to wave motion. A large impedance contrast produces a bright reflection; a small contrast produces a dim one. This is directly analogous to light reflecting off glass — the larger the refractive-index contrast, the brighter the glint.
+:::
+
+**Oblique incidence.** At non-zero angles, the amplitude coefficients depend on $\theta$ and all four elastic parameters ($V_P$, $V_S$, $\rho$ on each side). The full solution is given by the **Zoeppritz equations** — a $4 \times 4$ system enforcing continuity of the two displacement components and two traction components at the interface. We return to these in Lecture 8 (reflection seismology), where the dependence of $R$ on offset is the basis of **amplitude-versus-offset (AVO)** analysis.
+
+### 3.10 Critical Angle, Total Reflection, and Head Waves
+
+From Snell's law, the transmitted P-wave angle increases with incidence angle. When $V_2 > V_1$, there exists a **critical angle** $\theta_c$ at which the transmitted ray becomes parallel to the interface ($\theta_2 = 90°$):
+
+$$
+\theta_c = \arcsin\!\left(\frac{V_1}{V_2}\right)
+$$ (eq:critical-angle)
+
+For $\theta > \theta_c$, no real transmitted angle exists — the wave is **totally reflected**. The reflection coefficient becomes complex (magnitude 1, with a phase shift).
+
+**Head waves.** At exactly $\theta = \theta_c$, the wave traveling along the interface at $V_2$ continuously radiates energy back into medium 1 at the critical angle. This is the **head wave** (or refraction arrival), the foundation of seismic refraction surveying (Lectures 6–7).
+
+Because mode conversion occurs at interfaces, there are in general **multiple critical angles** — one when the transmitted P-wave becomes horizontal, and another (at a smaller angle) when the transmitted SV-wave becomes horizontal. These correspond to different post-critical phenomena.
+
 ---
 
 ## 4. The Forward Problem
@@ -348,9 +433,9 @@ A mirage on a hot road is exactly the same physics as a seismic wave turning in 
 
 ## 7. Course Connections
 
-- **Prior lectures:** Lecture 3 derived the wave speeds $V_P$ and $V_S$; Lecture 4 showed how different wave types propagate at different speeds. These velocities are the $V_1$ and $V_2$ in every Snell's law calculation in this lecture.
-- **Next lecture (Lecture 6 — Waves at Boundaries):** Snell's law tells us the angle of refracted rays. Lecture 6 asks: what happens to *all* the energy at a boundary — reflected, transmitted, and mode-converted? This includes the general Snell's law with P-to-S conversion, impedance contrast, critical refraction, and head waves.
-- **Lectures 7–9 (Seismic Refraction I & II):** The refraction method directly inverts the head-wave travel-time equation — derived from the critical-angle geometry previewed in the worked example here.
+- **Prior lectures:** Lecture 3 derived the wave speeds $V_P$ and $V_S$; Lecture 4 showed how different wave types propagate at different speeds. These velocities are the $V_1$ and $V_2$ in every Snell's law calculation in this lecture — and the $V_P$, $V_S$ pairs in the generalized Snell's law (§3.8).
+- **Next lecture (Lecture 6 — Seismic Refraction I):** The head wave introduced in §3.10 is the key observable in seismic refraction. Lecture 6 derives the head-wave travel-time equation and shows how to invert it for layer velocity and thickness.
+- **Lectures 7–9 (Seismic Refraction II, Intro to Reflection):** Dipping layers (Lecture 7), multi-layer inversions, and the transition to reflection seismology. The impedance and reflection coefficient concepts from §3.9 are the foundation of Lecture 8's treatment of reflection amplitudes and AVO.
 - **Lectures 10–14 (Seismic Reflection):** The reflection travel-time curve is a hyperbola derived from Snell's law applied to the reflected ray. Normal Moveout (NMO) is a direct consequence.
 - **Lab 2 (Apr 10):** Students implement Snell's law in Python, trace rays through a layered model, and compute travel-time curves $T(x)$. The slopes and intercepts of these curves are then inverted for $V_1$, $V_2$, and layer depth.
 - **Cross-topic:** Snell's law is mathematically identical for electromagnetic waves (ground-penetrating radar, optics) — Discussion 2 (Apr 8, "Radar eyes on ice") directly applies this lecture's physics to GPR on glaciers.

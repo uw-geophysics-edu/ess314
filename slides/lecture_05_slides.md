@@ -26,6 +26,9 @@ math: katex
 - **[LO-5.3]** *Derive* Snell's law from wavefront geometry
 - **[LO-5.4]** *Define* the ray parameter $p$ and explain why it is conserved
 - **[LO-5.5]** *Derive* Snell's law from Fermat's principle of least time
+- **[LO-5.6]** *Explain* why waves both reflect and refract at every interface
+- **[LO-5.7]** *Describe* P–SV mode conversion and the generalized Snell's law
+- **[LO-5.8]** *Define* acoustic impedance $Z = \rho V$ and compute normal-incidence $R$ and $T$
 
 ---
 
@@ -198,6 +201,64 @@ The ray parameter $p$ is the **fundamental invariant** of ray theory.
 
 ---
 
+# Reflection: The Other Half of Snell's Law
+
+At every velocity contrast, energy **both refracts and reflects**.
+
+The reflected ray stays in medium 1. Snell's law with $V_1 = V_1$:
+
+$$\frac{\sin\theta_i}{V_1} = \frac{\sin\theta_r}{V_1} \quad\Longrightarrow\quad \theta_r = \theta_i$$
+
+**The angle of reflection equals the angle of incidence.**
+
+This is symmetric about the normal — like a mirror.
+
+Only when $Z_1 = Z_2$ does the reflected wave vanish entirely.
+
+---
+
+# Mode Conversion: One P-Wave In, Four Waves Out
+
+An incident P-wave at oblique incidence generates **four** outgoing waves:
+
+| Wave | Medium | Angle |
+|---|---|---|
+| Reflected P | 1 | $\theta_{P1}$ |
+| Reflected SV | 1 | $\theta_{S1}$ |
+| Transmitted P | 2 | $\theta_{P2}$ |
+| Transmitted SV | 2 | $\theta_{S2}$ |
+
+**Generalized Snell's law** — one ray parameter $p$ governs all four:
+
+$$p = \frac{\sin\theta_{P1}}{V_{P1}} = \frac{\sin\theta_{S1}}{V_{S1}} = \frac{\sin\theta_{P2}}{V_{P2}} = \frac{\sin\theta_{S2}}{V_{S2}}$$
+
+Since $V_S < V_P$: the converted S-wave is always **steeper** than the P-wave.
+
+*Note: SH waves do not convert — they are decoupled from P–SV.*
+
+---
+
+# How Much Reflects? Acoustic Impedance
+
+Snell's law gives the **angles**. The **amplitudes** depend on **acoustic impedance**:
+
+$$Z = \rho\, V \quad [\text{kg/(m}^2\text{·s)}]$$
+
+At **normal incidence** ($\theta = 0$), the reflection and transmission coefficients:
+
+$$R = \frac{Z_2 - Z_1}{Z_2 + Z_1}, \qquad T = \frac{2\,Z_1}{Z_2 + Z_1}$$
+
+| Property | Meaning |
+|---|---|
+| $R > 0$ | $Z_2 > Z_1$ — same polarity |
+| $R < 0$ | $Z_2 < Z_1$ — **polarity flip** |
+| $R = 0$ | $Z_1 = Z_2$ — no reflection |
+| $R^2 + (Z_1/Z_2)\,T^2 = 1$ | Energy conservation |
+
+At oblique incidence → **Zoeppritz equations** (Lecture 8)
+
+---
+
 # Rays in a velocity gradient
 
 When $V$ increases with depth ($V = V(z)$), rays **curve continuously**:
@@ -237,15 +298,17 @@ Same physics, different scale.
 
 ---
 
-# Preview: what happens at the critical angle?
+# Critical angle and total reflection
 
-When $\sin\theta_2 = 1$, the refracted ray travels **along the interface** at speed $V_2$.
+When $V_2 > V_1$, increasing $\theta_i$ eventually makes $\sin\theta_2 = 1$ — the transmitted ray grazes the interface.
 
 $$\theta_c = \arcsin\!\left(\frac{V_1}{V_2}\right)$$
 
-This produces a **head wave** — the foundation of seismic refraction surveying.
+For $\theta > \theta_c$: **total reflection** — no transmitted energy, $|R| = 1$
 
-*Next lecture: reflection, mode conversion, critical refraction, and impedance.*
+At exactly $\theta_c$: the wave along the interface radiates a **head wave** back into medium 1 at angle $\theta_c$.
+
+Head waves travel at $V_2$ → the foundation of **seismic refraction** (Lectures 6–7).
 
 ---
 
@@ -288,10 +351,10 @@ The **M9 Project** uses 3D ray tracing through the Community Velocity Model to s
 
 # Next time
 
-**Lecture 6: Snell's Law and Waves at Boundaries**
+**Lecture 6: Seismic Refraction I**
 
-When a P-wave hits a boundary, it doesn't just refract — it **reflects**, and it **converts to S-waves**.
+The head wave we just introduced is the key observable. Lecture 6 derives the travel-time equations for head waves and shows how to invert slopes and intercepts for layer velocity and thickness — the method Mohorovičić used to discover the crust–mantle boundary.
 
-*Reflection · mode conversion · impedance · critical refraction · head waves*
+*Direct waves · head waves · travel-time curves · crossover distance · the Moho*
 
 **Discussion (Wed):** Radar eyes on ice — applying today's physics to GPR
