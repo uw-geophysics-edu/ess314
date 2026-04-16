@@ -91,10 +91,10 @@ When the wave speed varies spatially — $V = V(\mathbf{x})$ — wavefronts defo
 
 :::{figure} ../assets/figures/fig_wavefronts_isotropic_hetero.png
 :name: fig-wavefronts-lec5
-:alt: Two-panel figure. Top panel shows a point source at the surface with semicircular wavefronts expanding downward in a uniform blue medium, with straight downward-pointing ray arrows perpendicular to each wavefront. Label reads velocity constant in all directions, straight ray paths and circular wavefronts. Bottom panel shows the same point source but in a medium where the left half is blue with slower velocity and the right half is green with faster velocity. The wavefronts are distorted, bulging further into the fast region, and the ray arrows curve toward the slow region. Label reads velocity varies laterally, curved ray paths and irregular wavefronts.
+:alt: Two-panel figure. Panel (a) shows a point source at the surface with semicircular wavefronts expanding downward in a uniform blue medium, with straight downward-pointing ray arrows perpendicular to each wavefront. Panel (b) shows the same source above a medium containing a low-velocity elliptical anomaly (sedimentary basin or magma chamber) outlined by a dashed red ellipse. The velocity field is shown as a colour mesh. Rays bend into the slow anomaly, and wavefronts retard (bulge inward) inside it.
 :width: 80%
 
-**Figure 5.1.** Wavefronts and rays in (a) a homogeneous isotropic medium: circular wavefronts, straight rays, and (b) a laterally heterogeneous medium: distorted wavefronts, curved rays. Rays always point perpendicular to wavefronts in isotropic media. [Python-generated. Script: `assets/scripts/fig_wavefronts_isotropic_hetero.py`]
+**Figure 5.1.** Wavefronts and rays in (a) a homogeneous isotropic medium: circular wavefronts, straight rays, and (b) a medium with a low-velocity anomaly (basin / magma chamber): rays bend into the slow region and wavefronts retard inside it. Rays always point perpendicular to wavefronts in isotropic media. [Python-generated. Script: `assets/scripts/fig_wavefronts_isotropic_hetero.py`]
 :::
 
 :::{admonition} Key Concept: Rays Bend Toward Slow Regions
