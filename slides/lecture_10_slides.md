@@ -42,11 +42,22 @@ CASIE-21 (Cascadia, 2021) records reflections on the streamer and refractions on
 
 ## Why dipping reflectors are mispositioned
 
-![w:1000 Left: dipping reflector with normal ray of length d at dip theta = 30 degrees from source S, showing apparent position C directly below S at slant depth d and true reflection point R updip and shallower. Right: zero-offset time section showing the unmigrated event and a curved migration-shift arrow connecting the plotted position to the migrated position.](../assets/figures/fig_migration_mispositioning.png)
+![w:950 Left: earth cross-section — dipping reflector, actual normal ray (vermilion, perpendicular to reflector) vs. assumed vertical path (pink dashed). Right: zero-offset time section, migration shift arrow from apparent to true position.](../assets/figures/fig_migration_mispositioning.png)
 
-$z = d\cos\theta \qquad \Delta x = d\sin\theta$
+Four-step reasoning → **the instrument records only $t = 2d/v$, nothing about direction**.
 
-The event is **plotted beneath $S$**; the reflector is **updip and shallower**.
+---
+
+## The mispositioning chain — step by step
+
+1. **What is recorded:** round-trip time $t = 2d/v$ — no directional information
+2. **Why the ray is not vertical:** law of reflection + zero offset → the only returning ray hits the reflector at **90°** (the *normal ray*). If the reflector dips at $\theta$, the ray travels at $\theta$ off vertical
+3. **The wrong assumption:** the display plots the event **straight below** $S$ at depth $d$ — as if the ray were vertical
+4. **Two errors result:**
+   - Horizontal: true point $R$ is **updip** of plotted point $C$ by $\Delta x = d\sin\theta$
+   - Vertical: $R$ is **shallower** — true depth $d\cos\theta < d$
+
+Both errors vanish for flat reflectors ($\theta = 0$). **Migration** corrects both.
 
 ---
 
@@ -158,28 +169,36 @@ What would $v = 2.0$ km/s produce?
 
 ---
 
-## The refraction–reflection bridge
+## Why neither method works alone
 
-Migration requires $v(x, z)$. **Neither refraction nor reflection alone provides all of it.**
+| | Refraction (Lecs 6–7) | Reflection (Lecs 8–9) |
+|---|---|---|
+| **Wave type** | Head waves (first arrivals) | Reflected waves (later arrivals) |
+| **Measures** | Absolute velocities $v_1, v_2, \ldots$ | Stacking velocity $V_{\rm rms}(t_0)$ |
+| **Depth range** | Surface → deepest refractor (~1–5 km) | Any depth with impedance contrast |
+| **Strength** | Accurate absolute $v$; robust | Structural detail at all depths |
+| **Blind spot** | Can't see below deepest refractor; misses LVZs | Velocities relative, not absolute; near-surface errors propagate down |
 
-- **Refraction first arrivals** constrain $v$ in the **shallowest section**, down to the deepest refractor
-- **Reflection NMO** constrains $v$ between the **intermediate layers** that refraction never reaches
-- **Migration** tests the combined model: **residual moveout → velocity update**
-
-Refraction and reflection are two constraints on one model.
+**Refraction anchors the velocity; reflection reveals the structure.**
+Migration fuses both and tests whether the combined model is correct.
 
 ---
 
-## The unified processing loop
+## The unified processing checklist
 
-1. **Pick first breaks** → refraction tomography → $v_{\rm refr}(z)$ near surface
-2. **Pick NMO velocities** → Dix → $v_{\rm NMO}(x, z)$ deeper section
-3. **Stitch** into initial $v(x, z)$
-4. **Migrate**
-5. **Inspect image for frowns and smiles**
-6. **Update $v$, re-migrate** (iterate)
+| Step | Action | Method | Product |
+|:---:|--------|--------|--------|
+| **1** | Pick first breaks | Refraction | $t_{\rm fb}(x)$ |
+| **2** | Invert first arrivals | Refraction tomography | Shallow $v_{\rm refr}(x,z)$ |
+| **3** | Pick NMO velocities | Reflection | $V_{\rm rms}(t_0)$ |
+| **4** | Dix equation | Reflection | Interval $v_{\rm int}(t_0)$ |
+| **5** | Stitch models | Both | Initial $v_0(x,z)$ |
+| **6** | Migrate | Kirchhoff sum | Image $\hat{\mathbf{m}}_0$ |
+| **7** | Diagnose | Velocity QC | Frowns / smiles / flat |
+| **8** | Update $v$, re-migrate | Iterate 6→7→8 | Focused image |
 
 Every active-source imaging workflow — academic or industrial — is a variant of this loop.
+In CASIE-21, OBS first arrivals (Step 2) anchored the migration (Step 6).
 
 ---
 

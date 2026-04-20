@@ -78,17 +78,27 @@ A single shot gather in {numref}`fig-integrated-shot-gather` contains five disti
 
 ### 2.1 The mispositioning problem
 
-Consider the zero-offset experiment in {numref}`fig-mispositioning`: a collocated source and receiver at surface position $S$, and a dipping reflector. The recorded arrival came from a reflection point $R$ reached by a ray that leaves $S$ perpendicular to the reflector (the *normal ray*). If the event is plotted directly beneath $S$ at a depth equal to half the two-way travel time times velocity, it will be placed at an apparent position $C$ — not at the true position $R$. Two errors result:
+To understand why a zero-offset seismic section plots dipping reflectors in the wrong place, follow the chain of physical reasoning step by step.
 
-- **Horizontal mispositioning**: $R$ lies updip of $C$.
-- **Vertical mispositioning**: the slant path $SR$ is longer than the vertical from $S$ to the reflector, so $C$ is plotted deeper than the reflector actually is beneath $S$.
+**Step 1 — What the experiment actually records.** In a zero-offset survey, the source and receiver sit at the same surface location $S$. A seismic pulse travels down from $S$, bounces off the subsurface interface, and returns to $S$. The instrument records exactly one number from this round trip: the **two-way travel time** $t = 2d/v$, where $d$ is the total one-way path length and $v$ is the velocity. The instrument knows nothing about the direction the ray traveled.
+
+**Step 2 — Why the ray travels at an angle.** The law of reflection requires the angle of incidence to equal the angle of reflection. For a zero-offset geometry (source = receiver), the only ray that departs from $S$ and returns to the same point $S$ is one that strikes the reflector at exactly 90° — the so-called **normal ray** (shown in vermilion in {numref}`fig-mispositioning`). If the reflector dips at angle $\theta$ from horizontal, this normal ray is not vertical — it travels at angle $\theta$ from the vertical, hitting the reflector at the true reflection point $R$ which lies *updip* and at a *shallower depth* than the point directly beneath $S$. The small right-angle square where the ray meets the reflector reminds us of this geometric constraint.
+
+**Step 3 — The wrong assumption.** Because the recorder has no knowledge of ray direction, the conventional seismic display makes the simplest possible assumption: it plots the event **directly beneath the surface station** $S$, at a depth $z_{\rm apparent} = vt/2 = d$. This places the reflector at point $C$ in {numref}`fig-mispositioning` — straight below $S$ at the slant-path distance $d$.
+
+**Step 4 — The two errors.** Comparing $C$ (where the event is plotted) with $R$ (where the reflection actually occurred) reveals two systematic errors:
+
+- **Horizontal mispositioning**: $R$ lies updip of $C$ by a distance $\Delta x = d\sin\theta$. The event is plotted too far downdip.
+- **Vertical mispositioning**: the true depth of $R$ is $z_R = d\cos\theta$, but $C$ is plotted at depth $d$. Because $\cos\theta < 1$ for any nonzero dip, the event is plotted **too deep** by a factor of $1/\cos\theta$.
+
+Both errors vanish when $\theta = 0$ (a flat reflector): the normal ray *is* vertical, and the assumption is correct. The steeper the dip, the larger the mispositioning.
 
 ```{figure} ../assets/figures/fig_migration_mispositioning.png
 :name: fig-mispositioning
-:alt: Left panel: earth cross-section with a dipping reflector in blue, a source-receiver triangle S at the surface at x=1.5 km, an orange normal ray of length d descending at dip angle theta = 30 degrees to the true reflection point R (star) at (2.1 km, 1.04 km), and a dotted pink vertical line descending from S to depth d = 1.2 km marking the apparent position C (circle). A horizontal arrow at the surface labeled delta x = d sin theta shows the horizontal shift. Right panel: the corresponding zero-offset time section, with a blue straight line representing the unmigrated event. The apparent position pink circle sits at (1.5 km, 1200 ms) and the migrated position orange star sits at (2.1 km, 1039 ms). A curved arrow labeled migration shift connects them.
+:alt: Left panel: earth cross-section with a dipping reflector (blue), source-receiver S (orange triangle) at x = 1.5 km, the actual normal ray (vermilion, perpendicular to the reflector) of length d traveling at angle theta to the true reflection point R (star) at (2.10 km, 1.04 km), and the assumed vertical path (pink dashed) descending from S to the apparent position C (pink circle) at (1.5 km, 1.20 km depth). An italic annotation reads "Recorder knows only t = 2d/v; assumes ray went straight down." Right panel: zero-offset time section showing the unmigrated event as a blue line, the apparent position (pink circle) at (1.5 km, 1200 ms) and the correct migrated position (star) at (2.10 km, 1039 ms), with a migration-shift arrow connecting them and the equation tau = t cos theta.
 :width: 100%
 
-A dipping reflector is plotted at the wrong place and the wrong depth on a zero-offset section. The corrections are trigonometric: $\Delta x = d\sin\theta$ horizontally and a reduction from slant time $t$ to vertical two-way time $\tau = t\cos\theta$.
+**Why zero-offset sections misposition dipping reflectors.** The instrument records only the round-trip time $t = 2d/v$ and has no information about ray direction. Plotted beneath $S$ at depth $d$ (pink dashed line → point C), the event ends up too deep and too far downdip. The true reflection point $R$ lies updip at a shallower depth ($z = d\cos\theta$). Migration corrects both errors: $\Delta x = d\sin\theta$ horizontally and $\tau = t\cos\theta$ vertically.
 ```
 
 The operation that moves events from their apparent positions to their true positions is called **migration**. The name is historical: early interpreters using light tables literally moved reflection events on their unmigrated sections to where they calculated the reflections ought to be. Modern migration is performed numerically on millions of traces, but the kinematic problem it solves has not changed.
@@ -306,18 +316,61 @@ A marine zero-offset section shows a prominent reflection hyperbola with apex at
 
 ### 5.2 The refraction–reflection bridge
 
-Migration requires a velocity model $v(x,z)$. Where does that velocity come from? In the shallow section it comes from refraction first-arrival tomography (Lecture 7): head-wave travel times, inverted with {cite:t}`ZeltBarton1998` -style tomography or its modern equivalents, constrain $v(z)$ down to the depth of the deepest refractor. In the deeper section it comes from reflection moveout analysis (Lecture 8): hyperbolic semblance picking yields $V_{\rm rms}(t_0)$, which the Dix equation converts to interval velocities.
+Migration requires a velocity model $v(x,z)$. Where does that velocity come from? The answer is that **no single method can build it alone** — refraction and reflection each constrain a different part of the Earth, for reasons rooted in the physics of each wave type.
 
-Neither method alone produces a complete $v(x, z)$. Refraction constrains the top; reflection constrains the intermediate layers that refraction never reaches; and migration tests the combined model by demanding that the resulting image be focused. A workflow that illustrates the unity is:
+#### Why refraction alone is not enough
 
-1. **Pick first breaks** on the near-offset traces → refraction tomography → $v_{\rm refr}(z)$ for the near-surface.
-2. **Pick NMO velocities** on far-offset CMP gathers → Dix inversion → $v_{\rm NMO}(x, z)$ for the deeper section.
-3. **Stitch** $v_{\rm refr}$ and $v_{\rm NMO}$ into an initial $v(x, z)$.
-4. **Migrate** with this velocity.
-5. **Check** image focus and residual moveout on common-image gathers.
-6. If residuals remain, **update** the velocity and re-migrate (steps 4–6 iterated).
+Refraction (Lectures 6–7) uses head waves — energy that travels *horizontally* along a velocity interface and radiates back to the surface. The intercept-time method or {cite:t}`ZeltBarton1998`-style tomography inverts first-arrival travel times into a velocity-versus-depth profile $v(z)$. But head waves exist only along interfaces where velocity *increases* with depth. There are two hard limits:
 
-Every active-source imaging workflow — academic or industrial — is a variant of this loop. Refraction and reflection are not two methods competing for the same data; they are two constraints on the same model, each supplying what the other cannot.
+- **Depth ceiling**: the deepest refractor a survey can detect is the one whose crossover distance fits within the survey aperture (recall the crossover formula from Lecture 6).
+- **Low-velocity zones**: any layer where $v$ decreases is invisible to refraction — head waves are never generated, so the layer is simply skipped (the "hidden layer" problem from Lecture 7).
+
+Result: refraction gives a reliable, absolute $v(z)$ for the **shallow section** (typically the upper 1–5 km in crustal studies) but says nothing about deeper structure.
+
+#### Why reflection alone is not enough
+
+Reflection (Lectures 8–9) uses echoes from impedance contrasts at any depth. NMO analysis on CMP gathers yields the stacking velocity $V_{\rm rms}(t_0)$, and the Dix equation converts $V_{\rm rms}$ to interval velocities. But these velocities are:
+
+- **Relative, not absolute**: NMO velocities are best-fit hyperbolae; they constrain velocity *ratios* between layers better than they constrain absolute values.
+- **Contaminated by the near-surface**: if the shallow velocity is wrong, every Dix-inverted interval velocity below it inherits that error, because $V_{\rm rms}$ is a running average from the surface down.
+- **Measured in time, not depth**: without an independent velocity to convert from $t$ to $z$, reflectors are positioned in time, not in the Earth.
+
+Result: reflection gives excellent **structural detail** (interfaces, faults, stratigraphic horizons) at all depths but needs an external velocity anchor.
+
+#### What each method contributes
+
+| | Refraction (Lecs 6–7) | Reflection (Lecs 8–9) |
+|---|---|---|
+| **Wave type used** | Head waves (first arrivals) | Reflected waves (later arrivals) |
+| **What it measures** | Absolute layer velocities $v_1, v_2, \ldots$ | Stacking velocity $V_{\rm rms}(t_0)$ at each reflector |
+| **Depth range** | Surface to deepest refractor (~1–5 km) | Any depth with an impedance contrast |
+| **Strengths** | Accurate absolute $v$; robust to noise | Detailed structural image; works at all depths |
+| **Blind spots** | Cannot see below deepest refractor; misses low-velocity zones | Velocity estimates are relative, not absolute; sensitive to near-surface errors |
+| **Governing equation** | $t_i(x)$ intercept-time (Lec 6); tomographic inversion $\mathbf{d} = G\mathbf{m}$ (Lec 7) | $t^2(x^2)$ hyperbola → $V_{\rm rms}$ → Dix equation (Lec 8) |
+
+#### The unified processing checklist
+
+The two methods are not competitors — they are **complementary constraints on the same model** $v(x,z)$. In practice, an active-source imaging project proceeds through the following steps:
+
+::::{admonition} Active-source imaging workflow — from data to image
+:class: important
+
+| Step | Action | Method | What it produces | Equations / tools |
+|:----:|--------|--------|-----------------|-------------------|
+| **1** | **Pick first breaks** on near-offset traces | Refraction | Observed first-arrival times $t_{\rm fb}(x)$ | Visual picking or AI autopicker ({cite:t}`Mardan2024`) |
+| **2** | **Invert first-arrival times** | Refraction tomography | Shallow velocity model $v_{\rm refr}(x, z)$ from surface to ~3–5 km depth | Intercept-time (Lec 6) or $\mathbf{d} = G\mathbf{m}$ tomography ({cite:t}`ZeltBarton1998`) |
+| **3** | **Pick NMO velocities** on CMP gathers | Reflection | Stacking velocity $V_{\rm rms}(t_0)$ for each reflector | Semblance analysis (Lec 8) |
+| **4** | **Convert to interval velocities** | Reflection | Interval velocities $v_{\rm int}(t_0)$ below the refraction zone | Dix equation (Lec 8): $v_n^2 = \frac{V_{{\rm rms},n}^2 t_n - V_{{\rm rms},n-1}^2 t_{n-1}}{t_n - t_{n-1}}$ |
+| **5** | **Stitch the two models** | Both | An initial $v_0(x, z)$: refraction model on top, Dix-inverted model below, blended at the transition depth | — |
+| **6** | **Migrate** the zero-offset (stacked) section | Migration | A first image $\hat{\mathbf{m}}_0 = F^\top \mathbf{d}$ using $v_0$ | Kirchhoff sum, Eq. {eq}`eq-kirchhoff` |
+| **7** | **Diagnose** the image | Velocity analysis | Residual curvature on common-image gathers: frowns = too slow, smiles = too fast, flat = correct | Visual inspection ({numref}`fig-velocity-image-duality`) |
+| **8** | **Update** the velocity model | Iterative refinement | Corrected $v_1(x,z)$; return to Step 6 | Repeat Steps 6–8 until residuals are flat |
+
+The loop **6 → 7 → 8 → 6** is iterated until the image is focused. In CASIE-21 (Section 9), the shallow model from OBS first arrivals (Step 2) was the essential anchor without which the reflection migration (Step 6) would have started from a wrong velocity.
+
+::::
+
+The key insight is that **refraction supplies the absolute velocity anchor, and reflection supplies the structural detail**. Without the refraction model, migration starts from an incorrect velocity and produces an unfocused image. Without reflection, the refraction model alone cannot see the plate interface or deep sedimentary layers. Migration is the operation that fuses both constraints into a single image — and the image itself is the diagnostic of whether the combined velocity model is correct.
 
 ---
 
