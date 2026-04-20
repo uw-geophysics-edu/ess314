@@ -15,6 +15,10 @@ open_sources:
 
 # From Travel Times to Images: Migration and the Unity of Active-Source Seismology
 
+:::{seealso}
+📊 **Lecture slides** — <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_10_slides.html" target="_blank">open in new tab ↗</a>
+:::
+
 ::::{dropdown} Learning Objectives
 :color: primary
 :icon: target
