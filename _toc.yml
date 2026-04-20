@@ -37,8 +37,8 @@ parts:
         title: "Reflections I"
       - file: lectures/09_seismic_reflections_I
         title: "Reflections II"
-      - file: lectures/10_seismic_reflections_II
-        title: "Reflections II"
+      - file: lectures/10_migration_and_velocity_image_duality
+        title: "Migration & Velocity–Image Duality"
       - file: lectures/11_whole_earth_I
         title: "Whole Earth I"
       - file: lectures/12_whole_earth_II

@@ -44,7 +44,7 @@ By the end of this lecture, students will be able to:
 | **Course LOs addressed** | LO-1 (multiples, diffractions, AVO physics), LO-2 (dipping-layer t-x math, Shuey coefficients), LO-3 (DMO concept, velocity analysis for dipping layers), LO-4 (flat-layer assumptions and when they break), LO-5 (figure generation in Lab 3), LO-7 (AI/ML tools evaluated critically) |
 | **Learning outcomes** | LO-OUT-A through D, G, H |
 | **Prior lecture** | Lecture 8 — Introduction to Seismic Reflection (flat-layer travel time, NMO, CMP stacking, velocity analysis) |
-| **Next lecture** | Lecture 10 — Seismic Reflections II (migration, seismic stratigraphy, interpretation) |
+| **Next lecture** | Lecture 10 — Migration & Velocity–Image Duality |
 | **Lab connection** | Lab 3 Part 6 (dipping-layer CMP gather; measure up-dip/down-dip velocities; apply f-k filter) |
 
 :::::

@@ -19,6 +19,10 @@ All slide decks are compiled from [Marp](https://marp.app/) Markdown and served 
 | 04 | Wavefronts, Rays, and Huygens Construction | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_04_slides.html" target="_blank">▶ View</a> | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_04_slides.pdf" download>⬇ PDF</a> |
 | 05 | Wavefronts, Rays, and Snell's Law | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_05_slides.html" target="_blank">▶ View</a> | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_05_slides.pdf" download>⬇ PDF</a> |
 | 06 | Seismic Refraction I | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_06_slides.html" target="_blank">▶ View</a> | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_06_slides.pdf" download>⬇ PDF</a> |
+| 07 | Seismic Refraction II | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_07_slides.html" target="_blank">▶ View</a> | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_07_slides.pdf" download>⬇ PDF</a> |
+| 08 | Reflections I | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_08_slides.html" target="_blank">▶ View</a> | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_08_slides.pdf" download>⬇ PDF</a> |
+| 09 | Reflections II | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_09_slides.html" target="_blank">▶ View</a> | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_09_slides.pdf" download>⬇ PDF</a> |
+| 10 | Migration & Velocity–Image Duality | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_10_slides.html" target="_blank">▶ View</a> | <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_10_slides.pdf" download>⬇ PDF</a> |
 
 ---
 
