@@ -76,6 +76,40 @@ A single shot gather in {numref}`fig-integrated-shot-gather` contains five disti
 
 ## 2 — Governing Physics
 
+### 2.0 The simple case first: migrating flat layers
+
+Before tackling dipping reflectors, consider the simplest possible imaging problem: a **flat, horizontal interface** at depth $z$ below a constant-velocity layer with speed $v$.
+
+Place a collocated source and receiver at any surface position $S$. The seismic pulse travels straight down, reflects off the flat interface, and travels straight back up. The instrument records the round-trip (two-way) travel time:
+
+$$
+t = \frac{2z}{v}.
+$$
+
+Where should the reflector be plotted? Because the interface is flat, the normal to the reflector is vertical — the ray *is* vertical. The depth conversion is exact:
+
+$$
+z = \frac{v\,t}{2}.
+$$
+
+This is all that "migration" means for flat layers: multiply the two-way time by $v/2$ and you have the true depth. No horizontal shift, no depth error, no iteration. The display convention of plotting events beneath the surface station is correct when the reflector is horizontal ({numref}`fig-flat-vs-dipping`, panel a).
+
+Now tilt the reflector by a small dip $\theta = 10°$ ({numref}`fig-flat-vs-dipping`, panel b). The normal ray is no longer vertical — it tilts at $10°$ off vertical — and two small errors appear: the event is plotted 0.21 km too far downdip, and 2% too deep. At $\theta = 30°$ ({numref}`fig-flat-vs-dipping`, panel c) the errors grow to 0.60 km horizontally and 13% in depth. The simple time-to-depth formula $z = vt/2$ breaks down as soon as there is dip.
+
+```{figure} ../assets/figures/fig_flat_vs_dipping_migration.png
+:name: fig-flat-vs-dipping
+:alt: Three-panel progression. Panel (a) flat reflector at theta = 0 degrees with a vertical normal ray and the annotation z = vt/2 is exact. Panel (b) weak dip at theta = 10 degrees with a slightly tilted normal ray, apparent position C plotted 0.21 km too far downdip and 2 percent too deep. Panel (c) steep dip at theta = 30 degrees with a strongly tilted normal ray, 0.60 km horizontal error and 13 percent depth error.
+:width: 100%
+
+**From flat to dipping: why migration complexity grows with dip.** (a) For a flat reflector the normal ray is vertical and $z = vt/2$ places the event at the correct depth — no migration needed. (b) At $10°$ dip, small horizontal and vertical errors appear. (c) At $30°$ dip, errors are large enough to distort the interpreted geology. Migration corrects both errors; its corrections vanish smoothly when $\theta \to 0$.
+```
+
+:::{admonition} Key takeaway — time-to-depth conversion
+:class: tip
+
+For **flat layers** in a constant-velocity medium, "migration" is simply $z = vt/2$ — a linear time-to-depth conversion. This is why introductory seismology courses can discuss reflector depths without mentioning migration at all: for flat layers, the conventional display is already correct. The moment the reflector dips, however, the display places events in the wrong position, and a proper migration is required.
+:::
+
 ### 2.1 The mispositioning problem
 
 To understand why a zero-offset seismic section plots dipping reflectors in the wrong place, follow the chain of physical reasoning step by step.

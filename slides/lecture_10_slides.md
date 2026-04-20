@@ -40,6 +40,33 @@ CASIE-21 (Cascadia, 2021) records reflections on the streamer and refractions on
 
 ---
 
+## The simple case first: flat layers
+
+For a **flat, horizontal reflector** at depth $z$ with velocity $v$:
+
+$$t = \frac{2z}{v} \quad \Longrightarrow \quad z = \frac{v\,t}{2}$$
+
+- The normal ray **IS vertical** — the ray goes straight down and straight back up
+- Plotting the event beneath $S$ at depth $vt/2$ is **exactly correct**
+- "Migration" = a simple **time-to-depth conversion**
+- No horizontal shift, no depth error
+
+This is why introductory courses discuss reflector depths without mentioning migration — for flat layers, the display is already right.
+
+---
+
+## What happens when the reflector dips?
+
+![w:1050 Three panels: flat reflector with vertical ray and exact z = vt/2, 10-degree dip with small errors, 30-degree dip with large 13% depth error and 0.60 km horizontal shift.](../assets/figures/fig_flat_vs_dipping_migration.png)
+
+| Dip $\theta$ | Horizontal error $\Delta x$ | Depth error | Migration needed? |
+|:---:|:---:|:---:|:---:|
+| **0°** | 0 | 0% | No — $z = vt/2$ is exact |
+| **10°** | 0.21 km | 2% | Barely — small correction |
+| **30°** | 0.60 km | 13% | **Yes** — geology is distorted |
+
+---
+
 ## Why dipping reflectors are mispositioned
 
 ![w:950 Left: earth cross-section — dipping reflector, actual normal ray (vermilion, perpendicular to reflector) vs. assumed vertical path (pink dashed). Right: zero-offset time section, migration shift arrow from apparent to true position.](../assets/figures/fig_migration_mispositioning.png)
