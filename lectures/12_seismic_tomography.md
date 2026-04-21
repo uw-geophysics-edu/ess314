@@ -1,39 +1,51 @@
 ---
-title: "Lecture 12 — Seismic Tomography"
-subtitle: "From travel-time residuals to three-dimensional Earth structure"
-authors:
-  - name: Marine Denolle
-    affiliation: University of Washington, ESS
+title: "Seismic Tomography: From Travel-Time Residuals to 3-D Earth Structure"
 week: 6
 lecture: 12
+date: "2026-05-06"
+topic: "Seismic tomography, forward/inverse operator, regularisation, Cascadia slab, mantle plumes"
+course_lo: ["LO-2", "LO-3", "LO-5", "LO-7"]
+learning_outcomes: ["LO-OUT-B", "LO-OUT-D", "LO-OUT-E", "LO-OUT-F"]
+open_sources:
+  - "Nolet 2008, A Breviary of Seismic Tomography, Cambridge University Press"
+  - "IRIS/EarthScope Tomography Visualizations (open access)"
+  - "Sigloch et al. 2008, North American mantle tomography (open access)"
+  - "Lowrie & Fichtner 2020 Ch. 4 (UW Libraries)"
 ---
 
-# Lecture 12 — Seismic Tomography
+# Seismic Tomography: From Travel-Time Residuals to 3-D Earth Structure
 
-## Learning Objectives
+:::{seealso}
+📊 **Lecture slides** — <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_12_slides.html" target="_blank">open in new tab ↗</a>
+:::
+
+::::{dropdown} Learning Objectives
+:color: primary
+:icon: target
+:open:
 
 By the end of this lecture, students will be able to:
 
-- **[LO-12.1]** Formulate a discretised seismic tomography problem as
-  a linear forward operator $\mathbf{d} = \mathbf{G}\mathbf{m}$
-  acting on a slowness model, and explain why the operator geometry
-  is set by the ray paths that cross each cell (maps to course
-  **LO-2** forward/inverse reasoning, **LO-3** wave physics, and
-  **LO-OUT-B** subsurface imaging).
+- **[LO-12.1]** Formulate a discretised seismic tomography problem as a linear forward operator $\mathbf{d} = \mathbf{G}\mathbf{m}$ acting on a slowness model, and explain why the operator geometry is set by the ray paths that cross each cell.
+- **[LO-12.2]** Recognise that tomographic inverse problems are almost always ill-posed — under-determined, sensitive to noise, or both — and describe the role of regularisation (damping, smoothing, weighting) in producing a stable solution.
+- **[LO-12.3]** Interpret a global or regional tomographic image in terms of cold slabs, hot plumes, melt zones, and lower-mantle heterogeneity, and relate the Cascadia Juan de Fuca slab and mantle wedge to their tomographic signatures.
 
-- **[LO-12.2]** Recognise that tomographic inverse problems are
-  almost always ill-posed — under-determined, sensitive to noise, or
-  both — and describe the role of regularisation (damping, smoothing,
-  weighting) in producing a stable solution that remains physically
-  interpretable (maps to **LO-7** critical evaluation of models).
+::::
 
-- **[LO-12.3]** Interpret a global or regional tomographic image in
-  terms of cold slabs, hot plumes, melt zones, and lower-mantle
-  heterogeneity, and relate the Cascadia Juan de Fuca slab, the
-  mantle wedge beneath the Cascade arc, and the Yellowstone plume to
-  the tomographic signatures taught in this lecture (maps to
-  **LO-5** contemporary geophysical reasoning and **LO-OUT-D**
-  Pacific Northwest context).
+::::{dropdown} Syllabus Alignment
+:color: secondary
+:icon: list-task
+
+| | |
+|---|---|
+| **Course LOs addressed** | LO-2, LO-3, LO-5, LO-7 |
+| **Learning outcomes practiced** | LO-OUT-B (compute travel-time residuals), LO-OUT-D (set up $\mathbf{G}\mathbf{m}$ inversion), LO-OUT-E (interpret regularised model), LO-OUT-F (choose tomographic approach) |
+| **Prior lectures** | Lecture 11 (PREM, global phases, 1-D Earth); Lecture 10 (forward/inverse framework, $F\mathbf{m} = \mathbf{d}$) |
+| **Next lecture** | Lecture 13 — Earthquake Phenomena I |
+| **Lab connection** | Lab 3 extension: students invert a toy 2×2 slowness grid and explore how damping controls model roughness vs. data fit |
+| **Discussion connection** | Discussion 6: Cascadia slab imaging — comparing seismic velocity anomalies to geological observations |
+
+::::
 
 ## Prerequisites
 

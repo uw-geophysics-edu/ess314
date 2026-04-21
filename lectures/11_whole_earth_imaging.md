@@ -1,38 +1,51 @@
 ---
-title: "Lecture 11 — Whole Earth Imaging"
-subtitle: "From travel-time observations to the one-dimensional Earth"
-authors:
-  - name: Marine Denolle
-    affiliation: University of Washington, ESS
+title: "Whole Earth Imaging: From Travel-Time Observations to the 1-D Earth"
 week: 6
 lecture: 11
+date: "2026-05-04"
+topic: "Global body-wave phases, shadow zones, PREM, 1-D Earth structure"
+course_lo: ["LO-2", "LO-3", "LO-5", "LO-7"]
+learning_outcomes: ["LO-OUT-B", "LO-OUT-C", "LO-OUT-E"]
+open_sources:
+  - "Dziewonski & Anderson 1981, PREM (open access via ScienceDirect)"
+  - "Kennett et al. 1995, AK135 (open access, GJI)"
+  - "Lowrie & Fichtner 2020 Ch. 3 (UW Libraries)"
+  - "IRIS/EarthScope Global Stacks (open access)"
 ---
 
-# Lecture 11 — Whole Earth Imaging
+# Whole Earth Imaging: From Travel-Time Observations to the 1-D Earth
 
-## Learning Objectives
+:::{seealso}
+📊 **Lecture slides** — <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_11_slides.html" target="_blank">open in new tab ↗</a>
+:::
+
+::::{dropdown} Learning Objectives
+:color: primary
+:icon: target
+:open:
 
 By the end of this lecture, students will be able to:
 
-- **[LO-11.1]** Describe how seismic waves recorded around the globe
-  serve as a probe of Earth's internal structure, and explain why
-  travel-time observations alone can constrain the radial profile of
-  P- and S-wave velocity and the location of major discontinuities
-  (maps to course **LO-2** forward/inverse reasoning and **LO-OUT-B**
-  subsurface imaging).
+- **[LO-11.1]** Describe how seismic waves recorded around the globe serve as a probe of Earth's internal structure, and explain why travel-time observations alone can constrain the radial profile of P- and S-wave velocity and the location of major discontinuities.
+- **[LO-11.2]** Read a global travel-time diagram, identify the major body-wave phases (P, S, PP, SS, PcP, ScS, PKP, PKIKP, SKS), and explain how each phase's existence or absence constrains a specific property of Earth's interior.
+- **[LO-11.3]** Explain the physical evidence for the three canonical whole-Earth discoveries — Oldham's fluid outer core (1906), Gutenberg's depth to the CMB (1914), and Lehmann's solid inner core (1936) — and reproduce the shadow-zone reasoning that anchors each one.
 
-- **[LO-11.2]** Read a global travel-time diagram, identify the major
-  body-wave phases (P, S, PP, SS, PcP, ScS, PKP, PKIKP, SKS, SKKS),
-  and explain how each phase's existence or absence constrains a
-  specific property of Earth's interior (maps to **LO-3** wave
-  physics).
+::::
 
-- **[LO-11.3]** Explain the physical evidence for the three canonical
-  whole-Earth discoveries — Oldham's fluid outer core (1906),
-  Gutenberg's depth to the core-mantle boundary (1914), and Lehmann's
-  solid inner core (1936) — and reproduce the shadow-zone reasoning
-  that anchors each one (maps to **LO-5** historical and contemporary
-  geophysical reasoning and **LO-7** critical evaluation of claims).
+::::{dropdown} Syllabus Alignment
+:color: secondary
+:icon: list-task
+
+| | |
+|---|---|
+| **Course LOs addressed** | LO-2, LO-3, LO-5, LO-7 |
+| **Learning outcomes practiced** | LO-OUT-B (interpret travel-time curves), LO-OUT-C (explain physical reasoning from shadow zones), LO-OUT-E (evaluate 1-D Earth models) |
+| **Prior lectures** | Lectures 3–4 (Snell's law, ray-wavefront duality, slowness integral), Lecture 10 (forward/inverse problem framing) |
+| **Next lecture** | Lecture 12 — Seismic Tomography |
+| **Lab connection** | Lab 3: students compute AK135 travel times with obspy.taup and compare to observed phase picks |
+| **Discussion connection** | Discussion 6: How shadow zones led to discovery — evaluating historical claims from first principles |
+
+::::
 
 ## Prerequisites
 
