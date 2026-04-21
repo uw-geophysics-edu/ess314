@@ -1,9 +1,9 @@
 ---
-title: "From Travel Times to Images: Migration and the Unity of Active-Source Seismology"
+title: "Building Earth Images: The Iterative Refraction–Reflection Workflow"
 week: 4
 lecture: 10
 date: "2026-04-27"
-topic: "Migration, velocity, and the reflection–refraction bridge"
+topic: "Forward and inverse modeling, multi-layer migration, iterative refraction–reflection workflow"
 course_lo: ["LO-1", "LO-2", "LO-3", "LO-4", "LO-5", "LO-7"]
 learning_outcomes: ["LO-OUT-B", "LO-OUT-C", "LO-OUT-D", "LO-OUT-E", "LO-OUT-F", "LO-OUT-H"]
 open_sources:
@@ -13,7 +13,7 @@ open_sources:
   - "EarthScope/IRIS Active Source Educational Materials"
 ---
 
-# From Travel Times to Images: Migration and the Unity of Active-Source Seismology
+# Building Earth Images: The Iterative Refraction–Reflection Workflow
 
 :::{seealso}
 📊 **Lecture slides** — <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_10_slides.html" target="_blank">open in new tab ↗</a>
@@ -26,12 +26,13 @@ open_sources:
 
 By the end of this lecture, students will be able to:
 
-- **[LO-10.1]** Explain why a zero-offset seismic section mispositions dipping reflectors, and derive the geometric corrections $\Delta x = d\sin\theta$ and $\tau = t\cos\theta$.
-- **[LO-10.2]** State the exploding-reflector analogy, explain why it requires the propagation velocity to be halved, and identify two situations in which it breaks down.
-- **[LO-10.3]** Describe the Kirchhoff adjoint pair — that forward modeling spreads a scatterer into a data-space hyperbola, while migration sums data along the same hyperbola back into model space — and use this to explain why modeling and migration are transposes of each other.
-- **[LO-10.4]** Argue from a migrated image whether the migration velocity was correct, too slow, or too fast, using the geometry of residual curvature.
-- **[LO-10.5]** Diagram how refraction (first-arrival tomography) and reflection (NMO/migration) imaging share a single Earth model $v(x,z)$, and articulate how each method constrains a different part of it.
-- **[LO-10.6]** Identify one task in the active-source processing chain where deep learning provides a useful surrogate, and state explicitly what physical knowledge was required to produce the surrogate's training data.
+- **[LO-10.1]** Distinguish a *forward model* (predicting data from an Earth model) from an *inverse model* (estimating the Earth model from data), and write the operator notation $\mathbf{d} = F\,\mathbf{m}$ and $\hat{\mathbf{m}} = F^\top \mathbf{d}$ for each.
+- **[LO-10.2]** Explain why even perfectly flat, horizontal reflectors require a layered velocity model to be correctly depth-converted, and describe how refraction data (absolute layer velocities) anchor the Dix inversion.
+- **[LO-10.3]** Derive the two migration corrections for a dipping reflector — $\Delta x = d\sin\theta$ and $\tau = t\cos\theta$ — and explain why both vanish when $\theta = 0$.
+- **[LO-10.4]** Describe what a seismic diffraction is, explain its hyperbolic signature in a zero-offset section, and state how Kirchhoff migration collapses it to a point.
+- **[LO-10.5]** Read a migrated image and diagnose whether the migration velocity was correct, too slow (frowns), or too fast (smiles).
+- **[LO-10.6]** Outline the 8-step iterative refraction–reflection–migration workflow and identify where refraction and reflection each contribute to the final image.
+- **[LO-10.7]** Evaluate a deep-learning surrogate for an imaging task by identifying what physics-based operator it replaces and who produced its training data.
 
 ::::
 
@@ -42,196 +43,144 @@ By the end of this lecture, students will be able to:
 | | |
 |---|---|
 | **Course LOs addressed** | LO-1, LO-2, LO-3, LO-4, LO-5, LO-7 |
-| **Learning outcomes practiced** | LO-OUT-B (compute travel times), LO-OUT-C (explain physical why), LO-OUT-D (set up inverse problem), LO-OUT-E (interpret residuals), LO-OUT-F (choose methods), LO-OUT-H (critique AI outputs) |
-| **Prior lecture** | Lecture 9 — Seismic Reflections II (dipping layers, diffractions, AVO, noise filtering) |
+| **Learning outcomes practiced** | LO-OUT-B (compute travel times), LO-OUT-C (explain physical reasoning), LO-OUT-D (set up inverse problem), LO-OUT-E (interpret residuals), LO-OUT-F (choose methods), LO-OUT-H (critique AI outputs) |
+| **Prior lectures** | Lectures 6–7 (refraction, intercept-time, tomography), Lectures 8–9 (reflection, NMO, CMP stacking, Dix equation) |
 | **Next lecture** | Lecture 11 — Whole Earth Structure I |
-| **Lab connection** | Lab 4: Design → Simulate → Image — students build a synthetic dataset from their own survey design and migrate with correct and deliberately incorrect velocities |
-| **Discussion connection** | Revisits the Discussion 2 survey-design theme (radar on ice) with a broader active-source survey-design checklist |
+| **Lab connection** | Lab 4: students build a multi-layer synthetic, migrate with correct and incorrect velocities, and diagnose the image |
+| **Discussion connection** | Discussion 5: Hikurangi vs Cascadia — comparing imaging strategies at two subduction zones |
 
 ::::
 
 ## Prerequisites
 
-Students should be comfortable with: ray geometry and Snell's law (Lecture 5); refraction head waves and intercept-time analysis (Lectures 6–7); reflection coefficients, normal moveout, and CMP stacking (Lectures 8–9); the hyperbolic travel-time curve $t(x) = \sqrt{t_0^2 + x^2/V_{\rm rms}^2}$.
+Students should be comfortable with: ray geometry and Snell's law (Lecture 5); refraction head waves, the intercept-time equation, and first-arrival tomography (Lectures 6–7); normal moveout, CMP stacking, the Dix equation, the hyperbolic travel-time curve $t(x)^2 = t_0^2 + x^2/V_{\rm rms}^2$, and AVO (Lectures 8–9).
 
 ---
 
 ## 1 — The Geoscientific Question
 
-Off the Pacific Northwest coast, the Juan de Fuca plate dives beneath North America at the Cascadia subduction zone. The plate interface lies between about 5 and 25 km below the seafloor, and its geometry — where it is locked, where it is slipping, and how its properties change along strike — controls the size and location of the megathrust earthquakes that will eventually strike Washington, Oregon, and British Columbia. No borehole reaches this interface. Every constraint on its position and properties comes from seismic imaging.
+Off the eastern coast of New Zealand's North Island, the Pacific plate slides obliquely westward beneath the Australian plate at the **Hikurangi subduction zone**. The plate interface spans depths from less than 5 km beneath the trench to roughly 20–25 km under the forearc — and its geometry, coupling state, and fluid content control both the size of future megathrust earthquakes and the tsunami hazard to New Zealand's most populated coastlines.
 
-In the summer of 2021, the CASIE-21 experiment towed a $15$-km hydrophone streamer behind the R/V *Marcus G. Langseth* along a set of long profiles off the Oregon and Washington coast, while ocean-bottom seismometers (OBS) recorded the same shots at larger offsets. One pass, one set of airgun shots, two datasets: a streamer record dominated by near-offset *reflections*, and an OBS record dominated by long-offset *refractions*. Both constrain the same Earth — the same $v(x,z)$ — but they emphasize different arrivals and different sensitivities.
+No borehole reaches this interface. Every constraint on its position, dip, and physical properties comes from **seismic imaging**. At Hikurangi, modern campaigns deploy ocean-bottom seismometers (OBS) at long offsets to record *first-arrival refractions*, and a towed hydrophone streamer at shorter offsets to record *reflections*. Both instrument systems record the same airgun shots — yet they produce complementary datasets that constrain different aspects of the subsurface.
 
-```{figure} ../assets/figures/fig_integrated_shot_gather.png
-:name: fig-integrated-shot-gather
-:alt: Left panel: two-layer-over-halfspace Earth model with shot at x=0, receivers along the surface to 23 km offset, and ray paths drawn for a basement reflection (blue) and a head wave along the basement (green). Right panel: travel-time curves on the record section, showing a dashed black direct wave, a green straight-line head wave along the basement at v2 = 3.5 km/s, a blue reflection hyperbola from the basement with two-way zero-offset time 2.22 s, an orange reflection hyperbola from the Moho with t0 = 4.51 s, and a pink straight-line head wave below the Moho at v3 = 7.5 km/s.
+```{figure} ../assets/figures/fig_hikurangi_motivator.png
+:name: fig-hikurangi
+:alt: Schematic cross-section of the Hikurangi subduction margin showing the velocity background from refraction (colour) and structural picks from reflection (bold lines), with OBS receivers on the seafloor and a streamer at the sea surface.
 :width: 100%
 
-A single synthetic Cascadia-style shot gather contains both reflections (hyperbolas) and refractions (straight lines). The two event families are not separate experiments — they are two views of one Earth model $v(x,z)$.
+**The Hikurangi subduction margin (schematic after {cite:t}`Wallace2009`; {cite:t}`Barker2018`).** The background colour shows the P-wave velocity model from wide-angle refraction: slow sediments (blue) grading to fast crust and mantle (orange–red). Dashed lines are reflection picks at key sediment interfaces; the bold yellow–orange line traces the plate interface (décollement). Green triangles mark OBS positions; the dotted green line is a refraction head-wave ray path. The blue solid line is a reflection ray from the airgun to the plate interface and back to the towed streamer. Refraction and reflection are not competing experiments — they are complementary constraints on the same Earth model $v(x,z)$.
 ```
 
-A single shot gather in {numref}`fig-integrated-shot-gather` contains five distinct event families — a direct wave, two reflection hyperbolas, and two head waves. Prior lectures treated these separately: refraction in Lectures 6–7, reflection in Lectures 8–9. This lecture unifies them. The claim is simple: every method of active-source seismology is a strategy for turning travel-time data into an Earth model, and all of them share the same underlying problem — the *image* depends on the *velocity*, and the velocity is inferred from the same data.
+The key insight motivating this lecture is that **refraction and reflection are not competing methods** — they are two windows onto the same Earth model $v(x,z)$, and combining them iteratively produces better images than either alone. This lecture builds that iterative framework from first principles, starting with the simplest possible case and progressively adding physical complexity.
 
 ---
 
-## 2 — Governing Physics
+## 2 — The Framework: Forward and Inverse Modeling
 
-### 2.0 The simple case first: migrating flat layers
+### 2.1 The forward model
 
-Before tackling dipping reflectors, consider the simplest possible imaging problem: a **flat, horizontal interface** at depth $z$ below a constant-velocity layer with speed $v$.
+A **forward model** answers the question: *given that I know the Earth model, what data should I expect to record?*
 
-Place a collocated source and receiver at any surface position $S$. The seismic pulse travels straight down, reflects off the flat interface, and travels straight back up. The instrument records the round-trip (two-way) travel time:
+In seismic imaging the Earth model $\mathbf{m}$ encodes the velocity field $v(x,z)$ and the reflectivity $r(x,z)$. The **forward operator** $F$ maps from model space to data space:
 
-$$
-t = \frac{2z}{v}.
-$$
-
-Where should the reflector be plotted? Because the interface is flat, the normal to the reflector is vertical — the ray *is* vertical. The depth conversion is exact:
-
-$$
-z = \frac{v\,t}{2}.
-$$
-
-This is all that "migration" means for flat layers: multiply the two-way time by $v/2$ and you have the true depth. No horizontal shift, no depth error, no iteration. The display convention of plotting events beneath the surface station is correct when the reflector is horizontal ({numref}`fig-flat-vs-dipping`, panel a).
-
-Now tilt the reflector by a small dip $\theta = 10°$ ({numref}`fig-flat-vs-dipping`, panel b). The normal ray is no longer vertical — it tilts at $10°$ off vertical — and two small errors appear: the event is plotted 0.21 km too far downdip, and 2% too deep. At $\theta = 30°$ ({numref}`fig-flat-vs-dipping`, panel c) the errors grow to 0.60 km horizontally and 13% in depth. The simple time-to-depth formula $z = vt/2$ breaks down as soon as there is dip.
-
-```{figure} ../assets/figures/fig_flat_vs_dipping_migration.png
-:name: fig-flat-vs-dipping
-:alt: Three-panel progression. Panel (a) flat reflector at theta = 0 degrees with a vertical normal ray and the annotation z = vt/2 is exact. Panel (b) weak dip at theta = 10 degrees with a slightly tilted normal ray, apparent position C plotted 0.21 km too far downdip and 2 percent too deep. Panel (c) steep dip at theta = 30 degrees with a strongly tilted normal ray, 0.60 km horizontal error and 13 percent depth error.
-:width: 100%
-
-**From flat to dipping: why migration complexity grows with dip.** (a) For a flat reflector the normal ray is vertical and $z = vt/2$ places the event at the correct depth — no migration needed. (b) At $10°$ dip, small horizontal and vertical errors appear. (c) At $30°$ dip, errors are large enough to distort the interpreted geology. Migration corrects both errors; its corrections vanish smoothly when $\theta \to 0$.
+```{math}
+:label: eq-forward
+\mathbf{d} = F\,\mathbf{m},
 ```
 
-:::{admonition} Key takeaway — time-to-depth conversion
+where $\mathbf{d}$ is the predicted seismic record (time traces at all receivers). In the simplest zero-offset case, $F$ reduces to the kinematic calculation $t = 2z/v$: if a flat reflector sits at depth $z$ in a medium with velocity $v$, the forward model predicts an arrival at two-way time $t = 2z/v$.
+
+Running the forward model is *computationally cheap given a model*, because it follows the laws of physics directly. It is also **the source of all training data for machine-learning surrogates** — a point we return to in Section 6.
+
+### 2.2 The inverse model
+
+An **inverse model** answers the question: *given the data I recorded, what Earth model produced them?*
+
+In principle, invert {eq}`eq-forward` for $\mathbf{m}$:
+$$\mathbf{m} = F^{-1}\,\mathbf{d}.$$
+
+In practice, $F^{-1}$ is rarely available: the system is underdetermined, data are noisy, and the operator is nonlinear when the velocity is unknown. The practical strategy uses the **adjoint** (mathematical transpose) of $F$:
+
+```{math}
+:label: eq-adjoint
+\hat{\mathbf{m}} = F^\top\,\mathbf{d}.
+```
+
+The adjoint operator $F^\top$ is called **migration**. It is not the true inverse, but for a well-sampled survey with a correct velocity model it produces a good approximation of the true reflectivity. The quality of that approximation depends on whether the velocity model is correct — and that is exactly why refraction and reflection imaging must be combined.
+
+:::{admonition} Forward vs. inverse — at a glance
+:class: note
+
+| | Forward model | Inverse / adjoint (migration) |
+|---|---|---|
+| **Question** | Given $\mathbf{m}$, predict $\mathbf{d}$ | Given $\mathbf{d}$, estimate $\mathbf{m}$ |
+| **Operator** | $F$ | $F^\top$ |
+| **Example** | $t = 2z/v$, ray tracing, wave equation | Kirchhoff sum, reverse-time migration |
+| **Requires** | Earth model + velocity $v$ | Observed data + velocity $v$ |
+| **Output** | Synthetic seismogram | Depth image (reflectivity) |
+
+Both forward modeling and migration depend on $v(x,z)$. Neither can produce a correct result without it.
+:::
+
+---
+
+## 3 — Building the Image: From Flat Layers to Full Complexity
+
+### 3.1 Case 1 — Single flat layer, constant velocity
+
+The simplest forward model: one flat reflector at depth $z$, constant velocity $v$. The round-trip time is $t = 2z/v$. The inverse (migration) is exact:
+
+$$z = \frac{v\,t}{2}.$$
+
+Migration here is nothing more than multiplying the two-way time by $v/2$. No horizontal shift is needed, and if the velocity is known, the depth is exact. This is why introductory courses can discuss reflector depths without mentioning migration: for flat layers in a constant-velocity medium, the display is already correct.
+
+### 3.2 Case 2 — Multiple flat layers: why the velocity model matters
+
+Real crust has multiple layers with different velocities. For three layers with interval velocities $v_1 < v_2 < v_3$ and interface depths $z_1 < z_2 < z_3$, the zero-offset reflections arrive at:
+
+```{math}
+:label: eq-multilayer-twt
+t_1 = \frac{2z_1}{v_1}, \quad
+t_2 = t_1 + \frac{2(z_2 - z_1)}{v_2}, \quad
+t_3 = t_2 + \frac{2(z_3 - z_2)}{v_3}.
+```
+
+Converting back from time to depth requires knowing each $v_i$. The **Dix equation** (Lecture 8) does this from NMO stacking velocities $V_{{\rm rms},n}$:
+
+```{math}
+:label: eq-dix
+v_n^2 = \frac{V_{{\rm rms},n}^2\,t_n - V_{{\rm rms},n-1}^2\,t_{n-1}}{t_n - t_{n-1}}.
+```
+
+The Dix inversion integrates downward from the surface. Any error in $v_1$ propagates into $v_2$, and both errors propagate into $v_3$. This is where **refraction data are indispensable**: head-wave analysis (Lectures 6–7) measures absolute interval velocities $v_1, v_2, \ldots$ in the shallow layers, pinning the top of the Dix chain to a known, absolute value.
+
+```{figure} ../assets/figures/fig_multilayer_depth_conversion.png
+:name: fig-multilayer-depth
+:alt: Three panels. Left: true Earth with three horizontal layers at 0.80, 2.00, and 3.50 km with velocities 1.8, 2.8, and 4.5 km/s. Centre: depth image with constant 2.0 km/s, showing errors of plus 11 percent, minus 13 percent, and minus 31 percent. Right: depth image with correct refraction-plus-Dix velocities, with all interfaces at exact depths.
+:width: 100%
+
+**Multi-layer depth conversion: same two-way times, two velocity strategies, very different images.** Assuming a constant $v = 2.0$ km/s (centre) places the shallowest reflector 11 % too deep and the deepest 31 % too shallow. Using refraction-derived $v_1$ and Dix-inverted $v_2, v_3$ (right) recovers all three interfaces exactly. The message: even perfectly flat reflectors require the correct layered velocity model.
+```
+
+:::{admonition} Key takeaway — flat reflectors still need a velocity model
 :class: tip
 
-For **flat layers** in a constant-velocity medium, "migration" is simply $z = vt/2$ — a linear time-to-depth conversion. This is why introductory seismology courses can discuss reflector depths without mentioning migration at all: for flat layers, the conventional display is already correct. The moment the reflector dips, however, the display places events in the wrong position, and a proper migration is required.
+The depth error in the deepest reflector is 31 % when a constant velocity is assumed. Refraction provides the near-surface absolute velocity that anchors the Dix inversion; without it, errors at the top of the section corrupt every deeper interval estimate.
 :::
 
-### 2.1 The mispositioning problem
+### 3.3 Case 3 — Dipping layers: migration corrects mispositioning
 
-To understand why a zero-offset seismic section plots dipping reflectors in the wrong place, follow the chain of physical reasoning step by step.
+When a reflector dips at angle $\theta$, a zero-offset recording places events in the wrong lateral and vertical position. The physical reason: the law of reflection requires the ray to hit the reflector at 90° (the **normal ray**). For a dip $\theta$, the normal ray is not vertical — it travels at $\theta$ off-vertical, reaching the true reflection point $R$ updip and shallower than the point $C$ conventionally plotted directly below $S$.
 
-**Step 1 — What the experiment actually records.** In a zero-offset survey, the source and receiver sit at the same surface location $S$. A seismic pulse travels down from $S$, bounces off the subsurface interface, and returns to $S$. The instrument records exactly one number from this round trip: the **two-way travel time** $t = 2d/v$, where $d$ is the total one-way path length and $v$ is the velocity. The instrument knows nothing about the direction the ray traveled.
+The two errors are:
 
-**Step 2 — Why the ray travels at an angle.** The law of reflection requires the angle of incidence to equal the angle of reflection. For a zero-offset geometry (source = receiver), the only ray that departs from $S$ and returns to the same point $S$ is one that strikes the reflector at exactly 90° — the so-called **normal ray** (shown in vermilion in {numref}`fig-mispositioning`). If the reflector dips at angle $\theta$ from horizontal, this normal ray is not vertical — it travels at angle $\theta$ from the vertical, hitting the reflector at the true reflection point $R$ which lies *updip* and at a *shallower depth* than the point directly beneath $S$. The small right-angle square where the ray meets the reflector reminds us of this geometric constraint.
+$$
+\Delta x = d\sin\theta \quad (\text{horizontal: plotted too far downdip});
+\qquad
+\tau = t\cos\theta \quad (\text{corrected two-way time, shorter than recorded } t).
+$$
 
-**Step 3 — The wrong assumption.** Because the recorder has no knowledge of ray direction, the conventional seismic display makes the simplest possible assumption: it plots the event **directly beneath the surface station** $S$, at a depth $z_{\rm apparent} = vt/2 = d$. This places the reflector at point $C$ in {numref}`fig-mispositioning` — straight below $S$ at the slant-path distance $d$.
-
-**Step 4 — The two errors.** Comparing $C$ (where the event is plotted) with $R$ (where the reflection actually occurred) reveals two systematic errors:
-
-- **Horizontal mispositioning**: $R$ lies updip of $C$ by a distance $\Delta x = d\sin\theta$. The event is plotted too far downdip.
-- **Vertical mispositioning**: the true depth of $R$ is $z_R = d\cos\theta$, but $C$ is plotted at depth $d$. Because $\cos\theta < 1$ for any nonzero dip, the event is plotted **too deep** by a factor of $1/\cos\theta$.
-
-Both errors vanish when $\theta = 0$ (a flat reflector): the normal ray *is* vertical, and the assumption is correct. The steeper the dip, the larger the mispositioning.
-
-```{figure} ../assets/figures/fig_migration_mispositioning.png
-:name: fig-mispositioning
-:alt: Left panel: earth cross-section with a dipping reflector (blue), source-receiver S (orange triangle) at x = 1.5 km, the actual normal ray (vermilion, perpendicular to the reflector) of length d traveling at angle theta to the true reflection point R (star) at (2.10 km, 1.04 km), and the assumed vertical path (pink dashed) descending from S to the apparent position C (pink circle) at (1.5 km, 1.20 km depth). An italic annotation reads "Recorder knows only t = 2d/v; assumes ray went straight down." Right panel: zero-offset time section showing the unmigrated event as a blue line, the apparent position (pink circle) at (1.5 km, 1200 ms) and the correct migrated position (star) at (2.10 km, 1039 ms), with a migration-shift arrow connecting them and the equation tau = t cos theta.
-:width: 100%
-
-**Why zero-offset sections misposition dipping reflectors.** The instrument records only the round-trip time $t = 2d/v$ and has no information about ray direction. Plotted beneath $S$ at depth $d$ (pink dashed line → point C), the event ends up too deep and too far downdip. The true reflection point $R$ lies updip at a shallower depth ($z = d\cos\theta$). Migration corrects both errors: $\Delta x = d\sin\theta$ horizontally and $\tau = t\cos\theta$ vertically.
-```
-
-The operation that moves events from their apparent positions to their true positions is called **migration**. The name is historical: early interpreters using light tables literally moved reflection events on their unmigrated sections to where they calculated the reflections ought to be. Modern migration is performed numerically on millions of traces, but the kinematic problem it solves has not changed.
-
-### 2.2 The exploding-reflector analogy
-
-Zero-offset acquisition records thousands of separate field experiments — one shot for each source–receiver pair. Each shot sends a wave down to the reflector and receives the echo upward. {cite:t}`Claerbout2010` observed that all of these experiments are kinematically equivalent to a single thought experiment: imagine that every reflector in the Earth *explodes* simultaneously at $t = 0$ and the resulting upgoing wavefield is recorded by a receiver array at the surface. The ray paths are the same in both cases. The only difference is that in the real zero-offset experiment the wave travels down and back up, while in the exploding-reflector thought experiment it travels only up.
-
-```{figure} ../assets/figures/fig_exploding_reflector.png
-:name: fig-exploding-reflector
-:alt: Left panel shows the real experiment: a dipping blue reflector, four orange source-receiver triangles on the surface, each with a vermilion down-and-up normal ray to the reflection point on the reflector. Italic text reads wave travels DOWN then UP, velocity v. Right panel shows the thought experiment: the same dipping reflector, a dense orange receiver array along the surface, faint green upgoing rays from points distributed along the reflector, and faint pink arcs representing upgoing wavefronts at two time snapshots. Italic text reads waves travel ONLY UP, velocity v/2.
-:width: 100%
-
-The exploding-reflector analogy. Real zero-offset data (left) and the hypothetical upgoing-wavefield experiment (right) produce identical wavefronts at the surface, provided the propagation velocity in the thought experiment is reduced by a factor of two.
-```
-
-To preserve travel times, the exploding-reflector model uses a propagation velocity equal to half the true Earth velocity. The factor of two accounts for the round-trip compression: in the real experiment, the ray travels a total distance $2d$ at velocity $v$; in the thought experiment, it travels $d$ at velocity $v/2$. The arrival times match.
-
-The analogy is powerful because it collapses a multi-experiment acquisition into a single-experiment inverse problem. The question "what does the data look like?" becomes "what does one upgoing wavefield, sampled only at the surface, look like?" — and the tools of wave propagation and Fourier analysis can be brought to bear on that single wavefield.
-
-:::{admonition} Key Concept — When the analogy breaks
-:class: warning
-
-The exploding-reflector analogy is kinematically exact for single-bounce reflections at non-critical angles in a constant-velocity medium. It fails for three important phenomena that real data frequently contain:
-
-1. **Multiples.** A sea-floor multiple in real data arrives at time $2t_1$; the exploding-reflector model, with its v/2 and round-trip collapse, predicts $3t_1$.
-2. **Lateral velocity variations.** Rays that bend laterally before reaching the reflector are not reproduced by an upgoing wavefield in an equivalent half-velocity medium.
-3. **Reflection coefficient polarity.** The exploding reflector radiates the same polarity in all directions; a real reflection flips sign between waves approaching from above and below the interface.
-
-Migration algorithms that go beyond the exploding-reflector model — notably full-wave reverse-time migration — do exist, but they are more expensive and conceptually more demanding.
-:::
-
----
-
-## 3 — Mathematical Framework
-
-### 3.1 Notation
-
-| Symbol | Meaning | Units |
-|--------|---------|-------|
-| $x, y$ | Surface coordinates (midpoint, crossline) | km |
-| $z$ | Depth, positive downward | km |
-| $t$ | Two-way travel time, zero-offset data space | s |
-| $\tau$ | Two-way vertical travel time, $\tau = 2z/v$ | s |
-| $v$ | Propagation velocity (Earth) | km/s |
-| $\theta$ | Dip of reflector from horizontal | rad |
-| $d$ | Length of normal ray from $S$ to $R$ | km |
-| $\mathbf{d}$ | Data (observed zero-offset traces) | — |
-| $\mathbf{m}$ | Model (reflectivity at each $(x,z)$) | — |
-| $F$ | Forward modeling operator | — |
-| $F^\top$ | Adjoint (migration) operator | — |
-
-### 3.2 The hand-migration equations
-
-Let the reflector at point $R$ have dip $\theta$, and let a zero-offset source–receiver pair at surface position $S$ record the reflected arrival at two-way travel time $t$. The length of the normal ray from $S$ to $R$ is
-
-```{math}
-:label: eq-d
-d = \frac{v\,t}{2}.
-```
-
-From the geometry in {numref}`fig-mispositioning`, the true depth of $R$ beneath its true lateral position is
-
-```{math}
-:label: eq-z-cos
-z = d\cos\theta,
-```
-
-and the true lateral position of $R$ is displaced from $S$ by
-
-```{math}
-:label: eq-deltax
-\Delta x = d\sin\theta = \frac{v\,t}{2}\sin\theta.
-```
-
-Rewriting {eq}`eq-z-cos` in terms of the vertical two-way time $\tau = 2z/v$,
-
-```{math}
-:label: eq-tau
-\tau = t\cos\theta.
-```
-
-Both the horizontal shift $\Delta x$ and the vertical compression $t \to \tau$ vanish when $\theta = 0$. Flat reflectors are plotted correctly by a simple $t \to z$ time-to-depth conversion; dipping reflectors require migration.
-
-In practice, the dip $\theta$ is not known a priori — it is read from the local slope of the event on the zero-offset section,
-
-```{math}
-:label: eq-p0
-p_0 = \frac{\partial t}{\partial y}.
-```
-
-The slope $p_0$ and the dip $\theta$ are related by
-
-```{math}
-:label: eq-tuchel
-\sin\theta = \frac{v\,p_0}{2},
-```
-
-which is the zero-offset analogue of Snell's parameter $p = \sin\theta/v$ familiar from Lecture 5, with a factor of two for the two-way path. Substituting {eq}`eq-tuchel` into {eq}`eq-deltax` and {eq}`eq-tau` yields the hand-migration formulas
+Both vanish when $\theta = 0$ (Case 1). Reading the local slope $p_0 = \partial t / \partial y$ from the unmigrated section and using $\sin\theta = vp_0/2$ (Snell's parameter with the two-way factor), the hand-migration formulas are:
 
 ```{math}
 :label: eq-hand-migration
@@ -239,276 +188,201 @@ which is the zero-offset analogue of Snell's parameter $p = \sin\theta/v$ famili
 \tau = t\sqrt{1 - \frac{v^2 p_0^2}{4}}.
 ```
 
-### 3.3 From hand migration to the Kirchhoff sum
+These corrections again depend on $v$ — reinforcing that migration always requires an accurate velocity model (Cases 1–3 all converge on this point).
 
-Hand migration works on one event at a time, but real data contain crossing events, diffractions from edges and faults, and superimposed hyperbolas. What is needed is an operator that acts on the entire zero-offset section without first separating it into individual events.
+```{figure} ../assets/figures/fig_flat_vs_dipping_migration.png
+:name: fig-flat-vs-dipping
+:alt: Three panels showing flat (theta=0), weak-dip (theta=10 degrees), and steep-dip (theta=30 degrees) reflectors with the normal ray and apparent vs true positions.
+:width: 100%
 
-The construction rests on two dual observations, illustrated in {numref}`fig-kirchhoff-adjoint`.
-
-**Forward modeling (diffraction).** Place a single point scatterer at $(x_0, z_0)$ in the Earth model. In the exploding-reflector model with velocity $v/2$, the upgoing wavefront reaches the surface at a midpoint $x$ at time
-
-```{math}
-:label: eq-hyperbola-forward
-t(x) = \sqrt{ \left(\frac{2 z_0}{v}\right)^2 + \left(\frac{2(x - x_0)}{v}\right)^2 }.
+**From flat to dipping.** At $\theta = 0°$ migration is exact with $z = vt/2$. At $10°$, horizontal and depth errors are small. At $30°$ they are large enough to distort the geological interpretation ($\Delta x = 0.60$ km, 13% depth error). Migration applies {eq}`eq-hand-migration` to correct both.
 ```
 
-This is a hyperbola in $(x, t)$-space with apex at $(x_0,\ 2z_0/v)$. The forward operator $F$ takes a point in model space and spreads it along this hyperbola in data space. Any extended reflector is modeled as a superposition of such points, each contributing its own hyperbola.
+### 3.4 Case 4 — Diffractions and scatterers: Kirchhoff migration
 
-**Migration (imaging).** Consider the dual question: a single data-space impulse at $(y_0, t_0)$. What Earth model could have produced it? Any scatterer lying on the semicircle
+Real Earth cross-sections contain fault tips, unconformity edges, rugose basement, and salt flanks — any **geometric discontinuity** radiates energy as a point diffractor (Huygens' principle). In a zero-offset time section, a scatterer at $(x_0, z_0)$ produces a **diffraction hyperbola**:
 
 ```{math}
-:label: eq-semicircle
-(x - y_0)^2 + z^2 = \left(\frac{v\,t_0}{2}\right)^2
+:label: eq-hyperbola
+t(y) = \sqrt{\left(\frac{2z_0}{v}\right)^2 + \left(\frac{2(y - x_0)}{v}\right)^2},
 ```
 
-would produce an arrival at $(y_0, t_0)$. The migration operator $F^\top$ therefore spreads a data sample over the corresponding semicircle in model space. Any extended event is imaged as a superposition of such semicircles.
+with apex directly above the scatterer. An unprocessed section from a structurally complex area is littered with overlapping hyperbolas, as seen in {numref}`fig-accretionary-wedge`.
+
+```{figure} ../assets/figures/fig_accretionary_wedge.png
+:name: fig-accretionary-wedge
+:alt: Schematic of the Cascadia accretionary wedge showing dipping reflectors, surface multiples, and a fault-tip diffraction hyperbola.
+:width: 100%
+
+**Three challenges in a real accretionary wedge.** (1) Dipping reflectors (Case 3, mispositioning). (2) Surface multiples — same $V_{\rm rms}$ as primary reflections, cannot be removed by NMO stacking alone. (3) A fault-tip diffraction — the raw section shows a hyperbola; migration collapses it to the fault tip.
+```
+
+**Kirchhoff migration** collapses each diffraction hyperbola to its source point by summing data along the exact hyperbola {eq}`eq-hyperbola` and depositing the sum at $(x_0, z_0)$. The forward and adjoint form a dual pair illustrated in {numref}`fig-kirchhoff-adjoint`:
 
 ```{figure} ../assets/figures/fig_kirchhoff_adjoint_pair.png
 :name: fig-kirchhoff-adjoint
-:alt: Four-panel figure arranged in two rows. Top row shows forward modeling. Panel a: earth model with a single orange-vermilion star scatterer at x0 = 2 km, z0 = 1 km, against a blank background. Panel b: zero-offset data showing a blue hyperbola opening downward from its apex at midpoint 2 km and time 1000 ms, with equation t equals square root of open bracket 2 z0 over v close bracket squared plus open bracket 2 open parenthesis x minus x0 close parenthesis over v close bracket squared. Bottom row shows migration. Panel c: data space with a single orange circular impulse at midpoint 2 km, time 1000 ms, on an otherwise blank time section. Panel d: earth model showing a sky-blue semicircle of radius 1 km centered on the surface at x = 2 km, with a pink dotted vertical line marking z = v t0 over 2 = 1 km.
+:alt: Four panels. Top: forward modeling spreads a point scatterer into a hyperbola. Bottom: migration sums data along the hyperbola to image the point.
 :width: 100%
 
-The Kirchhoff adjoint pair. A point scatterer spreads into a hyperbola in the data (top); conversely, a data impulse is consistent with an entire semicircle of possible scatterers in the Earth (bottom). Forward modeling and migration are transpose operations that act by copying data along the same kinematic curves in opposite directions.
+**Kirchhoff adjoint pair.** Forward modeling (top): a point scatterer $\to$ hyperbola in data space. Migration (bottom): data impulse $\to$ semicircle of possible scatterers in model space. Summing all such semicircles for the full dataset collapses each hyperbola back to its source. ({cite:t}`Claerbout2010`, subroutine `kirchslow`.)
 ```
 
-These two operations are *adjoints* of one another. {cite:t}`Claerbout2010` gives a minimal implementation — subroutine `kirchslow` — that performs both with a single set of three nested loops, differing only by whether a copy flag points from model space to data space (forward modeling) or from data space to model space (migration). In pseudocode:
+In pseudocode, forward modeling and migration share one loop; the only difference is the direction of the copy:
 
 ```text
 for every (ix, iz) in the model:
-    for every midpoint x' in the data:
-        compute t = sqrt( (2*z[iz]/v)^2 + (2*(x[ix] - x')/v)^2 )
-        if flag == "forward":  data[t, x'] += model[iz, ix]
-        else:                  model[iz, ix] += data[t, x']
+    for every midpoint y in the data:
+        t = sqrt( (2·z[iz]/v)² + (2·(x[ix]−y)/v)² )    # same hyperbola
+        if forward:   data[t, y]    += model[iz, ix]     # spreads scatterer
+        else:         model[iz, ix] += data[t, y]        # collapses hyperbola
 ```
 
-The geometry — the relationship between a point in the Earth and a hyperbola in the data — is the same in both directions. What changes is which index is written and which is read.
-
-:::{admonition} Key Equation — Kirchhoff migration
-:class: important
-
-The Kirchhoff migration image at location $(x, z)$ is the weighted sum of data values along the hyperbola that would have been produced by a point scatterer at $(x, z)$:
-
-```{math}
-:label: eq-kirchhoff
-m(x, z) = \sum_{x'} w(x, z, x')\, d\!\left(x',\ t(x, z, x')\right),
-\quad \text{where}\quad
-t(x, z, x') = \sqrt{\left(\tfrac{2z}{v}\right)^2 + \left(\tfrac{2(x - x')}{v}\right)^2}.
-```
-
-The weight $w$ accounts for geometrical spreading and is approximately $z/t \cdot t^{-1/2}$ for the tutorial implementation {cite:p}`Claerbout2010`.
-:::
+This is what it means for migration to be the **adjoint** $F^\top$ of the forward operator $F$: same kinematic geometry, copy direction reversed.
 
 ---
 
-## 4 — The Forward Problem
+## 4 — The Velocity–Image Duality
 
-Given a model $m(x, z)$ and a velocity $v$, the forward operator $F$ in equation {eq}`eq-hyperbola-forward` produces the predicted zero-offset section. {numref}`fig-velocity-image-duality`(a) shows the result for a toy Earth model consisting of three isolated point scatterers and a short dipping segment: each scatterer contributes one hyperbola, the dipping segment contributes a band of overlapping hyperbolas whose constructive interference traces out a straight line offset and rotated from the true reflector position.
+The Kirchhoff summation in {eq}`eq-adjoint` depends explicitly on $v$: the shape of the summation hyperbola is determined by the migration velocity. Using the wrong $v$ produces characteristic geometric residuals — the **velocity–image duality** — that serve as the primary quality-control signal in the iterative workflow.
 
 ```{figure} ../assets/figures/fig_velocity_image_duality.png
 :name: fig-velocity-image-duality
-:alt: Four-panel migration experiment using the same synthetic zero-offset data. Panel a in the top left shows the data as a grayscale image of hyperbolic diffraction patterns from three point scatterers plus a short dipping band of overlapping hyperbolas, displayed against two-way time down to 2400 ms and offset 0 to 4 km. Panel b in the top right shows the migration result using the correct velocity of 2 km per second: three crisp focused point images at the true scatterer positions marked with orange plus signs, and a clean dipping segment aligned with the green reference line. Panel c in the bottom left shows migration with velocity too slow, at 0.80 times the correct velocity: the point images are left as downward-frowning arcs of uncollapsed hyperbola, and the dipping segment is under-migrated and offset from the green reference. Panel d in the bottom right shows migration with velocity too fast, at 1.25 times correct: the point images become upward-smiling arcs of over-migrated semicircular sweeps, and the dipping segment is over-rotated past the green reference. A bold suptitle reads: the image IS the velocity diagnostic.
+:alt: Four panels. Top-left: raw zero-offset data with diffraction hyperbolas. Top-right: correct-velocity migration with focused points. Bottom-left: slow-velocity migration with downward frowns. Bottom-right: fast-velocity migration with upward smiles.
 :width: 100%
 
-Kirchhoff migration applied to the same synthetic zero-offset data (a) with three migration velocities. Correct velocity (b) collapses each diffraction hyperbola back to its source point and aligns the dipping segment with its true position. Velocity too slow (c) leaves residual downward curvature — frowns. Velocity too fast (d) leaves residual upward curvature — smiles. The migrated image itself is the diagnostic of whether the velocity is right.
+**The velocity–image duality.** Same data, three migration velocities. Correct $v$ (top right): diffractions collapse to points, reflectors at true positions. Too slow (bottom left): residual downward arcs ("frowns") — the migration hyperbola is too narrow, leaving flanks behind. Too fast (bottom right): residual upward arcs ("smiles") — the migration hyperbola is too wide, spreading energy beyond the true data.
 ```
 
-Equation {eq}`eq-hyperbola-forward` is the kinematic forward operator. A complete forward operator also includes the amplitude weighting (spherical spreading, reflection coefficient, free-surface effects). For the remainder of this lecture the kinematic form is sufficient: it is what determines *where* events are plotted, which is what migration is correcting.
+| Migration velocity | Residual signature | Interpretation |
+|---|---|---|
+| Correct | Flat (no residual moveout) | Focused image — velocity is right |
+| Too slow | Frowns (downward arcs) | Under-migrated — increase velocity |
+| Too fast | Smiles (upward arcs) | Over-migrated — decrease velocity |
+
+**Why frowns mean too slow:** if $v_{\rm mig} < v_{\rm true}$, the migration hyperbola is *narrower* than the true data hyperbola. The summation samples only the apex, leaving the flanks as downward-curving residuals. The opposite holds for $v_{\rm mig} > v_{\rm true}$.
+
+The key implication: **the image itself is the velocity diagnostic** — no borehole control is needed to determine whether the migration velocity is correct. This feedback drives the iterative workflow in Section 5.
+
+:::{admonition} Concept Check 4.1
+:class: tip
+
+A zero-offset section contains a diffraction with apex at $(x = 3.0\text{ km},\ t_0 = 1.2\text{ s})$. After migration with $v = 2.0$ km/s, a crisp point image appears. After migration with $v = 2.5$ km/s, an upward arc replaces the point.
+
+1. Which velocity is more correct, and how can you tell?
+2. What depth does the correct image imply for the scatterer?
+3. What would migration with $v = 1.5$ km/s produce?
+:::
 
 ---
 
-## 5 — The Inverse Problem
+## 5 — The Iterative Refraction–Reflection–Migration Workflow
 
-The inverse problem is to recover $m(x, z)$ given observed data $\mathbf{d}$ and a velocity $v$. If $F$ is the forward operator, the adjoint $F^\top$ is Kirchhoff migration. In operator notation,
+All four cases above arrive at the same conclusion: **migration requires an accurate $v(x,z)$, and accurate velocity requires independent physical constraints**. Refraction and reflection supply those constraints from different depth ranges; their combination in an iterative loop converges to a focused image.
 
-```{math}
-:label: eq-forward-inverse
-\mathbf{d} = F\,\mathbf{m}, \qquad \hat{\mathbf{m}} = F^\top \mathbf{d}.
-```
-
-The migrated image $\hat{\mathbf{m}} = F^\top \mathbf{d}$ is not the true inverse $F^{-1}\mathbf{d}$ — it is the *adjoint* applied to the data. For a well-sampled, constant-velocity acquisition with infinite aperture, the adjoint and inverse agree up to a filter. In practice, finite apertures, missing traces, and spatial aliasing introduce artifacts: concentric semicircles at the survey ends (from abruptly terminated summation) and a characteristic $1/|\omega|$ low-frequency boost from the hyperbola summation acting as an integrator over time {cite:p}`Claerbout2010`. Least-squares migration and reverse-time migration are refinements that attempt to approximate $F^{-1}$ rather than $F^\top$ alone.
-
-### 5.1 The velocity–image duality
-
-The migration operator $F^\top$ in equation {eq}`eq-kirchhoff` depends explicitly on the velocity $v$. Using the wrong $v$ does not simply rescale the image — it produces a characteristic distortion that is visually diagnostic.
-
-- **Correct velocity.** Each diffraction hyperbola collapses exactly to its source point. Reflectors align with their true positions. The image is *focused*.
-- **Velocity too slow.** The migration hyperbolas are narrower than the true data hyperbolas. The summation catches only the apex of each true hyperbola, leaving the flanks behind as a downward-opening residual arc. These residuals are called *frowns*; the image is *under-migrated*.
-- **Velocity too fast.** The migration hyperbolas are broader than the true ones. Each migrated point is spread into a partial semicircle because the summation reaches beyond the true data. These residuals are called *smiles*; the image is *over-migrated*.
-
-{numref}`fig-velocity-image-duality` shows all three cases for the same synthetic data. This is the operational basis of **migration velocity analysis**: the velocity model is adjusted until residual moveout on image gathers is flat and diffractions collapse to points. In practice the process is iterative — a starting velocity from refraction tomography, a first migration, residual analysis, update, re-migrate — and the starting model often comes from the very refraction methods Lectures 6–7 developed.
-
-:::{admonition} Concept Check 5.1
-:class: tip
-
-A marine zero-offset section shows a prominent reflection hyperbola with apex at $(x = 5\text{ km},\ t_0 = 2.0\text{ s})$. After migration with $v = 2.5$ km/s, the hyperbola is replaced by a crisp point near $(x = 5\text{ km},\ z = 2.5\text{ km})$. After migration with $v = 3.0$ km/s, the point is replaced by an upward-curving arc.
-
-1. Which migration velocity is more nearly correct, and how can you tell?
-2. Estimate the depth of the reflector from the correct-velocity image.
-3. What would you expect to see if the velocity were set to $v = 2.0$ km/s?
-
-:::
-
-### 5.2 The refraction–reflection bridge
-
-Migration requires a velocity model $v(x,z)$. Where does that velocity come from? The answer is that **no single method can build it alone** — refraction and reflection each constrain a different part of the Earth, for reasons rooted in the physics of each wave type.
-
-#### Why refraction alone is not enough
-
-Refraction (Lectures 6–7) uses head waves — energy that travels *horizontally* along a velocity interface and radiates back to the surface. The intercept-time method or {cite:t}`ZeltBarton1998`-style tomography inverts first-arrival travel times into a velocity-versus-depth profile $v(z)$. But head waves exist only along interfaces where velocity *increases* with depth. There are two hard limits:
-
-- **Depth ceiling**: the deepest refractor a survey can detect is the one whose crossover distance fits within the survey aperture (recall the crossover formula from Lecture 6).
-- **Low-velocity zones**: any layer where $v$ decreases is invisible to refraction — head waves are never generated, so the layer is simply skipped (the "hidden layer" problem from Lecture 7).
-
-Result: refraction gives a reliable, absolute $v(z)$ for the **shallow section** (typically the upper 1–5 km in crustal studies) but says nothing about deeper structure.
-
-#### Why reflection alone is not enough
-
-Reflection (Lectures 8–9) uses echoes from impedance contrasts at any depth. NMO analysis on CMP gathers yields the stacking velocity $V_{\rm rms}(t_0)$, and the Dix equation converts $V_{\rm rms}$ to interval velocities. But these velocities are:
-
-- **Relative, not absolute**: NMO velocities are best-fit hyperbolae; they constrain velocity *ratios* between layers better than they constrain absolute values.
-- **Contaminated by the near-surface**: if the shallow velocity is wrong, every Dix-inverted interval velocity below it inherits that error, because $V_{\rm rms}$ is a running average from the surface down.
-- **Measured in time, not depth**: without an independent velocity to convert from $t$ to $z$, reflectors are positioned in time, not in the Earth.
-
-Result: reflection gives excellent **structural detail** (interfaces, faults, stratigraphic horizons) at all depths but needs an external velocity anchor.
-
-#### What each method contributes
+### 5.1 What each method contributes
 
 | | Refraction (Lecs 6–7) | Reflection (Lecs 8–9) |
 |---|---|---|
-| **Wave type used** | Head waves (first arrivals) | Reflected waves (later arrivals) |
-| **What it measures** | Absolute layer velocities $v_1, v_2, \ldots$ | Stacking velocity $V_{\rm rms}(t_0)$ at each reflector |
-| **Depth range** | Surface to deepest refractor (~1–5 km) | Any depth with an impedance contrast |
-| **Strengths** | Accurate absolute $v$; robust to noise | Detailed structural image; works at all depths |
-| **Blind spots** | Cannot see below deepest refractor; misses low-velocity zones | Velocity estimates are relative, not absolute; sensitive to near-surface errors |
-| **Governing equation** | $t_i(x)$ intercept-time (Lec 6); tomographic inversion $\mathbf{d} = G\mathbf{m}$ (Lec 7) | $t^2(x^2)$ hyperbola → $V_{\rm rms}$ → Dix equation (Lec 8) |
+| **Wave type** | Head waves (first arrivals) | Reflected waves (later arrivals) |
+| **Velocity product** | Absolute interval velocities $v_1, v_2, \ldots$ | Stacking velocity $V_{\rm rms}(t_0)$ per reflector |
+| **Depth range** | Surface to deepest refractor (~1–10 km) | Any depth with impedance contrast |
+| **Strength** | Accurate, absolute $v$; robust at low SNR | Full structural image at all depths |
+| **Blind spot** | Cannot see below deepest refractor; misses low-velocity zones | Velocities are relative; near-surface errors propagate through Dix |
 
-#### The unified processing checklist
+**The critical asymmetry:** Dix integrates downward from the surface, so a wrong near-surface velocity corrupts every deeper interval estimate. Refraction provides the near-surface absolute value that breaks the error chain.
 
-The two methods are not competitors — they are **complementary constraints on the same model** $v(x,z)$. In practice, an active-source imaging project proceeds through the following steps:
+### 5.2 The unified 8-step workflow
 
-::::{admonition} Active-source imaging workflow — from data to image
+| Step | Action | Method | Product |
+|:----:|--------|--------|---------|
+| **1** | Pick first breaks | Refraction | $t_{\rm fb}(x)$ |
+| **2** | Invert first arrivals | Refraction tomography | Shallow $v_{\rm refr}(x,z)$ (absolute) |
+| **3** | Pick NMO velocities | Reflection semblance | $V_{\rm rms}(t_0)$ per reflector |
+| **4** | Dix inversion | Reflection | $v_{\rm int}(t_0)$ for deeper layers |
+| **5** | Stitch models | Both | Initial $v_0(x,z)$: refraction on top, Dix below |
+| **6** | Migrate stacked section | Kirchhoff / RTM | Image $\hat{\mathbf{m}}_0 = F^\top\mathbf{d}$ |
+| **7** | Diagnose image quality | Residual moveout analysis | Frowns, smiles, or flat? |
+| **8** | Update velocity, repeat | Velocity model building | Improved $v_1(x,z)$ → return to Step 6 |
+
+The loop **6 → 7 → 8 → 6** iterates until residual moveout is flat and diffractions collapse to points. At Hikurangi, OBS first arrivals (Step 2) anchored the reflection migration (Step 6) that revealed the shallow plate interface.
+
+:::{admonition} The feedback that makes iteration work
 :class: important
 
-| Step | Action | Method | What it produces | Equations / tools |
-|:----:|--------|--------|-----------------|-------------------|
-| **1** | **Pick first breaks** on near-offset traces | Refraction | Observed first-arrival times $t_{\rm fb}(x)$ | Visual picking or AI autopicker ({cite:t}`Mardan2024`) |
-| **2** | **Invert first-arrival times** | Refraction tomography | Shallow velocity model $v_{\rm refr}(x, z)$ from surface to ~3–5 km depth | Intercept-time (Lec 6) or $\mathbf{d} = G\mathbf{m}$ tomography ({cite:t}`ZeltBarton1998`) |
-| **3** | **Pick NMO velocities** on CMP gathers | Reflection | Stacking velocity $V_{\rm rms}(t_0)$ for each reflector | Semblance analysis (Lec 8) |
-| **4** | **Convert to interval velocities** | Reflection | Interval velocities $v_{\rm int}(t_0)$ below the refraction zone | Dix equation (Lec 8): $v_n^2 = \frac{V_{{\rm rms},n}^2 t_n - V_{{\rm rms},n-1}^2 t_{n-1}}{t_n - t_{n-1}}$ |
-| **5** | **Stitch the two models** | Both | An initial $v_0(x, z)$: refraction model on top, Dix-inverted model below, blended at the transition depth | — |
-| **6** | **Migrate** the zero-offset (stacked) section | Migration | A first image $\hat{\mathbf{m}}_0 = F^\top \mathbf{d}$ using $v_0$ | Kirchhoff sum, Eq. {eq}`eq-kirchhoff` |
-| **7** | **Diagnose** the image | Velocity analysis | Residual curvature on common-image gathers: frowns = too slow, smiles = too fast, flat = correct | Visual inspection ({numref}`fig-velocity-image-duality`) |
-| **8** | **Update** the velocity model | Iterative refinement | Corrected $v_1(x,z)$; return to Step 6 | Repeat Steps 6–8 until residuals are flat |
-
-The loop **6 → 7 → 8 → 6** is iterated until the image is focused. In CASIE-21 (Section 9), the shallow model from OBS first arrivals (Step 2) was the essential anchor without which the reflection migration (Step 6) would have started from a wrong velocity.
-
-::::
-
-The key insight is that **refraction supplies the absolute velocity anchor, and reflection supplies the structural detail**. Without the refraction model, migration starts from an incorrect velocity and produces an unfocused image. Without reflection, the refraction model alone cannot see the plate interface or deep sedimentary layers. Migration is the operation that fuses both constraints into a single image — and the image itself is the diagnostic of whether the combined velocity model is correct.
-
----
-
-## 6 — Worked Example
-
-The data in {numref}`fig-velocity-image-duality`(a) were generated from a model with three point scatterers at $(0.8, 0.5)$, $(2.0, 1.0)$, and $(3.0, 0.7)$ km, plus a dipping segment from $(1.0, 1.3)$ to $(1.8, 1.7)$ km, in a constant-velocity medium with $v = 2.0$ km/s. Each scatterer produced a hyperbola via equation {eq}`eq-hyperbola-forward`.
-
-Consider the rightmost scatterer at $(x_0 = 3.0,\ z_0 = 0.7)$ km. Its forward-modeled hyperbola has apex at
-
-```{math}
-t_{\rm apex} = \frac{2 z_0}{v} = \frac{2 \times 0.7}{2.0} = 0.70\ \text{s}.
-```
-
-At an offset of 1 km from the apex ($x = 4.0$ km), the predicted arrival time is
-
-```{math}
-t = \sqrt{(0.70)^2 + \left(\frac{2 \times 1.0}{2.0}\right)^2} = \sqrt{0.49 + 1.00} = 1.22\ \text{s}.
-```
-
-Under the correct-velocity migration, the summation over the hyperbola through $(x = 3.0,\ z = 0.7)$ collects all the energy the forward operator placed along that hyperbola and deposits it back at the point — {numref}`fig-velocity-image-duality`(b) confirms this at the third scatterer location, marked by the orange cross.
-
-Now consider migrating with $v = 2.5$ km/s. The migration hyperbola for the same output pixel has a different shape: its apex is still at $t = 2 z/v = 0.56$ s, but the flank curvature is gentler. The summation samples data points that lie on a different curve from the one the data were actually placed along, so the summation misses the flanks, and the flank energy appears as a residual partial-semicircle "smile" in {numref}`fig-velocity-image-duality`(d).
-
-This is the velocity–image duality in one concrete example. The image was not merely scaled; its geometry encodes whether the velocity was right.
-
----
-
-## 7 — Course Connections
-
-- **Lecture 5 — Snell's law.** Equation {eq}`eq-tuchel` is the zero-offset version of Snell's parameter; the factor of two traces to the round-trip path.
-- **Lectures 6–7 — Seismic refraction.** First-arrival times and the intercept-time equation provide the shallow velocity model that seeds migration.
-- **Lectures 8–9 — Seismic reflection.** NMO, CMP stacking, and Dix inversion provide the deeper part of the same velocity model.
-- **Lecture 11 — Whole-Earth structure.** The same physical framework — travel times through a layered medium — produces the global 1-D Earth model (PREM) by stacking seismograms from earthquakes instead of shots.
-- **Lecture 13 — Seismic tomography.** The local refraction/reflection velocity model is the small-scale analogue of the global tomographic models; both solve $\mathbf{d} = F(\mathbf{m})$ for $\mathbf{m}$.
-- **Lab 4 — Design → Simulate → Image.** Students take the survey design from the companion discussion session, generate a synthetic shot gather, migrate it with three velocities, and report which velocity is correct and how they could tell from the image alone.
-
----
-
-## 8 — Research Horizon
-
-Active-source seismic imaging is an area of vigorous methodological development, and one of the most active sub-fields is the application of deep learning to accelerate or replace steps of the processing chain. The three references below, all from peer-reviewed academic outlets in 2019–2024, illustrate three different places where a neural network serves as a **surrogate** for a physics-based operator.
-
-1. **First-break picking {cite:p}`Mardan2024`.** A residual U-Net is initialized with weights pretrained on natural images (ImageNet), then fine-tuned on fewer than 10 % of hand-picked shots from a real refraction survey. The remaining 90 % are picked automatically with expert-level accuracy. The surrogate learns a mapping from waveform shapes to arrival times — the same mapping a human expert performs when reading a record section.
-
-2. **Denoising reflection shot gathers {cite:p}`LiTradLiu2024`.** A self-supervised U-Net removes erratic, non-Gaussian noise from shot gathers without requiring paired noisy/clean training data. The network trains only on the noisy data itself, exploiting the statistical difference between coherent seismic signals and incoherent noise. The surrogate learns a projection from noisy data to the signal subspace that the physics of wave propagation defines.
-
-3. **Velocity model building {cite:p}`YangMa2019`.** A fully-convolutional encoder–decoder network takes raw multi-shot gathers as input and produces a $v(x, z)$ model as output, in effect performing traveltime picking, NMO analysis, and Dix inversion in a single forward pass. Trained on synthetic data generated from known velocity models, the network learns a surrogate for the inverse operator $F^{-1}$.
-
-Each of these networks is a surrogate for an operator that geophysics already understands. The networks are trained on data that only exist *because* the physics-based operator exists: Mardan's network needs hand-picked first breaks (an expert using the intercept-time method); Li's network needs a statistical model of what constitutes "signal" versus "noise" that derives from the wave equation; Yang & Ma's network needs a training set of $(v, \text{shot gather})$ pairs where the shot gathers were produced by a finite-difference wave-equation solver.
-
-:::{admonition} A principle for the rest of this course
-:class: important
-
-Deep learning methods in active-source imaging are **accelerators, not replacements**, for physical understanding. Every surrogate network currently deployed requires training data that were produced by — or labeled by — someone who already understood the physics. The question for a student of geophysics is not "will AI replace the physics?" (it has not, and the training-data dependency is structural, not temporary). The question is: *where in the processing chain is a surrogate valuable, and what are the failure modes when the operator it replaces is applied to data outside the training distribution?*
+The velocity–image duality (Section 4) provides the feedback signal: frowns say "increase velocity," smiles say "decrease velocity," flat gathers say "you're done" — all from the image itself, with no external reference. Refraction provides the absolute velocity anchor; the image residuals guide the refinement. Together they converge to a focused, correctly-positioned geological cross-section.
 :::
 
 ---
 
-## 9 — Societal Relevance
+## 6 — Deep Learning as an Accelerator
 
-The Cascadia subduction zone hosts the largest earthquake hazard in the continental United States. A full-margin M9+ rupture is a once-per-500-year event; the last one occurred on 26 January 1700 and produced a tsunami that crossed the Pacific {cite:p}`Atwater2005`. Every plan for coastal resilience — shakemaps, tsunami inundation forecasts, land-use restrictions, building codes — rests on a model of where the plate interface is, how deeply it couples, and how far updip the rupture can propagate.
+Each step of the Section 5.2 workflow has attracted machine-learning research. Three examples from peer-reviewed outlets illustrate the range of roles:
 
-CASIE-21, the Cascadia Seismic Imaging Experiment, acquired the densest multi-channel reflection and OBS refraction dataset ever collected along the Cascadia margin in the summer of 2021. Its purpose was not incremental: it was to build a kilometer-scale image of the plate interface between the Nootka fracture zone and Cape Mendocino, from which the locked, transitional, and creeping zones could be mapped. The processing applies exactly the refraction–reflection–migration loop this lecture has developed. The velocity model built from OBS first arrivals is the starting model for the reflection migration that reveals the plate interface. The image is the velocity diagnostic.
+**Step 1 — First-break picking.** {cite:t}`Mardan2024` train a residual U-Net (initialized with ImageNet weights, fine-tuned on <10% of hand-picked shots) to pick first arrivals automatically at expert-level accuracy on the remaining 90% of shots. The network learns a surrogate for human pattern recognition grounded in the intercept-time physics of refraction.
 
-**Follow-up resource:** the CASIE-21 project overview at <https://casie21.weebly.com/> documents the experiment, the acquisition geometry, and the evolving data release. The Cascadia Recurrence Probability Workshop reports issued by USGS and Oregon DOGAMI translate these images into hazard parameters that are used in Washington, Oregon, and British Columbia for building codes and tsunami evacuation mapping.
+**Between Steps 1–2 — Shot-gather denoising.** {cite:t}`LiTradLiu2024` develop a self-supervised U-Net that removes erratic noise from raw shot gathers without requiring clean training labels. The network trains on the noisy data alone, exploiting the statistical contrast between coherent seismic signal and incoherent noise — a contrast that the wave equation defines.
+
+**Steps 2–5 combined — Velocity model building.** {cite:t}`YangMa2019` train an encoder–decoder network to map raw multi-shot gathers directly to $v(x,z)$ in a single forward pass, effectively performing first-break analysis, NMO semblance, and Dix inversion simultaneously. The training set consists of synthetic $(v, \text{gather})$ pairs produced by a finite-difference wave-equation solver.
+
+In every case, training data could only exist *because the physics-based operator existed first*: hand-picked first breaks require understanding the intercept-time equation; the denoiser needs the wave equation to define "signal"; the velocity-building network needs a finite-difference solver. Deep learning accelerates the chain; it does not replace the physics upstream of its training data.
+
+:::{admonition} The question to ask of any surrogate
+:class: important
+
+1. What physics-based operator does this network replace?
+2. Who produced the training data, and what physical knowledge was required?
+3. Does the evidence in the paper justify deployment on data outside the training distribution?
+
+These questions apply equally to regression formulas, empirical curves, and neural networks. Answering them rigorously is the goal of LO-10.7.
+:::
 
 ---
 
-## AI Literacy — Epistemics + Prompt Lab
+## 7 — Societal Relevance: Imaging the Hikurangi Plate Interface
 
-:::{admonition} AI Literacy — Evaluating surrogate networks
+The Hikurangi megathrust is capable of a $\mathrm{M}_w > 8.5$ earthquake with an associated trans-Pacific tsunami. New Zealand's national earthquake hazard model, coastal evacuation plans, and building codes for the North Island all depend on knowing where the plate interface is locked, where it is creeping, and how its properties vary along strike.
+
+Modern seismic campaigns at Hikurangi ({cite:t}`Wallace2009`; {cite:t}`Barker2018`) apply exactly the Section 5.2 workflow. Wide-angle OBS data supply the near-surface velocity model (Steps 1–2). Multichannel reflection data identify the interface geometry (Steps 3–4). The combined velocity model feeds the migration (Steps 5–6), and residual analysis (Step 7) drives iterative refinement (Step 8). The resulting cross-sections reveal that the northern Hikurangi interface is unusually shallow (1–2 km below seafloor near the trench) — the region where slow-slip events concentrate and the greatest tsunami hazard lies. This was not known until the seismic images were produced.
+
+**Open resource:** GNS Science Hikurangi research programme: <https://www.gns.cri.nz/research-projects/hikurangi-subduction-margin/>. IODP Expedition 375 report {cite:p}`Wallace2019` is open access.
+
+---
+
+## 8 — Course Connections
+
+- **Lecture 5 — Snell's law.** The hand-migration formula $\sin\theta = vp_0/2$ is the zero-offset Snell's parameter with the two-way factor.
+- **Lectures 6–7 — Refraction.** Intercept-time and first-arrival tomography supply Steps 1–2 of the workflow.
+- **Lectures 8–9 — Reflection.** NMO, CMP stacking, Dix, and AVO supply Steps 3–4.
+- **Lecture 11 — Whole-Earth structure.** Global $v(r)$ inversion for PREM is the same inverse problem at planetary scale, with earthquake sources instead of airguns.
+- **Lecture 13 — Seismic tomography.** Local refraction/reflection velocity models and global tomographic models both solve $\mathbf{d} = F(\mathbf{m})$ for $\mathbf{m}$.
+- **Lab 4 — Design → Simulate → Image.** Students generate a multi-layer synthetic shot gather, apply the Section 5.2 workflow, migrate with three velocity models, and identify which is correct from the image residuals alone.
+
+---
+
+## AI Literacy — Evaluating Imaging Surrogates
+
+:::{admonition} Discussion activity — surrogate epistemic audit
 :class: seealso
 
-The three deep-learning methods in Section 8 are all *data-driven surrogates* for physics-based operators. Two activities — one epistemic, one generative — deepen the critical stance.
+Working in pairs, select one of the three surrogate networks from Section 6 ({cite:t}`Mardan2024`, {cite:t}`LiTradLiu2024`, or {cite:t}`YangMa2019`). Read only the paper's methods and results. Answer:
 
-**Activity A — Epistemics (paired reading, 15 min).** Each pair selects one of {cite:t}`Mardan2024`, {cite:t}`LiTradLiu2024`, or {cite:t}`YangMa2019` and answers three questions from the paper's text alone, with no outside sources:
+1. Which step of the Section 5.2 workflow does this network accelerate? What physics-based operator does it replace?
+2. Identify one figure in the paper where the network output closely matches the physics-based reference, and one where it diverges. What does the divergence look like?
+3. Would you trust this network on Hikurangi accretionary-prism data (shallow, highly heterogeneous, underconsolidated sediments)? What evidence in the paper supports or undermines that trust?
 
-1. What Earth-science problem is the network designed to solve, and which physics-based operator does it replace?
-2. Where did the training data come from? What physical knowledge or human labor produced them?
-3. What evidence in the paper would warrant using this method on a Cascadia dataset that is *not* in the training distribution? If the authors do not provide such evidence, what would you demand before trusting the method?
-
-**Activity B — Prompt Lab (paired, 10 min).** Each pair crafts a prompt for a large language model that asks it to explain *why* the Kirchhoff migration of Figure 4(c) shows "frowns" when the velocity is too slow. Evaluate the response against the derivation in Section 3.3 and Section 5.1. Report one thing the model got right and one thing that was subtly (or obviously) wrong. A useful rubric:
-
-| Dimension | Question |
-|-----------|----------|
-| Physical correctness | Is the direction (frown vs. smile) attributed correctly to under- vs. over-migration? |
-| Causal explanation | Does the response invoke the shape mismatch between the migration hyperbola and the true data hyperbola, or does it offer a superficial curve-fitting account? |
-| Calibration | Does the response signal uncertainty where appropriate, or state incorrect claims with confidence? |
-| Use of mathematics | Does the response cite or reconstruct equation {eq}`eq-hyperbola-forward`, or avoid mathematics entirely? |
-
+**Prompt lab (10 min):** Ask an LLM to explain why a migration with too-slow velocity produces downward-curving ("frowning") residuals using the shape of the summation hyperbola. Evaluate the response against Section 4. Did the LLM correctly invoke the hyperbola shape mismatch, or give a qualitative account without the geometry?
 :::
-
-LO-7 is exercised directly through these activities: the goal is not to reject AI tools, but to use them in a way that is *anchored in the physics of the problem*. A surrogate network — whether a picked-for-this-lecture ImageNet-pretrained U-Net or a large language model explaining a figure — is only as trustworthy as the understanding one brings to evaluate it.
 
 ---
 
 ## Further Reading
 
-- {cite:t}`Claerbout2010`, *Basic Earth Imaging*. Stanford Exploration Project. Open-access: <http://sepwww.stanford.edu/sep/prof/bei11.2010.pdf>. Chapters 3–5 cover the same material developed here at a deeper level; Chapters 6–8 extend to Fourier-domain phase-shift migration, downward continuation, and prestack migration.
-- {cite:t}`LowrieFichtner2020`, *Fundamentals of Geophysics* (3rd ed., Cambridge University Press). Chapter 3. Available free via UW Libraries.
-- {cite:t}`ZeltBarton1998`, "Three-dimensional seismic refraction tomography: A comparison of two methods applied to data from the Faeroe Basin", *J. Geophys. Res.* 103, 7187–7210. doi:10.1029/97JB03536. Foundational open-access paper for refraction tomography as practiced today.
-- {cite:t}`Stolt1978`, "Migration by Fourier transform", *Geophysics* 43, 23–48. The original f-k migration method. Paywalled; cite only.
-- MIT OCW 12.510 Introduction to Seismology, lecture notes on migration: <https://ocw.mit.edu/courses/12-510-introduction-to-seismology-spring-2010>. CC BY-NC-SA.
-- EarthScope/IRIS Active Source Recording Resources: <https://www.earthscope.org/data/active-source/>. Recording geometries and sample datasets.
+- {cite:t}`Claerbout2010`, *Basic Earth Imaging*, Chapters 3–5. Open: <http://sepwww.stanford.edu/sep/prof/bei11.2010.pdf>. Chapter 5 contains the `kirchslow` adjoint-pair implementation.
+- {cite:t}`LowrieFichtner2020`, *Fundamentals of Geophysics* (3rd ed., Cambridge). Chapter 3. UW Libraries.
+- {cite:t}`ZeltBarton1998`, "Three-dimensional seismic refraction tomography." *J Geophys Res* 103, 7187–7210. The standard reference for first-arrival tomography.
+- {cite:t}`Stolt1978`, "Migration by Fourier transform." *Geophysics* 43, 23–48. Foundation of $f$-$k$ migration.
+- GNS Science Hikurangi research programme: <https://www.gns.cri.nz/research-projects/hikurangi-subduction-margin/>
+- MIT OCW 12.510 Introduction to Seismology, migration notes: <https://ocw.mit.edu/courses/12-510-introduction-to-seismology-spring-2010>
 
 ```{bibliography}
 :filter: docname in docnames
