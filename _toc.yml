@@ -39,11 +39,9 @@ parts:
         title: "Reflections II"
       - file: lectures/10_migration_and_velocity_image_duality
         title: "Migration & Velocity–Image Duality"
-      - file: lectures/11_whole_earth_I
-        title: "Whole Earth I"
-      - file: lectures/12_whole_earth_II
-        title: "Whole Earth II"
-      - file: lectures/13_seismic_tomography
+      - file: lectures/11_whole_earth_imaging
+        title: "Whole Earth Imaging"
+      - file: lectures/12_seismic_tomography
         title: "Seismic Tomography"
 
   - caption: "Module 4 — Earthquake Phenomenology"
