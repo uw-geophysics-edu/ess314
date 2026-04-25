@@ -201,27 +201,48 @@ PKP emerges from the far side of the core.
 
 ```{figure} ../assets/figures/fig_11_shadow_zones.png
 :name: fig-shadow-zones
-:alt: Two cross-sections of Earth side by side, each showing the
-  source as an orange star at the top and angular distance tick marks
-  in 30-degree increments from 0 to 180 on both sides. The left panel
-  shows orange S-wave rays confined to the mantle, terminating at about
-  103 degrees epicentral distance; the entire region beyond 103 degrees
-  is shaded pale orange and labelled "S-wave shadow zone". The right
-  panel shows blue mantle P-rays, blue-green PKP rays refracting
-  through the outer core, and dashed green PKIKP rays passing through
-  the inner core; a pale orange shaded ring between 103 and 143 degrees
-  on each side is labelled "P-wave shadow".
+:alt: Two side-by-side schematic Earth cross-sections. Panel (a):
+  S-wave shadow. Orange S-rays from a star-shaped source at the top
+  of the Earth turn back inside the mantle and reach the surface only
+  at angular distances less than 103 degrees. The surface arc from
+  103 degrees through the antipode at 180 degrees is shaded in
+  vermilion and labelled "S-wave shadow zone". The annotation inside
+  the outer core reads "liquid outer core (no S)". Panel (b): P-wave
+  shadow. Blue P-rays turn in the mantle and reach the surface within
+  103 degrees; light-blue PKP rays refract into the outer core,
+  traverse it along curved paths computed from AK135, and emerge at
+  the surface beyond the PKP caustic at 143 degrees. Dashed green
+  PKIKP rays pass through the outer core and continue through the
+  solid inner core, emerging at distances near 155–175 degrees. The
+  surface arc from 103 degrees to 143 degrees on each side is shaded
+  in vermilion and labelled "P-wave shadow". Angular distance ticks in
+  30-degree increments run from 0 to 180 on both sides of each panel.
+  Both panels use the colorblind-safe Wong palette.
 :width: 100%
 
-Shadow zones are the direct observational signature of the fluid
-outer core. The existence of an S-wave shadow at $\Delta > 103^\circ$
-demonstrates that shear waves are extinguished somewhere below the
-mantle — that is, that something below the mantle behaves mechanically
-like a fluid. The P-wave shadow band from $103^\circ$ to $143^\circ$
-demonstrates that a strong velocity decrease must occur at the same
-depth as the S-wave extinction. Together, these two observations
-locate the core-mantle boundary and characterise the outer core as a
-low-$V_P$, zero-$V_S$ fluid.
+Shadow zones are the direct observational signature of the fluid outer
+core. The 103° threshold is **geometric** — it is the angular distance
+at which a direct mantle ray just grazes the core-mantle boundary. Beyond
+103° any direct ray must penetrate the core.
+
+**S-wave shadow** ($\Delta > 103^\circ$): S-wave energy cannot propagate
+as a shear wave in the fluid outer core
+($\mu = 0 \Rightarrow \beta = \sqrt{\mu/\rho} = 0$), so the S shadow
+extends from 103° all the way to the antipode.
+
+**P-wave shadow** ($103^\circ < \Delta < 143^\circ$): P-wave energy
+refracts into the core ($\alpha_\text{mantle} \approx 13.7$ km/s,
+$\alpha_\text{outer\,core} \approx 8$ km/s; by Snell's law the ray bends
+strongly toward the normal) and re-emerges as PKP at or beyond the PKP
+caustic near 143°, leaving a gap in the 103°–143° band.
+
+The same kinematic boundary at the CMB combined with one constitutive
+fact — fluids carry no shear stress — explains both shadows.
+
+> **Reproducibility.** Ray paths in panel (b) use real obspy.taup AK135
+> ray tracing. The precise caustic position and PKP emergence distances
+> depend on the radial velocity model; this figure uses AK135
+> (Kennett et al. 1995). Source: `assets/scripts/fig_11_shadow_zones.py`.
 ```
 
 Oldham (1906) observed the S-wave shadow and inferred the fluid
@@ -468,7 +489,34 @@ picture in several directions.
 
 ## 10. AI Literacy
 
-:::{admonition} AI Literacy — Epistemics (LO-7)
+:::{admonition} AI Literacy — Shadow Zone Epistemics (LO-7)
+:class: tip
+
+**Prompt Lab.** Ask a chat assistant: *"Why does the S-wave shadow
+zone extend to 180° but the P-wave shadow zone only goes from 103°
+to 143°?"* Then evaluate the response against Figure
+{numref}`fig-shadow-zones`.
+
+Common failure modes to watch for:
+
+1. **Attributing both shadows to absorption** rather than distinguishing
+   the two distinct mechanisms (fluid constitutive property for S;
+   refraction geometry for P).
+2. **Confusing 103° geometry with the width of the P-shadow**: 103° is
+   set by the ray that grazes the CMB; the outer edge at 143° is set
+   by the PKP caustic, a separate piece of physics.
+3. **Hallucinating velocity numbers**: correct values are
+   $\alpha_\text{mantle} \approx 13.7$ km/s and
+   $\alpha_\text{outer\,core} \approx 8$ km/s just across the CMB;
+   $\beta_\text{outer\,core} = 0$.
+
+**The epistemic skill.** Compare what the model says against the figure
+and against `obspy.taup.TauPyModel('ak135')`. Report numerical discrepancies
+explicitly and treat AI-generated shadow-zone explanations as *drafts to
+cross-check*, not authoritative answers.
+:::
+
+:::{admonition} AI Literacy — Phase-Name Epistemics (LO-7)
 :class: tip
 
 **Prompt to try.** *"List the seismic phases that pass through

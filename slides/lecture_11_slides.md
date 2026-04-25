@@ -73,12 +73,13 @@ Collect enough — invert — and a 1-D Earth emerges.
 
 ---
 
-## The forward model — what shadow zones predict
+## Both shadow zones start at 103° — for different reasons
 
-![w:900](../assets/figures/fig_11_shadow_zones.png)
+![w:900 alt:Two-panel Earth cross-section. Left: orange S-rays confined to mantle, vermilion shadow zone beyond 103 degrees. Right: blue P-rays in mantle, light-blue PKP rays arching through outer core emerging beyond 143 degrees, dashed-green PKIKP rays through inner core, vermilion P-shadow band from 103 to 143 degrees.](../assets/figures/fig_11_shadow_zones.png)
 
-**S-wave shadow**: $\Delta > 103^\circ$ — no S arrivals. *Fluid outer core.*
-**P-wave shadow**: $103^\circ < \Delta < 143^\circ$ — velocity drop at the CMB.
+- **103° is geometric** — the epicentral distance at which a direct mantle ray just grazes the CMB
+- **S shadow → antipode**: fluid outer core, $\mu = 0 \Rightarrow \beta = 0$, shear cannot propagate
+- **P shadow → 143°**: P refracts into core ($\alpha_m \approx 13.7$ km/s → $\alpha_c \approx 8$ km/s); PKP fills in beyond the caustic
 
 ---
 
