@@ -39,9 +39,9 @@ Marine Denolle · University of Washington
 
 ## Stand in Seattle. What is 60 km below your feet?
 
-![w:900](../assets/figures/fig_12_cascadia_slab.png)
+![w:900 alt:East-west cross-section of Cascadia. From left to right at the surface: offshore trench, coastline, Seattle (Puget Lowland, west of the arc), Cascade arc volcanoes (orange triangles). The subducting Juan de Fuca slab (blue) dips east beneath Seattle and the arc to ~350 km depth. Orange patches show the hydrated slab top and mantle-wedge melt zone.](../assets/figures/fig_12_cascadia_slab.png)
 
-*The Juan de Fuca plate, descending eastward. The Cascade arc melt zone. The hydrated slab-top.*
+*The Juan de Fuca plate descends eastward beneath Seattle, then under the Cascade arc. The melt zone feeds Rainier, St Helens, and the rest of the arc — **east** of Seattle.*
 
 **Every number above came from a travel-time residual measured in fractions of a second.**
 
@@ -117,6 +117,25 @@ $$
 
 ---
 
+## But rays bend — Snell's law makes $\mathbf{G}$ non-linear
+
+$$p = \frac{\sin i}{V} = \text{const along a ray}$$
+
+When $V$ varies, the ray bends → the path lengths $G_{ki}$ change → **$\mathbf{G}$ depends on $\mathbf{m}$ itself**.
+
+**Born (linearised) approximation** around a reference model $\mathbf{m}_0$:
+$$\delta\mathbf{d} \approx \mathbf{G}(\mathbf{m}_0)\,\delta\mathbf{m}$$
+
+**Iterate:** solve for $\delta\mathbf{m}$, update model, retrace rays, repeat.
+
+**Full-waveform inversion (FWI)** replaces ray tracing entirely:
+- Simulate the 3-D elastic wavefield numerically (SPECFEM3D)
+- Compute **adjoint kernels** — volumetric sensitivity to every parameter
+- Match the *entire waveform*, not just the first arrival
+- Doubles resolution; captures finite-frequency "banana-doughnut" effects
+
+---
+
 ## The inverse problem — why least squares needs help
 
 **Ordinary least squares:**
@@ -184,12 +203,23 @@ $\varepsilon^{2}$ trades **resolution** for **stability**. Too small → noise. 
 
 ---
 
-## Research horizon
+## Research horizon (2021–2026)
 
-- **Full-waveform inversion (FWI):** GLAD-M25 (Lei et al. 2020) — 2× resolution over travel-time tomography.
-- **ML phase pickers:** PhaseNet (Zhu & Beroza 2019), EQTransformer (Mousavi et al. 2020) — 10× catalog completeness.
-- **Distributed acoustic sensing (DAS):** dense fibre-optic arrays — imaging shallow PNW structure (Wilbur, UW-ESS).
-- **Joint inversions:** travel times + surface waves + gravity + MT + geodesy (Moulik & Ekström 2014).
+**Travel-time → full-waveform**
+- GLAD-M25 and successors (Lei et al. 2020; Tromp 2020 *Nat Rev Earth Env*) — adjoint FWI doubles resolution
+- Finite-frequency kernels: sensitivity is a **banana-doughnut**, not a ray delta-function
+- Multiscale FWI incorporating multiple period bands simultaneously (Fichtner group, ETH, 2021–2024)
+
+**ML augmentation**
+- **SeisBench** (Woollam et al. 2022, *SRL*) — unified ML picker API; one to two orders of magnitude more picks from continuous data
+- Neural-network tomographic solvers: promising, but must be validated against conventional inversions before geological interpretation
+
+**New data sources**
+- **Ambient-noise FWI**: cross-correlation wavefields now used in full adjoint inversion — no earthquakes needed for crustal imaging
+- **DAS**: fibre-optic cables as dense seismic arrays; PNW shallow structure (UW, 2022–2024)
+
+**Probabilistic inversion**
+- HMC / variational Bayes approaches: sample the full model posterior → honest uncertainty estimates on slab geometry, LLSVP boundaries
 
 ---
 

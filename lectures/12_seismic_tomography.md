@@ -86,12 +86,14 @@ arrive.
   of the slab indicates a hydrated slab-top low-velocity layer, and
   an orange wedge-shaped region at 50-110 km depth beneath the
   Cascade arc represents the mantle wedge partial-melt zone. Symbols
-  at the surface mark the Cascadia trench, the coastline, the Cascade
-  arc volcanoes (orange triangles), and Seattle. A black arrow shows
-  the Juan de Fuca plate moving eastward at about 4 cm/yr. Labels
-  identify the fast (blue) anomaly as the cold subducted slab and
-  the slow (orange) anomalies as the hydrated slab top and the
-  partial-melt mantle wedge.
+  at the surface mark, from left to right: the Cascadia trench
+  offshore, the coastline, Seattle (in the Puget Lowland, west of
+  the volcanic arc), and the Cascade arc volcanoes (orange triangles)
+  near the right edge of the profile. A black arrow shows the Juan
+  de Fuca plate moving eastward at about 4 cm/yr. Labels identify
+  the fast (blue) anomaly as the cold subducted slab and the slow
+  (orange) anomalies as the hydrated slab top and the partial-melt
+  mantle wedge.
 :width: 100%
 
 The Cascadia subduction zone in tomographic cross-section. The fast
@@ -269,6 +271,77 @@ satisfies all four travel-time equations equally well. This is a
 that the data cannot see. Every real tomographic inversion has
 such null spaces, and the job of regularisation is to decide which
 model the inversion returns when the data are indifferent.
+
+### 3b. Snell's law bends the rays — and that makes $\mathbf{G}$ non-linear
+
+The derivation above assumes the path of each ray through the cells
+is **known and fixed**: $G_{ki}$ is simply the geometric length of
+a straight line (or a pre-computed reference-model path) through
+cell $i$. In reality, rays obey Snell's law at every interface:
+whenever velocity changes, the ray direction changes to conserve
+the ray parameter $p = \sin i / V$. This means the actual path
+— and therefore every entry $G_{ki}$ — depends on the very
+velocity model $\mathbf{m}$ we are trying to recover. The forward
+problem is **non-linear**:
+
+```{math}
+:label: eq:nonlinear-fm
+\mathbf{d} = \mathbf{F}(\mathbf{m}),
+```
+
+where $\mathbf{F}$ is the full (non-linear) forward operator that
+computes travel times by tracing rays through the model.
+
+**Standard fix — linearise around a reference model.** Let
+$\mathbf{m}_0$ be a smooth 1-D reference (e.g.  AK135), and let
+$\delta\mathbf{m} = \mathbf{m} - \mathbf{m}_0$ be the perturbation
+we seek. Expanding $\mathbf{F}$ to first order
+(the **Born approximation** for ray theory),
+
+```{math}
+:label: eq:born
+\delta\mathbf{d} \;\approx\; \mathbf{G}(\mathbf{m}_0)\,\delta\mathbf{m},
+```
+
+where $\delta\mathbf{d} = \mathbf{d}_\text{obs} - \mathbf{F}(\mathbf{m}_0)$
+are the **travel-time residuals** and $\mathbf{G}(\mathbf{m}_0)$ is
+the sensitivity matrix evaluated on the reference-model ray paths.
+The system is now linear in $\delta\mathbf{m}$ and can be treated
+with standard least squares.
+
+**Iterative solution.** Because Eq. {eq}`eq:born` is only
+approximate, we iterate:
+
+1. Compute reference-model ray paths and residuals
+   $\delta\mathbf{d}^{(0)}$.
+2. Invert for $\delta\mathbf{m}$ using damped least squares
+   (Eq. {eq}`eq:dls`).
+3. Update the model: $\mathbf{m}_1 = \mathbf{m}_0 + \delta\mathbf{m}$.
+4. Retrace rays through $\mathbf{m}_1$, compute new residuals, repeat.
+
+This loop converges in a few iterations for well-sampled problems.
+For poorly-sampled problems the loop can diverge or stagnate, and
+one must rely on smoothing to stabilise it.
+
+**Full-waveform inversion (FWI) goes further still.** Rather than
+collapsing a seismogram to a single travel-time number, FWI
+minimises the misfit between the *entire observed waveform* and a
+simulated waveform computed by solving the 3-D elastic wave equation
+numerically (SPECFEM3D). The sensitivity matrix is replaced by
+**adjoint kernels** — volumetric sensitivity maps computed from pairs
+of forward and adjoint simulations. This approach captures finite-
+frequency effects (curved sensitivity lobes, "banana-doughnut"
+kernels) that ray theory ignores, and it doubles the spatial
+resolution achievable from the same dataset.
+
+:::{admonition} The non-linear chain in one sentence
+:class: important
+
+Ray paths depend on velocity → $\mathbf{G}$ depends on
+$\mathbf{m}$ → the forward problem is non-linear → we linearise
+around a reference model and iterate, or replace ray theory with a
+full numerical wave simulation.
+:::
 
 ---
 
@@ -472,35 +545,95 @@ Transportable Array to sweep east-to-west across the continent.
 
 ## 8. Research Horizon
 
-- **Full-waveform inversion (FWI).** Rather than reducing a
-  seismogram to a single travel time and inverting those travel
-  times, FWI inverts the entire waveform, using 3-D numerical
-  simulations of wave propagation (Fichtner et al. 2009;
-  SPECFEM3D). Global FWI models such as GLAD-M25 (Lei et al.
-  2020, https://doi.org/10.1093/gji/ggaa253) have roughly doubled
-  the resolution of classical travel-time tomography.
+The field has moved rapidly from travel-time ray tomography to
+full-waveform inversion, from human phase pickers to neural networks,
+and from single-data-type to joint inversions. Below is a snapshot
+of the frontier as of 2021–2026.
 
-- **Machine-learning phase pickers.** PhaseNet (Zhu and Beroza 2019,
-  https://doi.org/10.1093/gji/ggy423) and EQTransformer (Mousavi et
-  al. 2020, https://doi.org/10.1038/s41467-020-17591-w) now pick P
-  and S arrivals on continuous seismograms with better accuracy and
-  ten times higher completeness than an expert analyst. The
-  resulting catalogs are being reprocessed through global tomography
-  pipelines. Lab 6 has students compare a PhaseNet pick to a manual
-  pick on a real Cascadia event.
+### Travel-time → full-waveform inversion
 
-- **Distributed acoustic sensing (DAS).** Fibre-optic telecom cables,
-  repurposed as dense seismic arrays with one sensor per metre, are
-  imaging shallow crustal structure at unprecedented resolution
-  along highways, submarine cables, and inside glaciers. Emily
-  Wilbur's doctoral work with PNSN uses DAS for shallow-structure
-  imaging in the Puget Lowland (UW-ESS).
+- **Global adjoint tomography.** The GLAD-M25 model (Lei et al. 2020;
+  https://doi.org/10.1093/gji/ggaa253) demonstrated that
+  spectral-element-based FWI with adjoint kernels (SPECFEM3D_GLOBE)
+  roughly doubles the spatial resolution of classical travel-time
+  tomography at the global scale. Subsequent iterations by the same
+  group (Bozdağ, Peter, Tromp et al.) have extended the approach
+  to higher frequency and larger earthquake datasets; see the review
+  in Tromp 2020 (Nature Reviews Earth & Environment,
+  https://doi.org/10.1038/s43017-019-0008-9) for full context.
 
-- **Joint inversions.** Travel-time, surface-wave, gravity,
-  magnetotelluric, and geodetic data carry complementary sensitivity
-  to subsurface structure. Modern inversions combine several of
-  these simultaneously (Moulik and Ekström 2014;
-  https://doi.org/10.1093/gji/ggu356).
+- **Finite-frequency and banana-doughnut kernels.** Dahlen et al.
+  (2000) and Tromp et al. (2005) showed that at finite frequency the
+  sensitivity of a travel-time measurement is zero *on* the geometric
+  ray and peaks in a doughnut-shaped region around it — completely
+  unlike the delta-function sensitivity assumed in ray theory. Modern
+  tomography uses adjoint kernels that correctly represent this, at
+  the cost of one forward + one adjoint simulation per measurement.
+
+- **Multiscale and collaborative FWI.** Fichtner and colleagues
+  (ETH Zurich / ORFEUS) have extended FWI to exploit the entire
+  seismic wavefield at multiple period bands simultaneously,
+  improving sensitivity to both lithospheric and lower-mantle
+  structure in regional European models (2021–2024).
+
+### Machine-learning augmentation
+
+- **SeisBench.** Woollam et al. (2022; Seismological Research Letters,
+  https://doi.org/10.1785/0220210324) released SeisBench, an
+  open-source framework that unifies PhaseNet, EQTransformer, and a
+  dozen other ML pickers under a single API. Models trained on one
+  network can be fine-tuned on another in minutes, dramatically
+  lowering the barrier to building regional catalogs for tomography.
+
+- **ML phase pickers in global catalogs.** Applying SeisBench-class
+  pickers to continuous ISC and IRIS archives has increased usable
+  P and S picks by one to two orders of magnitude, with cataloged
+  events now approaching $M_c \approx 2$ globally. The expanded
+  catalogs are being ingested into new travel-time tomography
+  inversions with a corresponding resolution increase.
+
+- **Neural-network tomographic solvers.** Recent work has trained
+  networks to map travel-time residual patterns directly to 3-D
+  velocity anomalies. These approaches are promising for real-time
+  or low-cost applications but must be validated against
+  conventional least-squares inversions before the images are
+  interpreted geologically.
+
+### Ambient-noise and distributed sensing
+
+- **Ambient-noise FWI.** Surface-wave ambient noise tomography
+  (Shapiro et al. 2005) is now being extended to the full-waveform
+  regime: the cross-correlation wavefield is simulated numerically
+  and adjoint kernels are computed from it (Sager et al. 2022 and
+  related work), eliminating the need for earthquakes entirely for
+  crustal-scale imaging.
+
+- **Distributed acoustic sensing (DAS).** Fibre-optic telecom cables
+  repurposed as seismic arrays — one channel per metre, hundreds of
+  kilometres long — are now imaging shallow crustal structure at
+  unprecedented density along highways, submarine cables, and inside
+  glaciers (multiple groups, 2021–2024). DAS-based tomography of the
+  Puget Lowland is an active research direction at UW.
+
+### Probabilistic and uncertainty-aware inversion
+
+- **Bayesian and HMC inversion.** Hamiltonian Monte Carlo (HMC)
+  and variational inference approaches now make it feasible to
+  sample the full posterior of a tomographic model — rather than
+  reporting a single regularised solution — giving honest
+  uncertainty estimates on features such as the Cascadia slab
+  geometry and LLSVP boundaries.
+
+### Joint multi-observable inversions
+
+- **Multi-observable adjoint tomography.** The same SPECFEM3D
+  framework that inverts waveforms can simultaneously match
+  surface-wave dispersion, receiver functions, and normal-mode
+  frequencies, constraining density and anisotropy as well as
+  velocity. Moulik and Ekström (2014;
+  https://doi.org/10.1093/gji/ggu356) demonstrated this for
+  isotropic elasticity; subsequent work has extended it to
+  full anisotropic elasticity in the mantle.
 
 ---
 
