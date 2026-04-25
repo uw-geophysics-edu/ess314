@@ -35,6 +35,53 @@ under a compatible licence).
 - **Used in:** `lectures/12_seismic_tomography.md` §5 (large
   low-shear-velocity provinces at the base of the mantle).
 
+## `paulatto2022_g002.webp`
+
+- **Authors:** Paulatto, M., Hooft, E. E. E., Chrapkiewicz, K.,
+  Heath, B., Toomey, D. R., & Morgan, J. V. (2022).
+- **Source paper:** *Advances in seismic imaging of magma and crystal
+  mush*, **Frontiers in Earth Science** 10, 970131.
+  DOI: <https://doi.org/10.3389/feart.2022.970131>
+- **Licence:** Creative Commons Attribution 4.0 International
+  (CC BY 4.0). <https://creativecommons.org/licenses/by/4.0/>
+  License text on article page: "© 2022 Paulatto, Hooft, Chrapkiewicz,
+  Heath, Toomey and Morgan. This is an open-access article distributed
+  under the terms of the Creative Commons Attribution License (CC BY)."
+- **Source URL:** <https://www.frontiersin.org/articles/10.3389/feart.2022.970131/full>
+  (image served from Frontiers ipx proxy; original
+  `feart-10-970131-g002`).
+- **Original figure:** Figure 2 of the article — decomposes recovery
+  of an idealised volcano velocity model into image fidelity, physical
+  sensitivity, data coverage, and model resolution.
+- **Used in:** `lectures/12_seismic_tomography.md` §7 (estimating
+  resolution).
+
+## `paulatto2022_g008.webp`
+
+- **Authors:** Paulatto et al. 2022 (same article as above).
+- **Licence:** CC BY 4.0 (as above).
+- **Original figure:** Figure 8 — four real joint-inversion examples:
+  Kolumbo FWI, Montserrat joint travel-time + gravity, Mount St Helens
+  joint local-earthquake + ambient-noise surface-wave tomography, and
+  Laguna del Maule surface-wave tomography.
+- **Used in:** `lectures/12_seismic_tomography.md` §6 (joint
+  body-wave / surface-wave / multi-observable tomography).
+
+## `mars_interior_PIA25282.jpg`
+
+- **Author / origin:** NASA / JPL-Caltech, image PIA25282
+  *Inside Mars Infographic*, 17 May 2022, summarising InSight-derived
+  models of the Martian crust, mantle and liquid iron core.
+- **Licence:** Public Domain (work of NASA, U.S. federal government).
+  See JPL image use policy: <https://www.jpl.nasa.gov/jpl-image-use-policy>
+- **Source pages:**
+  - <https://commons.wikimedia.org/wiki/File:PIA25282-MarsInSightLander-InsideMars-20220517.jpg>
+  - JPL Photojournal entry PIA25282
+- **Direct file (Wikimedia mirror):**
+  <https://commons.wikimedia.org/wiki/Special:FilePath/PIA25282-MarsInSightLander-InsideMars-20220517.jpg>
+- **Used in:** `lectures/12_seismic_tomography.md` §10 (planetary
+  tomography — Mars/InSight as a single-station inverse problem).
+
 ---
 
 ## Reuse policy

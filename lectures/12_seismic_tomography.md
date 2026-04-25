@@ -684,6 +684,34 @@ critically — different sensitivity kernels can produce different
 amplitudes for the *same* feature.
 :::
 
+```{figure} ../assets/figures/external/paulatto2022_g008.webp
+:name: fig-paulatto-joint
+:alt: Four-panel composite showing real joint-inversion tomographic
+  results from four volcanic systems—Kolumbo (full-waveform inversion
+  of marine streamer data), Montserrat (joint travel-time and gravity
+  inversion), Mount St Helens (joint local-earthquake and ambient-noise
+  surface-wave tomography), and Laguna del Maule (ambient-noise surface
+  wave tomography). Each panel shows a vertical cross-section of
+  P- or S-wave velocity anomaly with a low-velocity body interpreted
+  as magma or crystal mush at depths of a few kilometres beneath the
+  edifice.
+:width: 95%
+
+**Four real joint-inversion images of magmatic systems.** Reproduced
+from Figure 8 of {cite:t}`Paulatto2022` under CC BY 4.0. Each panel
+combines a different mix of observables: (a) full-waveform inversion
+(FWI) of marine streamer data at Kolumbo; (b) joint travel-time +
+gravity inversion at Montserrat; (c) joint local-earthquake +
+ambient-noise surface-wave tomography at Mount St Helens; (d) ambient
+noise surface-wave tomography at Laguna del Maule. **Reading exercise
+(geophysical reasoning):** the four methods differ in the depth
+range they constrain best and in their vertical vs. lateral
+resolution. Identify which panel best resolves a *vertically extensive*
+low-velocity body (a tall mush column rather than a thin sill) and
+defend your choice in three sentences, citing the underlying
+observable each method depends on.
+```
+
 ---
 
 ## 7. Estimating resolution: where can we trust the image?
@@ -696,6 +724,34 @@ the regularisation prefers (often zero, or smoothness) is **not the
 same** as a region where the inversion finds genuinely zero anomaly.
 Telling these apart is the most important step in interpreting a
 tomographic image responsibly.
+
+```{figure} ../assets/figures/external/paulatto2022_g002.webp
+:name: fig-paulatto-resolution
+:alt: Multi-panel synthetic recovery test. The top row shows the true
+  velocity model (an idealised volcano with a low-velocity magma body
+  at depth). Subsequent rows isolate four distinct effects on the
+  recovered image—image fidelity (the choice of imaging method),
+  physical sensitivity (the wavefield's intrinsic ability to sense
+  the target), data coverage (the source-receiver geometry), and
+  model resolution (the regularisation and parametrisation). Each row
+  shows how that single effect, in isolation, blurs or biases the
+  recovered low-velocity body.
+:width: 90%
+
+**The four effects that limit any tomographic image.** Reproduced
+from Figure 2 of {cite:t}`Paulatto2022` under CC BY 4.0. The same
+idealised target (a magma body) is recovered under four separate
+degradations: imaging-method fidelity, physical sensitivity, data
+coverage, and regularisation/model resolution. Together these set
+the ceiling on what *any* tomographic experiment can recover.
+**Reading exercise (geophysical reasoning):** suppose you want to
+image a 5-km-wide low-velocity body at 30 km depth using a 50-station
+local network and local earthquakes. Which of the four panels
+depicts the *binding constraint* for your survey — the one effect
+that will dominate the blurring of your final image? Justify in
+three sentences, then state one thing you could change about the
+experiment to relax that constraint.
+```
 
 ### The two ingredients of poor resolution
 
@@ -966,6 +1022,37 @@ of the frontier as of 2021–2026.
   https://doi.org/10.1093/gji/ggu356) demonstrated this for
   isotropic elasticity; subsequent work has extended it to
   full anisotropic elasticity in the mantle.
+
+### Planetary tomography: doing it with one station
+
+```{figure} ../assets/figures/external/mars_interior_PIA25282.jpg
+:name: fig-mars-insight
+:alt: NASA infographic summarising the InSight-derived model of the
+  interior of Mars. A vertical wedge through the planet shows a thin
+  outer crust, a silicate mantle, and a large liquid iron-alloy core
+  whose radius is now constrained by seismology. Annotations identify
+  the seismometer SEIS on the surface and indicate ray paths of
+  marsquakes and meteoroid impacts that travel through the planet to
+  the single instrument.
+:width: 80%
+
+**Mars from a single seismometer.** NASA/JPL-Caltech infographic
+PIA25282 (public domain; 17 May 2022) summarising the interior
+model of Mars derived from the InSight mission's SEIS instrument
+{cite:p}`Banerdt2020`. With *one* broadband station on the surface,
+the inverse problem of §3–7 collapses to its hardest possible
+geometry: every "ray" begins at an unknown source location and
+ends at the same single receiver, and the resolution is governed
+entirely by the time–distance information available in surface
+reflections (PP, SS), core phases (PcP, ScS) and converted phases
+(SKS). **Reading exercise (geophysical reasoning):** with only one
+station, list which of the four resolution effects of
+{numref}`fig-paulatto-resolution` becomes the binding constraint
+on recovering Mars's core radius, and explain in two sentences why
+adding meteoroid impacts as additional sources improves the inverse
+problem more than adding more marsquakes from the same source
+region would.
+```
 
 ---
 
