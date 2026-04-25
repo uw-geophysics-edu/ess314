@@ -511,6 +511,88 @@ dense broadband networks (EarthScope Transportable Array passed
 through Washington in 2007–2009), and ambient-noise surface-wave
 tomography.
 
+### A worked example from the published literature: the Farallon slab
+
+```{figure} ../assets/figures/external/farallon_tomo_slice.png
+:name: fig-farallon-grand
+:alt: Cross-section of the Earth's mantle from the surface to the
+  core-mantle boundary at 2891 km depth, showing P-wave (left half)
+  and S-wave (right half) velocity perturbations beneath southern
+  North America. A continuous fast (blue) tabular feature dips from
+  the western surface beneath North America, flattens broadly between
+  about 660 and 1500 km depth, and then descends more steeply into
+  the lowermost mantle. Slow (red) regions appear in the upper-mantle
+  asthenosphere and in patches of the lowermost mantle. The fast
+  feature is labelled the Farallon slab; the lowermost-mantle slow
+  patch corresponds to the African / Pacific large low-shear-velocity
+  province.
+:width: 95%
+
+**A real published tomographic cross-section: the Farallon slab beneath
+North America.** The image (CC BY-SA 4.0; Wikimedia Commons user
+*Oilfieldvegetarian* after Grand, van der Hilst & Widiyantoro 1997,
+*GSA Today* 7(4), 1–7) shows P-wave velocity perturbations on the left
+and S-wave perturbations on the right. The slab is the fast (blue)
+tabular feature that subducted under western North America in the
+Mesozoic, stalled in the mid-mantle, and sinks today toward the
+core–mantle boundary. Compare it to the schematic in
+{numref}`fig-mantle`: the published image shows the same kinematic
+features, but with real ray-coverage gaps, smearing along illumination
+direction, and amplitude reductions where damping dominates. **Reading
+exercise:** identify (i) the upper-mantle low-velocity zone, (ii) the
+slab segment that has stalled near 660 km, and (iii) at least one
+region where the recovered amplitude is suspect because the
+illumination is one-sided.
+```
+
+```{figure} ../assets/figures/external/african_llsvp_cartoon.jpg
+:name: fig-african-llsvp
+:alt: Three-dimensional cartoon of Earth's lower mantle viewed from
+  the south Atlantic side, showing the African large low-shear-velocity
+  province (LLSVP) as a translucent red dome rising from the
+  core-mantle boundary into the lower mantle beneath southern Africa
+  and the southwest Indian Ocean. The CMB is shown as a smooth orange
+  shell at the base; the dome's outline is irregular but coherent.
+:width: 60%
+
+**The African LLSVP — a deep-mantle structure inferred from S-wave
+tomography.** Cartoon by Sanne Cottaar (CC BY-SA 3.0; Wikimedia
+Commons), based on her published cluster analysis of multiple
+shear-wave tomographic models {cite:t}`Cottaar2016`. The two LLSVPs
+(the African one shown here, and a second beneath the central Pacific)
+together cover roughly a quarter of the core-mantle boundary, are
+about 1000 km tall, and are reproducibly recovered by independent
+inversions. Whether they are dominantly thermal piles or
+thermo-chemical reservoirs remains an open research question — and
+the answer matters for whether mantle plumes anchor at LLSVP edges,
+where some hotspots (Iceland, Hawaii, Tristan) appear to root.
+```
+
+::::{admonition} A small literature gallery — open-access papers per section
+:class: seealso
+
+Paper figures are protected by their journals' licences. Where a
+figure is not directly embeddable here we link to its open-access
+source so you can read it in context. Verify each DOI yourself.
+
+| Section | Open-access paper | What its figures show |
+|---|---|---|
+| §2 ray cones, §7 resolution | {cite:t}`Rawlinson2010` *Phys. Earth Planet. Inter.* 178 (open-access PDF widely available) — *Seismic tomography: a window into deep Earth* | Comprehensive review with worked examples of ray-density maps, checkerboard tests, and trade-off curves. Best single reading for §7. |
+| §3 forward problem, §4 inverse | {cite:t}`Aster2018` *Parameter Estimation and Inverse Problems* (UW Libraries) | Schematic of $\mathbf{G}$ for travel-time tomography; L-curve worked examples. |
+| §5 LLSVPs, lower-mantle structure | Cottaar & Lekić (2016) *Geophys. J. Int.* 207, 1122–1136 — <https://doi.org/10.1093/gji/ggw324> (Open Access) | The LLSVP cluster analysis behind {numref}`fig-african-llsvp`; Figure 4 is a clear depth-by-depth map of consensus structure. |
+| §5 deep mantle plumes | Koppers et al. (2021) *Nat. Rev. Earth Environ.* 2, 382–401 — <https://doi.org/10.1038/s43017-021-00168-6> | Fig. 2 compares plume locations across multiple modern tomographic models — useful when judging which features are "robust". |
+| §6 ambient-noise / joint | Wang, Lin & Ward (2019) *Geophys. J. Int.* 217, 1668–1680 — <https://doi.org/10.1093/gji/ggz109> (OA) | Cascadia ambient-noise tomography using dense linear arrays; their Fig. 5 is a textbook example of a joint shallow $V_S$ image. |
+| §7 resolution / checkerboard | Rawlinson & Spakman (2016) *Tectonophysics* 670, 1–8 — *On the use of sensitivity tests in seismic tomography* | Full discussion (with examples) of the limits of checkerboard tests as resolution proxies — the paper that warns against trusting them as the only diagnostic. |
+| §10 FWI | Lei et al. (2020, GLAD-M25) *Geophys. J. Int.* 223, 1–21 — <https://doi.org/10.1093/gji/ggaa253> (OA) | Fig. 6 (mantle cross-sections) and Fig. 11 (resolution tests) of GLAD-M25. |
+| §10 ML / phase picking | Woollam et al. (2022, *SeisBench*) *Seismol. Res. Lett.* 93, 1695–1709 — <https://doi.org/10.1785/0220210324> (OA) | Fig. 1 of the SeisBench architecture; benchmarks across networks. |
+| §10 Mars / planetary | Stähler et al. (2021) *Science* 373, 443–448 — <https://doi.org/10.1126/science.abi7730> | Fig. 1 (Mars seismogram + ray paths) and Fig. 3 (recovered Martian core radius) — the same inverse-problem framework on a different planet. |
+
+These are the figures we asked you to read alongside the lecture.
+Whenever a tomographic image is reproduced in a textbook or a slide
+deck, **trace it back** to a primary paper and inspect the resolution
+test the authors actually published.
+::::
+
 ---
 
 ## 6. Combining body-wave and surface-wave tomography
