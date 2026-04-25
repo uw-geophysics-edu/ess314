@@ -347,6 +347,24 @@ Modern seismic campaigns at Hikurangi ({cite:t}`Wallace2009`; {cite:t}`Barker201
 
 ---
 
+## Concept Checks — reasoning practice
+
+These questions ask you to *reason from the physics*, not to recall a formula. Bring sketches and short written arguments to discussion.
+
+1. **[LO-10.1, LO-10.5 — diagnose]** A migrated section shows clear *upward smiles* at $t_0 = 1.8$ s but flat (focused) gathers at $t_0 = 0.6$ s. Argue from the velocity–image duality whether the migration velocity used for the deeper interval is too fast, too slow, or correct. Then explain why the shallow image can be flat while the deep image is wrong — what does this say about how Dix-derived velocities accumulate error with depth?
+
+2. **[LO-10.2 — predict]** A flat reflector at $z = 3.0$ km sits below two layers with $v_1 = 1.8$ km/s (0–1 km) and $v_2 = 3.0$ km/s (1–3 km). A processor mistakenly uses a constant $v = 2.0$ km/s for depth conversion. Predict (a) the two-way time of the reflection, (b) the depth the processor will plot, and (c) the sign and magnitude of the error. Generalise: under what condition does a constant-velocity assumption *over*-estimate depth?
+
+3. **[LO-10.3 — derive]** Starting from the law of reflection (incident angle = reflected angle measured from the local normal), re-derive $\Delta x = d\sin\theta$ and $\tau = t\cos\theta$ for a reflector dipping at $\theta$. Why must both corrections vanish in the limit $\theta \to 0$? What goes wrong with these formulas as $\theta \to 90°$?
+
+4. **[LO-10.4 — diagnose]** You inspect a raw zero-offset section and see two overlapping hyperbolas with apices at the same horizontal position but at $t_0 = 1.0$ s and $t_0 = 1.2$ s. Argue whether these are (i) two distinct scatterers at different depths, (ii) a primary plus a multiple from the same scatterer, or (iii) ambiguous from this evidence alone. What additional data (offsets, NMO behaviour) would resolve the ambiguity?
+
+5. **[LO-10.6 — choose]** You have three days of OBS data and one day of streamer data over a deep gas hydrate target offshore. Walk through the 8-step workflow and identify the single step where, given limited time, you should invest the most computational effort. Justify your choice in terms of where errors propagate forward.
+
+6. **[LO-10.7 — critique]** A paper reports that a CNN trained on 50,000 synthetic shot gathers from a layered Earth recovers $v(x,z)$ "with error <2%" on real Cascadia field data. List three failure modes that would *not* show up in the reported error metric, and propose a single experiment (using the iterative workflow of Section 5.2) that would expose any one of them.
+
+---
+
 ## 8 — Course Connections
 
 - **Lecture 5 — Snell's law.** The hand-migration formula $\sin\theta = vp_0/2$ is the zero-offset Snell's parameter with the two-way factor.

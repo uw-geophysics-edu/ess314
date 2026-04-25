@@ -408,6 +408,33 @@ Near the edges of the array, or in depth ranges where few rays bottom,
 the recovered anomaly is smeared and attenuated. A responsible
 tomographer always reports resolution tests alongside the result.
 
+:::{admonition} Reasoning sketch — choosing $\varepsilon^2$ via the L-curve
+:class: tip
+
+The damping parameter $\varepsilon^2$ is *not* given by the data —
+it is a modeller's choice that trades two competing goods:
+
+- **Data misfit** $\|\mathbf{d} - \mathbf{G}\hat{\mathbf{m}}\|_2$:
+  small $\varepsilon^2$ → low misfit (the model fits the data,
+  including the noise).
+- **Model norm** $\|\hat{\mathbf{m}}\|_2$: small $\varepsilon^2$
+  → large model amplitudes (resolved features and noise alike are
+  amplified).
+
+Plot one against the other across a range of $\varepsilon^2$ and
+the points fall on an **L-shaped curve**: a near-vertical branch where
+reducing $\varepsilon^2$ buys huge model norm for negligible misfit
+improvement (overfitting noise), a near-horizontal branch where
+increasing $\varepsilon^2$ throws away resolution for negligible
+norm gain (over-smoothing), and a corner where the two trade off
+fairly. The corner is conventionally chosen.
+
+**Reasoning question for office hours.** If a colleague says "I just
+used $\varepsilon^2 = 0.01$ because that's the default," what
+follow-up question do you ask? What single figure in the paper would
+let you check whether the choice is defensible?
+:::
+
 ---
 
 ## 5. Worked interpretation: reading a mantle tomographic image

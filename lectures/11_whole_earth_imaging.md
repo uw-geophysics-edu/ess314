@@ -273,6 +273,40 @@ velocity contrast and the ray-parameter conservation rule $p =
 r\sin i / V$. Lab 6 walks through this calculation.
 :::
 
+:::{admonition} Reasoning sketch — why $p = r\sin i / V$ is the right invariant
+:class: tip
+
+In a flat-layered Earth, Snell's law conserves $\sin i / V$ at every
+interface. In a *spherically symmetric* Earth the geometry has changed:
+"horizontal" is no longer a single direction. What is preserved instead
+is the **Bullen ray parameter**
+
+$$
+p \;=\; \frac{r \sin i(r)}{V(r)} \;=\; \text{constant along a ray},
+$$
+
+where $r$ is radius and $i(r)$ is the angle between the ray and the
+local radial direction. Two facts make this work, and you should be
+able to argue both:
+
+1. **Spherical symmetry.** Velocity depends only on $r$; rotating the
+   source–receiver geometry around Earth's centre does not change the
+   physics. Noether-style: a continuous symmetry implies a conserved
+   quantity. Here the conserved quantity is the angular momentum-like
+   product $r\sin i / V$.
+2. **Turning condition.** A ray turns where $i = 90°$, i.e. where
+   $r/V(r) = p$. Plotting $r/V(r)$ for AK135 makes the shadow-zone
+   numbers visible: every $p$ that maps onto the *mantle* part of the
+   curve corresponds to a ray that emerges at $\Delta < 103°$; the
+   first $p$ small enough to reach the CMB defines the 103° edge; rays
+   that hit the velocity drop at the CMB refract steeply into the core
+   and re-emerge as PKP beyond 143°.
+
+The reasoning chain is: **symmetry → conserved quantity → turning
+depth → emergence distance**. Once internalised, every global travel-time
+diagnostic in this lecture and Lab 6 is a consequence.
+:::
+
 ---
 
 ## 5. The inverse problem: from global seismograms to a 1-D Earth
@@ -432,6 +466,48 @@ is smooth and physically reasonable, not because it is the only
 profile consistent with the data. Lecture 12 will return to this
 point.
 
+:::{admonition} Reasoning prompt — why density needs separate data
+:class: tip
+
+Travel-time data of body waves constrain $V_P(r)$ and $V_S(r)$ but
+**not** $\rho(r)$ directly: a P-wave travel time depends on
+$V_P = \sqrt{(\kappa + \tfrac{4}{3}\mu)/\rho}$, so a $\rho$ change can
+always be absorbed by a corresponding change in $\kappa$ or $\mu$.
+Density enters PREM through three independent constraints that body-wave
+times alone cannot supply:
+
+1. **Total mass** $M_\oplus = 5.972\times 10^{24}$ kg (from Newtonian
+   gravity + the Moon's orbit) sets $\int_0^R \rho(r)\,4\pi r^2 dr$.
+2. **Moment of inertia** $I/M_\oplus R^2 \approx 0.3307$ (from precession
+   and lunar laser ranging) sets the *radial weighting* of $\rho(r)$ —
+   a denser core lowers $I/M R^2$.
+3. **Free-oscillation eigenfrequencies** depend on the elastic moduli
+   *and* on $\rho$ through the equations of motion, breaking the
+   $\rho$–modulus trade-off at specific depths.
+
+Reasoning question to take to office hours: if we only had body-wave
+travel times (no mass, no moment, no normal modes), could we still
+prove the inner core is solid? Argue from the role $V_S$ plays in the
+PKIKP raypath, then explain what we *could not* determine.
+:::
+
+:::{admonition} Reasoning prompt — what the shadow zone tells us, and what it doesn't
+:class: tip
+
+The shadow zone proves the outer core is liquid (no $V_S$ at any depth
+in the 103°–180° band) and bounds the core radius (the geometric 103°
+edge fixes where the CMB sits). It does **not** by itself prove:
+
+- The core is iron-rich (density argument from mass + moment).
+- The inner core is solid (Lehmann's PKIKP energy in the gap;
+  J-wave detections by Tkalčić & Pham 2018).
+- The inner core rotates differentially (decadal PKIKP residuals).
+
+Distinguishing **what a single observation constrains** from **what
+is layered on top of it through additional data** is the central
+reasoning skill of whole-Earth seismology.
+:::
+
 ---
 
 ## 8. Connecting to Cascadia and the Pacific Northwest
@@ -564,6 +640,21 @@ details to paper over.
    with $V_P > V_P$(outer core) would produce such arrivals. What
    would the PKIKP travel-time curve look like if the inner core did
    not exist?
+
+4. **[LO-11.3 — reasoning chain]** Suppose a future probe of an
+   exoplanet records body-wave travel times that show **no** S-wave
+   shadow zone at any distance, but a P-wave shadow at
+   $\sim 110^\circ$–$140^\circ$. What can you infer about that
+   planet's interior, and what can you *not* infer? Build the
+   argument step by step from the shadow-zone reasoning of Section 4.
+
+5. **[LO-11.2 — quantitative reasoning]** Two stations record the
+   same earthquake at $\Delta = 60^\circ$ and $\Delta = 95^\circ$.
+   Sketch how the Bullen ray parameter $p = r\sin i / V$ differs
+   between the two rays, predict which ray turns deeper, and explain
+   why the deeper ray has the *smaller* $p$. Use this to argue why
+   the slope of the global $T(\Delta)$ curve is monotonically
+   decreasing with distance up to $\sim 100^\circ$.
 
 ---
 
