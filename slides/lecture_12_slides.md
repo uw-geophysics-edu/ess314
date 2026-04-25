@@ -203,6 +203,82 @@ $\varepsilon^{2}$ trades **resolution** for **stability**. Too small → noise. 
 
 ---
 
+## Combining body waves and surface waves
+
+|  | **Body waves** | **Surface waves** |
+|---|---|---|
+| Sensitivity | narrow ray, deep | broad depth kernel, shallow |
+| Coverage | only where rays turn | every great-circle path |
+| Source | earthquakes | earthquakes **or** ambient noise |
+| Strength | vertical resolution | horizontal coverage |
+
+**Joint inversion** stacks both blocks in one $\mathbf{G}$:
+
+$$
+\begin{pmatrix} \mathbf{W}_b\,\mathbf{d}_b \\ \mathbf{W}_s\,\mathbf{d}_s \end{pmatrix}
+=
+\begin{pmatrix} \mathbf{W}_b\,\mathbf{G}_b \\ \mathbf{W}_s\,\mathbf{G}_s \end{pmatrix} \mathbf{m}
+$$
+
+> *In Cascadia: body waves anchor the slab below 100 km; ambient-noise surface waves resolve the upper 50 km.*
+
+---
+
+## Resolution: where can we trust the image?
+
+A region the data **cannot constrain** ≠ a region with **zero anomaly**.
+
+### Two ingredients of poor resolution
+- **Sparse sources** — earthquakes only on plate boundaries
+- **Sparse stations** — oceans, polar regions, intraplate continents
+
+### The fast diagnostic: **ray density map**
+Count non-zero entries in each column of $\mathbf{G}$ (or sum path lengths through each cell).
+A directional version checks **azimuthal coverage** — 1000 N–S rays ≠ good lateral resolution.
+
+---
+
+## The formal answer: the resolution matrix
+
+$$\hat{\mathbf{m}} = \mathbf{R}\,\mathbf{m}_\text{true}, \qquad \mathbf{R} = (\mathbf{G}^T\mathbf{G} + \varepsilon^2\mathbf{I})^{-1}\mathbf{G}^T\mathbf{G}$$
+
+- **Diagonal $R_{ii}$** → fraction of true anomaly recovered at cell $i$
+- **Off-diagonal $R_{ij}$** → smearing between cells
+- A row of $\mathbf{R}$ is the **point-spread function** at that cell
+
+> Often too large to form explicitly — diagonal estimated stochastically.
+
+---
+
+## Empirical resolution: the checkerboard test
+
+1. Build a synthetic model of alternating fast/slow blocks of known size
+2. Forward-model with the **same** $\mathbf{G}$
+3. Add realistic noise
+4. Invert with the **same** damping
+5. Compare recovered to input
+
+**Where the pattern recovers → trust the inversion at that scale.**
+**Where it smears → do not interpret features at that scale.**
+
+> Repeat at multiple checkerboard wavelengths → **scale-dependent** resolution.
+> Probabilistic / Bayesian methods replace this with full posterior uncertainties.
+
+---
+
+## Reading checklist for any tomographic image
+
+> Always ask **four questions**:
+>
+> 1. Where are the **sources** and **stations**? (Show the ray density.)
+> 2. What **checkerboard test** was done, at what scale? (Show recovery.)
+> 3. What **damping** was used? (L-curve justification.)
+> 4. Are **uncertainties** reported? (Bayesian posterior > single model.)
+
+*A paper that does not address all four is incomplete. Anomaly amplitudes are lower bounds at best.*
+
+---
+
 ## Research horizon (2021–2026)
 
 **Travel-time → full-waveform**

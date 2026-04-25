@@ -487,7 +487,231 @@ tomography.
 
 ---
 
-## 6. Seismic vs. medical tomography: the same mathematics, different geometry
+## 6. Combining body-wave and surface-wave tomography
+
+Body waves and surface waves probe the Earth in fundamentally
+different ways, and a tomographic image built from one alone has
+predictable blind spots that the other can fill. Modern tomography
+treats the two as complementary observables that should be inverted
+together whenever possible.
+
+**Body waves** (P, S, PcP, PKP, …) carry sensitivity along narrow
+ray paths that turn deep in the mantle. They give **good lateral
+resolution** in the lower mantle but only where rays actually pass
+through. Beneath an aseismic, sparsely-instrumented region (most of
+the oceans, most of the Southern Hemisphere), no body-wave ray
+ever turns there, and no body-wave inversion can constrain the
+structure.
+
+**Surface waves** (Rayleigh, Love) propagate along the Earth's
+surface with a depth sensitivity that is set by their period: longer
+periods sample deeper. Their sensitivity is a smooth, broad
+**depth kernel** that integrates over a few hundred kilometres
+vertically, so depth resolution is poor — but they sample
+**every great-circle path** between any pair of stations, and (via
+ambient-noise cross-correlation) can be obtained without earthquakes.
+Surface waves therefore give **good shallow lateral coverage even
+where body-wave coverage is sparse**, but cannot resolve sharp
+vertical contrasts.
+
+The two are perfectly complementary: body waves give vertical
+resolution where rays pass; surface waves give horizontal coverage
+everywhere shallow.
+
+### How a joint inversion is built
+
+Stack the body-wave and surface-wave equations into a single linear
+system:
+
+```{math}
+:label: eq:joint
+\begin{pmatrix} \mathbf{W}_b\,\mathbf{d}_b \\ \mathbf{W}_s\,\mathbf{d}_s \end{pmatrix}
+\;=\;
+\begin{pmatrix} \mathbf{W}_b\,\mathbf{G}_b \\ \mathbf{W}_s\,\mathbf{G}_s \end{pmatrix}
+\,\mathbf{m},
+```
+
+where $\mathbf{d}_b$ are body-wave travel-time residuals,
+$\mathbf{d}_s$ are surface-wave dispersion measurements (phase or
+group velocity vs. period at each path), and $\mathbf{W}_b$,
+$\mathbf{W}_s$ are diagonal weighting matrices that scale each block
+by its data-uncertainty and balance the relative contribution of
+the two datasets. The combined system is then inverted with damped
+least squares (Eq. {eq}`eq:dls`) exactly as before. Choosing the
+relative weighting is itself a regularisation choice; common practice
+is to vary the body/surface weight ratio across an order of magnitude
+and verify the recovered model is stable.
+
+Surface-wave dispersion enters $\mathbf{G}_s$ through depth
+**sensitivity kernels** $K(z; T)$ that say how strongly a phase
+velocity at period $T$ depends on the shear-velocity profile at
+each depth. The kernels are smooth bumps centred near
+$z \sim T \cdot V_S$ (the rule of thumb: a 30-second Rayleigh wave
+samples roughly the upper 80–100 km). Inverting many periods
+together unstacks the depth integral and yields a
+$V_S(z)$ profile at every surface point.
+
+### Why the combination wins in Cascadia
+
+In the Pacific Northwest, the EarthScope Transportable Array (TA)
+provided body-wave coverage of the upper-mantle slab geometry, while
+ambient-noise tomography from PNSN and TA stations provided
+high-resolution shallow $V_S$ images of the **forearc, back-arc, and
+mantle wedge** without needing earthquakes. Joint inversions
+(Schmandt and Humphreys 2010, then iteratively refined by many
+groups) leverage both: the body waves anchor the slab below 100 km;
+the surface waves resolve the crust and uppermost mantle. Neither
+dataset alone gives the full picture in
+Figure {numref}`fig-cascadia`.
+
+:::{admonition} A practical observation
+:class: tip
+
+A modern Cascadia tomography paper almost always shows:
+(i) a body-wave $\delta V_P$ image to deep mantle,
+(ii) an ambient-noise $V_S$ image for the upper 50 km, and
+(iii) a joint $V_S$ image that splices them across 50–150 km depth.
+The transitions between datasets are the places to scrutinise
+critically — different sensitivity kernels can produce different
+amplitudes for the *same* feature.
+:::
+
+---
+
+## 7. Estimating resolution: where can we trust the image?
+
+Every tomographic image lives or dies on its **resolution map** —
+the spatial distribution of how well, or how poorly, the inversion
+can constrain the model. A region of an image where the inversion
+*cannot* constrain the model and the inversion drifts toward whatever
+the regularisation prefers (often zero, or smoothness) is **not the
+same** as a region where the inversion finds genuinely zero anomaly.
+Telling these apart is the most important step in interpreting a
+tomographic image responsibly.
+
+### The two ingredients of poor resolution
+
+1. **Sparse sources.** Earthquakes occur almost exclusively at plate
+   boundaries — subduction zones, mid-ocean ridges, transforms.
+   Source-rich regions (Japan, Aleutians, Andes, Indonesia,
+   Mediterranean) provide rays from many azimuths. Source-poor
+   regions (most of the ocean basins, intraplate continents,
+   Antarctica) provide rays from one or two azimuths at most.
+2. **Sparse stations.** Permanent broadband stations cluster in
+   wealthy, populated continents. Oceans, deserts, polar regions
+   carry few stations. Temporary deployments (USArray, AlpArray,
+   AfricaArray) have radically improved coverage in their
+   target regions for ~5-year windows.
+
+The product of these two distributions — the **ray density** in
+each cell — is the first-order proxy for resolution. Cells crossed
+by many rays from many azimuths are well constrained; cells crossed
+by few rays, or by parallel rays, are not.
+
+### Ray density maps as a quick-look resolution proxy
+
+The fastest resolution diagnostic, computed at essentially zero cost
+once $\mathbf{G}$ is built, is the **ray-density map**: count the
+number of non-zero entries in each *column* of $\mathbf{G}$, or
+equivalently sum the path lengths through each cell. This is
+displayed alongside the tomographic image and immediately reveals
+which features sit in well-illuminated regions versus illumination
+shadows. A more directional version is the **azimuthal coverage**,
+which counts not just the number of rays but how uniformly their
+azimuths span 360°: a cell crossed by 1000 rays all in a north-south
+direction is *not* well resolved laterally.
+
+### The diagonal of the resolution matrix $\mathbf{R}$
+
+The formal answer is the **resolution matrix** $\mathbf{R}$, defined
+by composing the linearised inverse and forward operators:
+
+```{math}
+:label: eq:R
+\hat{\mathbf{m}} = \mathbf{R}\,\mathbf{m}_\text{true},
+\qquad
+\mathbf{R} = (\mathbf{G}^{T}\mathbf{G} + \varepsilon^{2}\mathbf{I})^{-1}\mathbf{G}^{T}\mathbf{G}.
+```
+
+If $\mathbf{R}$ were the identity matrix the inversion would
+recover the true model exactly. In practice it is not. The
+**diagonal** $R_{ii}$ measures how much of the true value of
+cell $i$ ends up in the recovered model: $R_{ii} = 1$ means perfect
+recovery; $R_{ii} \ll 1$ means the inversion is recovering only a
+small fraction (the rest is suppressed by damping or smeared into
+neighbours). The **off-diagonal** entries $R_{ij}$ measure smearing
+between cells. A row of $\mathbf{R}$ is the **point-spread function**
+of the inversion at one cell — the image that the inversion would
+return for a delta-function input there.
+
+For large problems $\mathbf{R}$ is impractical to form explicitly,
+but its diagonal can be approximated stochastically (probing with
+random vectors).
+
+### Synthetic tests: checkerboard, spike, and "input model" tests
+
+The community standard for empirical resolution assessment is the
+**checkerboard test**:
+
+1. Build a synthetic "true" model — a regular grid of alternating
+   fast and slow anomalies of known size and amplitude.
+2. Forward-model it through the **same** $\mathbf{G}$ used for the
+   real inversion: $\mathbf{d}_\text{syn} = \mathbf{G}\,\mathbf{m}_\text{cb}$.
+3. Add realistic noise to $\mathbf{d}_\text{syn}$.
+4. Invert with the **same** regularisation $\varepsilon^2$ and
+   workflow.
+5. Compare the recovered checkerboard to the input. Where the
+   pattern is faithfully recovered, the inversion has good
+   resolution at that scale. Where the pattern is smeared, blurred,
+   or rotated, the inversion is unreliable at that scale.
+
+Repeating the test at multiple checkerboard wavelengths gives a
+**scale-dependent** resolution map: a region might recover 200-km
+features but not 50-km features. **Spike tests** (a single isolated
+anomaly) and **input-model tests** (a synthetic that mimics the
+recovered model) probe different aspects of the same question.
+
+:::{warning}
+Checkerboard tests **only** assess the resolution of the linearised
+operator $\mathbf{G}$ at the chosen damping; they do **not** validate
+the choice of parametrisation, the linearisation itself, or the
+adequacy of ray theory. A checkerboard test that "passes" can still
+miss systematic errors.
+:::
+
+### Bayesian / probabilistic resolution
+
+Modern probabilistic tomography (HMC, variational inference) replaces
+the single regularised solution with a **posterior distribution**
+over models. The standard deviation of the posterior at each cell is
+a directly interpretable, dimensional uncertainty estimate:
+"the $V_P$ anomaly at 150 km depth is $-1.2 \pm 0.4 \%$." This is
+the gold standard of resolution reporting and is becoming
+increasingly common as compute costs fall.
+
+:::{admonition} The four-question reading list for any tomographic image
+:class: important
+
+When you read a published tomographic image, ask:
+
+1. **Where are the sources and where are the stations?** A ray
+   density or hit-count map should accompany the image.
+2. **What checkerboard test was performed and at what scale?** The
+   recovered checkerboard should be shown alongside the model.
+3. **What damping was used and how was it chosen?** An L-curve
+   or trade-off curve should justify the value.
+4. **Are uncertainty estimates reported?** Posterior standard
+   deviations or model bootstrap variability beat a single
+   regularised model.
+
+A paper that fails to address any of these is incomplete, and the
+amplitude of any anomaly it reports must be taken as a lower bound
+at best.
+:::
+
+---
+
+## 8. Seismic vs. medical tomography: the same mathematics, different geometry
 
 Computed tomography (CT) scans of the human body and seismic
 tomography of the mantle are the same inverse problem mathematically.
@@ -513,7 +737,7 @@ in the PNW and elsewhere.
 
 ---
 
-## 7. Connecting to Cascadia: why seeing the slab matters
+## 9. Connecting to Cascadia: why seeing the slab matters
 
 The tomographic image of the Juan de Fuca slab in Figure
 {numref}`fig-cascadia` is not a curiosity. It carries direct
@@ -543,7 +767,7 @@ Transportable Array to sweep east-to-west across the continent.
 
 ---
 
-## 8. Research Horizon
+## 10. Research Horizon
 
 The field has moved rapidly from travel-time ray tomography to
 full-waveform inversion, from human phase pickers to neural networks,
@@ -637,7 +861,7 @@ of the frontier as of 2021–2026.
 
 ---
 
-## 9. AI Literacy
+## 11. AI Literacy
 
 :::{admonition} AI Literacy — Tool use and critical evaluation (LO-7)
 :class: tip
@@ -683,7 +907,7 @@ papers?
 
 ---
 
-## 10. Concept Checks
+## 12. Concept Checks
 
 1. **[LO-12.1]** Write down the $\mathbf{G}$ matrix for a
    $3 \times 3$ grid of cells illuminated by three horizontal rays
@@ -707,7 +931,7 @@ papers?
 
 ---
 
-## 11. Connections
+## 13. Connections
 
 - **Previous lectures.** Lecture 11 established the 1-D reference
   model PREM; this lecture perturbs it. The seismic phases you
