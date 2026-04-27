@@ -2,7 +2,7 @@
 marp: true
 theme: ess314
 paginate: true
-header: "ESS 314 — Lecture 13"
+header: "ESS 314 — Lecture 14"
 footer: "Earthquake Phenomena I — Records, Phases, and Location"
 math: katex
 ---
@@ -31,7 +31,7 @@ By the end of this lecture, you will be able to:
 
 ---
 
-## §1 The geoscientific question
+## 1. The framing question
 
 The Pacific Northwest sits above the **Cascadia subduction zone**.
 
@@ -41,6 +41,8 @@ The Pacific Northwest sits above the **Cascadia subduction zone**.
 - Yet, from surface records, we routinely infer **where, when, how big, and what kind**
 
 This lecture: *where* and *when*.
+
+*Read more → [Lecture 14 §1](../lectures/14_earthquake_phenomena_I.html#1-the-framing-question-where-did-the-earthquake-happen-and-how-do-we-know)*
 
 ---
 
@@ -54,13 +56,15 @@ This lecture: *where* and *when*.
 
 ---
 
-## §2 Three pieces of physics combine
+## 2. Three pieces of physics combine
 
 1. **Two body-wave modes.** P and S waves leave the source together; $V_P/V_S = \sqrt{3}$ in a Poisson solid
 
 2. **Spherical wavefronts.** Geometric spreading reduces amplitudes, but *arrival times* are governed by the integral of slowness along the ray
 
 3. **The free surface.** Converts body-wave energy into surface waves and produces the depth phases (pP) used for teleseismic depth determination
+
+*Read more → [Lecture 14 §2](../lectures/14_earthquake_phenomena_I.html#2-the-physics-a-seismogram-records-p-s-and-surface-waves-in-time-order)*
 
 ---
 
@@ -72,11 +76,13 @@ The three wavefronts spread at distinct speeds → arrivals always in **P → S 
 
 ---
 
-## §3 The seismogram, anatomized
+## 3. The seismogram, anatomized
 
 ![w:1100 alt:Synthetic teleseismic seismogram with shaded windows for pre-event noise, P alone, P+S, and P+S+surface, with phase-onset markers and an annotation showing T_S minus T_P approximately equal to 7.5 minutes](../assets/figures/fig_three_phase_seismogram.png)
 
 The interval $T_S - T_P$ is the **diagnostic measurement** for distance.
+
+*Read more → [Lecture 14 §3](../lectures/14_earthquake_phenomena_I.html#3-the-mathematical-framework-travel-times-as-a-forward-operator)*
 
 ---
 
@@ -124,7 +130,7 @@ Vertical-component polarity resolves the $180°$ ambiguity.
 
 ---
 
-## §3.4 Triangulation: the multi-station epicenter
+## 3d. Triangulation: the multi-station epicenter
 
 ![w:1100 alt:Two map-view panels showing three stations and circles of constant hypocentral distance intersecting at the epicenter — perfectly in panel (a) and bounding a small residual region in panel (b)](../assets/figures/fig_triangulation.png)
 
@@ -133,16 +139,18 @@ Vertical-component polarity resolves the $180°$ ambiguity.
 
 ---
 
-## §3.5 Resolving focal depth
+## 3e. Resolving focal depth
 
 ![w:1100 alt:Two-panel figure: left, a right triangle in cross-section showing h equals the square root of D squared minus Delta squared; right, a teleseismic schematic showing the direct P ray and the depth phase pP that reflects at the free surface above the source, separated in time by t_pP minus t_P](../assets/figures/fig_focal_depth_methods.png)
 
 - **Local distance**: right triangle, $h = \sqrt{D^2 - \Delta^2}$
 - **Teleseismic distance**: depth phase, $t_{pP} - t_P$ → focal depth
 
+*Read more → [Lecture 14 §3e](../lectures/14_earthquake_phenomena_I.html#3e-resolving-focal-depth)*
+
 ---
 
-## §4 The forward problem
+## 4. The forward problem
 
 Given a candidate hypocenter $\mathbf{m} = (x_0, y_0, z_0, t_0)$, predict the P arrival time at every station:
 
@@ -159,9 +167,11 @@ Two key properties:
 
 This decomposition is what Geiger's 1912 algorithm exploits.
 
+*Read more → [Lecture 14 §4](../lectures/14_earthquake_phenomena_I.html#4-the-forward-problem-predicting-arrivals-at-every-station)*
+
 ---
 
-## §5 The inverse problem
+## 5. The inverse problem
 
 Define the residual at observation $i$:
 
@@ -182,6 +192,8 @@ $$
 $$
 
 Iterative: linearize about $\mathbf{m}_k$, take a least-squares step, repeat.
+
+*Read more → [Lecture 14 §5](../lectures/14_earthquake_phenomena_I.html#5-the-inverse-problem-from-picks-to-a-hypocenter)*
 
 ---
 
@@ -205,7 +217,7 @@ When two earthquakes are close together, the *difference* of their arrival times
 
 ---
 
-## §6 Worked example — a Puget Lowland event
+## 6. Worked example — a Puget Lowland event
 
 A station at $\Delta = 50$ km records $T_P = 14.2$ s, $T_S = 21.1$ s, with $A_N = 0.74$, $A_E = 0.32$, $A_Z = +0.92$.
 
@@ -215,18 +227,24 @@ A station at $\Delta = 50$ km records $T_P = 14.2$ s, $T_S = 21.1$ s, with $A_N 
 
 A 25 km focal depth is consistent with a deep intra-slab event in the subducting Juan de Fuca plate — the same regime as the **2001 $M_w$ 6.8 Nisqually** earthquake.
 
+> *Did anyone in this room feel Nisqually?* Stories from across the Puget Lowland — things falling off shelves at home, bricks tumbling off the State Capitol — are exactly the ground-motion data this lecture’s methods turned into a hypocenter the same morning.
+
+*Read more → [Lecture 14 §6](../lectures/14_earthquake_phenomena_I.html#6-a-worked-example-locating-a-small-puget-lowland-earthquake)*
+
 ---
 
-## §7 Course connections
+## 7. Course connections
 
 - **Lecture 12 (Tomography)**: same forward/inverse framework, different unknown
-- **Lecture 14 (next)**: takes location as known, asks *how big* — magnitude, $M_0$
+- **Lecture 15 (next)**: takes location as known, asks *how big* — magnitude, $M_0$
 - **Lectures 18, 23**: gravity and magnetic inverse problems — the same non-uniqueness reappears
 - **Week 5 lab**: phase picking and location with `ObsPy` and PNSN data
 
+*Read more → [Lecture 14 §11](../lectures/14_earthquake_phenomena_I.html#11-connections)*
+
 ---
 
-## §8 Research horizon — ML phase picking
+## 8. Research horizon — ML phase picking
 
 - **PhaseNet** {cite:p}`Zhu2019PhaseNet`: U-Net trained on 600,000 NCEDC waveforms; ~96% precision on P
 - **EQTransformer** {cite:p}`Mousavi2020EQT`: hierarchical attention; hundreds of microearthquakes detected with one-third of typical networks
@@ -236,16 +254,18 @@ A 25 km focal depth is consistent with a deep intra-slab event in the subducting
 
 ---
 
-## §8 Research horizon — Distributed Acoustic Sensing
+## 8. Research horizon — Distributed Acoustic Sensing
 
 - A single fibre-optic cable, interrogated by laser pulses, becomes a dense seismic array of thousands of channels
 - **Submarine fibres off Cascadia** {cite:p}`Wilcock2025`: detect offshore earthquakes invisible to onshore networks
 - Crucial for **early warning of offshore megathrust ruptures**
 - Active research area at UW (Denolle group): semi-supervised picking on DAS strain-rate data {cite:p}`Zhu2023DAS`
 
+*Read more → [Lecture 14 §8](../lectures/14_earthquake_phenomena_I.html#8-research-horizon)*
+
 ---
 
-## §9 Societal relevance — ShakeAlert
+## 7. Connecting to Cascadia — ShakeAlert
 
 - Operational across Washington and Oregon since 2021
 - Ingests data from ~1500 PNSN seismic stations + ~760 GNSS sensors
@@ -254,9 +274,11 @@ A 25 km focal depth is consistent with a deep intra-slab event in the subducting
 - Nisqually-style intra-slab event: ~10 s of warning typical
 - **GFAST** {cite:p}`Crowell2024GFAST`: geodetic algorithm avoids magnitude saturation at $M_w$ 7
 
+*Read more → [Lecture 14 §7](../lectures/14_earthquake_phenomena_I.html#7-connecting-to-cascadia-shakealert-and-societal-relevance)*
+
 ---
 
-## AI Literacy — when to trust an ML phase pick
+## 9. AI Literacy — when to trust an ML phase pick
 
 ML pickers achieve ~95% precision on **data that look like their training data**.
 
@@ -267,15 +289,52 @@ ML pickers achieve ~95% precision on **data that look like their training data**
   2. Verify a sample by eye
   3. Carry the velocity-model assumption forward — a pick is not a location
 
+*Read more → [Lecture 14 §9](../lectures/14_earthquake_phenomena_I.html#9-ai-literacy-when-to-trust-an-automated-phase-pick)*
+
 ---
 
-## Concept check
+## 10. Concept check
 
 1. If the velocity model used $V_P = 5.5$ instead of $V_P = 6.0$ km/s (same $V_P/V_S$), how would the calculated $D$ change?
 
 2. For an event $\Delta = 5$ km from the closest station, do you trust the single-station $D$ more, or the multi-station triangulated epicenter?
 
 3. With only teleseismic stations, which of $(x_0, y_0, z_0, t_0)$ is best constrained, and which is most degenerate?
+
+*Read more → [Lecture 14 §10](../lectures/14_earthquake_phenomena_I.html#10-concept-checks)*
+
+---
+
+## Beyond Earth — locating *marsquakes*
+
+NASA's **InSight** lander (2018–2022) carried a single three-component seismometer (SEIS) to Elysium Planitia.
+
+- **One station, no triangulation possible.**
+- Distance came from $T_S - T_P$ — exactly equation $D = \dfrac{V_P V_S}{V_P - V_S}(T_S - T_P)$, with a *Mars* velocity model.
+- Back-azimuth came from P-wave polarization — exactly section 3c.
+- Depth was nearly unconstrained — a planetary-scale version of the depth–origin-time trade-off.
+
+> The same physics that locates a Puget Sound earthquake located the [InSight S1222a marsquake](https://www.seis-insight.eu/en/public-2/martian-science/marsquake-service) ($M_w \sim 4.7$, May 2022).
+
+---
+
+## If you're newer to Python — what to focus on this week
+
+You don't need to write a phase picker from scratch. The lab uses ObsPy, a high-level Python library where one line gets you a seismogram:
+
+```python
+from obspy.clients.fdsn import Client
+st = Client("IRIS").get_waveforms("UW", "SEP", "*", "BHZ",
+                                  t1, t1 + 600)
+```
+
+What matters for this lecture:
+
+- **Read** the S-minus-P time off a plot — by eye, not by code
+- **Apply** $D = 8.2\,(T_S - T_P)$ — on paper, with a calculator
+- **Reason** about *which* parameters are well-constrained and *which* are not
+
+The physics is what we are testing. The Python is the medium.
 
 ---
 
@@ -291,3 +350,6 @@ ML pickers achieve ~95% precision on **data that look like their training data**
 - ML pickers and DAS are transforming the data flow — the physics is unchanged
 
 **Next: Earthquake Phenomena II — magnitude and seismic moment**
+
+📖 **Read the full lecture:** [Lecture 14 — Earthquake Phenomena I](../lectures/14_earthquake_phenomena_I.html)
+🌋 **Live PNSN earthquakes:** [`pnsn.org`](https://pnsn.org/)

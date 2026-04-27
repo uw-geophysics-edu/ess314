@@ -51,7 +51,7 @@ Before reading this lecture, students should be comfortable with the seismic-wav
 
 ---
 
-## §1 The Geoscientific Question
+## 1. The framing question: where did the earthquake happen, and how do we know?
 
 The Pacific Northwest sits above one of the most consequential subduction zones in the world. Off the coast of Washington and Oregon, the Juan de Fuca plate is being thrust beneath North America at the Cascadia subduction zone. The plate interface is locked: it has not produced a great earthquake in the instrumental record, but paleoseismic and tsunami evidence date the last megathrust rupture to 26 January 1700, with a magnitude estimated near $M_w$ 9. The shaking from the *next* such event will be felt across an area larger than the United Kingdom.
 
@@ -69,7 +69,7 @@ Source geometry of an earthquake. The **focus** (or **hypocenter**) is the point
 
 ---
 
-## §2 Governing Physics
+## 2. The physics: a seismogram records P, S, and surface waves in time order
 
 Three pieces of physics that have already been developed in this course combine to make earthquake location possible.
 
@@ -95,7 +95,7 @@ The same source emits P, S, and surface waves at the same instant. The reason di
 
 ---
 
-## §3 Mathematical Framework
+## 3. The mathematical framework: travel times as a forward operator
 
 ```{admonition} Notation
 :class: note
@@ -114,7 +114,7 @@ The same source emits P, S, and surface waves at the same instant. The reason di
 
 ::::
 
-### 3.1 The travel-time forward model
+### 3a. The travel-time forward model
 
 For a homogeneous, isotropic half-space and straight-line ray paths, the predicted P-wave arrival time at station $i$ from a source at $(x_0, y_0, z_0, t_0)$ is
 
@@ -134,7 +134,7 @@ $$ (eq:ts-forward)
 
 In a real Earth, the square-root expression is replaced by a travel-time integral along a ray path that bends through depth-varying velocity structure. The conceptual shape of the problem is the same, but the forward model becomes a non-linear functional of the source coordinates.
 
-### 3.2 The S-minus-P relation: distance from a single station
+### 3b. The S-minus-P relation: distance from a single station
 
 Subtracting equation {eq}`eq:tp-forward` from {eq}`eq:ts-forward`, the origin time $t_0$ cancels and the source-station distance $D_i$ falls out as
 
@@ -172,7 +172,7 @@ Anatomy of a teleseismic seismogram. The three principal arrivals appear in time
 Hypocentral distance as a linear function of $T_S - T_P$ for three crustal velocity scenarios. Slower velocity contrasts (sedimentary basins) produce steeper slopes — a small misjudgment of the appropriate velocity model translates into a large distance error. The choice of velocity model is therefore a *prior assumption* that must be made explicit in any single-station distance estimate.
 ```
 
-### 3.3 Single-station back-azimuth from polarization
+### 3c. Single-station back-azimuth from polarization
 
 A single three-component station can also constrain the *direction* to the source through P-wave polarization. Because P-wave particle motion is parallel to the propagation direction, the first-motion amplitudes on the East and North horizontal components determine the azimuth in the horizontal plane:
 
@@ -190,19 +190,19 @@ The vertical-component first-motion polarity disambiguates the inherent $180°$ 
 Single-station back-azimuth from P-wave first-motion polarization. The horizontal particle-motion vector $(A_E, A_N)$ points either toward or away from the source depending on the vertical-component polarity.
 ```
 
-### 3.4 Triangulation: the multi-station epicenter
+### 3d. Triangulation: the multi-station epicenter
 
-With three or more stations, each S-minus-P time defines a *circle* of constant hypocentral distance on the surface. Taking the focal depth as a known quantity (or assuming surface focus for a first guess), the epicenter must lie on the intersection of these circles. Three circles in general position intersect at a single point; with picking errors and an imperfect velocity model the circles bound a small *residual region* near the true epicenter. This residual region is what the inverse problem in §5 minimizes.
+With three or more stations, each S-minus-P time defines a *circle* of constant hypocentral distance on the surface. Taking the focal depth as a known quantity (or assuming surface focus for a first guess), the epicenter must lie on the intersection of these circles. Three circles in general position intersect at a single point; with picking errors and an imperfect velocity model the circles bound a small *residual region* near the true epicenter. This residual region is what the inverse problem in section 5 minimizes.
 
 ```{figure} ../assets/figures/fig_triangulation.png
 :name: fig-triangulation
 :alt: Two-panel map view. Both panels show three green station triangles labelled S1, S2, S3 at different positions, with circles of distinct colours centered on each station and an orange star marking the true epicenter at the origin. In panel (a), with perfect picks, all three circles intersect cleanly at the epicenter and a callout reads 'Single intersection = epicenter'. In panel (b), with realistic picking errors, the circles no longer intersect at one point but bound a small residual region near the true epicenter; a callout reads 'Residual region (picking + velocity errors)'.
 :width: 96%
 
-Epicenter location by triangulation. (a) With perfect picks and perfect velocity model, three circles intersect at one point. (b) With realistic picking errors and an imperfect velocity model, the circles bound a small residual region — the inverse problem of §5 finds the source position that minimizes the sum of squared residuals.
+Epicenter location by triangulation. (a) With perfect picks and perfect velocity model, three circles intersect at one point. (b) With realistic picking errors and an imperfect velocity model, the circles bound a small residual region — the inverse problem of section 5 finds the source position that minimizes the sum of squared residuals.
 ```
 
-### 3.5 Resolving focal depth
+### 3e. Resolving focal depth
 
 The fourth coordinate, the focal depth $z_0$, is geometrically the hardest to recover. Two complementary methods are used in different distance regimes.
 
@@ -232,7 +232,7 @@ Focal-depth determination. (a) At local distances the right triangle of focus, e
 
 ---
 
-## §4 The Forward Problem
+## 4. The forward problem: predicting arrivals at every station
 
 The earthquake-location forward problem states: given a candidate source $\mathbf{m} = (x_0, y_0, z_0, t_0)$ and a velocity model, predict the P (and possibly S) arrival times at every station. The compact form is
 
@@ -249,7 +249,7 @@ Two important properties of the forward operator govern everything that follows.
 
 ---
 
-## §5 The Inverse Problem
+## 5. The inverse problem: from picks to a hypocenter
 
 The inverse problem is the inversion of equation {eq}`eq:forward`: find the model $\mathbf{m}$ that best explains the observed arrival times. Define the residual at the $i$-th observation as
 
@@ -279,13 +279,13 @@ is more robust because it down-weights large residuals.
 Linearity in inverse problems means that the misfit function is a quadratic in the model parameters and has a unique minimum that can be found by a single matrix inversion. Earthquake location is *not* linear in the spatial coordinates, because the distance $\sqrt{(x_i-x_0)^2 + \cdots}$ enters $G_i$ non-linearly. The standard solution is iterative: linearize $G_i$ about a current best guess $\mathbf{m}_k$, take a least-squares step to $\mathbf{m}_{k+1}$, and repeat until the residuals stabilize. This is the **Geiger method** (Geiger, 1912), and every major modern locator — HypoInverse, NonLinLoc, HypoDD — is a refinement of it.
 ```
 
-### 5.1 Non-uniqueness and the geometric origin of uncertainty
+### 5a. Non-uniqueness and the geometric origin of uncertainty
 
 Two systematic sources of location uncertainty are not visible in the misfit function alone, and they govern how much one should trust a published hypocenter.
 
 The first is the **station-distribution effect** (Figure {ref}`fig-error-ellipse`a). When the recording stations are clustered on one side of the source, the rays from the candidate hypocenter to the network all share approximately the same azimuth. The arrival times are then sensitive to displacements *transverse* to that average ray direction but insensitive to displacements *along* it. The result is a $1$-σ confidence region — the *error ellipse* — that is elongated radially, away from the network. Outside-network earthquakes (for example, an event off the coast of Washington recorded only by onshore PNSN stations) can have along-strike location uncertainties exceeding $20$ km even when the picks themselves are precise to $0.1$ s.
 
-The second is the **depth–origin-time trade-off** (Figure {ref}`fig-error-ellipse`b). When all stations are at large epicentral distance, rays from the source approach with a narrow range of takeoff angles, and a shallower-and-earlier hypocenter predicts almost the same set of arrival times as a deeper-and-later one. The two parameters become correlated: a $10$ km change in depth can be compensated by a $\sim 1.5$ s change in origin time with negligible change in misfit. This is the geometric reason that teleseismic locations of large oceanic earthquakes routinely report depth uncertainties of several tens of kilometres, and it is the principal motivation for the use of the depth phase pP introduced in §3.5.
+The second is the **depth–origin-time trade-off** (Figure {ref}`fig-error-ellipse`b). When all stations are at large epicentral distance, rays from the source approach with a narrow range of takeoff angles, and a shallower-and-earlier hypocenter predicts almost the same set of arrival times as a deeper-and-later one. The two parameters become correlated: a $10$ km change in depth can be compensated by a $\sim 1.5$ s change in origin time with negligible change in misfit. This is the geometric reason that teleseismic locations of large oceanic earthquakes routinely report depth uncertainties of several tens of kilometres, and it is the principal motivation for the use of the depth phase pP introduced in section 3e.
 
 ```{figure} ../assets/figures/fig_error_ellipse.png
 :name: fig-error-ellipse
@@ -295,13 +295,13 @@ The second is the **depth–origin-time trade-off** (Figure {ref}`fig-error-elli
 The geometric origin of earthquake-location uncertainty. (a) When the recording network is clustered on one side, the error ellipse is elongated radially away from the network. (b) When only distant stations are available, focal depth and origin time trade off: a shallower-and-earlier source predicts the same arrival times as a deeper-and-later source.
 ```
 
-### 5.2 Relative location: the double-difference principle
+### 5b. Relative location: the double-difference principle
 
 When two earthquakes occur close together — say, on the same fault patch — the ray paths from each to a common station are nearly identical, and the *difference* of their arrival times at that station depends only on the *difference* of their hypocentral coordinates. The bulk of the velocity-model error, which would otherwise dominate the absolute location uncertainty, cancels out in the differencing. Algorithms that exploit this cancellation — most prominently the **double-difference relocation** algorithm `HypoDD` of {cite:t}`Waldhauser2000` — routinely achieve relative location precisions of tens of metres for clustered earthquakes, even when the absolute locations are uncertain at the kilometre level. The result is the spectacular fault-aligned earthquake structures that emerge when raw catalogs are relocated, as in {cite:t}`Hauksson2012` for southern California, {cite:t}`Shelly2016` for Long Valley caldera, and the Quake Template Matching (QTM) catalog of {cite:t}`Ross2019` for the San Jacinto fault zone.
 
 ---
 
-## §6 Worked Example
+## 6. A worked example: locating a small Puget Lowland earthquake
 
 A small earthquake occurs in the Puget Lowland. A three-component PNSN station, $50$ km from the epicenter, records a clean P arrival at $T_P = 14.2$ s and a clean S arrival at $T_S = 21.1$ s in absolute time after some reference. The horizontal first-motion amplitudes are $A_N = 0.74$ and $A_E = 0.32$ on a normalized scale, with a clear upward Z first motion. Take $V_P = 6.0$ km/s and $V_S = 3.46$ km/s in the upper crust.
 
@@ -338,29 +338,7 @@ A $25$ km focal depth in this region is consistent with a deep intra-slab event 
 
 ---
 
-## §7 Course Connections
-
-The location problem is the same family of problem as the seismic-tomography problem of Lecture 12, but with a different unknown. In tomography, the *velocity field* is the unknown and the source-receiver geometry is fixed; in location, the velocity field is fixed (assumed) and the *source position* is the unknown. The forward operator $G_i$ is a travel-time integral in both cases. Modern *joint* inversions — in which the source positions and the velocity model are estimated simultaneously — are routine in regional seismic networks, and they connect this lecture directly to the imaging methods of Module 3.
-
-The forward / inverse-problem framework introduced here will reappear in Lecture 18 (Earth's gravity) and Lecture 23 (Earth's magnetic field), where the observable is no longer a travel time but a gravity or magnetic anomaly. The non-uniqueness identified in §5 is a general feature of geophysical inverse problems, not a peculiarity of seismology.
-
-The next lecture takes the location $(x_0, y_0, z_0, t_0)$ as a known quantity and turns to the question of *how big* the earthquake was — magnitude scales, the seismic moment $M_0$, and the connection to the radiated wavefield amplitude.
-
----
-
-## §8 Research Horizon
-
-Two technological shifts have transformed earthquake location since roughly 2018, and both will be operational in the Pacific Northwest by the time today's undergraduates begin graduate work.
-
-**Machine-learning phase pickers.** Convolutional and transformer neural networks now pick P and S arrivals on continuous waveform data with precision approaching that of expert analysts, but at orders-of-magnitude greater throughput. **PhaseNet** {cite:p}`Zhu2019PhaseNet`, a U-Net trained on $\sim$ 600,000 hand-picked Northern California waveforms, achieves $\sim$ 96% precision on P-wave detection. **EQTransformer** {cite:p}`Mousavi2020EQT` adds a hierarchical attention mechanism and outperforms all earlier pickers on a global benchmark dataset. Multi-station extensions such as the **Phase Neural Operator** (PhaseNO) {cite:p}`Sun2023PhaseNO` exploit the spatial coherence of arrivals across a network, and a re-trained EQTransformer applied to two decades of PNSN data has produced the first machine-learning earthquake catalog for the Pacific Northwest, with substantial gains in event completeness for small magnitudes. These methods should be understood not as replacements for the physics in §3 but as fast, automated front-ends that supply the picks $\{T_P^{(i)}, T_S^{(i)}\}$ that the location problem then consumes.
-
-**Distributed acoustic sensing (DAS).** A single fibre-optic cable, interrogated with laser pulses from one end, can be turned into a dense seismic array of thousands of "channels" spaced metres apart along the cable. Submarine telecommunication fibres off the Cascadia margin have recently been used to detect and locate offshore earthquakes that no land-based instrument could record adequately {cite:p}`Wilcock2025`, and the integration of DAS into earthquake early-warning systems is now active research. The Denolle group at the University of Washington has been particularly active in developing semi-supervised learning approaches for picking phases on DAS data {cite:p}`Zhu2023DAS` and in evaluating the offshore early-warning gain from submarine cables.
-
-**Earthquake catalogs as research products.** The combination of dense networks, ML picking, and double-difference relocation has produced a generation of "high-resolution" catalogs that resolve fault structures at metre to hundred-metre scale. {cite:t}`Ross2019` produced the QTM catalog of $1.81$ million events on the San Jacinto fault zone using template matching at the waveform level; {cite:t}`Shelly2016` resolved the structure of a 2014 Long Valley caldera swarm in three dimensions with relative precision approaching $20$ metres. These catalogs are themselves data products on which derivative research — earthquake-rate forecasting, fault-zone structural geology, induced-seismicity attribution — increasingly depends.
-
----
-
-## §9 Societal Relevance
+## 7. Connecting to Cascadia: ShakeAlert and societal relevance
 
 The Pacific Northwest's **ShakeAlert** earthquake early-warning system became operational for Washington and Oregon in 2021. ShakeAlert ingests data from the PNSN's $\sim 1500$ seismic stations, plus geodetic data from $\sim 760$ GNSS sensors, and uses real-time location and magnitude estimation to issue alerts seconds to tens of seconds before the strong shaking from a damaging earthquake reaches a given location. The warning time available to a user depends on (a) how rapidly the location and magnitude can be determined, and (b) how far the user is from the source.
 
@@ -372,12 +350,24 @@ For students wishing to follow up: the PNSN web portal at [`pnsn.org`](https://p
 
 ---
 
-## AI Literacy: When to trust an automated phase pick
+## 8. Research Horizon
+
+Two technological shifts have transformed earthquake location since roughly 2018, and both will be operational in the Pacific Northwest by the time today's undergraduates begin graduate work.
+
+**Machine-learning phase pickers.** Convolutional and transformer neural networks now pick P and S arrivals on continuous waveform data with precision approaching that of expert analysts, but at orders-of-magnitude greater throughput. **PhaseNet** {cite:p}`Zhu2019PhaseNet`, a U-Net trained on $\sim$ 600,000 hand-picked Northern California waveforms, achieves $\sim$ 96% precision on P-wave detection. **EQTransformer** {cite:p}`Mousavi2020EQT` adds a hierarchical attention mechanism and outperforms all earlier pickers on a global benchmark dataset. Multi-station extensions such as the **Phase Neural Operator** (PhaseNO) {cite:p}`Sun2023PhaseNO` exploit the spatial coherence of arrivals across a network, and a re-trained EQTransformer applied to two decades of PNSN data has produced the first machine-learning earthquake catalog for the Pacific Northwest, with substantial gains in event completeness for small magnitudes. These methods should be understood not as replacements for the physics in section 3 but as fast, automated front-ends that supply the picks $\{T_P^{(i)}, T_S^{(i)}\}$ that the location problem then consumes.
+
+**Distributed acoustic sensing (DAS).** A single fibre-optic cable, interrogated with laser pulses from one end, can be turned into a dense seismic array of thousands of "channels" spaced metres apart along the cable. Submarine telecommunication fibres off the Cascadia margin have recently been used to detect and locate offshore earthquakes that no land-based instrument could record adequately {cite:p}`Wilcock2025`, and the integration of DAS into earthquake early-warning systems is now active research. The Denolle group at the University of Washington has been particularly active in developing semi-supervised learning approaches for picking phases on DAS data {cite:p}`Zhu2023DAS` and in evaluating the offshore early-warning gain from submarine cables.
+
+**Earthquake catalogs as research products.** The combination of dense networks, ML picking, and double-difference relocation has produced a generation of "high-resolution" catalogs that resolve fault structures at metre to hundred-metre scale. {cite:t}`Ross2019` produced the QTM catalog of $1.81$ million events on the San Jacinto fault zone using template matching at the waveform level; {cite:t}`Shelly2016` resolved the structure of a 2014 Long Valley caldera swarm in three dimensions with relative precision approaching $20$ metres. These catalogs are themselves data products on which derivative research — earthquake-rate forecasting, fault-zone structural geology, induced-seismicity attribution — increasingly depends.
+
+---
+
+## 9. AI Literacy: when to trust an automated phase pick
 
 ```{admonition} AI Epistemics — phase pickers and the data they were trained on
 :class: warning
 
-Modern machine-learning phase pickers are remarkably good — until they are not. The PhaseNet and EQTransformer benchmark figures cited in §8 (precision and recall around 95% on test sets) describe performance *on data that look like their training data*. Independent evaluations have found that the recall of pre-trained pickers can drop by 30–40% when applied to a new region {cite:p}`Munchmeyer2022`, and dramatically further on unusual data types — ocean-bottom seismograms, downhole data sampled at $2000$ Hz, distributed-acoustic-sensing strain rates, or mining-induced microseismicity. A pre-trained model is a *prior* about what waveforms look like, and that prior fails when the new data fall outside the training distribution.
+Modern machine-learning phase pickers are remarkably good — until they are not. The PhaseNet and EQTransformer benchmark figures cited in section 8 (precision and recall around 95% on test sets) describe performance *on data that look like their training data*. Independent evaluations have found that the recall of pre-trained pickers can drop by 30–40% when applied to a new region {cite:p}`Munchmeyer2022`, and dramatically further on unusual data types — ocean-bottom seismograms, downhole data sampled at $2000$ Hz, distributed-acoustic-sensing strain rates, or mining-induced microseismicity. A pre-trained model is a *prior* about what waveforms look like, and that prior fails when the new data fall outside the training distribution.
 
 For this course's purposes, three habits matter:
 
@@ -405,6 +395,32 @@ Evaluation criteria:
 - Are the citations real? Search each title to verify it is a published paper, not a hallucinated reference.
 - Did the response acknowledge any of the limitations described above, or did it present ML pickers as uniformly successful?
 ```
+
+---
+
+## 10. Concept Checks
+
+```{admonition} Synthesis questions
+:class: tip
+
+1. **Phase identification.** A three-component station records, in order, a small high-frequency arrival, a larger lower-frequency arrival, and a long-period dispersive train of largest amplitude. Identify each phase and explain in one sentence each *why* this order is universal.
+2. **Velocity-model sensitivity.** If your assumed $V_P$ is too high by 5 % (with $V_P/V_S$ fixed), in which direction does your single-station distance estimate err, and by approximately what percentage?
+3. **Network geometry.** Sketch a station distribution that produces a circular (rather than elongated) error ellipse. Sketch one that produces an east–west–elongated ellipse.
+4. **Depth–origin-time trade-off.** A $10$ km change in focal depth at teleseismic distance is compensated by roughly what change in origin time? Why does the depth phase pP break this trade-off?
+5. **Linear vs. non-linear.** Of the four source parameters $(x_0, y_0, z_0, t_0)$, which one is recovered by a single linear matrix step and which three require iteration? Why?
+6. **Relative location.** Two earthquakes a few hundred metres apart can be *relatively* located to tens of metres even when their *absolute* locations are uncertain at the kilometre level. Which physical quantity cancels in the differencing?
+7. **Beyond Earth.** Mars's InSight mission used a *single* three-component seismometer to locate marsquakes. Which of the multi-station techniques in section 3 had to be replaced by polarization-based reasoning, and what kind of uncertainty did that introduce?
+```
+
+---
+
+## 11. Connections
+
+The location problem is the same family of problem as the seismic-tomography problem of [Lecture 12](12_seismic_tomography.md), but with a different unknown. In tomography, the *velocity field* is the unknown and the source-receiver geometry is fixed; in location, the velocity field is fixed (assumed) and the *source position* is the unknown. The forward operator $G_i$ is a travel-time integral in both cases. Modern *joint* inversions — in which the source positions and the velocity model are estimated simultaneously — are routine in regional seismic networks, and they connect this lecture directly to the imaging methods of Module 3.
+
+The forward / inverse-problem framework introduced here will reappear in [Lecture 18 (Earth's gravity)](18_earths_gravity.md) and [Lecture 23 (Earth's magnetic field)](23_earth_magnetism.md), where the observable is no longer a travel time but a gravity or magnetic anomaly. The non-uniqueness identified in section 5 is a general feature of geophysical inverse problems, not a peculiarity of seismology.
+
+The next lecture, [Earthquake Phenomena II](15_earthquake_phenomena_II.md), takes the location $(x_0, y_0, z_0, t_0)$ as a known quantity and turns to the question of *how big* the earthquake was — magnitude scales, the seismic moment $M_0$, and the connection to the radiated wavefield amplitude.
 
 ---
 
