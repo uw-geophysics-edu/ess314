@@ -112,6 +112,81 @@ Use the pattern: `{ModuleNumber}_{Topic}_{Type}.ipynb`
 - Use admonitions: `{note}`, `{warning}`, `{tip}`, `{important}`
 - Use figures: `{figure}` directive with captions and labels
 
+### Canonical Section-Numbering Convention (ESS 314)
+
+Every lecture must use the **same** top-level section structure so the book reads as a single textbook. The convention, established by Lectures 1–12 and enforced thereafter:
+
+- Top-level title: `# Lecture Title — Subtitle`
+- Numbered sections use `## N. Sentence-case title` with a **bare integer + period** — **never** the `§` glyph, never `## §N`, never decimal numbering at the `##` level.
+- Subsections use **letter suffixes**: `### 3a. ...`, `### 3b. ...`, `### 5a. ...` — **not** `### 3.1`, `### 5.2`. Plain unnumbered `### Sentence-case` subsections are also acceptable for short asides.
+- Body-text references to sections use the word "section" (e.g. *"as introduced in section 3e"*), **not** the `§` glyph.
+
+The canonical top-level outline (section names may vary in wording, but the **slot** and **order** are fixed):
+
+```
+## Prerequisites               (unnumbered, before section 1)
+## 1. The framing question: ...
+## 2. The physics: ...
+## 3. The mathematical framework: ...
+## 4. The forward problem: ...
+## 5. The inverse problem: ...
+## 6. A worked example: ...
+## 7. Connecting to Cascadia: ...        (or domain-specific society/PNW link)
+## 8. Research Horizon
+## 9. AI Literacy: ...
+## 10. Concept Checks
+## 11. Connections                       (links to neighboring lectures)
+## Further Reading                       (unnumbered, last)
+```
+
+The closing block is always `## Further Reading` followed by:
+
+```markdown
+\`\`\`{bibliography}
+:filter: docname in docnames
+\`\`\`
+```
+
+### Cross-References Between Lectures
+
+Use **MyST file links** (not raw `.html` URLs) for lecture-to-lecture references inside lecture `.md` files:
+
+```markdown
+[Lecture 12 — Seismic Tomography](12_seismic_tomography.md)
+```
+
+Reserve raw `.html` anchor links (e.g. `../lectures/14_earthquake_phenomena_I.html#3b-...`) for **slides** linking *into* the book — slides are not part of the Sphinx cross-reference graph.
+
+## Slide Deck Conventions (Marp)
+
+Slide decks live in `slides/lecture_NN_slides.md` paired with `.html` outputs and must be tailored to the **current student cohort**, not generic.
+
+### Heading Style
+
+- Slide section headers mirror the lecture-note convention: `## N. Sentence-case title` with no `§` glyph.
+- The Marp `header:` field must reference the correct lecture number (`"ESS 314 — Lecture NN"`).
+
+### Cross-Links from Slides → Lecture Notes
+
+Every numbered section slide ends with a single-line italic footer linking to the corresponding lecture-note anchor:
+
+```markdown
+*Read more → [Lecture 14 §3b](../lectures/14_earthquake_phenomena_I.html#3b-the-s-minus-p-relation-distance-from-a-single-station)*
+```
+
+The anchor is the slugified form of the heading: lowercase, words joined by hyphens, punctuation removed. The closing slide of every deck includes a final pointer to the full lecture page.
+
+### Student-Profile Tailoring
+
+A private, gitignored `.student_profiles.md` file (aggregate themes only, never individuals) drives slide personalization. When refreshing slides, weave in:
+
+- **PNW / Cascadia hooks** when students cite local geology connections (Nisqually 2001, Cascades hiking, Mount Rainier).
+- **Planetary-science callouts** (e.g. InSight marsquakes use the same $T_S - T_P$ physics) for the planetary / astronomy track.
+- **Coding-anxiety reassurance** when introducing labs — explicitly state that the physics is what's being assessed and that high-level libraries (`ObsPy`, `numpy`) abstract the heavy lifting.
+- **Personal-experience invitations** drawn from the profiles (e.g. *"Did anyone in this room feel Nisqually?"*) — never name students; always frame as an open invitation.
+
+Do not commit `.student_profiles.md`; verify it is in `.gitignore`.
+
 ## Pixi Configuration
 
 The `pixi.toml` should include:
@@ -219,8 +294,13 @@ When asked to create or modify course content:
 - DO NOT use conda when pixi is available — pixi is the preferred environment manager
 - DO NOT skip `_toc.yml` updates when adding new content files
 - DO NOT use deprecated Jupyter Book v1 syntax — use current MyST/Sphinx patterns
+- DO NOT use the `§` glyph in lecture or slide headings — use `## N. Sentence-case title` with a bare integer
+- DO NOT use decimal subsection numbering (`### 3.1`) — use letter suffixes (`### 3a.`)
+- DO NOT commit `.student_profiles.md` or any file containing identifying student information
 - ALWAYS preserve existing content when reorganizing — never delete without confirmation
 - ALWAYS use the reference architecture structure unless the user explicitly requests otherwise
+- ALWAYS add `*Read more →*` cross-links from slide section headers to the corresponding lecture-note anchors
+- ALWAYS run `pixi run build-book` after content changes and report the warning count before committing
 
 ## Design Philosophy
 
