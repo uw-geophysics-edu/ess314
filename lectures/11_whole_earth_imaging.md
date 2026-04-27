@@ -534,9 +534,12 @@ picture in several directions.
   travel times from repeating earthquake sources recorded over
   decades (Song and Richards 1996; Tkalčić and Pham 2018) have
   identified small but resolvable inner-core rotation rates relative
-  to the mantle. Current debate centres on whether the rotation is
-  differential and time-varying (Vidale et al. 2024;
-  https://doi.org/10.1038/s41586-023-06589-1).
+  to the mantle. The most recent analysis of multi-decade PKIKP
+  doublets reports *annual-scale* variability in both the rotation
+  rate and the near-surface structure of the inner core
+  ({cite:t}`Vidale2025InnerCore`), reframing the long-running
+  "rotation vs. surface change" debate as a coupled, time-varying
+  process rather than a steady differential rotation.
 
 - **Comparative planetology.** The NASA InSight mission placed a
   broadband seismometer on Mars in 2018 and recorded more than 1300
@@ -705,3 +708,7 @@ details to paper over.
 - Lowrie, W. and Fichtner, A., 2020. *Fundamentals of Geophysics*,
   3rd ed., Cambridge University Press. Chapter 3.5-3.6. (Free via
   UW Libraries.)
+
+```{bibliography}
+:filter: docname in docnames
+```
