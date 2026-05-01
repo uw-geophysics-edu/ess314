@@ -50,8 +50,8 @@ parts:
         title: "Earthquake Phenomena I"
       - file: lectures/15_earthquake_phenomena_II
         title: "Earthquake Phenomena II"
-      - file: lectures/16_ground_motions
-        title: "Ground Motions"
+      - file: lectures/16_focal_mechanisms
+        title: "Focal Mechanisms"
       - file: lectures/17_tsunami
         title: "Tsunami"
 
