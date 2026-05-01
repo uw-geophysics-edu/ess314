@@ -889,7 +889,7 @@ its accuracy on quantitative questions.
 - **Forwards.**
   [Lecture 16 — Ground Motions](16_ground_motions.md) takes moment as
   the input to ground-motion prediction equations for hazard
-  assessment, and [Lecture 17 — Tsunami](17_tsunami.md) shows how a
+  assessment, and [Lecture 18 — Tsunami](18_tsunami.md) shows how a
   saturating-vs-non-saturating magnitude becomes a tsunami warning
   decision.
 - **Across methods.** Section 5 (forward / inverse problem)

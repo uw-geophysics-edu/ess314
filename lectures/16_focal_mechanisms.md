@@ -44,7 +44,7 @@ By the end of this lecture, students will be able to:
 | **Course LOs addressed** | LO-1, LO-2, LO-3, LO-4, LO-7 |
 | **Learning outcomes practiced** | LO-OUT-A (radiation pattern), LO-OUT-C (read beach balls), LO-OUT-D (interpret ambiguity), LO-OUT-E (connect to plate tectonics), LO-OUT-H (critique ML solutions) |
 | **Prior lecture** | [Lecture 15 — Earthquake Phenomena II](../lectures/15_earthquake_phenomena_II.html): magnitude, energy, and the seismic moment $M_0$ |
-| **Next lecture** | [Lecture 17 — Tsunami](../lectures/17_tsunami.html): coupling source mechanism to ocean dynamics |
+| **Next lecture** | [Lecture 17 — Ground Motions](../lectures/17_ground_motions.html): coupling source mechanism to the built environmentthe built environment |
 | **Lab connection** | Lab 6 — first-motion focal-mechanism analysis with `ObsPy` on PNSN waveforms (week 5) |
 
 ::::
@@ -370,9 +370,9 @@ The goal is not to discredit AI tools — they are increasingly useful — but t
 
 The focal mechanism is the bridge between the *seismogram* of [Lecture 14](14_earthquake_phenomena_I.md) and the *seismic moment* of [Lecture 15](15_earthquake_phenomena_II.md): the location problem fixes *where* the rupture happened, the magnitude problem fixes *how big*, and the focal mechanism fixes *what kind of motion*. The three together specify the source for every downstream calculation in this module.
 
-Two upcoming lectures pick up the focal mechanism as input. The radiation pattern $F^P$ derived in section 3c governs the spatial distribution of strong ground motion near a rupture; the same physics is hidden inside ShakeMap's directivity correction. [Lecture 17 — Tsunami](17_tsunami.md) takes the focal mechanism as its primary source-side input: the vertical seafloor displacement that initiates a tsunami is determined entirely by the dip, rake, and seismic moment of the underlying fault.
+Two upcoming lectures pick up the focal mechanism as input. The radiation pattern $F^P$ derived in section 3c governs the spatial distribution of strong ground motion near a rupture; [Lecture 17 — Ground Motions](17_ground_motions.md) takes that pattern as the starting point for ShakeMap-style intensity prediction. [Lecture 18 — Tsunami](18_tsunami.md) takes the focal mechanism as its primary source-side input: the vertical seafloor displacement that initiates a tsunami is determined entirely by the dip, rake, and seismic moment of the underlying fault.
 
-Looking forward, [Lecture 18 (Earth's gravity)](18_earths_gravity.md) and [Lecture 23 (Earth's magnetic field)](23_earth_magnetism.md) reuse the forward / inverse-problem framework with very different observables. The fault-plane / auxiliary-plane ambiguity introduced here is one example of the broader non-uniqueness that pervades all geophysical inverse problems.
+Looking forward, [Lecture 19 (Earth's gravity)](19_earths_gravity.md) and [Lecture 24 (Earth's magnetic field)](24_earth_magnetism.md) reuse the forward / inverse-problem framework with very different observables. The fault-plane / auxiliary-plane ambiguity introduced here is one example of the broader non-uniqueness that pervades all geophysical inverse problems.
 
 Looking backward, the take-off angle $i$ that maps a station to the focal sphere is computed by ray tracing through a velocity model — exactly the Snell's-law / ray-tracing machinery built up in Lectures 5 and 6. Every part of this lecture stands on machinery developed earlier in the term.
 

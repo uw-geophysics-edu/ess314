@@ -320,7 +320,7 @@ Everything in this deck — and a great deal more — is written up at
 
 → **[Lecture 16 — Earthquake Focal Mechanisms and Faults](../lectures/16_focal_mechanisms.html)**
 
-Next lecture: **[Lecture 17 — Tsunami](../lectures/17_tsunami.html)**
+Next lecture: **[Lecture 17 — Ground Motions](../lectures/17_ground_motionsground_motions.html)**
 — from focal mechanism to seafloor displacement to wave propagation.
 
 *Questions? mdenolle@uw.edu*

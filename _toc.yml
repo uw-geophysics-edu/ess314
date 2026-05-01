@@ -52,40 +52,42 @@ parts:
         title: "Earthquake Phenomena II"
       - file: lectures/16_focal_mechanisms
         title: "Focal Mechanisms"
-      - file: lectures/17_tsunami
+      - file: lectures/17_ground_motions
+        title: "Ground Motions"
+      - file: lectures/18_tsunami
         title: "Tsunami"
 
   - caption: "Module 5 — Gravity"
     chapters:
-      - file: lectures/18_earths_gravity
+      - file: lectures/19_earths_gravity
         title: "Earth's Gravity"
-      - file: lectures/19_gravity_isostasy
+      - file: lectures/20_gravity_isostasy
         title: "Isostasy"
-      - file: lectures/20_gravity_anomalies_I
+      - file: lectures/21_gravity_anomalies_I
         title: "Gravity Anomalies I"
-      - file: lectures/21_gravity_anomalies_II
+      - file: lectures/22_gravity_anomalies_II
         title: "Gravity Anomalies II"
 
   - caption: "Module 6 — Magnetism"
     chapters:
-      - file: lectures/22_density_lithosphere
+      - file: lectures/23_density_lithosphere
         title: "Density & Lithosphere"
-      - file: lectures/23_earth_magnetism
+      - file: lectures/24_earth_magnetism
         title: "Earth Magnetism"
-      - file: lectures/24_magnetic_field_tectonics
+      - file: lectures/25_magnetic_field_tectonics
         title: "Magnetism & Tectonics"
 
   - caption: "Module 7 — Geodynamics and Tectonics: A Synthesis"
     chapters:
-      - file: lectures/25_heat_geodynamics
+      - file: lectures/26_heat_geodynamics
         title: "Heat & Geodynamics"
-      - file: lectures/26_divergent_margins
+      - file: lectures/27_divergent_margins
         title: "Divergent Margins"
-      - file: lectures/27_convergent_margins
+      - file: lectures/28_convergent_margins
         title: "Convergent Margins"
-      - file: lectures/28_transform_intraplate
+      - file: lectures/29_transform_intraplate
         title: "Transform & Intraplate"
-      - file: lectures/29_synthesis
+      - file: lectures/30_synthesis
         title: "Synthesis"
 
   - caption: "Labs"
