@@ -60,34 +60,32 @@ parts:
   - caption: "Module 5 — Gravity"
     chapters:
       - file: lectures/19_earths_gravity
-        title: "Earth's Gravity"
-      - file: lectures/20_gravity_isostasy
-        title: "Isostasy"
-      - file: lectures/21_gravity_anomalies_I
-        title: "Gravity Anomalies I"
-      - file: lectures/22_gravity_anomalies_II
-        title: "Gravity Anomalies II"
+        title: "Earth's Gravity & the Geoid"
+      - file: lectures/20_gravity_anomalies
+        title: "Gravity Anomalies & Subsurface Modeling"
+      - file: lectures/21_isostasy
+        title: "Isostasy & Lithospheric Flexure"
 
   - caption: "Module 6 — Magnetism"
     chapters:
-      - file: lectures/23_density_lithosphere
+      - file: lectures/22_density_lithosphere
         title: "Density & Lithosphere"
-      - file: lectures/24_earth_magnetism
+      - file: lectures/23_earth_magnetism
         title: "Earth Magnetism"
-      - file: lectures/25_magnetic_field_tectonics
+      - file: lectures/24_magnetic_field_tectonics
         title: "Magnetism & Tectonics"
 
   - caption: "Module 7 — Geodynamics and Tectonics: A Synthesis"
     chapters:
-      - file: lectures/26_heat_geodynamics
+      - file: lectures/25_heat_geodynamics
         title: "Heat & Geodynamics"
-      - file: lectures/27_divergent_margins
+      - file: lectures/26_divergent_margins
         title: "Divergent Margins"
-      - file: lectures/28_convergent_margins
+      - file: lectures/27_convergent_margins
         title: "Convergent Margins"
-      - file: lectures/29_transform_intraplate
+      - file: lectures/28_transform_intraplate
         title: "Transform & Intraplate"
-      - file: lectures/30_synthesis
+      - file: lectures/29_synthesis
         title: "Synthesis"
 
   - caption: "Labs"
