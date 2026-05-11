@@ -15,6 +15,10 @@ open_sources:
 
 # Isostasy and Lithospheric Flexure
 
+:::{seealso}
+📊 **Lecture slides** — <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_21_slides.html" target="_blank">open in new tab ↗</a>
+:::
+
 ::::{dropdown} Learning Objectives
 :color: primary
 :icon: target

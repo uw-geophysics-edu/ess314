@@ -15,6 +15,10 @@ open_sources:
 
 # Earth's Gravity Field and the Geoid
 
+:::{seealso}
+📊 **Lecture slides** — <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_19_slides.html" target="_blank">open in new tab ↗</a>
+:::
+
 ::::{dropdown} Learning Objectives
 :color: primary
 :icon: target
