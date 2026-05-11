@@ -57,7 +57,7 @@ Any pressure imbalance there drives lateral flow that restores equilibrium.
 
 ## Airy and Pratt — two end-member compensation styles
 
-![Airy and Pratt isostasy compared](../../assets/figures/fig_airy_pratt.png)
+![Airy and Pratt isostasy compared](../assets/figures/fig_airy_pratt.png)
 
 - **Airy**: same density, variable thickness. High mountain → deep root.
 - **Pratt**: same depth, variable density. High mountain → low-density column.
@@ -115,7 +115,7 @@ Transient residuals are diagnostic of **active geodynamic processes**.
 
 ## Time-dependent compensation — post-glacial rebound
 
-![Post-glacial rebound](../../assets/figures/fig_postglacial_rebound.png)
+![Post-glacial rebound](../assets/figures/fig_postglacial_rebound.png)
 
 Ice sheet removed → lithosphere rebounds toward equilibrium.
 Rate set by **mantle viscosity**:
@@ -152,7 +152,7 @@ and **flexural parameter** $\alpha = \bigl[ 4D / (\rho_{m}\!-\!\rho_{w}) g \bigr
 
 ## What flexure looks like
 
-![Lithospheric flexure under a line load](../../assets/figures/fig_flexural_bulge.png)
+![Lithospheric flexure under a line load](../assets/figures/fig_flexural_bulge.png)
 
 Load → central depression + **forebulge** at $x \approx \pi\alpha$ + zero crossing.
 Increasing $T_{e}$ widens *and* reduces the deflection.

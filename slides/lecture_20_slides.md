@@ -69,7 +69,7 @@ $$ \Delta g(x) = \frac{G \, M \, z}{(x^{2}+z^{2})^{3/2}}, \qquad M = \frac{4}{3}
 
 ## Half-max rule in action
 
-![Three buried spheres at increasing depth](../../assets/figures/fig_buried_sphere.png)
+![Three buried spheres at increasing depth](../assets/figures/fig_buried_sphere.png)
 
 Three identical-mass spheres at $z = 400, 800, 1600$ m → wider, weaker profiles with depth. Half-max rule recovers $z=1599$ m for actual $z=1600$ m.
 
@@ -77,7 +77,7 @@ Three identical-mass spheres at $z = 400, 800, 1600$ m → wider, weaker profile
 
 ## The other canonical shapes
 
-![Sphere, cylinder, finite slab, fault offset](../../assets/figures/fig_simple_shapes.png)
+![Sphere, cylinder, finite slab, fault offset](../assets/figures/fig_simple_shapes.png)
 
 Each geometry has its own **signature** in the surface profile. Recognise the shape → apply the right formula.
 
@@ -177,7 +177,7 @@ Top of salt: $z - R \approx 1000$ m.
 
 ## A PNW worked example — Seattle Basin
 
-![Seattle Basin gravity profile and cross-section](../../assets/figures/fig_seattle_basin.png)
+![Seattle Basin gravity profile and cross-section](../assets/figures/fig_seattle_basin.png)
 
 A 60-mGal isostatic-residual low across the basin. Width → depth (~7–8 km). Asymmetry → Seattle Fault Zone offset.
 

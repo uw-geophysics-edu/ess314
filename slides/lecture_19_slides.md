@@ -68,7 +68,7 @@ $$ U(\mathbf{r}) = -\,G \int_{V} \frac{\rho(\mathbf{r}')}{|\mathbf{r}-\mathbf{r}
 
 ## How $g$ varies with distance
 
-![Inverse-square law and free-air gradient](../../assets/figures/fig_g_inverse_square.png)
+![Inverse-square law and free-air gradient](../assets/figures/fig_g_inverse_square.png)
 
 Left: $g(r) = G M_{E}/r^{2}$, log-log. Right: linear free-air gradient $-0.3086\,$mGal m⁻¹ near surface.
 
@@ -87,7 +87,7 @@ The ISS is *not* in deep space. **$g$ falls off slowly.**
 
 ## Three approximations to Earth's shape
 
-![Sphere, oblate spheroid, geoid](../../assets/figures/fig_geoid_ellipsoid.png)
+![Sphere, oblate spheroid, geoid](../assets/figures/fig_geoid_ellipsoid.png)
 
 Each panel is the "next correction" on the previous one.
 
@@ -135,7 +135,7 @@ The next four slides take a single transect and walk through each correction.
 
 ## The reduction chain
 
-![Topography, raw deviation, free-air & simple Bouguer, complete Bouguer](../../assets/figures/fig_correction_chain.png)
+![Topography, raw deviation, free-air & simple Bouguer, complete Bouguer](../assets/figures/fig_correction_chain.png)
 
 A buried 5-mGal target sits underneath a **300-mGal** elevation effect. Each correction below removes a known, predictable contribution.
 
