@@ -32,5 +32,9 @@ Thumbs.db
 # Private student data (never push)
 .student_profiles.md
 
+# Private instructor materials — never commit to public repo
+notebooks/Lab_AI/answer_key_and_ta_guide.md
+**/answer_key*.md
+
 # Lock file (uncomment if you want to track it)
 # pixi.lock

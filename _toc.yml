@@ -94,18 +94,31 @@ parts:
         title: "Lab 1: Introduction to Python"
       - file: notebooks/Lab2-FirstnameLastname
         title: "Lab 2: More Python & Earthquakes"
-      # - file: notebooks/Lab3-Refraction
-        # title: "Lab 3: Refraction"
-      # - file: notebooks/Lab4-Reflection
-        # title: "Lab 4: Reflection"
-      # - file: notebooks/Lab5-Earthquake-Location
-        # title: "Lab 5: Earthquake Location"
-      # - file: notebooks/Lab6-AI-Literacy
-        # title: "Lab 6: AI Literacy"
-      # - file: notebooks/Lab7-Gravity
-        # title: "Lab 7: Gravity"
-      # - file: notebooks/Lab8-Magnetics
-        # title: "Lab 8: Magnetics"
+      # - file: notebooks/Lab3/Lab3-FirstnameLastname
+      #   title: "Lab 3: Refraction"
+      # - file: notebooks/Lab4/Lab4-FirstnameLastname
+      #   title: "Lab 4: Reflection"
+      # - file: notebooks/Lab5/Lab5-FirstnameLastname
+      #   title: "Lab 5: Earthquake Location"
+      # - file: notebooks/Lab6/Lab6-FirstnameLastname
+      #   title: "Lab 6: Gravity"
+      - file: notebooks/Lab_AI/Lab6-AI-Literacy
+        title: "Lab AI: AI as a Geophysics Collaborator"
+        sections:
+          - file: notebooks/Lab_AI/README
+            title: "Resources Overview"
+          - file: notebooks/Lab_AI/three_claims
+            title: "Part 5 — Three Claims"
+          - file: notebooks/Lab_AI/sample_methods_paragraph
+            title: "Part 6 — Sample Methods Paragraph"
+          - file: notebooks/Lab_AI/methods_reviewer_v0_template
+            title: "Part 6 — Methods Reviewer Agent (Template)"
+          - file: notebooks/Lab_AI/session_card_template
+            title: "Session Card (Template)"
+          - file: notebooks/Lab_AI/error_log_template
+            title: "AI Error Log (Template)"
+      # - file: notebooks/Lab7-Magnetics
+      #   title: "Lab 7: Magnetics"
 
   - caption: "Career Prospects & Skills"
     chapters:
