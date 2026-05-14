@@ -182,6 +182,98 @@ The choice of regional surface is a modelling choice, not a measurement; this in
 
 The horizontal derivative $\partial \Delta g / \partial x$ peaks at the location of a vertical density contrast. Over a vertical fault, the gradient is largest directly above the fault plane; over a basin edge, the gradient peaks at the wall. The gradient is robust against long-wavelength trends, because differentiation suppresses the very-low-frequency components of the field. Map-view gradient images — easily produced from gridded gravity data — are widely used to locate structural lineaments that may not be obvious in the underlying anomaly map.
 
+### 3.5 Comparing shapes at a common depth
+
+Before discussing measurement errors it is worth seeing the three localised signatures *side by side at the same depth*. {numref}`fig-shape-overlay` overlays a sphere, a horizontal cylinder, and a finite slab, all anchored to a depth-to-centre of $z = 600$ m. The differences are subtle: at the half-maximum level the curves separate by less than a hundred metres, and they agree to within a few percent over the central region of the profile.
+
+```{figure} ../assets/figures/fig_shape_overlay.png
+:name: fig-shape-overlay
+:alt: Two-panel figure comparing canonical gravity anomalies at a common depth. The left panel shows three normalised profiles (sphere in blue, horizontal cylinder in orange, finite slab in green), all peaking at one. Vertical dotted lines mark the half-width: about 460 m for the sphere (consistent with 0.766 z = 460 m) and about 600 m for the cylinder (consistent with x_half = z exactly). The slab falls between them and is flat-topped near x = 0. The right panel shows the same three profiles in absolute units in mGal: the cylinder peaks near 1.4 mGal, the slab near 0.75 mGal, and the sphere near 0.27 mGal. A grey band marks the typical land-survey measurement noise envelope of plus or minus 2 sigma (sigma = 0.05 mGal). The sphere anomaly drops into the noise band beyond about 600 m offset, while the cylinder and slab anomalies stay clearly above the noise out to roughly 1.6–2.1 km.
+:width: 100%
+
+The three localised anomaly shapes at $z = 600$ m. **(a)** Normalised profiles isolate *shape*: the sphere falls off as $1/r^{3}$ (steepest), the cylinder as $1/r^{2}$ (broadest), and the finite slab is flat-topped near the centre. **(b)** Absolute amplitudes plotted together with a typical land-survey noise band ($\sigma = 0.05$ mGal). At this depth, the sphere disappears into the noise beyond $|x| \approx 600$ m, whereas the cylinder and slab remain detectable to several times that distance — a *survey-design* consequence of the slower far-field decay.
+```
+
+The figure makes a point that is easy to miss when each shape is plotted in its own panel: for the same depth and density contrast, the *amplitude* spread between geometries is more than a factor of five, but the *normalised shape* difference is small. The choice of which closed-form to fit therefore matters more for amplitude-derived quantities (mass, density contrast) than for the half-max-derived depth.
+
+### 3.6 Measurement errors and what they do to the inferred depth
+
+Field gravimeters are precise instruments — a modern relative LaCoste–Romberg or scintrex CG-6 reaches a repeatability of $\sim 0.005$ mGal in the laboratory — but a real *station* gravity value carries error contributions from several sources that combine to a typical *survey* noise floor of $\sigma_{\Delta g} \approx 0.05$ mGal, occasionally larger:
+
+- **Instrument drift and tides.** Mechanical drift of a few hundredths of a mGal per hour, plus solid-Earth tides of order ±0.3 mGal that must be removed by repeat base-station measurements and a tidal-correction model.
+- **Station elevation and position.** The free-air gradient is $-0.3086$ mGal m⁻¹; a 30-cm error in station height costs about 0.1 mGal. A 1-metre horizontal position error in the latitude correction costs roughly 0.01 mGal at mid-latitudes.
+- **Terrain correction error.** Inadequate terrain models — particularly in mountainous surveys — leave residual amplitudes of 0.05–0.5 mGal.
+- **Bouguer-density choice.** The Bouguer slab correction is $0.0419 \, \rho \, h$ mGal (with $\rho$ in g cm⁻³ and $h$ in m). Using $\rho = 2.67$ versus $\rho = 2.50$ g cm⁻³ on a 200 m elevation difference shifts the reduced anomaly by $\sim 1.4$ mGal.
+
+When these contributions are summed in quadrature, a well-run regional land survey delivers $\sigma_{\Delta g}$ in the 0.05–0.10 mGal range. Modern absolute-gravity meters used for time-lapse work (FG-5, A10) push the floor below 0.005 mGal at a single station, at the cost of throughput.
+
+The right panel of {numref}`fig-shape-overlay` shows what this means at depth. The sphere anomaly, the most rapidly decaying of the three signatures, drops *into* the $\pm 2\sigma$ noise band beyond $|x| \approx 600$ m at $z = 600$ m — so for any source deeper than its own half-width, the *tails* of the anomaly are unrecoverable from a single profile.
+
+**Error propagation into the half-max depth.** Suppose the peak amplitude is measured to $\pm \sigma_{\Delta g}$. The half-maximum level $g_{\max}/2$ is then known to $\pm \sigma_{\Delta g}/2$, and the corresponding error in the half-width $x_{1/2}$ is set by the local slope of the profile at the half-maximum point:
+
+```{math}
+:label: eq-x12-error
+\sigma_{x_{1/2}} \;\approx\; \frac{\sigma_{\Delta g}/2}{|\partial \Delta g/\partial x|_{x_{1/2}}}.
+```
+
+For a sphere, $|\partial g/\partial x|$ at $x_{1/2}$ is $\approx 0.55 \, g_{\max}/z$. Substituting and using $z = x_{1/2}/0.766$, the relative error in depth is approximately
+
+```{math}
+:label: eq-depth-error
+\frac{\sigma_{z}}{z} \;\approx\; 1.2 \, \frac{\sigma_{\Delta g}}{g_{\max}}.
+```
+
+In words: a *noise-to-signal ratio* of 5% propagates to a depth uncertainty of about 6%. For our salt-dome example in §6, $g_{\max} = 16$ mGal and $\sigma_{\Delta g} \approx 0.1$ mGal, giving $\sigma_z / z \approx 0.7\%$ — well below the bias from the shape assumption. For a $g_{\max} = 0.5$ mGal anomaly, however, $\sigma_z/z$ climbs above 20%, and the half-max depth is dominated by measurement error rather than by the source geometry.
+
+```{admonition} Key concept — when does noise dominate the depth?
+:class: important
+
+The signal-to-noise ratio that matters for depth recovery is not the peak amplitude alone but $g_{\max} / \sigma_{\Delta g}$ at the *half-maximum*. A rule of thumb:
+
+- $g_{\max} / \sigma_{\Delta g} \gtrsim 50$: depth set by the geometry assumption; noise is a $\lesssim 3\%$ contribution.
+- $10 \lesssim g_{\max} / \sigma_{\Delta g} \lesssim 50$: depth uncertainty is $\sim 5{-}15\%$; report the half-max depth with an explicit error bar.
+- $g_{\max} / \sigma_{\Delta g} \lesssim 10$: the depth is essentially unconstrained by a single profile. Acquire more data, use the horizontal gradient (§3.4), or combine with seismic.
+
+Deeper sources push the anomaly into this last regime even when the body is large: doubling $z$ at fixed mass divides $g_{\max}$ by four (sphere) or by two (cylinder), while $\sigma_{\Delta g}$ is set by instrumentation and site conditions, not by the target.
+```
+
+### 3.7 From data error to model uncertainty — an ensemble of fits
+
+The half-max formula (§3.6) propagates noise into a single number, $\sigma_z$. That is a useful first move, but it hides the *shape* of the uncertainty. The honest picture is that finite data error admits a *family* of models that fit the observations equally well — and the geometry of that family is the heart of how potential-field inverse problems are interpreted in practice.
+
+{numref}`fig-ensemble-fit` makes the family visible. A synthetic sphere anomaly is generated with the truth $(z^{*}, M^{*}) = (600\,\text{m}, 1.47\times 10^{10}\,\text{kg})$, then sampled at 31 stations spaced 100 m apart and contaminated with Gaussian noise of standard deviation $\sigma_{\Delta g} = 0.05$ mGal. To assess which sphere parameters could have produced these data, every candidate $(z, M)$ pair on a coarse grid is scored by the reduced chi-squared,
+
+```{math}
+:label: eq-chi2
+\chi^{2}/N \;=\; \frac{1}{N}\sum_{i=1}^{N}\left(\frac{\Delta g_{i}^{\text{obs}} - \Delta g(x_{i}; z, M)}{\sigma_{\Delta g}}\right)^{2}.
+```
+
+A model is *accepted* if $\chi^{2}/N \leq 1.5$ — heuristically, "fits the data within $\sim 1.5\sigma$ on average." This is a deliberately generous cutoff at this stage of the course; the geometry of the result, not its precise width, is what matters.
+
+```{figure} ../assets/figures/fig_ensemble_fit.png
+:name: fig-ensemble-fit
+:alt: Two-panel figure. Left panel shows a noisy synthetic gravity profile with 31 blue data points (each with a vertical 1-sigma error bar of 0.05 mGal) peaking at about 0.27 mGal at x = 0 and falling toward zero by plus or minus 1500 m. A bundle of about 200 thin grey curves passes through the error bars, all representing sphere models with chi-squared per N below 1.5. A black dashed curve marks the true sphere and an orange curve marks the best-fit model — they overlap to within the line width. Right panel shows the parameter-space scatter of all accepted (z, M) pairs, colored by chi-squared per N (yellow at the minimum, dark purple at the cutoff). The accepted cloud traces a curved valley from the lower-left to the upper-right, following the dotted black line that marks the theoretical depth-mass tradeoff M proportional to z squared. The true value at z equal 600 m and M equal 1.47 times ten to the tenth kilograms is starred at the centre of the yellow region.
+:width: 100%
+
+**From data error to model uncertainty.** **(a)** Noisy observations (blue, with $\pm 1\sigma$ bars). Every grey curve is a sphere model that satisfies $\chi^{2}/N \leq 1.5$; the orange curve is the best fit. **(b)** The same accepted models plotted in $(z, M)$ space. The cloud is *not* a tight disc around the truth — it is a curved valley that follows the depth-mass tradeoff $M = (g_{\max}/G)\,z^{2}$ (dotted line). Many of the models on this curve are nearly indistinguishable from the truth at the level of the data; gravity alone cannot tell them apart.
+```
+
+Three lessons follow from {numref}`fig-ensemble-fit`.
+
+**The "answer" is a family, not a point.** Any single best-fit estimate $(\hat z, \hat M)$ — the orange curve in the figure — is one member of the cloud, no more correct than the others. A scientific report should give either an explicit ensemble or, at minimum, the central value with marginalised uncertainties: $\hat z = 600^{+220}_{-180}$ m, $\hat M = (1.5 \pm 0.7) \times 10^{10}$ kg here.
+
+**Uncertainty in $z$ and $M$ is correlated, not independent.** The cloud is a long ridge along the $M \propto z^{2}$ direction — exactly the tradeoff predicted by the closed-form expression for $g_{\max}$. Reporting $\sigma_z$ and $\sigma_M$ separately throws away most of the information; the *joint* uncertainty is the object of interest.
+
+**More data tightens the cloud — but only some of it.** Adding stations far from the source narrows the cloud along the tradeoff valley (the tails of $\Delta g$ are more sensitive to the long-range fall-off, which differs slightly between members of the family). Adding stations at the centre, where the profiles overlap most tightly, helps less. This is the survey-design corollary of error propagation and motivates the use of **wide, sparse profiles** rather than dense ones for deep targets.
+
+This ensemble picture is the conceptual entry point to formal *Bayesian inversion*: a prior distribution on the model parameters, multiplied by the likelihood implied by the data and their errors, yields a posterior distribution whose shape is essentially the cloud in {numref}`fig-ensemble-fit`(b). For the geometric models of this lecture, the cloud can be sampled by brute-force grid evaluation as we have done; in higher-dimensional or non-linear problems (such as full-waveform inversion in Lecture 12 or geodynamic inversion in Lecture 25), the same logic is implemented with Markov-chain Monte Carlo or with ensemble Kalman methods. The accompanying notebook *gravity_ensemble.ipynb* lets students vary $\sigma_{\Delta g}$, the survey aperture, and the depth and see the cloud expand, contract, and rotate accordingly.
+
+```{admonition} Key concept — error propagation is *correlated*
+:class: important
+
+In a parameter-fitting problem, finite data error never produces a tight disc around the truth. It produces a *ridge* aligned with the inherent tradeoffs of the forward map — here, $M \propto z^{2}$. Reporting the answer as $\hat z \pm \sigma_z$ and $\hat M \pm \sigma_M$ independently overstates the uncertainty on each parameter *and* hides the correlation. The faithful representation is the ensemble itself, or its covariance matrix.
+```
+
 ```{admonition} Key equation — what the gravity profile tells you
 :class: important
 

@@ -97,6 +97,71 @@ $$ \Delta g = 2\pi G \Delta\rho \, h. $$
 
 ---
 
+## Three shapes, one depth — what is *actually* different?
+
+![Overlay of sphere, cylinder, and slab anomalies at z = 600 m, plus the measurement-noise band](../assets/figures/fig_shape_overlay.png)
+
+- **(a) Shapes**: sphere falls off fastest ($1/r^{3}$), cylinder slowest ($1/r^{2}$), slab is flat-topped.
+- **(b) Amplitudes** differ by **5×** at the same depth and density contrast.
+- The *shape* assumption matters more for **density/mass** than for the **half-max depth**.
+
+---
+
+## Measurement errors — the field-survey noise floor
+
+Typical land-survey noise budget (1σ, combined in quadrature):
+
+| Source | Contribution |
+|---|---|
+| Instrument drift + tides (after correction) | 0.01–0.03 mGal |
+| Station elevation (0.3 m at $-0.3086$ mGal/m) | ~0.1 mGal |
+| Terrain correction residual | 0.05–0.5 mGal |
+| Bouguer-density choice (2.50 vs 2.67 g cm⁻³) | up to 1 mGal |
+
+**Result:** $\sigma_{\Delta g} \approx 0.05{-}0.1$ mGal for a well-run survey.
+Absolute meters (FG-5) reach $< 0.005$ mGal at single stations.
+
+---
+
+## Noise floor → depth uncertainty
+
+The half-max rule propagates measurement noise into a depth error:
+
+$$ \frac{\sigma_{z}}{z} \;\approx\; 1.2 \, \frac{\sigma_{\Delta g}}{g_{\max}} \quad \text{(sphere)} $$
+
+| $g_{\max}/\sigma_{\Delta g}$ | Depth uncertainty | What to do |
+|:---:|:---:|---|
+| $\gtrsim 50$ | $\lesssim 3\%$ | Geometry bias dominates |
+| 10–50 | 5–15% | Report explicit error bar |
+| $\lesssim 10$ | unconstrained | Acquire more data; use $\partial g/\partial x$; combine w/ seismic |
+
+→ Doubling depth quarters the sphere's peak; the noise floor doesn't budge.
+
+---
+
+## From data error to *model uncertainty*
+
+![Noisy profile + ensemble of acceptable sphere fits, and the (z, M) cloud](../assets/figures/fig_ensemble_fit.png)
+
+**Step 1** – generate a noisy profile (31 stations, $\sigma=0.05$ mGal).
+**Step 2** – score every $(z, M)$ on a grid by
+$\chi^{2}/N = \tfrac{1}{N}\sum_i \big((\Delta g_i^{\text{obs}} - \Delta g(x_i; z, M))/\sigma\big)^{2}$.
+**Step 3** – keep all models with $\chi^{2}/N \leq 1.5$. **The answer is the cloud.**
+
+---
+
+## The cloud has *shape* — it is not a disc
+
+- The accepted $(z, M)$ ensemble **traces $M \propto z^{2}$** — the depth-mass tradeoff predicted by $g_{\max} = GM/z^{2}$.
+- A single best-fit point is **one member of a family**; the family is what we report.
+- $\sigma_z$ and $\sigma_M$ are **correlated**, not independent. Report the joint cloud (or its covariance), not two separate $\pm$ ranges.
+
+**Survey-design corollary**: stations *far* from the source narrow the cloud along the tradeoff direction. Wide, sparse profiles beat dense ones for deep targets.
+
+**Forward to the rest of the course**: this is the entry point to *Bayesian inversion* — prior × likelihood = posterior. Same logic, scaled up, drives MCMC and ensemble Kalman methods used in tomography (L12) and geodynamics (L25).
+
+---
+
 ## Density contrast — not absolute density
 
 $\Delta g$ depends on **$\Delta \rho$**, not on $\rho$ itself.
