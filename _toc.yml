@@ -65,15 +65,15 @@ parts:
         title: "Gravity Anomalies & Subsurface Modeling"
       - file: lectures/21_isostasy
         title: "Isostasy & Lithospheric Flexure"
+      - file: lectures/22_density_lithosphere
+        title: "Density & Lithosphere"
 
   - caption: "Module 6 — Magnetism"
     chapters:
-      - file: lectures/22_density_lithosphere
-        title: "Density & Lithosphere"
       - file: lectures/23_earth_magnetism
-        title: "Earth Magnetism"
+        title: "Earth Magnetism & Mineral Magnetism"
       - file: lectures/24_magnetic_field_tectonics
-        title: "Magnetism & Tectonics"
+        title: "Magnetism & Plate Tectonics"
 
   - caption: "Module 7 — Geodynamics and Tectonics: A Synthesis"
     chapters:
