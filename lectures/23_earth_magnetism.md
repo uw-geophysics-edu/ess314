@@ -1,15 +1,64 @@
 ---
-title: "Lecture 23 — Earth Magnetism and Mineral Magnetism"
+title: "Earth Magnetism and Mineral Magnetism"
 subtitle: "Where the field comes from, and how rocks remember it"
 short_title: "Earth Magnetism"
-course_lo: [LO-1, LO-2, LO-4]
-learning_outcomes: [LO-OUT-A, LO-OUT-C]
-prerequisites: [Lecture 19 — Earth's Gravity, Lecture 20 — Gravity Anomalies]
-next_lecture: 24_magnetic_field_tectonics
+week: 9
+lecture: 23
+date: "2026-06-01"
+topic: "Magnetism I — the geomagnetic field and rock magnetism"
+course_lo: ["LO-1", "LO-2", "LO-4"]
+learning_outcomes: ["LO-OUT-A", "LO-OUT-C"]
+open_sources:
+  - "Lowrie & Fichtner (2020), Fundamentals of Geophysics, 3rd ed., Ch. 5.1–5.3 (UW Libraries e-book)"
+  - "Tauxe et al. (2018), Essentials of Paleomagnetism, 5th Web Edition (open access, EarthRef.org)"
+  - "Butler (1992), Paleomagnetism: Magnetic Domains to Geologic Terranes (electronic edition freely available)"
+  - "IGRF-13 model and field calculator: NOAA NCEI / IAGA (public domain, https://www.ngdc.noaa.gov/IAGA/vmod/igrf.html)"
 keywords: [geomagnetism, geodynamo, declination, inclination, IGRF, paleomagnetism, magnetite, Curie temperature, TRM, secular variation]
 ---
 
-# Lecture 23 — Earth Magnetism and Mineral Magnetism
+# Earth Magnetism and Mineral Magnetism
+
+:::{seealso}
+📊 **Lecture slides** — <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_23_slides.html" target="_blank">open in new tab ↗</a>
+:::
+
+::::{dropdown} Learning Objectives
+:color: primary
+:icon: target
+:open:
+
+By the end of this lecture, students will be able to:
+
+- **[LO-23.1]** Decompose the geomagnetic field vector at a station into declination $D$, inclination $I$, and total intensity $F$, and convert between $(D, I, F)$ and the local $(X, Y, Z)$ Cartesian components.
+- **[LO-23.2]** Identify the three principal sources of the surface field — core (geodynamo), lithosphere, and ionosphere — on the field's spatial power spectrum, and assign each source a characteristic wavelength range.
+- **[LO-23.3]** Distinguish the five categories of magnetic ordering at the mineral scale (dia-, para-, ferro-, antiferro-, ferrimagnetic) and predict their behaviour in a geophysical setting.
+- **[LO-23.4]** Describe how thermoremanent magnetization (TRM) is acquired on cooling through the Curie temperature, and identify the principal magnetic minerals encountered in Pacific Northwest rocks (magnetite, titanomagnetite, hematite, pyrrhotite) by their Curie temperatures.
+- **[LO-23.5]** Apply the geocentric axial dipole equation $\tan I = 2 \tan \lambda$ as a forward problem (predict $I$ given $\lambda$) and as an inverse problem (estimate $\lambda$ with propagated uncertainty given a measured $I$).
+
+::::
+
+::::{dropdown} Syllabus Alignment
+:color: secondary
+:icon: list-task
+
+| | |
+|---|---|
+| **Course LOs addressed** | LO-1 (observables ↔ Earth properties), LO-2 (forward model from source physics to surface field), LO-4 (method strengths, limitations, and uncertainty) |
+| **Learning outcomes practiced** | LO-OUT-A (predict surface signature from a simple source model), LO-OUT-C (interpret a measurement as a constraint on subsurface structure with appropriate uncertainty) |
+| **Prior lecture** | [L22 — Density and the Lithosphere](22_density_lithosphere.md) |
+| **Next lecture** | [L24 — Magnetism and Plate Tectonics](24_magnetic_field_tectonics.md) |
+| **Lab connection** | Lab 7 — Magnetic Anomaly Modeling (forward + inverse, induced dipole) |
+| **Textbook** | Lowrie & Fichtner (2020), Ch. 5.1–5.3 |
+
+::::
+
+## Prerequisites
+
+Students should be comfortable with the vector calculus introduced in the gravity module (Lectures 19–22) — in particular, the idea that a scalar potential generates a vector field by gradient, and that surface measurements can be projected onto local Cartesian components. Familiarity with the inverse-square law and with the concept of a non-uniqueness/ensemble-fit framework from gravity will transfer directly. No prior exposure to electromagnetism beyond an introductory-physics treatment of a bar magnet is required.
+
+---
+
+## 1. The Geoscientific Question
 
 ```{epigraph}
 A compass needle in Seattle today points 15.5° east of true north.
@@ -17,7 +66,6 @@ In 1955 it pointed 22.1° east. The asphalt of Seattle-Tacoma's main runway
 was repainted in 2019 to keep its name, "16R", honest.
 ```
 
-## 1. Motivation — a compass that drifts
 
 A pilot lining up on runway 16R at Seattle-Tacoma International Airport is
 flying along a heading numbered to match Earth's magnetic field. The number
@@ -42,45 +90,6 @@ The first two are observed at the surface today. The third is the bridge
 that lets us read the field's history backward in time, and it is the
 foundation of paleomagnetism and plate-tectonic reconstructions
 (developed in Lecture 24).
-
-```{admonition} Learning Objectives
-:class: tip, dropdown
-
-By the end of this lecture, students will be able to:
-
-1. Decompose the geomagnetic field vector at a station into declination
-   D, inclination I, and total intensity F, and convert between
-   (D, I, F) and the local (X, Y, Z) components.
-2. Identify the three principal sources of the surface field
-   (core, lithosphere, ionosphere) on the field's spatial power spectrum
-   and assign each source a characteristic wavelength range.
-3. Distinguish the five categories of magnetic ordering at the mineral
-   scale (dia-, para-, ferro-, antiferro-, ferri-magnetic) and predict
-   their behaviour in a geophysical setting.
-4. Describe how thermoremanent magnetization (TRM) is acquired on cooling
-   through the Curie temperature, and identify the principal magnetic
-   minerals encountered in Pacific Northwest rocks (magnetite, titanomagnetite,
-   hematite, pyrrhotite) by their Curie temperatures.
-5. Apply the geocentric axial dipole equation
-   $\tan I = 2 \tan \lambda$ as a forward problem (predict I given $\lambda$)
-   and as an inverse problem (estimate $\lambda$ with propagated uncertainty
-   given a measured I).
-```
-
-```{admonition} Syllabus Alignment
-:class: note, dropdown
-
-This lecture maps to **Course Learning Objectives 1, 2, and 4** (governing
-equations of geophysical fields; multi-physics signatures of subsurface
-processes; quantitative interpretation under uncertainty). It introduces the
-field-physics half of the magnetics block; Lecture 24 develops the anomaly
-forward and inverse problems and connects to plate tectonics.
-
-Lecture-level outcomes addressed: **LO-OUT-A** (write the governing equation
-for a geophysical field and predict its surface signature from a simple
-source model), and **LO-OUT-C** (interpret a measurement as a constraint on
-subsurface or interior structure, with appropriate uncertainty).
-```
 
 ## 2. The dipole field and the (D, I, F) system
 

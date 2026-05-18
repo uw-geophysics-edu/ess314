@@ -1,15 +1,65 @@
 ---
-title: "Lecture 24 — Magnetic Field, Magnetism, and Tectonic Plates"
+title: "Magnetic Field, Magnetism, and Tectonic Plates"
 subtitle: "Anomalies, ensembles, and the floor of the Pacific"
 short_title: "Magnetism & Tectonics"
-course_lo: [LO-1, LO-2, LO-3, LO-4, LO-5]
-learning_outcomes: [LO-OUT-A, LO-OUT-B, LO-OUT-D, LO-OUT-E]
-prerequisites: [Lecture 23 — Earth Magnetism, Lecture 20 — Gravity Anomalies]
-next_lecture: 25_electromagnetic_methods
+week: 9
+lecture: 24
+date: "2026-06-03"
+topic: "Magnetism II — anomalies, inversion, and seafloor spreading"
+course_lo: ["LO-1", "LO-2", "LO-3", "LO-4", "LO-5"]
+learning_outcomes: ["LO-OUT-A", "LO-OUT-B", "LO-OUT-D", "LO-OUT-E"]
+open_sources:
+  - "Lowrie & Fichtner (2020), Fundamentals of Geophysics, 3rd ed., Ch. 5.4–5.7 (UW Libraries e-book)"
+  - "Blakely (1995), Potential Theory in Gravity and Magnetic Applications, Cambridge (UW Libraries)"
+  - "Vine & Matthews (1963), Magnetic anomalies over oceanic ridges, Nature, doi:10.1038/199947a0"
+  - "USGS aeromagnetic surveys of the Pacific Northwest (public domain, https://mrdata.usgs.gov/magnetic/)"
+  - "NOAA NCEI EMAG2 global magnetic anomaly grid (public domain)"
 keywords: [magnetic anomaly, dipole, reduction-to-pole, half-width depth rule, ensemble inversion, seafloor spreading, Vine-Matthews, Juan de Fuca, Seattle Fault Zone, paleomagnetism]
 ---
 
-# Lecture 24 — Magnetic Field, Magnetism, and Tectonic Plates
+# Magnetic Field, Magnetism, and Tectonic Plates
+
+:::{seealso}
+📊 **Lecture slides** — <a href="https://uw-geophysics-edu.github.io/ess314/slides/lecture_24_slides.html" target="_blank">open in new tab ↗</a>
+:::
+
+::::{dropdown} Learning Objectives
+:color: primary
+:icon: target
+:open:
+
+By the end of this lecture, students will be able to:
+
+- **[LO-24.1]** Define the **total-field magnetic anomaly** $\Delta F$ and explain why it is approximately the projection of the source field onto the local $\mathbf{F}_\text{earth}$ direction.
+- **[LO-24.2]** Use the closed-form expression for a buried induced magnetic dipole to predict the **anomaly shape** above the source, including the dependence on the inclination $I$ of the inducing field.
+- **[LO-24.3]** Apply the **half-width depth rule** $z \approx 2\,x_{1/2}$ for an induced dipole at the magnetic pole (or after reduction-to-pole), and propagate measurement noise $\sigma_F$ to depth uncertainty $\sigma_z / z \approx (1/3)\,\sigma_F / F_\text{max}$.
+- **[LO-24.4]** Generate and interpret an **ensemble-fit cloud** in $(z, m)$ parameter space, identify the theoretical ridge $m \propto z^3$ along which depth and moment trade off, and discuss how induced + remanent ambiguity widens the cloud relative to the gravity case.
+- **[LO-24.5]** Use a magnetic stripe sequence offshore the Pacific Northwest to estimate a **seafloor half-spreading rate**, and explain the role of magnetic data in mapping the **Seattle Fault Zone**.
+
+::::
+
+::::{dropdown} Syllabus Alignment
+:color: secondary
+:icon: list-task
+
+| | |
+|---|---|
+| **Course LOs addressed** | LO-1 (observables ↔ Earth properties), LO-2 (forward model), LO-3 (inverse problem with $d = G(m)$), LO-4 (uncertainty and non-uniqueness), LO-5 (multi-physics integration with gravity and seismic reflection) |
+| **Learning outcomes practiced** | LO-OUT-A (forward problem from governing equation), LO-OUT-B (inverse problem with model uncertainty), LO-OUT-D (multi-physics interpretation), LO-OUT-E (societal-relevance reasoning, via the Seattle Fault aeromagnetic survey) |
+| **Prior lecture** | [L23 — Earth Magnetism and Mineral Magnetism](23_earth_magnetism.md) |
+| **Next lecture** | [L25 — Heat and Geodynamics](25_heat_geodynamics.md) |
+| **Lab connection** | Lab 7 — Magnetic Anomaly Modeling (ensemble inversion of an induced dipole, JdF stripe interpretation) |
+| **Textbook** | Lowrie & Fichtner (2020), Ch. 5.4–5.7 |
+
+::::
+
+## Prerequisites
+
+This lecture builds directly on **Lecture 23** (geomagnetic field components, dipole geometry, mineral magnetism, TRM) and on the gravity-inversion framework introduced in **Lecture 20**. Students should be comfortable with the closed-form dipole field, with the idea of an ensemble fit and a $\chi^2/N$ misfit, and with the half-width depth rule for a buried point source. Familiarity with how IGRF separates main field from anomaly is assumed.
+
+---
+
+## 1. The Geoscientific Question
 
 ```{epigraph}
 "If the floor of the oceans is spreading apart at mid-ocean ridges and
@@ -21,7 +71,6 @@ reversed material running parallel to the ridge crest."
 — F. J. Vine & D. H. Matthews, *Nature*, 1963
 ```
 
-## 1. Motivation — Vine, Matthews, and the floor of the Pacific
 
 In 1963, Fred Vine and Drummond Matthews proposed that the alternating
 magnetic anomalies recorded across the Carlsberg Ridge in the Indian Ocean
@@ -55,50 +104,7 @@ the lecture:
    closed-form expressions for how measurement noise propagates to depth
    uncertainty.
 
-```{admonition} Learning objectives
-:class: tip, dropdown
 
-By the end of this lecture, students will be able to:
-
-1. Define the **total-field magnetic anomaly** $\Delta F$ and explain why
-   it is approximately the projection of the source field onto the local
-   $\mathbf{F}_\text{earth}$ direction.
-2. Use the closed-form expression for a buried induced magnetic dipole to
-   predict the **anomaly shape** above the source, including the dependence
-   on the inclination $I$ of the inducing field.
-3. Apply the **half-width depth rule** $z \approx 2\,x_{1/2}$ for an induced
-   dipole at the magnetic pole (or after reduction-to-pole), and propagate
-   measurement noise $\sigma_F$ to depth uncertainty
-   $\sigma_z / z \approx (1/3)\,\sigma_F / F_\text{max}$.
-4. Generate and interpret an **ensemble-fit cloud** in $(z, m)$ parameter
-   space, identify the theoretical ridge $m \propto z^3$ along which
-   depth and moment trade off, and discuss how **induced + remanent**
-   ambiguity widens the cloud relative to the gravity case.
-5. Use a magnetic stripe sequence offshore the Pacific Northwest to
-   estimate a **seafloor half-spreading rate**, and explain the role of
-   magnetic data in mapping the **Seattle Fault Zone**.
-```
-
-```{admonition} Syllabus alignment
-:class: note, dropdown
-
-This lecture closes the magnetics block and maps to **Course Learning
-Objectives 1–5**: writing governing equations (CLO-1, 2), formulating and
-solving forward/inverse problems (CLO-3), quantitative interpretation under
-uncertainty (CLO-4), and connecting geophysical signatures to natural-
-hazard and tectonic processes (CLO-5).
-
-Lecture-level outcomes addressed: **LO-OUT-A** (forward problem from a
-governing equation), **LO-OUT-B** (inverse problem with model uncertainty),
-**LO-OUT-D** (multi-physics interpretation — magnetics integrated with
-gravity and seismic reflection from earlier in the course), and
-**LO-OUT-E** (societal-relevance reasoning, here via the Seattle Fault
-aeromagnetic survey).
-```
-
-## 2. From observed F to anomaly $\Delta F$
-
-A magnetic-survey instrument — a proton-precession magnetometer in a
 ground survey, a cesium-vapour scalar magnetometer towed behind an
 aircraft — measures the **magnitude** of the total magnetic field $|F|$ at
 each station. The signal of interest is the small perturbation produced by
