@@ -1,0 +1,150 @@
+[01mmyst v3.0.1:[39;49;00m MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions={'amsmath', 'dollarmath', 'smartquotes', 'html_image', 'colon_fence', 'html_admonition', 'substitution', 'linkify'}, disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('mailto', 'http', 'https'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=0, heading_slug_func=None, html_meta={}, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+[91m/Users/marinedenolle/GitHub/ess314/lectures/08_intro_reflection.md:434: WARNING: duplicate citation for key "Ledeczi2024"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/08_intro_reflection.md:434: WARNING: duplicate label "1" for keys "AkiRichards2002" and "Ledeczi2024"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate citation for key "Barker2018"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate label "1" for keys "AkiRichards2002" and "Barker2018"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate citation for key "Claerbout2010"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate label "2" for keys "alken2021igrf" and "Claerbout2010"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate citation for key "LiTradLiu2024"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate label "3" for keys "Allen2020MyShake" and "LiTradLiu2024"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate citation for key "LowrieFichtner2020"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate label "4" for keys "Aster2018" and "LowrieFichtner2020"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate citation for key "Mardan2024"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate label "5" for keys "Atwater2005" and "Mardan2024"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate citation for key "Stolt1978"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate label "6" for keys "Bohm2022Mars" and "Stolt1978"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate citation for key "Wallace2009"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate label "7" for keys "Banerdt2020" and "Wallace2009"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate citation for key "Wallace2019"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate label "8" for keys "Barker2018" and "Wallace2019"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate citation for key "YangMa2019"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate label "9" for keys "blakely1995potential" and "YangMa2019"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate citation for key "ZeltBarton1998"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/10_migration_and_velocity_image_duality.md:404: WARNING: duplicate label "10" for keys "blakely2002seattlefault" and "ZeltBarton1998"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/11_whole_earth_imaging.md:712: WARNING: duplicate citation for key "Vidale2025InnerCore"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/11_whole_earth_imaging.md:712: WARNING: duplicate label "1" for keys "AkiRichards2002" and "Vidale2025InnerCore"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate citation for key "Hauksson2012"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate label "1" for keys "AkiRichards2002" and "Hauksson2012"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate citation for key "LowrieFichtner2020"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate label "2" for keys "alken2021igrf" and "LowrieFichtner2020"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate citation for key "Mousavi2022Review"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate label "3" for keys "Allen2020MyShake" and "Mousavi2022Review"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate citation for key "Mousavi2020EQT"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate label "4" for keys "Aster2018" and "Mousavi2020EQT"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate citation for key "Munchmeyer2022"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate label "5" for keys "Atwater2005" and "Munchmeyer2022"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate citation for key "Ross2019"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate label "6" for keys "Bohm2022Mars" and "Ross2019"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate citation for key "Shelly2016"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate label "7" for keys "Banerdt2020" and "Shelly2016"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate citation for key "Sun2023PhaseNO"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate label "8" for keys "Barker2018" and "Sun2023PhaseNO"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate citation for key "Waldhauser2000"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate label "9" for keys "blakely1995potential" and "Waldhauser2000"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate citation for key "Wilcock2025"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate label "10" for keys "blakely2002seattlefault" and "Wilcock2025"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate citation for key "Zhu2019PhaseNet"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate label "11" for keys "BurridgeKnopoff1964" and "Zhu2019PhaseNet"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate citation for key "Zhu2023DAS"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate label "12" for keys "candekent1995gpts" and "Zhu2023DAS"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate citation for key "Crowell2024GFAST"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/14_earthquake_phenomena_I.md:439: WARNING: duplicate label "13" for keys "Claerbout2010" and "Crowell2024GFAST"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "Allen2020MyShake"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "1" for keys "AkiRichards2002" and "Allen2020MyShake"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "Atwater2005"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "2" for keys "alken2021igrf" and "Atwater2005"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "Bohm2022Mars"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "3" for keys "Allen2020MyShake" and "Bohm2022Mars"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "Frankel2018"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "4" for keys "Aster2018" and "Frankel2018"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "Goldberg2024"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "5" for keys "Atwater2005" and "Goldberg2024"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "Goldfinger2012"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "6" for keys "Bohm2022Mars" and "Goldfinger2012"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "HanksKanamori1979"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "7" for keys "Banerdt2020" and "HanksKanamori1979"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "Hardebeck2024ETAS"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "8" for keys "Barker2018" and "Hardebeck2024ETAS"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "Kanamori1977"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "9" for keys "blakely1995potential" and "Kanamori1977"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "Kawamura2023S1222a"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "10" for keys "blakely2002seattlefault" and "Kawamura2023S1222a"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "LowrieFichtner2020"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "11" for keys "BurridgeKnopoff1964" and "LowrieFichtner2020"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "Mai2023Turkiye"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "12" for keys "candekent1995gpts" and "Mai2023Turkiye"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "Mousavi2022Review"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "13" for keys "Claerbout2010" and "Mousavi2022Review"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "Mousavi2020EQT"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "14" for keys "Cottaar2016" and "Mousavi2020EQT"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "Sun2023PhaseNO"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "15" for keys "dunlop2001rockmagnetism" and "Sun2023PhaseNO"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "Wilcock2025"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "16" for keys "Frankel2018" and "Wilcock2025"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "Yin2023DAS"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "17" for keys "Goldberg2024" and "Yin2023DAS"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "Zhu2019PhaseNet"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "18" for keys "Goldfinger2012" and "Zhu2019PhaseNet"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "Zhu2023DAS"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "19" for keys "HanksKanamori1979" and "Zhu2023DAS"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate citation for key "Crowell2024GFAST"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/15_earthquake_phenomena_II.md:955: WARNING: duplicate label "20" for keys "Hardebeck2024ETAS" and "Crowell2024GFAST"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/16_focal_mechanisms.md:389: WARNING: duplicate citation for key "AkiRichards2002"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/16_focal_mechanisms.md:389: WARNING: duplicate citation for key "BurridgeKnopoff1964"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/16_focal_mechanisms.md:389: WARNING: duplicate label "2" for keys "alken2021igrf" and "BurridgeKnopoff1964"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/16_focal_mechanisms.md:389: WARNING: duplicate citation for key "Hardebeck2002HASH"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/16_focal_mechanisms.md:389: WARNING: duplicate label "3" for keys "Allen2020MyShake" and "Hardebeck2002HASH"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/16_focal_mechanisms.md:389: WARNING: duplicate citation for key "Hayes2017Wphase"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/16_focal_mechanisms.md:389: WARNING: duplicate label "4" for keys "Aster2018" and "Hayes2017Wphase"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/16_focal_mechanisms.md:389: WARNING: duplicate citation for key "Ichinose2004Nisqually"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/16_focal_mechanisms.md:389: WARNING: duplicate label "5" for keys "Atwater2005" and "Ichinose2004Nisqually"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/16_focal_mechanisms.md:389: WARNING: duplicate citation for key "LowrieFichtner2020"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/16_focal_mechanisms.md:389: WARNING: duplicate label "6" for keys "Bohm2022Mars" and "LowrieFichtner2020"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/16_focal_mechanisms.md:389: WARNING: duplicate citation for key "McCrory2012Slab"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/16_focal_mechanisms.md:389: WARNING: duplicate label "7" for keys "Banerdt2020" and "McCrory2012Slab"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/16_focal_mechanisms.md:389: WARNING: duplicate citation for key "Mousavi2020EQT"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/16_focal_mechanisms.md:389: WARNING: duplicate label "8" for keys "Barker2018" and "Mousavi2020EQT"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/16_focal_mechanisms.md:389: WARNING: duplicate citation for key "Reasenberg1985FPFIT"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/16_focal_mechanisms.md:389: WARNING: duplicate label "9" for keys "blakely1995potential" and "Reasenberg1985FPFIT"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/16_focal_mechanisms.md:389: WARNING: duplicate citation for key "Vavrycuk2014Stress"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/16_focal_mechanisms.md:389: WARNING: duplicate label "10" for keys "blakely2002seattlefault" and "Vavrycuk2014Stress"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/24_magnetic_field_tectonics.md:707: WARNING: duplicate citation for key "blakely1995potential"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/24_magnetic_field_tectonics.md:707: WARNING: duplicate label "1" for keys "AkiRichards2002" and "blakely1995potential"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/24_magnetic_field_tectonics.md:707: WARNING: duplicate citation for key "blakely2002seattlefault"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/24_magnetic_field_tectonics.md:707: WARNING: duplicate label "2" for keys "alken2021igrf" and "blakely2002seattlefault"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/24_magnetic_field_tectonics.md:707: WARNING: duplicate citation for key "candekent1995gpts"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/24_magnetic_field_tectonics.md:707: WARNING: duplicate label "3" for keys "Allen2020MyShake" and "candekent1995gpts"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/24_magnetic_field_tectonics.md:707: WARNING: duplicate label "4" for keys "Aster2018" and "lowrie2020fundamentals"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/24_magnetic_field_tectonics.md:707: WARNING: duplicate citation for key "ogg2020gts"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/24_magnetic_field_tectonics.md:707: WARNING: duplicate label "5" for keys "Atwater2005" and "ogg2020gts"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/24_magnetic_field_tectonics.md:707: WARNING: duplicate citation for key "tauxe2018essentials"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/24_magnetic_field_tectonics.md:707: WARNING: duplicate label "6" for keys "Bohm2022Mars" and "tauxe2018essentials"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/24_magnetic_field_tectonics.md:707: WARNING: duplicate label "7" for keys "Banerdt2020" and "vine1963magnetic"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/correction-lectures-magnetism/23_earth_magnetism.md:1035: WARNING: duplicate citation for key "alken2021igrf"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/correction-lectures-magnetism/23_earth_magnetism.md:1035: WARNING: duplicate label "1" for keys "AkiRichards2002" and "alken2021igrf"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/correction-lectures-magnetism/23_earth_magnetism.md:1035: WARNING: duplicate label "2" for keys "alken2021igrf" and "butler1992paleomagnetism"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/correction-lectures-magnetism/23_earth_magnetism.md:1035: WARNING: duplicate citation for key "dunlop2001rockmagnetism"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/correction-lectures-magnetism/23_earth_magnetism.md:1035: WARNING: duplicate label "3" for keys "Allen2020MyShake" and "dunlop2001rockmagnetism"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/correction-lectures-magnetism/23_earth_magnetism.md:1035: WARNING: duplicate citation for key "hunt1995magprops"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/correction-lectures-magnetism/23_earth_magnetism.md:1035: WARNING: duplicate label "4" for keys "Aster2018" and "hunt1995magprops"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/correction-lectures-magnetism/23_earth_magnetism.md:1035: WARNING: duplicate citation for key "lowrie2020fundamentals"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/correction-lectures-magnetism/23_earth_magnetism.md:1035: WARNING: duplicate label "5" for keys "Atwater2005" and "lowrie2020fundamentals"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/correction-lectures-magnetism/23_earth_magnetism.md:1035: WARNING: duplicate citation for key "maus2008powerspectrum"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/correction-lectures-magnetism/23_earth_magnetism.md:1035: WARNING: duplicate label "6" for keys "Bohm2022Mars" and "maus2008powerspectrum"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/correction-lectures-magnetism/23_earth_magnetism.md:1035: WARNING: duplicate citation for key "tauxe2018essentials"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/correction-lectures-magnetism/23_earth_magnetism.md:1035: WARNING: duplicate label "7" for keys "Banerdt2020" and "tauxe2018essentials"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/23_earth_magnetism.md:1035: WARNING: duplicate citation for key "alken2021igrf"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/23_earth_magnetism.md:1035: WARNING: duplicate label "1" for keys "AkiRichards2002" and "alken2021igrf"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/23_earth_magnetism.md:1035: WARNING: duplicate citation for key "butler1992paleomagnetism"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/23_earth_magnetism.md:1035: WARNING: duplicate label "2" for keys "alken2021igrf" and "butler1992paleomagnetism"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/23_earth_magnetism.md:1035: WARNING: duplicate citation for key "dunlop2001rockmagnetism"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/23_earth_magnetism.md:1035: WARNING: duplicate label "3" for keys "Allen2020MyShake" and "dunlop2001rockmagnetism"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/23_earth_magnetism.md:1035: WARNING: duplicate citation for key "hunt1995magprops"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/23_earth_magnetism.md:1035: WARNING: duplicate label "4" for keys "Aster2018" and "hunt1995magprops"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/23_earth_magnetism.md:1035: WARNING: duplicate citation for key "lowrie2020fundamentals"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/23_earth_magnetism.md:1035: WARNING: duplicate label "5" for keys "Atwater2005" and "lowrie2020fundamentals"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/23_earth_magnetism.md:1035: WARNING: duplicate citation for key "maus2008powerspectrum"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/23_earth_magnetism.md:1035: WARNING: duplicate label "6" for keys "Bohm2022Mars" and "maus2008powerspectrum"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/23_earth_magnetism.md:1035: WARNING: duplicate citation for key "tauxe2018essentials"[39;49;00m
+[91m/Users/marinedenolle/GitHub/ess314/lectures/23_earth_magnetism.md:1035: WARNING: duplicate label "7" for keys "Banerdt2020" and "tauxe2018essentials"[39;49;00m
+[01mbuild succeeded, 148 warnings.[39;49;00m
